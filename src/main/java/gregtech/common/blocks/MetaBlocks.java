@@ -21,9 +21,6 @@ import gregtech.common.blocks.foam.BlockPetrifiedFoam;
 import gregtech.common.blocks.modelfactories.BakedModelHandler;
 import gregtech.common.blocks.surfacerock.BlockSurfaceRock;
 import gregtech.common.blocks.surfacerock.BlockSurfaceRockFlooded;
-import gregtech.common.blocks.wood.BlockGregLeaves;
-import gregtech.common.blocks.wood.BlockGregLog;
-import gregtech.common.blocks.wood.BlockGregSapling;
 import gregtech.common.pipelike.cable.BlockCable;
 import gregtech.common.pipelike.cable.Insulation;
 import gregtech.common.pipelike.cable.WireProperties;
@@ -89,10 +86,6 @@ public class MetaBlocks {
     public static BlockFoam REINFORCED_FOAM;
     public static BlockPetrifiedFoam PETRIFIED_FOAM;
     public static BlockPetrifiedFoam REINFORCED_PETRIFIED_FOAM;
-
-    public static BlockGregLog LOG;
-    public static BlockGregLeaves LEAVES;
-    public static BlockGregSapling SAPLING;
     
     public static BlockDrillHead DRILL_HEAD;
 
@@ -136,13 +129,6 @@ public class MetaBlocks {
         PETRIFIED_FOAM.setRegistryName("petrified_foam");
         REINFORCED_PETRIFIED_FOAM = new BlockPetrifiedFoam(true);
         REINFORCED_PETRIFIED_FOAM.setRegistryName("reinforced_petrified_foam");
-
-        LOG = new BlockGregLog();
-        LOG.setRegistryName("log");
-        LEAVES = new BlockGregLeaves();
-        LEAVES.setRegistryName("leaves");
-        SAPLING = new BlockGregSapling();
-        SAPLING.setRegistryName("sapling");
         
         DRILL_HEAD = new BlockDrillHead();
         DRILL_HEAD.setRegistryName("drill_head");
@@ -272,9 +258,6 @@ public class MetaBlocks {
         registerItemModel(MUTLIBLOCK_CASING);
         registerItemModel(WIRE_COIL);
         registerItemModel(CONCRETE);
-        registerItemModelWithOverride(LOG, ImmutableMap.of(BlockGregLog.LOG_AXIS, EnumAxis.Y));
-        registerItemModel(LEAVES);
-        registerItemModel(SAPLING);
         registerItemModel(DRILL_HEAD);
 
         COMPRESSED.values().stream().distinct().forEach(MetaBlocks::registerItemModel);
@@ -388,9 +371,6 @@ public class MetaBlocks {
     }
 
     public static void registerOreDict() {
-        OreDictUnifier.registerOre(new ItemStack(LOG, 1, GTValues.W), OrePrefix.log, Materials.Wood);
-        OreDictUnifier.registerOre(new ItemStack(LEAVES, 1, GTValues.W), OrePrefix.treeLeaves, null);
-        OreDictUnifier.registerOre(new ItemStack(SAPLING, 1, GTValues.W), OrePrefix.treeSapling, null);
 
         for(Entry<DustMaterial, BlockCompressed> entry : COMPRESSED.entrySet()) {
             DustMaterial material = entry.getKey();
