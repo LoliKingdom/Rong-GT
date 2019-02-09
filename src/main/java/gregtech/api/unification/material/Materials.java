@@ -365,10 +365,8 @@ public class Materials {
      * Second Degree Compounds
      */
     public static DustMaterial Glass = new DustMaterial(289, "glass", 0xFFFFFF, MaterialIconSet.GLASS, 0, of(new MaterialStack(SiliconDioxide, 1)), GENERATE_PLATE | GENERATE_LENSE | NO_SMASHING | NO_RECYCLING | SMELT_INTO_FLUID | EXCLUDE_BLOCK_CRAFTING_RECIPES);
-    public static DustMaterial Perlite = new DustMaterial(288, "perlite", 0x1E141E, MaterialIconSet.DULL, 1, of(new MaterialStack(Obsidian, 2), new MaterialStack(Water, 1)), 0);
-    public static DustMaterial Borax = new DustMaterial(290, "borax", 0xFFFFFF, MaterialIconSet.SAND, 1, of(new MaterialStack(Sodium, 2), new MaterialStack(Boron, 4), new MaterialStack(Water, 10), new MaterialStack(Oxygen, 7)), 0);
-    public static DustMaterial VolcanicAsh = new DustMaterial(292, "volcanic_ash", 0x3C3232, MaterialIconSet.SAND, 0, of(new MaterialStack(Silicon, 1), new MaterialStack(Iron, 1), new MaterialStack(Magnesium, 1)), 0);
-    public static DustMaterial Niter = new DustMaterial(293, "niter", 0xFFC8C8, MaterialIconSet.FLINT, 1, of(new MaterialStack(Saltpeter, 1)), NO_SMASHING | NO_SMELTING);
+    public static DustMaterial Fiberglass = new DustMaterial(290, "fiberglass", 0xFFFFFF, MaterialIconSet.GLASS, 0, of(), GENERATE_PLATE | NO_SMASHING | NO_RECYCLING | SMELT_INTO_FLUID | EXCLUDE_BLOCK_CRAFTING_RECIPES);
+    public static DustMaterial Niter = new DustMaterial(293, "niter", 0xFFC8C8, MaterialIconSet.FLINT, 0, of(new MaterialStack(Saltpeter, 1)), NO_SMASHING | NO_SMELTING);
     
     /**
      * Vanilla Materials
@@ -402,7 +400,6 @@ public class Materials {
     public static IngotMaterial Osmiridium = new IngotMaterial(315, "osmiridium", 0x6464FF, MaterialIconSet.METALLIC, 3, of(new MaterialStack(Iridium, 3), new MaterialStack(Osmium, 1)), EXT2_METAL, null, 7.0F, 1600, 2500);
     public static IngotMaterial SolderingAlloy = new IngotMaterial(316, "soldering_alloy", 0xDCDCE6, MaterialIconSet.DULL, 1, of(new MaterialStack(Tin, 9), new MaterialStack(Antimony, 1)), EXT_METAL | GENERATE_FINE_WIRE, null);
     public static IngotMaterial Nichrome = new IngotMaterial(317, "nichrome", 0xCDCEF6, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Nickel, 4), new MaterialStack(Chrome, 1)), EXT_METAL, null, 6.0F, 64, 2700);
-    public static IngotMaterial NiobiumNitride = new IngotMaterial(318, "niobium_nitride", 0x1D291D, MaterialIconSet.DULL, 2, of(new MaterialStack(Niobium, 1), new MaterialStack(Nitrogen, 1)), EXT_METAL, null, 2573);
     public static IngotMaterial NiobiumTitanium = new IngotMaterial(319, "niobium_titanium", 0x1D1D29, MaterialIconSet.DULL, 2, of(new MaterialStack(Niobium, 1), new MaterialStack(Titanium, 1)), EXT2_METAL, null, 4500);
     public static IngotMaterial VanadiumGallium = new IngotMaterial(320, "vanadium_gallium", 0x80808C, MaterialIconSet.SHINY, 2, of(new MaterialStack(Vanadium, 3), new MaterialStack(Gallium, 1)), STD_METAL | GENERATE_FOIL | GENERATE_ROD, null, 4500);
     public static IngotMaterial WroughtIron = new IngotMaterial(321, "wrought_iron", 0xC8B4B4, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 1)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_LONG_ROD, null, 6.0F, 384);
@@ -417,7 +414,6 @@ public class Materials {
     public static IngotMaterial YttriumBariumCuprate = new IngotMaterial(331, "yttrium_barium_cuprate", 0x504046, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Yttrium, 1), new MaterialStack(Barium, 2), new MaterialStack(Copper, 3), new MaterialStack(Oxygen, 7)), EXT_METAL | GENERATE_FOIL, null, 4500);
     public static IngotMaterial Brass = new IngotMaterial(332, "brass", 0xFFB400, MaterialIconSet.METALLIC, 1, of(new MaterialStack(Zinc, 1), new MaterialStack(Copper, 3)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING, 7.0F, 96);
     public static IngotMaterial Bronze = new IngotMaterial(333, "bronze", 0xFF8000, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Tin, 1), new MaterialStack(Copper, 3)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_ROTOR, 6.0F, 192);
-    public static IngotMaterial CobaltBrass = new IngotMaterial(334, "cobalt_brass", 0xB4B4A0, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Brass, 7), new MaterialStack(Aluminium, 1), new MaterialStack(Cobalt, 1)), EXT2_METAL, null, 8.0F, 256);
 
     /**
      * Stones
@@ -433,9 +429,6 @@ public class Materials {
     public static GemMaterial Charcoal = new GemMaterial(339, "charcoal", 0x644646, MaterialIconSet.LIGNITE, 1, of(new MaterialStack(Carbon, 1)), FLAMMABLE | NO_SMELTING | NO_SMASHING | MORTAR_GRINDABLE);
     public static GemMaterial Coal = new GemMaterial(340, "coal", 0x464646, MaterialIconSet.LIGNITE, 1, of(new MaterialStack(Carbon, 1)), GENERATE_ORE | FLAMMABLE | NO_SMELTING | NO_SMASHING | MORTAR_GRINDABLE);
     public static GemMaterial Lignite = new GemMaterial(341, "lignite", 0x644646, MaterialIconSet.LIGNITE, 0, of(new MaterialStack(Carbon, 2), new MaterialStack(Water, 4), new MaterialStack(DarkAsh, 1)), GENERATE_ORE | FLAMMABLE | NO_SMELTING | NO_SMASHING | MORTAR_GRINDABLE);
-    public static GemMaterial Anthracite = new GemMaterial(345, "anthracite_coal", 0x262626, MaterialIconSet.LIGNITE, 1, of(new MaterialStack(Carbon, 1)), GENERATE_ORE | FLAMMABLE | NO_SMELTING | NO_SMASHING | MORTAR_GRINDABLE);
-
-    public static DustMaterial HydratedCoal = new DustMaterial(346, "hydrated_coal", 0x464664, MaterialIconSet.ROUGH, 1, of(new MaterialStack(Coal, 8), new MaterialStack(Water, 1)), 0);
    
     /**
      * Foods
@@ -628,7 +621,6 @@ public class Materials {
         Coal.setBurnTime(1600); //default coal burn time in vanilla
         Charcoal.setBurnTime(1600); //default coal burn time in vanilla
         Lignite.setBurnTime(1200); //2/3 of burn time of coal
-        Anthracite.setBurnTime(2400); //1.5x more than Coal
         
         Vinteum.addEnchantmentForTools(Enchantments.FORTUNE, 1);
         RoseGold.addEnchantmentForTools(Enchantments.SMITE, 4);
@@ -646,8 +638,6 @@ public class Materials {
         HSSG.addEnchantmentForTools(Enchantments.SHARPNESS, 4);
         HSSS.addEnchantmentForTools(Enchantments.SHARPNESS, 5);
 
-    	Salt.addOreByProducts(Borax);
-        RockSalt.addOreByProducts(Borax);
         Lepidolite.addOreByProducts(Boron);
         Chalcopyrite.addOreByProducts(Pyrite, Cobalt, Cadmium, Gold);
         Sphalerite.addOreByProducts(GarnetYellow, Cadmium, Gallium, Zinc);
