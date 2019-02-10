@@ -1,4 +1,4 @@
-package gregtech.loaders;
+package gregtech.loaders.recipes;
 
 import forestry.core.fluids.Fluids;
 import gregtech.api.GTValues;

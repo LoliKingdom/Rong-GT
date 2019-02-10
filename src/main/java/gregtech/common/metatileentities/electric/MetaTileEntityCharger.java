@@ -8,6 +8,11 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
+import gregtech.api.recipes.CountableIngredient;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -49,6 +54,11 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
                     importItems.setStackInSlot(i, batteryStack);
                     if(energyUsedUp >= energyContainer.getEnergyStored()) break;
                 }
+                if(batteryStack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)) && energyContainer.canUse(10000)) {
+                	energyContainer.removeEnergy(10000);
+                	importItems.extractItem(i, 1, false);
+                	importItems.setStackInSlot(i, OreDictUnifier.get(OrePrefix.crystal, Materials.ChargedCertusQuartz));
+                }
             }
             if(energyUsedUp > 0) {
                 energyContainer.changeEnergy(-energyUsedUp);
@@ -65,7 +75,10 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
                 IElectricItem electricItem = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
                 if(electricItem == null || electricItem.getTier() != getTier() ||
                     electricItem.charge(Long.MAX_VALUE, getTier(), false, true) == 0)
-                    return stack; //why do i write these comments? because this line is too short while line above is long
+                    return stack;
+                if(stack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)))
+                	return stack;
+                
                 return super.insertItem(slot, stack, simulate);
             }
 

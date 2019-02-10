@@ -73,8 +73,9 @@ public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity {
     @Override
     public void update() {
         super.update();
-        if(getWorld().isRemote)
-            return;
+        if(getWorld().isRemote) {
+        	return;
+        }
         /*if(!(getWorld().provider instanceof WorldProviderEnd)) {
             return; //don't try to do anything outside end dimension
         }*/

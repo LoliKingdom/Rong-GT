@@ -1,4 +1,4 @@
-package gregtech.loaders;
+package gregtech.loaders.recipes;
 
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;

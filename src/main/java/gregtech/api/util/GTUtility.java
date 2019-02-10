@@ -158,7 +158,7 @@ public class GTUtility {
 
         Map<Double, EnumDyeColor> distances = new HashMap<>();
         for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-            Color c2 = new Color(dyeColor.colorValue);
+            Color c2 = new Color(dyeColor.getColorValue());
 
             double distance = (c.getRed() - c2.getRed()) * (c.getRed() - c2.getRed())
                 + (c.getGreen() - c2.getGreen()) * (c.getGreen() - c2.getGreen())

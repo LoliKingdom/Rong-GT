@@ -216,10 +216,6 @@ public class MetaItems {
 
     public static MetaItem<?>.MetaValueItem BOTTLE_PURPLE_DRINK;
     
-    public static MetaItem<?>.MetaValueItem PLANT_BALL;
-    
-    public static MetaItem<?>.MetaValueItem RUBBER_DROP;
-    
     public static MetaItem<?>.MetaValueItem FOAM_SPRAYER;
     
     public static MetaItem<?>.MetaValueItem ENERGY_CRYSTAL;

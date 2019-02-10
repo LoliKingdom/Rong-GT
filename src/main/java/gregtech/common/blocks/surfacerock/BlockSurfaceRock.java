@@ -36,7 +36,7 @@ public class BlockSurfaceRock extends Block {
     public BlockSurfaceRock(Material[] allowedValues) {
         super(net.minecraft.block.material.Material.ROCK);
         this.materialProperty = PropertyMaterial.create("material", allowedValues);
-        setHardness(0.5f);
+        setHardness(1.0f);
         setResistance(0.3f);
         setSoundType(SoundType.STONE);
         setUnlocalizedName("surface_rock");
@@ -136,5 +136,4 @@ public class BlockSurfaceRock extends Block {
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
-
 }

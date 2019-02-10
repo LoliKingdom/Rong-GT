@@ -23,7 +23,6 @@ import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityL
 import gregtech.common.metatileentities.steam.*;
 import gregtech.common.metatileentities.steam.boiler.SteamCoalBoiler;
 import gregtech.common.metatileentities.steam.boiler.SteamLavaBoiler;
-import gregtech.common.metatileentities.steam.boiler.SteamSolarBoiler;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumChest;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import gregtech.common.metatileentities.storage.MetaTileEntityTank;
@@ -93,7 +92,8 @@ public class MetaTileEntities {
     public static SimpleGeneratorMetaTileEntity[] DIESEL_GENERATOR = new SimpleGeneratorMetaTileEntity[4];
     public static SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static SimpleGeneratorMetaTileEntity[] GAS_TURBINE = new SimpleGeneratorMetaTileEntity[4];
-    public static MetaTileEntityMagicEnergyAbsorber MAGIC_ENERGY_ABSORBER;
+    public static MetaTileEntityMagicEnergyAbsorber[] MAGIC_ENERGY_ABSORBER = new MetaTileEntityMagicEnergyAbsorber[5]; //HV+
+    public static MetaTileEntityLightningHarvester[] LIGHTNING_HARVESTER = new MetaTileEntityLightningHarvester[6]; //HV+
 
     //MULTIBLOCK PARTS SECTION
     public static MetaTileEntityItemBus[] ITEM_IMPORT_BUS = new MetaTileEntityItemBus[GTValues.V.length];
@@ -102,7 +102,7 @@ public class MetaTileEntities {
     public static MetaTileEntityFluidHatch[] FLUID_EXPORT_HATCH = new MetaTileEntityFluidHatch[GTValues.V.length];
     public static MetaTileEntityEnergyHatch[] ENERGY_INPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
     public static MetaTileEntityEnergyHatch[] ENERGY_OUTPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
-    public static MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[3]; //HV, LuV, MAX
+    public static MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[3]; //HV, LuV, UV
 
     //MULTIBLOCKS SECTION
     public static MetaTileEntityPrimitiveBlastFurnace PRIMITIVE_BLAST_FURNACE;
@@ -337,7 +337,17 @@ public class MetaTileEntities {
         GAS_TURBINE[1] = GregTechAPI.registerMetaTileEntity(491, new SimpleGeneratorMetaTileEntity(gregtechId("gas_turbine.mv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 2));
         GAS_TURBINE[2] = GregTechAPI.registerMetaTileEntity(492, new SimpleGeneratorMetaTileEntity(gregtechId("gas_turbine.hv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 3));
 
-        MAGIC_ENERGY_ABSORBER = GregTechAPI.registerMetaTileEntity(493, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber"), 3));
+        MAGIC_ENERGY_ABSORBER[0] = GregTechAPI.registerMetaTileEntity(493, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.hv"), 3));
+        MAGIC_ENERGY_ABSORBER[1] = GregTechAPI.registerMetaTileEntity(494, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.ev"), 4));
+        MAGIC_ENERGY_ABSORBER[2] = GregTechAPI.registerMetaTileEntity(495, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.iv"), 5));
+        MAGIC_ENERGY_ABSORBER[3] = GregTechAPI.registerMetaTileEntity(496, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.luv"), 6));
+        MAGIC_ENERGY_ABSORBER[4] = GregTechAPI.registerMetaTileEntity(497, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.uv"), 7));
+        
+        LIGHTNING_HARVESTER[0] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.hv"), 3));
+        LIGHTNING_HARVESTER[1] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.ev"), 4));
+        LIGHTNING_HARVESTER[2] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.iv"), 5));
+        LIGHTNING_HARVESTER[3] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.luv"), 6));
+        LIGHTNING_HARVESTER[4] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.uv"), 7));
 
         for(int i = 0; i < HULL.length; i++) {
             MetaTileEntityHull metaTileEntity = new MetaTileEntityHull(gregtechId("hull." + GTValues.VN[i].toLowerCase()), i);

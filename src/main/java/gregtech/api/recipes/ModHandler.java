@@ -13,6 +13,7 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.DummyContainer;
 import gregtech.api.util.GTLog;
+import gregtech.api.util.ShapedOreEnergyTransferRecipe;
 import gregtech.api.util.ShapedOreIngredientAwareRecipe;
 import gregtech.api.util.world.DummyWorld;
 import gregtech.common.MetaFluids;
