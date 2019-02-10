@@ -63,9 +63,15 @@ public class BedrockDrillLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.RareEarth, 2), 3500)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Iridium), 4000)
 				  .level(GTValues.V[GTValues.LuV])
-				  .modifier(120)
+				  .modifier(140)
 				  .buildAndRegister();
-				  
+		
+		//UV
+		RecipeMaps.BEDROCK_DRILL_RECIPES.recipeBuilder()
+				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.RareEarth), 7500)
+				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Iridium), 5000)
+				  .level(GTValues.V[GTValues.UV])
+				  .modifier(200)
+				  .buildAndRegister();				  
 	}
-
 }

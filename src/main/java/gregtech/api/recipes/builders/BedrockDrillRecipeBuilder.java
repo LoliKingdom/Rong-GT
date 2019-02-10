@@ -83,7 +83,7 @@ public class BedrockDrillRecipeBuilder extends RecipeBuilder<BedrockDrillRecipeB
     				 .fluidInputs(Materials.DrillingFluid.getFluid(50))
     				 .outputs(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Bedrock, 2))
     				 .duration(320 - modifier)
-    				 .EUt((int)(level - (long)modifier))
+    				 .EUt(((int)level - modifier))
     				 .build());
     	}
     }
