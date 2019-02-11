@@ -214,6 +214,14 @@ public class MetaItems1 extends MaterialMetaItem {
         ENERGY_CRYSTAL = addItem(514, "energy_crystal").addStats(ElectricStats.createRechargeableBattery(1000000L, GTValues.HV)).setModelAmount(8).setMaxStackSize(1);
         LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(4000000L, GTValues.EV)).setModelAmount(8).setMaxStackSize(1);
         ENERGIUM_DUST = addItem(516, "energium_dust");
+        
+        WOODEN_FORM_EMPTY = addItem(517, "wooden_form.empty");
+        WOODEN_FORM_BRICK = addItem(518, "wooden_form.brick");
+
+        COMPRESSED_CLAY = addItem(519, "compressed.clay");
+        COMPRESSED_FIRECLAY = addItem(520, "compressed.fireclay");
+        FIRECLAY_BRICK = addItem(521, "brick.fireclay");
+        COKE_OVEN_BRICK = addItem(522, "brick.coke");
 	}
 	
 	public void registerRecipes() {

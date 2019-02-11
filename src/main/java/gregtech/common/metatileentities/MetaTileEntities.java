@@ -8,19 +8,42 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.render.Textures;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTLog;
-import gregtech.common.metatileentities.electric.*;
+import gregtech.common.metatileentities.electric.MetaTileEntityAirCollector;
+import gregtech.common.metatileentities.electric.MetaTileEntityBatteryBuffer;
+import gregtech.common.metatileentities.electric.MetaTileEntityCharger;
+import gregtech.common.metatileentities.electric.MetaTileEntityHull;
+import gregtech.common.metatileentities.electric.MetaTileEntityLightningHarvester;
+import gregtech.common.metatileentities.electric.MetaTileEntityMacerator;
+import gregtech.common.metatileentities.electric.MetaTileEntityMagicEnergyAbsorber;
+import gregtech.common.metatileentities.electric.MetaTileEntityPump;
+import gregtech.common.metatileentities.electric.MetaTileEntityTeslaCoil;
+import gregtech.common.metatileentities.electric.MetaTileEntityTransformer;
 import gregtech.common.metatileentities.electric.multiblockpart.MetaTileEntityEnergyHatch;
 import gregtech.common.metatileentities.electric.multiblockpart.MetaTileEntityFluidHatch;
 import gregtech.common.metatileentities.electric.multiblockpart.MetaTileEntityItemBus;
 import gregtech.common.metatileentities.electric.multiblockpart.MetaTileEntityRotorHolder;
+import gregtech.common.metatileentities.multi.MetaTileEntityCokeOven;
+import gregtech.common.metatileentities.multi.MetaTileEntityCokeOvenHatch;
 import gregtech.common.metatileentities.multi.MetaTileEntityLargeBoiler;
 import gregtech.common.metatileentities.multi.MetaTileEntityLargeBoiler.BoilerType;
 import gregtech.common.metatileentities.multi.MetaTileEntityPrimitiveBlastFurnace;
-import gregtech.common.metatileentities.multi.electric.*;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityBedrockDrillingUnit;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityCrackingUnit;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityDistillationTower;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityElectricBlastFurnace;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityImplosionCompressor;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiFurnace;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityPyrolyseOven;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityVacuumFreezer;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityDieselEngine;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine.TurbineType;
-import gregtech.common.metatileentities.steam.*;
+import gregtech.common.metatileentities.steam.SteamAlloySmelter;
+import gregtech.common.metatileentities.steam.SteamCompressor;
+import gregtech.common.metatileentities.steam.SteamExtractor;
+import gregtech.common.metatileentities.steam.SteamFurnace;
+import gregtech.common.metatileentities.steam.SteamHammer;
+import gregtech.common.metatileentities.steam.SteamMacerator;
 import gregtech.common.metatileentities.steam.boiler.SteamCoalBoiler;
 import gregtech.common.metatileentities.steam.boiler.SteamLavaBoiler;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumChest;
@@ -103,6 +126,8 @@ public class MetaTileEntities {
     public static MetaTileEntityEnergyHatch[] ENERGY_INPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
     public static MetaTileEntityEnergyHatch[] ENERGY_OUTPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
     public static MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[3]; //HV, LuV, UV
+    
+    public static MetaTileEntityCokeOvenHatch COKE_OVEN_HATCH;
 
     //MULTIBLOCKS SECTION
     public static MetaTileEntityPrimitiveBlastFurnace PRIMITIVE_BLAST_FURNACE;
@@ -114,6 +139,8 @@ public class MetaTileEntities {
     public static MetaTileEntityCrackingUnit CRACKER;
     public static MetaTileEntityMultiFurnace MULTI_FURNACE;
     public static MetaTileEntityDieselEngine DIESEL_ENGINE;
+    
+    public static MetaTileEntityCokeOven COKE_OVEN;
     
     public static MetaTileEntityBedrockDrillingUnit BEDROCK_DRILL;
 
@@ -344,14 +371,14 @@ public class MetaTileEntities {
         MAGIC_ENERGY_ABSORBER[4] = GregTechAPI.registerMetaTileEntity(497, new MetaTileEntityMagicEnergyAbsorber(gregtechId("magic_energy_absorber.uv"), 7));
         
         LIGHTNING_HARVESTER[0] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.hv"), 3));
-        LIGHTNING_HARVESTER[1] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.ev"), 4));
-        LIGHTNING_HARVESTER[2] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.iv"), 5));
-        LIGHTNING_HARVESTER[3] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.luv"), 6));
-        LIGHTNING_HARVESTER[4] = GregTechAPI.registerMetaTileEntity(498, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.uv"), 7));
+        LIGHTNING_HARVESTER[1] = GregTechAPI.registerMetaTileEntity(499, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.ev"), 4));
+        LIGHTNING_HARVESTER[2] = GregTechAPI.registerMetaTileEntity(500, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.iv"), 5));
+        LIGHTNING_HARVESTER[3] = GregTechAPI.registerMetaTileEntity(501, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.luv"), 6));
+        LIGHTNING_HARVESTER[4] = GregTechAPI.registerMetaTileEntity(502, new MetaTileEntityLightningHarvester(gregtechId("lightning_harvester.uv"), 7));
 
         for(int i = 0; i < HULL.length; i++) {
             MetaTileEntityHull metaTileEntity = new MetaTileEntityHull(gregtechId("hull." + GTValues.VN[i].toLowerCase()), i);
-            GregTechAPI.registerMetaTileEntity(500 + i, metaTileEntity);
+            GregTechAPI.registerMetaTileEntity(530 + i, metaTileEntity);
             HULL[i] = metaTileEntity;
         }
 
@@ -363,7 +390,7 @@ public class MetaTileEntities {
         DISTILLATION_TOWER = GregTechAPI.registerMetaTileEntity(515, new MetaTileEntityDistillationTower(gregtechId("distillation_tower")));
         MULTI_FURNACE = GregTechAPI.registerMetaTileEntity(516, new MetaTileEntityMultiFurnace(gregtechId("multi_furnace")));
         DIESEL_ENGINE = GregTechAPI.registerMetaTileEntity(517, new MetaTileEntityDieselEngine(gregtechId("diesel_engine")));
-        CRACKER = GregTechAPI.registerMetaTileEntity(525, new MetaTileEntityCrackingUnit(gregtechId("cracker")));
+        CRACKER = GregTechAPI.registerMetaTileEntity(528, new MetaTileEntityCrackingUnit(gregtechId("cracker")));
 
         LARGE_STEAM_TURBINE = GregTechAPI.registerMetaTileEntity(518, new MetaTileEntityLargeTurbine(gregtechId("large_turbine.steam"), TurbineType.STEAM));
         LARGE_GAS_TURBINE = GregTechAPI.registerMetaTileEntity(519, new MetaTileEntityLargeTurbine(gregtechId("large_turbine.gas"), TurbineType.GAS));
@@ -374,8 +401,11 @@ public class MetaTileEntities {
         LARGE_TITANIUM_BOILER = GregTechAPI.registerMetaTileEntity(523, new MetaTileEntityLargeBoiler(gregtechId("large_boiler.titanium"), BoilerType.TITANIUM));
         LARGE_TUNGSTENSTEEL_BOILER = GregTechAPI.registerMetaTileEntity(524, new MetaTileEntityLargeBoiler(gregtechId("large_boiler.tungstensteel"), BoilerType.TUNGSTENSTEEL));
 
-        BEDROCK_DRILL = GregTechAPI.registerMetaTileEntity(500, new MetaTileEntityBedrockDrillingUnit(gregtechId("bedrock_drill")));
+        BEDROCK_DRILL = GregTechAPI.registerMetaTileEntity(525, new MetaTileEntityBedrockDrillingUnit(gregtechId("bedrock_drill")));
         
+        COKE_OVEN = GregTechAPI.registerMetaTileEntity(526, new MetaTileEntityCokeOven(gregtechId("coke_oven")));
+        COKE_OVEN_HATCH = GregTechAPI.registerMetaTileEntity(527, new MetaTileEntityCokeOvenHatch(gregtechId("coke_oven_hatch")));
+
         int[] batteryBufferSlots = new int[] {1, 4, 9, 16};
         for(int i = 0; i < GTValues.V.length; i++) {
             if(i > 0) {

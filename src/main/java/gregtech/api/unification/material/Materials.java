@@ -139,6 +139,7 @@ public class Materials {
     public static FluidMaterial ConstructionFoam = new FluidMaterial(347, "construction_foam", 0x333333, MaterialIconSet.FLUID, of(), 0);
     public static DustMaterial Concrete = new DustMaterial(296, "concrete", 0x646464, MaterialIconSet.ROUGH, 1, of(new MaterialStack(Stone, 1)), NO_SMASHING | SMELT_INTO_FLUID);
     
+    
     /**
      * First Degree Compounds
      */
@@ -174,7 +175,10 @@ public class Materials {
     public static FluidMaterial Steam = new FluidMaterial(128, "steam", 0xFFFFFF, MaterialIconSet.GAS, of(new MaterialStack(Hydrogen, 2), new MaterialStack(Oxygen, 1)), NO_RECYCLING | GENERATE_FLUID_BLOCK);
     public static FluidMaterial Epichlorhydrin = new FluidMaterial(129, "epichlorhydrin", 0xFFFFFF, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 3), new MaterialStack(Hydrogen, 5), new MaterialStack(Chlorine, 1), new MaterialStack(Oxygen, 1)), 0);
     public static FluidMaterial NitricAcid = new FluidMaterial(130, "nitric_acid", 0xCCCC00, MaterialIconSet.FLUID, of(new MaterialStack(Hydrogen, 1), new MaterialStack(Nitrogen, 1), new MaterialStack(Oxygen, 3)), 0);
-
+    public static DustMaterial Brick = new DustMaterial(355, "brick", 0xB75A40, MaterialIconSet.FINE, 1, of(new MaterialStack(Clay, 1)), EXCLUDE_BLOCK_CRAFTING_RECIPES | DECOMPOSITION_BY_CENTRIFUGING);
+    public static DustMaterial Fireclay = new DustMaterial(356, "fireclay", 0x928073, MaterialIconSet.FINE, 2, of(new MaterialStack(Clay, 1), new MaterialStack(Brick, 1)), DECOMPOSITION_BY_CENTRIFUGING);
+    public static GemMaterial Coke = new GemMaterial(357, "coke", 0x666666, MaterialIconSet.LIGNITE, 1, of(new MaterialStack(Carbon, 1)), FLAMMABLE | NO_SMELTING | NO_SMASHING | MORTAR_GRINDABLE);
+    
     /**
      * Fuels/Oils
      */    
@@ -622,6 +626,7 @@ public class Materials {
         Coal.setBurnTime(1600); //default coal burn time in vanilla
         Charcoal.setBurnTime(1600); //default coal burn time in vanilla
         Lignite.setBurnTime(1200); //2/3 of burn time of coal
+        Coke.setBurnTime(3200); //2x burn time of coal
         
         Vinteum.addEnchantmentForTools(Enchantments.FORTUNE, 1);
         RoseGold.addEnchantmentForTools(Enchantments.SMITE, 4);

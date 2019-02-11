@@ -32,7 +32,14 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_NUGGET;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_NAME;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_GEAR_SMALL;
+    
+    public static MetaItem<?>.MetaValueItem COMPRESSED_CLAY;
+    public static MetaItem<?>.MetaValueItem COMPRESSED_FIRECLAY;
+    public static MetaItem<?>.MetaValueItem FIRECLAY_BRICK;
+    public static MetaItem<?>.MetaValueItem COKE_OVEN_BRICK;
 
+    public static MetaItem<?>.MetaValueItem WOODEN_FORM_EMPTY;
+    public static MetaItem<?>.MetaValueItem WOODEN_FORM_BRICK;
     
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_PLATE;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_ROD;

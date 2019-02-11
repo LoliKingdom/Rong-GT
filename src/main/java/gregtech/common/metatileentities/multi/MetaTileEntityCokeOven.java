@@ -1,60 +1,58 @@
 package gregtech.common.metatileentities.multi;
 
-import javax.annotation.Nonnull;
-
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.texture.TextureUtils;
-import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
-import gregtech.api.capability.impl.ItemHandlerProxy;
+import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ProgressWidget.MoveType;
 import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.gui.widgets.TankWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.multiblock.BlockPattern;
+import gregtech.api.multiblock.BlockWorldState;
 import gregtech.api.multiblock.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipes.PrimitiveBlastFurnaceRecipe;
+import gregtech.api.recipes.recipes.CokeOvenRecipe;
 import gregtech.api.render.ICubeRenderer;
 import gregtech.api.render.Textures;
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBase {
+import java.util.function.Predicate;
+
+public class MetaTileEntityCokeOven extends MultiblockControllerBase {
 
     private int maxProgressDuration;
     private int currentProgress;
-    private NonNullList<ItemStack> outputsList;
+    private ItemStack outputStack;
+    private FluidStack outputFluid;
     private boolean isActive;
     private boolean wasActiveAndNeedUpdate;
-    
-    private ItemStack lastInputStack = ItemStack.EMPTY;
-    private PrimitiveBlastFurnaceRecipe previousRecipe;
 
-    public MetaTileEntityPrimitiveBlastFurnace(ResourceLocation metaTileEntityId) {
+    private ItemStack lastInputStack = ItemStack.EMPTY;
+    private CokeOvenRecipe previousRecipe;
+
+    public MetaTileEntityCokeOven(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
 
@@ -80,20 +78,20 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
     private void finishCurrentRecipe() {
         this.maxProgressDuration = 0;
         this.currentProgress = 0;
-        MetaTileEntity.addItemsToItemHandler(exportItems, false, outputsList);
-        this.outputsList = null;
+        ItemHandlerHelper.insertItemStacked(exportItems, outputStack, false);
+        this.exportFluids.fill(outputFluid, true);
         markDirty();
     }
-    
-    private PrimitiveBlastFurnaceRecipe getOrRefreshRecipe(ItemStack inputStack) {
-        PrimitiveBlastFurnaceRecipe currentRecipe = null;
+
+    private CokeOvenRecipe getOrRefreshRecipe(ItemStack inputStack) {
+        CokeOvenRecipe currentRecipe = null;
         if (previousRecipe != null &&
             previousRecipe.getInput().getIngredient().apply(inputStack)) {
             currentRecipe = previousRecipe;
         } else if (!ItemStack.areItemsEqual(lastInputStack, inputStack) ||
             !ItemStack.areItemStackTagsEqual(lastInputStack, inputStack)) {
             this.lastInputStack = inputStack.copy();
-            currentRecipe = RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES.stream()
+            currentRecipe = RecipeMaps.COKE_OVEN_RECIPES.stream()
                 .filter(it -> it.getInput().getIngredient().test(inputStack))
                 .findFirst().orElse(null);
             if (currentRecipe != null) {
@@ -103,29 +101,24 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
         return currentRecipe;
     }
 
-    private boolean setupRecipe(ItemStack inputStack, int fuelAmount, PrimitiveBlastFurnaceRecipe recipe) {
-        return inputStack.getCount() >= recipe.getInput().getCount() && fuelAmount >= recipe.getFuelAmount() &&
-            ItemHandlerHelper.insertItemStacked(exportItems, recipe.getOutput(), true).isEmpty();
+    private boolean setupRecipe(ItemStack inputStack, CokeOvenRecipe recipe) {
+        return inputStack.getCount() >= recipe.getInput().getCount() &&
+            ItemHandlerHelper.insertItemStacked(exportItems, recipe.getOutput(), true).isEmpty() &&
+            exportFluids.fill(recipe.getFluidOutput(), false) == recipe.getFluidOutput().amount;
     }
 
     private boolean tryPickNewRecipe() {
         ItemStack inputStack = importItems.getStackInSlot(0);
-        ItemStack fuelStack = importItems.getStackInSlot(1);
-        if(inputStack.isEmpty() || fuelStack.isEmpty()) {
+        if(inputStack.isEmpty()) {
             return false;
         }
-        int fuelUnitsPerItem = getFuelUnits(fuelStack);
-        int totalFuelUnits = fuelUnitsPerItem * fuelStack.getCount();
-        PrimitiveBlastFurnaceRecipe currentRecipe = getOrRefreshRecipe(inputStack);
-        if (currentRecipe != null && setupRecipe(inputStack, totalFuelUnits, currentRecipe)) {
+        CokeOvenRecipe currentRecipe = getOrRefreshRecipe(inputStack);
+        if (currentRecipe != null && setupRecipe(inputStack, currentRecipe)) {
             inputStack.shrink(currentRecipe.getInput().getCount());
-            fuelStack.shrink(Math.max(1, currentRecipe.getFuelAmount() / fuelUnitsPerItem));
             this.maxProgressDuration = currentRecipe.getDuration();
             this.currentProgress = 0;
-            NonNullList<ItemStack> outputs = NonNullList.create();
-            outputs.add(currentRecipe.getOutput().copy());
-            outputs.add(OreDictUnifier.get(OrePrefix.dustTiny, Materials.DarkAsh, Math.max(1, Math.abs(3 - fuelUnitsPerItem))));
-            this.outputsList = outputs;
+            this.outputStack = currentRecipe.getOutput().copy();
+            this.outputFluid = currentRecipe.getFluidOutput().copy();
             markDirty();
             return true;
         }
@@ -140,11 +133,8 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
         data.setInteger("MaxProgress", maxProgressDuration);
         if(maxProgressDuration > 0) {
             data.setInteger("Progress", currentProgress);
-            NBTTagList itemOutputs = new NBTTagList();
-            for(ItemStack itemStack : outputsList) {
-                itemOutputs.appendTag(itemStack.writeToNBT(new NBTTagCompound()));
-            }
-            data.setTag("Outputs", itemOutputs);
+            data.setTag("OutputItem", outputStack.writeToNBT(new NBTTagCompound()));
+            data.setTag("OutputFluid", outputFluid.writeToNBT(new NBTTagCompound()));
         }
         return data;
     }
@@ -157,11 +147,8 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
         this.maxProgressDuration = data.getInteger("MaxProgress");
         if(maxProgressDuration > 0) {
             this.currentProgress = data.getInteger("Progress");
-            NBTTagList itemOutputs = data.getTagList("Outputs", NBT.TAG_COMPOUND);
-            this.outputsList = NonNullList.create();
-            for(int i = 0; i < itemOutputs.tagCount(); i++) {
-                this.outputsList.add(new ItemStack(itemOutputs.getCompoundTagAt(i)));
-            }
+            this.outputStack = new ItemStack(data.getCompoundTag("OutputItem"));
+            this.outputFluid = FluidStack.loadFluidStackFromNBT(data.getCompoundTag("OutputFluid"));
         }
     }
 
@@ -199,85 +186,62 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
         return isActive;
     }
 
-    public double getProgressScaled() {
-        return maxProgressDuration == 0 ? 0.0 : (currentProgress / (maxProgressDuration * 1.0));
-    }
-    
     @Override
     public int getLightValue(IMultiblockPart sourcePart) {
         return sourcePart == null && isActive ? 15 : 0;
     }
 
-    protected int getFuelUnits(ItemStack fuelType) {
-        if(fuelType.isEmpty()) {
-            return 0;
-        }
-        if(OreDictUnifier.getOreDictionaryNames(fuelType).contains("fuelCoke")) {
-            return 2;
-        }
-        MaterialStack materialStack = OreDictUnifier.getMaterial(fuelType);
-        if(materialStack.material == Materials.Coal ||
-            materialStack.material == Materials.Charcoal) {
-        	return 1;
-        } else if(materialStack.material == Materials.Coke) {
-            return 2;
-        } else return 0;
+    public double getProgressScaled() {
+        return maxProgressDuration == 0 ? 0.0 : (currentProgress / (maxProgressDuration * 1.0));
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.METAL_CASING.getState(MetalCasingType.PRIMITIVE_BRICKS);
+        return MetaBlocks.METAL_CASING.getState(MetalCasingType.COKE_BRICKS);
     }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.PRIMITIVE_BRICKS;
+        return Textures.COKE_BRICKS;
     }
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
-        Textures.PRIMITIVE_BLAST_FURNACE_OVERLAY.render(renderState, translation, pipeline, getFrontFacing(), isActive());
-        if(isActive() && isStructureFormed()) {
-            EnumFacing back = getFrontFacing().getOpposite();
-            Matrix4 offset = translation.copy().translate(back.getFrontOffsetX(), -0.3, back.getFrontOffsetZ());
-            TextureAtlasSprite sprite = TextureUtils.getBlockTexture("lava_still");
-            renderState.brightness = 0xF000F0;
-            renderState.colour = 0xFFFFFFFF;
-            Textures.renderFace(renderState, offset, new IVertexOperation[0], EnumFacing.UP, Cuboid6.full, sprite);
-        }
+        Textures.COKE_OVEN_OVERLAY.render(renderState, translation, pipeline, getFrontFacing(), isActive());
     }
 
     @Override
-    protected void initializeInventory() {
-        super.initializeInventory();
-        ItemStackHandler emptyHandler = new ItemStackHandler(0);
-        this.itemInventory = new ItemHandlerProxy(emptyHandler, emptyHandler);
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
+            capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return null;
+        }
+        return super.getCapability(capability, side);
     }
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
-        return new ItemStackHandler(2) {
-            @Nonnull
-            @Override
-            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                if(slot == 1 && getFuelUnits(stack) == 0)
-                    return stack;
-                return super.insertItem(slot, stack, simulate);
-            }
-        };
+        return new ItemStackHandler(1);
     }
 
     @Override
     protected IItemHandlerModifiable createExportItemHandler() {
-        return new ItemStackHandler(2);
+        return new ItemStackHandler(1);
+    }
+
+    @Override
+    protected FluidTankList createExportFluidHandler() {
+        return new FluidTankList(false, new FluidTank(32000));
     }
 
     @Override
     protected BlockPattern createStructurePattern() {
+        Predicate<BlockWorldState> hatchPredicate = tilePredicate((state, tile) -> tile instanceof MetaTileEntityCokeOvenHatch);
         return FactoryBlockPattern.start()
-            .aisle("XXX", "XXX", "XXX", "XXX")
-            .aisle("XXX", "X#X", "X#X", "X#X")
-            .aisle("XXX", "XYX", "XXX", "XXX")
+            .aisle("XXX", "XZX", "XXX")
+            .aisle("XZX", "Z#Z", "XZX")
+            .aisle("XXX", "XYX", "XXX")
+            .where('Z', statePredicate(getCasingState()).or(hatchPredicate))
             .where('X', statePredicate(getCasingState()))
             .where('#', isAirPredicate())
             .where('Y', selfPredicate())
@@ -286,22 +250,22 @@ public class MetaTileEntityPrimitiveBlastFurnace extends MultiblockControllerBas
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new MetaTileEntityPrimitiveBlastFurnace(metaTileEntityId);
+        return new MetaTileEntityCokeOven(metaTileEntityId);
     }
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         return ModularUI.builder(GuiTextures.BACKGROUND, 176, 166)
-            .widget(new SlotWidget(importItems, 0, 33, 15, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INGOT_OVERLAY))
-            .widget(new SlotWidget(importItems, 1, 33, 33, true, true)
+            .widget(new SlotWidget(importItems, 0, 33, 30, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.FURNACE_OVERLAY))
-            .progressBar(this::getProgressScaled, 58, 24, 20, 15, GuiTextures.BRONZE_BLAST_FURNACE_PROGRESS_BAR, MoveType.HORIZONTAL)
-            .widget(new SlotWidget(exportItems, 0, 85, 24, true, false)
-                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.INGOT_OVERLAY))
-            .widget(new SlotWidget(exportItems, 1, 103, 24, true, false)
-                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.DUST_OVERLAY))
+            .progressBar(this::getProgressScaled, 58, 30, 20, 15, GuiTextures.BRONZE_BLAST_FURNACE_PROGRESS_BAR, MoveType.HORIZONTAL)
+            .widget(new SlotWidget(exportItems, 0, 85, 30, true, false)
+                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.FURNACE_OVERLAY))
+            .widget(new TankWidget(exportFluids.getTankAt(0), 133, 13, 20, 58)
+                .setBackgroundTexture(GuiTextures.FLUID_TANK_BACKGROUND)
+                .setOverlayTexture(GuiTextures.FLUID_TANK_OVERLAY)
+                .setContainerIO(true, false))
             .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT)
             .build(getHolder(), entityPlayer);
-}
+    }
 }

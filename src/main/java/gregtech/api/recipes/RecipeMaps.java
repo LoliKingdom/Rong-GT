@@ -1,17 +1,33 @@
 package gregtech.api.recipes;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import crafttweaker.annotations.ZenRegister;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget.MoveType;
-import gregtech.api.recipes.builders.*;
-import gregtech.api.recipes.machines.*;
+import gregtech.api.recipes.builders.ArcFurnaceRecipeBuilder;
+import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
+import gregtech.api.recipes.builders.BedrockDrillRecipeBuilder;
+import gregtech.api.recipes.builders.BlastRecipeBuilder;
+import gregtech.api.recipes.builders.CrackingRecipeBuilder;
+import gregtech.api.recipes.builders.CutterRecipeBuilder;
+import gregtech.api.recipes.builders.FusionRecipeBuilder;
+import gregtech.api.recipes.builders.ImplosionRecipeBuilder;
+import gregtech.api.recipes.builders.IntCircuitRecipeBuilder;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
+import gregtech.api.recipes.builders.UniversalDistillationRecipeBuilder;
+import gregtech.api.recipes.machines.FuelRecipeMap;
+import gregtech.api.recipes.machines.RecipeMapBrewer;
+import gregtech.api.recipes.machines.RecipeMapFluidCanner;
+import gregtech.api.recipes.machines.RecipeMapFormingPress;
+import gregtech.api.recipes.machines.RecipeMapFurnace;
+import gregtech.api.recipes.machines.RecipeMapGroupOutput;
+import gregtech.api.recipes.recipes.CokeOvenRecipe;
 import gregtech.api.recipes.recipes.PrimitiveBlastFurnaceRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
-
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @ZenClass("mods.gregtech.recipe.RecipeMaps")
 @ZenRegister
@@ -634,10 +650,16 @@ public class RecipeMaps {
      */
     @ZenProperty public static final List<PrimitiveBlastFurnaceRecipe> PRIMITIVE_BLAST_FURNACE_RECIPES = new CopyOnWriteArrayList<>();
 
+    @ZenProperty public static final List<CokeOvenRecipe> COKE_OVEN_RECIPES = new CopyOnWriteArrayList<>();
+    
     @ZenMethod
-    @Deprecated
     public static List<PrimitiveBlastFurnaceRecipe> getPrimitiveBlastFurnaceRecipes() {
         return PRIMITIVE_BLAST_FURNACE_RECIPES;
+    }
+    
+    @ZenMethod
+    public static List<CokeOvenRecipe> getCokeOvenRecipes() {
+        return COKE_OVEN_RECIPES;
     }
 
 }
