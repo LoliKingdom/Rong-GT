@@ -17,7 +17,7 @@ import gregtech.loaders.OreDictionaryLoader;
 import gregtech.loaders.oredictionary.BotaniaODFixer;
 import gregtech.loaders.oreprocessing.DecompositionRecipeHandler;
 import gregtech.loaders.oreprocessing.RecipeHandlerList;
-import gregtech.loaders.oreprocessing.ToolRecipeHandler;
+import gregtech.loaders.recipes.processing.ToolRecipeHandler;
 import gregtech.loaders.recipe.CraftingRecipeLoader;
 import gregtech.loaders.recipe.FuelLoader;
 import gregtech.loaders.recipe.MachineRecipeLoader;

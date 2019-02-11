@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.lib.events.EssentiaHandler;
+import vazkii.botania.api.mana.IManaReceiver;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -42,12 +43,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity {
+public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity implements IManaReceiver {
 
     private TIntList connectedCrystalsIds = new TIntArrayList();
     private boolean hasDragonEggAmplifier = false;
     private boolean isActive = false;
     private int essentiaLeft = 0;
+    
+    private static final int MANA_PER_EU = 40;
+    private final int MANA_STORAGE = 40 * ((int)(GTValues.V[getTier()]));
+    private int mana = 0;
 
     public MetaTileEntityMagicEnergyAbsorber(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
@@ -89,7 +94,7 @@ public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity {
             updateConnectedCrystals();
         }
         if(getTimer() % 200 == 0) {
-        	updateManaStatus();
+        	updateManaAndStarlightStatus();
         }
         int totalEnergyGeneration = 0;
         for(int connectedCrystalId : connectedCrystalsIds.toArray()) {
@@ -221,8 +226,11 @@ public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity {
         this.hasDragonEggAmplifier = blockState.getBlock() instanceof BlockDragonEgg;
     }
     
-    private void updateManaStatus() {
-    	
+    private void updateManaAndStarlightStatus() {
+    	if(energyContainer.getEnergyCanBeInserted() == 1L) {
+    		recieveMana(MANA_PER_EU);
+    		energyContainer.addEnergy(1);
+    	} 	
     }
     
     private int calculateEssentiaToEU(Aspect aspect) {
@@ -250,4 +258,24 @@ public class MetaTileEntityMagicEnergyAbsorber extends TieredMetaTileEntity {
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         return null;
     }
+
+	@Override
+	public int getCurrentMana() {
+		return ((int)(energyContainer.getEnergyStored() / 40));
+	}
+
+	@Override
+	public boolean canRecieveManaFromBursts() {
+		return !(isFull());
+	}
+
+	@Override
+	public boolean isFull() {
+		return energyContainer.getEnergyStored() == energyContainer.getEnergyCapacity();
+	}
+
+	@Override
+	public void recieveMana(int arg0) {
+		this.mana = Math.min(((int)energyContainer.getEnergyCapacity()), this.mana + mana * MANA_PER_EU);
+	}
 }

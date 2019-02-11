@@ -33,9 +33,7 @@ public class MetaItems1 extends MaterialMetaItem {
         GELLED_TOLUENE = addItem(300, "gelled_toluene");
 
         BOTTLE_PURPLE_DRINK = addItem(301, "bottle.purple.drink").addStats(new FoodStats(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90)));
-
-        PLANT_BALL = addItem(302, "plant_ball").setBurnValue(75);
-
+        
         SHAPE_EMPTY = addItem(303, "shape.empty");
 
         SHAPE_MOLD_PLATE = addItem(304, "shape.mold.plate");
@@ -171,8 +169,6 @@ public class MetaItems1 extends MaterialMetaItem {
         SENSOR_IV = addItem(481, "sensor.iv");
         SENSOR_LuV = addItem(482, "sensor.luv");
         SENSOR_UV = addItem(483, "sensor.uv");
-        
-        RUBBER_DROP = addItem(484, "rubber_drop").setBurnValue(200);
 
         FLUID_FILTER = addItem(485, "fluid_filter");
 
@@ -221,11 +217,12 @@ public class MetaItems1 extends MaterialMetaItem {
 	}
 	
 	public void registerRecipes() {
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+		//Replace with IF's rubber drop
+        /*RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(RUBBER_DROP.getStackForm())
             .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber, 3))
             .duration(800).EUt(6)
-            .buildAndRegister();
+            .buildAndRegister();*/
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.dust, Materials.Redstone).input(OrePrefix.plate, Materials.Tin, 3)
