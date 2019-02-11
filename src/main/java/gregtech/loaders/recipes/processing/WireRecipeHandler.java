@@ -76,21 +76,47 @@ public class WireRecipeHandler {
                 ModHandler.addShapelessRecipe(String.format("%s_cable_%d", material, cableAmount), cableStack, ingredients);
             }
         }
-        if(wirePrefix != OrePrefix.wireGtSingle) {
-        	RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                      .input(OrePrefix.wireGtSingle, material, cableAmount).circuitMeta(24 + ArrayUtils.indexOf(WIRE_DOUBLING_ORDER, wirePrefix))
-                      .fluidInputs(Materials.Rubber.getFluid(144 * cableAmount))
-                      .outputs(cableStack)
-                    .  duration(150).EUt(8)
-                    .  buildAndRegister();
-        }
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-                  .input(wirePrefix, material).circuitMeta(24)
-                  .fluidInputs(Materials.Rubber.getFluid(144 * cableAmount))
-                  .outputs(cableStack)
-                  .duration(150).EUt(8)
-                  .buildAndRegister();
+        if(isPaperInsulatedCable(material)) {
+            ItemStack carpetStack = new ItemStack(Blocks.CARPET, cableAmount, EnumDyeColor.BLACK.getMetadata());
+            /*RecipeMaps.PACKER_RECIPES.recipeBuilder()
+                .input(wirePrefix, material)
+                .inputs(carpetStack)
+                .outputs(cableStack)
+                .duration(100).EUt(8)
+                .buildAndRegister();
+
+            RecipeMaps.UNPACKER_RECIPES.recipeBuilder()
+                .input(cablePrefix, material)
+                .outputs(OreDictUnifier.get(wirePrefix, material))
+                .outputs(carpetStack)
+                .duration(100).EUt(8)
+                .buildAndRegister();*/
+
+        } else {
+            if(wirePrefix != OrePrefix.wireGtSingle) {
+                RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(OrePrefix.wireGtSingle, material, cableAmount).circuitMeta(24 + ArrayUtils.indexOf(WIRE_DOUBLING_ORDER, wirePrefix))
+                    .fluidInputs(Materials.Rubber.getFluid(144 * cableAmount))
+                    .outputs(cableStack)
+                    .duration(150).EUt(8)
+                    .buildAndRegister();
+            }
+
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .input(wirePrefix, material).circuitMeta(24)
+                .fluidInputs(Materials.Rubber.getFluid(144 * cableAmount))
+                .outputs(cableStack)
+                .duration(150).EUt(8)
+                .buildAndRegister();
+
+            /*RecipeMaps.UNPACKER_RECIPES.recipeBuilder()
+                .input(cablePrefix, material)
+                .outputs(OreDictUnifier.get(wirePrefix, material))
+                .outputs(OreDictUnifier.get(OrePrefix.plate, Materials.Rubber))
+                .duration(100).EUt(8)
+                .buildAndRegister();*/
+        }
     }
 
     public static void generateWireCombiningRecipe(OrePrefix wirePrefix, Material material) {

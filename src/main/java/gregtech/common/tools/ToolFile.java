@@ -27,4 +27,5 @@ public class ToolFile extends ToolBase {
         return (tool != null && tool.equals("file")) ||
             block.getMaterial() == Material.CIRCUITS;
     }
+
 }

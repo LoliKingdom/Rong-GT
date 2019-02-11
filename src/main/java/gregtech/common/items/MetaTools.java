@@ -27,6 +27,7 @@ import gregtech.api.unification.material.type.IngotMaterial;
 import gregtech.api.unification.material.type.SolidMaterial;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.ConfigHolder;
 import gregtech.common.tools.ToolBuzzSaw;
 import gregtech.common.tools.ToolFile;
 import gregtech.common.tools.ToolHardHammer;
@@ -54,14 +55,14 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
 
     @Override
     public void registerSubItems() {
-        SAW = addItem(5, "tool.saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
-        HARD_HAMMER = addItem(6, "tool.hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
-        SOFT_HAMMER = addItem(7, "tool.soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
-        WRENCH = addItem(8, "tool.wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
-        FILE = addItem(9, "tool.file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
-        SCREWDRIVER = addItem(10, "tool.screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
-        MORTAR = addItem(11, "tool.mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
-        WIRE_CUTTER = addItem(12, "tool.wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
+        SAW = addItem(1, "tool.saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
+        HARD_HAMMER = addItem(2, "tool.hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
+        SOFT_HAMMER = addItem(3, "tool.soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
+        WRENCH = addItem(4, "tool.wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
+        FILE = addItem(5, "tool.file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
+        SCREWDRIVER = addItem(6, "tool.screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
+        MORTAR = addItem(7, "tool.mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
+        WIRE_CUTTER = addItem(8, "tool.wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
 
         WRENCH_LV = addItem(20, "tool.wrench.lv").setToolStats(new ToolWrenchLV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
@@ -85,7 +86,7 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
             .addOreDict(ToolDictNames.craftingToolSaw)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        TURBINE = addItem(50, "tool.turbine").setToolStats(new ToolTurbineRotor());
+        TURBINE = addItem(26, "tool.turbine").setToolStats(new ToolTurbineRotor());
     }
 
     public void registerRecipes() {
@@ -104,9 +105,7 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
                 'S', OrePrefix.stone);
         }
         
-        SolidMaterial[] softHammerMaterials = new SolidMaterial[] {
-                Materials.Wood, Materials.Rubber, Materials.Plastic, Materials.Polytetrafluoroethylene
-            };
+        SolidMaterial[] softHammerMaterials = new SolidMaterial[] {Materials.Rubber, Materials.Plastic, Materials.Polytetrafluoroethylene};
             for(int i = 0; i < softHammerMaterials.length; i++) {
                 SolidMaterial solidMaterial = softHammerMaterials[i];
                 ItemStack itemStack = MetaItems.SOFT_HAMMER.getStackForm();

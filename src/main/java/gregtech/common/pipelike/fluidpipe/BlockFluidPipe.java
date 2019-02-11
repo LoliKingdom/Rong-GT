@@ -1,6 +1,12 @@
 package gregtech.common.pipelike.fluidpipe;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import com.google.common.base.Preconditions;
+
 import gregtech.api.damagesources.DamageSources;
 import gregtech.api.pipenet.block.BlockPipe;
 import gregtech.api.pipenet.tile.IPipeTile;
@@ -31,11 +37,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties, WorldFluidPipeNet> {
 
@@ -159,7 +160,7 @@ public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     protected TextureAtlasSprite getParticleTexture(World world, BlockPos blockPos) {

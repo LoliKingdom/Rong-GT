@@ -117,7 +117,7 @@ public class ToolRecipeHandler {
                 'S', new UnificationEntry(OrePrefix.stick, material),
                 'W', new UnificationEntry(OrePrefix.stick, handleMaterial));
         }
-        
+
         if (material.hasFlag(GENERATE_PLATE | GENERATE_ROD | GENERATE_BOLT_SCREW) && material.toolDurability > 0) {
             for (MetaValueItem batteryItem : batteryItems[0]) {
                 ItemStack batteryStack = batteryItem.getStackForm();
@@ -189,21 +189,7 @@ public class ToolRecipeHandler {
             String.format("head_%s_%s", toolPrefix.name(), solidMaterial.toString()),
             OreDictUnifier.get(toolPrefix, solidMaterial), recipe);
     }
-
-    public static void processSawHead(OrePrefix toolPrefix, SolidMaterial solidMaterial) {
-        processSimpleToolHead(toolPrefix, solidMaterial, MetaItems.SAW, "PP", "fh");
-
-        int voltageMultiplier = getVoltageMultiplier(solidMaterial);
-
-        RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-            .input(OrePrefix.ingot, solidMaterial, 2)
-            .notConsumable(MetaItems.SHAPE_EXTRUDER_SAW)
-            .outputs(OreDictUnifier.get(OrePrefix.toolHeadSaw, solidMaterial))
-            .duration((int) solidMaterial.getAverageMass() * 2)
-            .EUt(8 * voltageMultiplier)
-            .buildAndRegister();
-    }
-
+    
     public static void processHammerHead(OrePrefix toolPrefix, SolidMaterial solidMaterial) {
         if(!solidMaterial.hasFlag(NO_WORKING)) {
             processSimpleToolHead(toolPrefix, solidMaterial, MetaItems.HARD_HAMMER, "II ", "IIh", "II ");
@@ -253,6 +239,20 @@ public class ToolRecipeHandler {
             .EUt(8 * voltageMultiplier)
             .buildAndRegister();
 
+    }
+    
+    public static void processSawHead(OrePrefix toolPrefix, SolidMaterial solidMaterial) {
+        processSimpleToolHead(toolPrefix, solidMaterial, MetaItems.SAW, "PP", "fh");
+
+        int voltageMultiplier = getVoltageMultiplier(solidMaterial);
+
+        RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
+            .input(OrePrefix.ingot, solidMaterial, 2)
+            .notConsumable(MetaItems.SHAPE_EXTRUDER_SAW)
+            .outputs(OreDictUnifier.get(OrePrefix.toolHeadSaw, solidMaterial))
+            .duration((int) solidMaterial.getAverageMass() * 2)
+            .EUt(8 * voltageMultiplier)
+            .buildAndRegister();
     }
 
     private static int getVoltageMultiplier(Material material) {

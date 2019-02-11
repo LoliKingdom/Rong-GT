@@ -54,37 +54,4 @@ public class ConfigHolder {
     @Config.Comment("Setting this to true makes GTCE ignore error and invalid recipes that would otherwise cause crash. Default to true.")
     @Config.RequiresMcRestart
     public static boolean ignoreErrorOrInvalidRecipes = true;
-
-    @Config.Comment("Category that contains configs for changing vanilla recipes")
-    @Config.RequiresMcRestart
-    public static VanillaRecipes vanillaRecipes = new VanillaRecipes();
-
-    public static class VanillaRecipes {
-
-        @Config.Comment("Whether to nerf paper crafting recipe. Default is true.")
-        public boolean nerfPaperCrafting = true;
-
-        @Config.Comment("Whether to make flint and steel recipe require steel nugget instead of iron one. Default is true")
-        public boolean flintAndSteelRequireSteel = true;
-
-        @Config.Comment("Whether to nerf wood crafting to 2 planks from 1 log. Default is false.")
-        public boolean nerfWoodCrafting = false;
-
-        @Config.Comment("Whether to nerf wood crafting to 2 sticks from 2 planks. Default is false.")
-        public boolean nerfStickCrafting = false;
-
-        @Config.Comment("Whether to make iron bucket recipe harder by requiring hammer and plates. Default is true.")
-        public boolean bucketRequirePlatesAndHammer = true;
-
-        @Config.Comment("Recipes for items like iron doors, trapdors, pressure plates, cauldron, hopper and iron bars require iron plates and hammer. Default is true")
-        public boolean ironConsumingCraftingRecipesRequirePlates = true;
-
-        @Config.Comment("Require a knife for bowl crafting instead of only plank? Default is true.")
-        public boolean bowlRequireKnife = true;
-
-        @Config.Comment("Require steel wheels to craft minecarts? Default is true.")
-        public boolean harderMinecarts = true;
-
-    }
-
 }

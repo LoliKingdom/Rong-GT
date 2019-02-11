@@ -33,7 +33,7 @@ public class MetaItems1 extends MaterialMetaItem {
         GELLED_TOLUENE = addItem(300, "gelled_toluene");
 
         BOTTLE_PURPLE_DRINK = addItem(301, "bottle.purple.drink").addStats(new FoodStats(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90)));
-        
+
         SHAPE_EMPTY = addItem(303, "shape.empty");
 
         SHAPE_MOLD_PLATE = addItem(304, "shape.mold.plate");
@@ -217,7 +217,7 @@ public class MetaItems1 extends MaterialMetaItem {
 	}
 	
 	public void registerRecipes() {
-		//Replace with IF's rubber drop
+		//Replace with IF rubber drop
         /*RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(RUBBER_DROP.getStackForm())
             .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber, 3))
