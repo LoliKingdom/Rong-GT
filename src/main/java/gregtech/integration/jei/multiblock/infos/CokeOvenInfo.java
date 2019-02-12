@@ -1,7 +1,6 @@
 package gregtech.integration.jei.multiblock.infos;
 
 import com.google.common.collect.Lists;
-import gregtech.api.GTValues;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
@@ -14,33 +13,30 @@ import net.minecraft.util.EnumFacing;
 
 import java.util.List;
 
-public class DistillationTowerInfo extends MultiblockInfoPage {
+public class CokeOvenInfo extends MultiblockInfoPage {
 
     @Override
     public MultiblockControllerBase getController() {
-        return MetaTileEntities.DISTILLATION_TOWER;
+        return MetaTileEntities.COKE_OVEN;
     }
 
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         MultiblockShapeInfo shapeInfo = MultiblockShapeInfo.builder()
-            .aisle("EXX", "XXX", "XXX", "XXX", "XXX", "XXX")
-            .aisle("SFX", "X#X", "X#X", "X#X", "X#X" ,"XXX")
-            .aisle("IXX", "HXX", "HXX", "HXX", "HXX", "HXX")
+            .aisle("XXX", "XXX", "XXX")
+            .aisle("XXX", "C#X", "XXX")
+            .aisle("XXX", "XSX", "XXX")
+            .where('X', MetaBlocks.METAL_CASING.getState(MetalCasingType.COKE_BRICKS))
+            .where('C', MetaTileEntities.COKE_OVEN, EnumFacing.WEST)
+            .where('S', MetaTileEntities.COKE_OVEN_HATCH, EnumFacing.SOUTH)
             .where('#', Blocks.AIR.getDefaultState())
-            .where('X', MetaBlocks.METAL_CASING.getState(MetalCasingType.STAINLESS_CLEAN))
-            .where('S', MetaTileEntities.DISTILLATION_TOWER, EnumFacing.WEST)
-            .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.EV], EnumFacing.WEST)
-            .where('I', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.EV], EnumFacing.WEST)
-            .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.EV], EnumFacing.DOWN)
-            .where('H', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.EV], EnumFacing.WEST)
             .build();
         return Lists.newArrayList(shapeInfo);
     }
 
     @Override
     public String[] getDescription() {
-        return new String[] {I18n.format("gregtech.multiblock.distillation_tower.description")};
+        return new String[] {I18n.format("gregtech.multiblock.coke_oven.description")};
     }
 
 }

@@ -1,5 +1,8 @@
 package gregtech.loaders.recipes;
 
+import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.M;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,15 +12,10 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import static gregtech.api.GTValues.L;
-import static gregtech.api.GTValues.M;
-import static gregtech.common.items.MetaItems.FLUID_FILTER;
-import static gregtech.common.items.MetaItems.ITEM_FILTER;
-import static gregtech.common.items.MetaItems.ORE_DICTIONARY_FILTER;
-
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.builders.CokeOvenRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.DustMaterial;
@@ -29,7 +27,6 @@ import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.util.GTLog;
 import gregtech.api.util.GTUtility;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.StoneBlock;
 import gregtech.common.blocks.StoneBlock.ChiselingVariant;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -41,6 +38,23 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MachineRecipeLoader {
+	
+	public static void init() {
+		
+		//Coke Oven
+		CokeOvenRecipeBuilder.start().input(OrePrefix.log, Materials.Wood).output(OreDictUnifier.get(OrePrefix.gem, Materials.Charcoal)).fluidOutput(Materials.Creosote.getFluid(250)).duration(900).buildAndRegister();
+		CokeOvenRecipeBuilder.start().input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).duration(900).buildAndRegister();
+		CokeOvenRecipeBuilder.start().input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).duration(8100).buildAndRegister();
+
+		//Pyrolose Oven
+		RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+        	.input(OrePrefix.gem, Materials.Coal, 16)
+        	.circuitMeta(0)
+        	.outputs(OreDictUnifier.get(OrePrefix.gem, Materials.Coke, 20))
+        	.fluidOutputs(Materials.Creosote.getFluid(10000))
+        	.duration(440).EUt(96)
+        	.buildAndRegister();
+	}
 	
 	public static void initializeArcRecyclingRecipes() {
         for(Entry<ItemStack, ItemMaterialInfo> entry : OreDictUnifier.getAllItemInfos()) {

@@ -66,8 +66,8 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        this.speed = context.get("DrillHeadType", DrillHeadType.STEEL).getSpeed();
-        this.energyLevel = context.get("DrillHeadType", DrillHeadType.STEEL).getEnergyLevel();
+        this.speed = context.getOrDefault("DrillHeadType", DrillHeadType.STEEL).getSpeed();
+        this.energyLevel = context.getOrDefault("DrillHeadType", DrillHeadType.STEEL).getEnergyLevel();
     }
     
     @Override
@@ -106,7 +106,7 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
                 return false;
             BlockDrillHead blockDrillHead = (BlockDrillHead)blockState.getBlock();
             DrillHeadType drillType = blockDrillHead.getState(blockState);
-            DrillHeadType currentDrillType = blockWorldState.getMatchContext().get("DrillHeadType", drillType);
+            DrillHeadType currentDrillType = blockWorldState.getMatchContext().getOrPut("DrillHeadType", drillType);
             return currentDrillType.getName().equals(drillType.getName());
         };
     }
