@@ -222,6 +222,13 @@ public class MetaItems1 extends MaterialMetaItem {
         COMPRESSED_FIRECLAY = addItem(520, "compressed.fireclay");
         FIRECLAY_BRICK = addItem(521, "brick.fireclay");
         COKE_OVEN_BRICK = addItem(522, "brick.coke");
+        
+        QUANTUM_EYE = addItem(523, "quantumeye");
+        QUANTUM_STAR = addItem(524, "quantumstar");
+        GRAVI_STAR = addItem(525, "gravistar");
+        
+        ENERGY_LAPOTRONIC_ORB2 = addItem(526, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+
 	}
 	
 	public void registerRecipes() {

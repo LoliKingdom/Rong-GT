@@ -46,7 +46,7 @@ public class MachineRecipeLoader {
 		CokeOvenRecipeBuilder.start().input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).duration(900).buildAndRegister();
 		CokeOvenRecipeBuilder.start().input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).duration(8100).buildAndRegister();
 
-		//Pyrolose Oven
+		//Pyrolyse Oven
 		RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
         	.input(OrePrefix.gem, Materials.Coal, 16)
         	.circuitMeta(0)

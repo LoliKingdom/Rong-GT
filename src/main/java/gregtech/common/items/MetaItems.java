@@ -20,6 +20,10 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_IV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_LuV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_UV;
+    
+    public static MetaItem<?>.MetaValueItem QUANTUM_EYE;
+    public static MetaItem<?>.MetaValueItem QUANTUM_STAR;
+    public static MetaItem<?>.MetaValueItem GRAVI_STAR;
 
     public static MetaItem<?>.MetaValueItem SHAPE_EMPTY;
 
@@ -84,6 +88,7 @@ public class MetaItems {
     
     public static MetaItem<?>.MetaValueItem ENERGY_LAPOTRONIC_ORB;
     public static MetaItem<?>.MetaValueItem ENERGY_LAPOTRONIC_ORB2;
+    public static MetaItem<?>.MetaValueItem ENERGY_LAPOTRONIC_ORB3;
     
     public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_LV;
     public static MetaItem<?>.MetaValueItem ELECTRIC_MOTOR_MV;

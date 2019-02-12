@@ -5,12 +5,13 @@ import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipes.FuelRecipe;
 import gregtech.api.unification.material.Materials;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FuelLoader {
 	
 	public static void registerFuels() {
-		
+		/*
         registerDieselGeneratorFuel(Materials.Naphtha.getFluid(1), 8, GTValues.LV);
         
         registerDieselGeneratorFuel(Materials.Ethanol.getFluid(2), 1, GTValues.HV);
@@ -66,6 +67,8 @@ public class FuelLoader {
         registerPlasmaFuel(Materials.Nickel.getPlasma(16), 106905, GTValues.LV);
 
         registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(32), 1, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Fluids.BIOMASS.getFluid(16), 1, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.SeedOil.getFluid(64), 1, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.Creosote.getFluid(16), 1, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.Biomass.getFluid(16), 1, GTValues.LV);
@@ -75,6 +78,8 @@ public class FuelLoader {
         registerSemiFluidGeneratorFuel(Materials.SulfuricHeavyFuel.getFluid(16), 5, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.HeavyFuel.getFluid(8), 15, GTValues.LV);
         
+        //Fantasy? Other-mod fuels nonetheless
+        registerSemiFluidGeneratorFuel(FluidRegistry.getFluidStack("gelid_cryotheum", 20), 8, GTValues.MV);*/
     }
 
     public static void registerDieselGeneratorFuel(FluidStack fuelStack, int duration, int tier) {
@@ -91,10 +96,9 @@ public class FuelLoader {
     
     public static void registerPlasmaFuel(FluidStack fuelStack, int duration, int tier) {
         RecipeMaps.PLASMA_GENERATOR_FUELS.addRecipe(new FuelRecipe(fuelStack, duration, GTValues.V[tier]));
-}
+    }
 
     public static void registerSemiFluidGeneratorFuel(FluidStack fuelStack, int duration, int tier) {
         RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.addRecipe(new FuelRecipe(fuelStack, duration, GTValues.V[tier]));
-}
-
+    }
 }
