@@ -1,6 +1,20 @@
 package gregtech.api.items.metaitem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.google.common.collect.ImmutableList;
+
 import gnu.trove.map.TShortObjectMap;
 import gnu.trove.map.hash.TShortObjectHashMap;
 import gregtech.api.GTValues;
@@ -14,7 +28,16 @@ import gregtech.api.gui.resources.RenderUtil;
 import gregtech.api.items.OreDictNames;
 import gregtech.api.items.gui.ItemUIFactory;
 import gregtech.api.items.gui.PlayerInventoryHolder;
-import gregtech.api.items.metaitem.stats.*;
+import gregtech.api.items.metaitem.stats.IFoodBehavior;
+import gregtech.api.items.metaitem.stats.IItemBehaviour;
+import gregtech.api.items.metaitem.stats.IItemCapabilityProvider;
+import gregtech.api.items.metaitem.stats.IItemColorProvider;
+import gregtech.api.items.metaitem.stats.IItemContainerItemProvider;
+import gregtech.api.items.metaitem.stats.IItemDurabilityManager;
+import gregtech.api.items.metaitem.stats.IItemMaxStackSizeProvider;
+import gregtech.api.items.metaitem.stats.IItemModelIndexProvider;
+import gregtech.api.items.metaitem.stats.IItemUseManager;
+import gregtech.api.items.metaitem.stats.IMetaItemStats;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
@@ -32,7 +55,12 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -48,11 +76,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import javax.annotation.Nullable;
-import java.util.*;
 
 /**
  * MetaItem is item that can have up to Short.MAX_VALUE items inside one id.
@@ -452,6 +475,25 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
             behaviour.addInformation(itemStack, lines);
         }
     }
+    
+    @Override
+    public boolean hasContainerItem(ItemStack itemStack) {
+        T item = getItem(itemStack);
+        if (item == null) {
+            return false;
+        }
+        return item.getContainerItemProvider() != null;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack) {
+        T item = getItem(itemStack);
+        if (item == null) {
+            return ItemStack.EMPTY;
+        }
+        IItemContainerItemProvider provider = item.getContainerItemProvider();
+        return provider == null ? ItemStack.EMPTY : provider.getContainerItem(itemStack);
+    }
 
     @Override
     public CreativeTabs[] getCreativeTabs() {
@@ -516,6 +558,8 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
         private IItemMaxStackSizeProvider stackSizeProvider;
         private IItemColorProvider colorProvider;
         private IItemModelIndexProvider modelIndexProvider;
+        private IItemContainerItemProvider containerItemProvider;
+
 
         private int burnValue = 0;
         private boolean visible = true;
@@ -602,6 +646,8 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
                     this.stackSizeProvider = (IItemMaxStackSizeProvider) metaItemStats;
                 if(metaItemStats instanceof IItemColorProvider)
                     this.colorProvider = (IItemColorProvider) metaItemStats;
+                if(metaItemStats instanceof IItemContainerItemProvider)
+                    this.containerItemProvider = (IItemContainerItemProvider) metaItemStats;
                 if(metaItemStats instanceof IItemModelIndexProvider)
                     this.modelIndexProvider = (IItemModelIndexProvider) metaItemStats;
                 if (metaItemStats instanceof IItemBehaviour)
@@ -638,12 +684,19 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
             return uiManager;
         }
 
+        @Nullable
         public IItemColorProvider getColorProvider() {
             return colorProvider;
         }
 
+        @Nullable
         public IItemModelIndexProvider getModelIndexProvider() {
             return modelIndexProvider;
+        }
+        
+        @Nullable
+        public IItemContainerItemProvider getContainerItemProvider() {
+            return containerItemProvider;
         }
 
         public int getBurnValue() {

@@ -1,24 +1,28 @@
 package gregtech.loaders;
 
+import static gregtech.api.GTValues.M;
+import static gregtech.api.GTValues.W;
+
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.ItemMaterialInfo;
+import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTLog;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.blocks.StoneBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-
-import static gregtech.api.GTValues.W;
 
 public class OreDictionaryLoader {
 
     public static void init() {
         GTLog.logger.info("Registering OreDict entries.");
+        
+        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL, 1, W), OrePrefix.ingot, Materials.Clay);
+        OreDictUnifier.registerOre(new ItemStack(Blocks.HARDENED_CLAY, 1, W), new ItemMaterialInfo(new MaterialStack(Materials.Clay, M * 4)));
+        OreDictUnifier.registerOre(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, W), new ItemMaterialInfo(new MaterialStack(Materials.Clay, M * 4)));
 
         OreDictUnifier.registerOre(new ItemStack(Items.BUCKET), OrePrefix.bucket, MarkerMaterials.Empty);
         OreDictUnifier.registerOre(new ItemStack(Items.WATER_BUCKET), OrePrefix.bucket, Materials.Water);

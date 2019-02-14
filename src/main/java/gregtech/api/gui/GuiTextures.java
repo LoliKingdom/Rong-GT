@@ -55,6 +55,7 @@ public class GuiTextures {
     public static final TextureArea EXTRACTOR_OVERLAY = TextureArea.fullImage("textures/gui/overlay/extractor_overlay.png");
     public static final TextureArea CRUSHED_ORE_OVERLAY = TextureArea.fullImage("textures/gui/overlay/crushed_ore_overlay.png");
     public static final TextureArea DUST_OVERLAY = TextureArea.fullImage("textures/gui/overlay/dust_overlay.png");
+    public static final TextureArea INGOT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/ingot_overlay.png");
     public static final TextureArea CIRCUIT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/circuit_overlay.png");
     public static final TextureArea BATTERY_OVERLAY = TextureArea.fullImage("textures/gui/overlay/battery_overlay.png");
     public static final TextureArea PRESS_OVERLAY_1 = TextureArea.fullImage("textures/gui/overlay/press_overlay_1.png");
@@ -86,7 +87,6 @@ public class GuiTextures {
     public static final TextureArea IN_SLOT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/in_slot_overlay.png");
     public static final TextureArea OUT_SLOT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/out_slot_overlay.png");
     public static final TextureArea FILTER_SLOT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/filter_slot_overlay.png");
-    public static final TextureArea INGOT_OVERLAY = TextureArea.fullImage("textures/gui/overlay/ingot_overlay.png");
 
     //PROGRESS BARS
     public static final TextureArea PROGRESS_BAR_ARROW = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_arrow.png");

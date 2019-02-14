@@ -8,8 +8,8 @@ import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.ElectricStats;
 import gregtech.api.items.metaitem.FluidStats;
 import gregtech.api.items.metaitem.FoodStats;
+import gregtech.api.items.metaitem.stats.IItemContainerItemProvider;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -215,8 +215,9 @@ public class MetaItems1 extends MaterialMetaItem {
         LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(4000000L, GTValues.EV)).setModelAmount(8).setMaxStackSize(1);
         ENERGIUM_DUST = addItem(516, "energium_dust");
         
-        WOODEN_FORM_EMPTY = addItem(517, "wooden_form.empty");
-        WOODEN_FORM_BRICK = addItem(518, "wooden_form.brick");
+        IItemContainerItemProvider selfContainerItemProvider = itemStack -> itemStack;
+        WOODEN_FORM_EMPTY = addItem(517, "wooden_form.empty").addStats(selfContainerItemProvider);
+        WOODEN_FORM_BRICK = addItem(518, "wooden_form.brick").addStats(selfContainerItemProvider);
 
         COMPRESSED_CLAY = addItem(519, "compressed.clay");
         COMPRESSED_FIRECLAY = addItem(520, "compressed.fireclay");

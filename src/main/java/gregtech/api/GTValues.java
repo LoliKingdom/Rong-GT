@@ -64,11 +64,10 @@ public class GTValues {
      * MOD ID Strings, since they are very common Parameters.
      */
     public static final String MODID = "gregtech",
-            MODID_RC = "railcraft",
             MODID_FR = "forestry",
-            MODID_JEI = "jei",
             MODID_FMP = "forgemultipartcbe",
             MODID_CT = "crafttweaker",
-            MODID_TOP = "theoneprobe";
+            MODID_TOP = "theoneprobe",
+    		MODID_IT = "inventorytweaks";
 
 }
