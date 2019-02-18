@@ -303,7 +303,7 @@ public enum OrePrefix {
         block.setIgnored(Materials.Diamond);
         block.setIgnored(Materials.Coal);
         block.setIgnored(Materials.Glass);
-        block.setIgnored(Materials.Marble);
+        //block.setIgnored(Materials.Marble);
         block.setIgnored(Materials.Stone);
         block.setIgnored(Materials.Glowstone);
         block.setIgnored(Materials.Endstone);

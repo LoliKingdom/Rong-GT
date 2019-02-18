@@ -239,6 +239,10 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem LAPOTRON_CRYSTAL;
     public static MetaItem<?>.MetaValueItem ENERGIUM_DUST;
     
+    public static MetaItem<?>.MetaValueItem FUEL_BINDER;
+    public static MetaItem<?>.MetaValueItem SUPER_FUEL_BINDER;
+    public static MetaItem<?>.MetaValueItem MAGIC_FUEL_BINDER;
+    
     public static ToolMetaItem<?>.MetaToolValueItem SAW;
     public static ToolMetaItem<?>.MetaToolValueItem HARD_HAMMER;
     public static ToolMetaItem<?>.MetaToolValueItem SOFT_HAMMER;

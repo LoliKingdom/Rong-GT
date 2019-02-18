@@ -230,6 +230,9 @@ public class MetaItems1 extends MaterialMetaItem {
         
         ENERGY_LAPOTRONIC_ORB2 = addItem(526, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
 
+        FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
+        SUPER_FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
+        MAGIC_FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
 	}
 	
 	public void registerRecipes() {

@@ -32,23 +32,6 @@ public class ToolUtility {
         return result == null ? harvester.getHorizontalFacing() : result.sideHit;
     }
 
-    public static int applyTimberAxe(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer harvester, List<ItemStack> drops) {
-        if(harvester.isSneaking() ||
-            !GTUtility.isBlockOrePrefixed(world, blockPos, blockState, OrePrefix.log, drops))
-            return 0; //do not try to convert while shift-clicking or non-log blocks
-        MutableBlockPos mutableBlockPos = new MutableBlockPos(blockPos);
-        int destroyedAmount = 0;
-        while(true) {
-            mutableBlockPos.move(EnumFacing.UP);
-            IBlockState targetState = world.getBlockState(mutableBlockPos);
-            if(targetState != blockState ||
-                !world.isBlockModifiable(harvester, mutableBlockPos) ||
-                !((EntityPlayerMP) harvester).interactionManager.tryHarvestBlock(mutableBlockPos))
-                return destroyedAmount;
-            destroyedAmount++;
-        }
-    }
-
     public static int applyShearable(World world, BlockPos blockPos, IBlockState blockState, List<ItemStack> drops, EntityPlayer harvester) {
         if(blockState.getBlock() instanceof IShearable) {
             IShearable shearable = (IShearable) blockState.getBlock();
@@ -82,26 +65,6 @@ public class ToolUtility {
         return 0;
     }
 
-    public static int applyMultiBreak(World world, BlockPos blockPos, EntityPlayer harvester, ToolBase self, int size) {
-        int conversions = 0;
-        ItemStack selfStack = harvester.getHeldItem(EnumHand.MAIN_HAND);
-        for (int i = -size; i <= size; i++) {
-            for (int j = -size; j <= size; j++) {
-                for (int k = -size; k <= size; k++) {
-                    if(i == 0 && j == 0 && k == 0)
-                        continue;
-                    BlockPos block = blockPos.add(i, j, k);
-                    if(!self.isMinableBlock(world.getBlockState(block), selfStack) ||
-                        !world.canMineBlockBody(harvester, block) ||
-                        !((EntityPlayerMP) harvester).interactionManager.tryHarvestBlock(block))
-                        continue;
-                    conversions++;
-                }
-            }
-        }
-        return conversions;
-    }
-
     public static int applyHammerDrops(Random random, IBlockState blockState, List<ItemStack> drops, boolean randomizeDrop) {
         ItemStack itemStack = new ItemStack(blockState.getBlock(), 1, blockState.getBlock().getMetaFromState(blockState));
         Recipe recipe = RecipeMaps.FORGE_HAMMER_RECIPES.findRecipe(Long.MAX_VALUE, Collections.singletonList(itemStack), Collections.emptyList());
@@ -120,7 +83,4 @@ public class ToolUtility {
         }
         return 0;
     }
-
-
-
 }

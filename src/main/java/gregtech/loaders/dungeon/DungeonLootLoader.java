@@ -52,8 +52,6 @@ public class DungeonLootLoader {
         ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.Ruby, 1), 2, 8, 1);
         ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.Sapphire, 1), 2, 8, 3);
         ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.Peridot, 1), 2, 8, 4);
-        ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.GarnetRed, 1), 2, 8, 4);
-        ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.GarnetYellow, 1), 2, 8, 4);
         ChestGenHooks.addItem(LootTableList.CHESTS_DESERT_PYRAMID, OreDictUnifier.get(OrePrefix.gem, Materials.Olivine, 1), 2, 8, 4);
 
         ChestGenHooks.addItem(LootTableList.CHESTS_JUNGLE_TEMPLE, OreDictUnifier.get(OrePrefix.ingot, Materials.Bronze, 1), 4, 16, 12);
