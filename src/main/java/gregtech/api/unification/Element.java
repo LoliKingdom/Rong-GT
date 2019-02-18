@@ -111,7 +111,7 @@ public enum Element {
     U_235(92, 143, -1, null, "Uranium-235", true),
     Np(93, 144, -1, null, "Neptunium", false),
     Pu(94, 152, -1, null, "Plutonium", false),
-    Pu_239(94, 149, -1, null, "Plutonium-241", true),
+    Pu_239(94, 149, -1, null, "Plutonium-239", true),
     Am(95, 150, -1, null, "Americium", false),
     Cm(96, 153, -1, null, "Curium", false),
     Bk(97, 152, -1, null, "Berkelium", false),
