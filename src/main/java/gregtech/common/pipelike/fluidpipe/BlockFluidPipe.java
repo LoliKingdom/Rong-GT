@@ -73,6 +73,11 @@ public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties
     }
 
     @Override
+    protected FluidPipeProperties getFallbackType() {
+        return enabledMaterials.values().iterator().next();
+    }
+    
+    @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (Material material : enabledMaterials.keySet()) {
             for (FluidPipeType fluidPipeType : FluidPipeType.values()) {

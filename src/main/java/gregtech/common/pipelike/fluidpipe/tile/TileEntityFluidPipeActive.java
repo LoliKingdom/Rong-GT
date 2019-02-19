@@ -1,5 +1,6 @@
 package gregtech.common.pipelike.fluidpipe.tile;
 
+import gregtech.api.GTValues;
 import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.common.covers.CoverPump;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,8 +11,11 @@ import net.minecraft.util.math.BlockPos.PooledMutableBlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.function.Predicate;
+
+import codechicken.multipart.TileMultipart;
 
 public class TileEntityFluidPipeActive extends TileEntityFluidPipe implements ITickable {
 
@@ -57,6 +61,9 @@ public class TileEntityFluidPipeActive extends TileEntityFluidPipe implements IT
         for(EnumFacing side : EnumFacing.VALUES) {
             blockPos.setPos(pipeTile.getPipePos()).move(side);
             TileEntity tileEntity = pipeTile.getPipeWorld().getTileEntity(blockPos);
+            if(tileEntity instanceof TileEntityFluidPipe ||
+                    (Loader.isModLoaded(GTValues.MODID_FMP) && tileEntity instanceof TileMultipart))
+                    continue;
             IFluidHandler sourceHandler = pipeTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
             IFluidHandler receiverHandler = tileEntity == null ? null : tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
             if(sourceHandler == null || receiverHandler == null) {

@@ -113,6 +113,11 @@ public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet>
             }
         }
     }
+    
+    @Override
+    protected WireProperties getFallbackType() {
+        return enabledMaterials.values().iterator().next();
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
