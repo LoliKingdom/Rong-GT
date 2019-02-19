@@ -97,7 +97,4 @@ public class MarkerMaterials {
         public static Material Superconductor = new Material(500, "superconductor", 0xFFFFFF, MaterialIconSet.NONE, ImmutableList.of(), 0L, null) {};
         public static Material Data = new MarkerMaterial("data");
     }
-
-
-
 }

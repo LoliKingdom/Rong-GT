@@ -92,8 +92,8 @@ public class MetaFluids {
         registerFluid(Materials.LightFuel, FluidType.LIQUID, 300, true);
         registerFluid(Materials.HeavyFuel, FluidType.LIQUID, 300, true);
         registerFluid(Materials.LPG, FluidType.LIQUID, 300, true);
-        registerFluid(Materials.CrackedLightFuel, FluidType.LIQUID, 300, true);
-        registerFluid(Materials.CrackedHeavyFuel, FluidType.LIQUID, 300, true);
+        registerFluid(Materials.SteamCrackedLightFuel, FluidType.LIQUID, 300, true);
+        registerFluid(Materials.SteamCrackedHeavyFuel, FluidType.LIQUID, 300, true);
 
         registerFluid(Materials.UUAmplifier, FluidType.LIQUID, 300, true);
         registerFluid(Materials.Chlorine, FluidType.GAS, 300, true);
