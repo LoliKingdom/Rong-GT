@@ -4,6 +4,7 @@ import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.lib.vec.Cuboid6;
+import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
@@ -41,6 +42,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional.Method;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -137,11 +139,11 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        boolean isActiveNode = getActiveNodeConnections(worldIn, pos) > 0;
         IPipeTile<PipeType, NodeDataType> pipeTile = getPipeTileEntity(worldIn, pos);
         if(pipeTile != null) {
-            getWorldPipeNet(worldIn).addNode(pos, createProperties(pipeTile), 0, 0, isActiveNode);
-            onActiveModeChange(worldIn, pos, isActiveNode, true);
+            int activeConnections = getActiveNodeConnections(worldIn, pos);
+            activeConnections |= ~pipeTile.getBlockedConnections(); //remove blocked connections
+            boolean isActiveNode = activeConnections > 0;
         }
     }
 
@@ -155,9 +157,16 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        boolean isActiveNodeNow = getActiveNodeConnections(worldIn, pos) > 0;
+    	updateActiveNodeStatus(worldIn, pos);
+    }
+    
+    public void updateActiveNodeStatus(World worldIn, BlockPos pos) {
         PipeNet<NodeDataType> pipeNet = getWorldPipeNet(worldIn).getNetFromPos(pos);
-        if(pipeNet != null) {
+        IPipeTile<PipeType, NodeDataType> pipeTile = getPipeTileEntity(worldIn, pos);
+        if(pipeNet != null && pipeTile != null) {
+            int activeConnections = getActiveNodeConnections(worldIn, pos);
+            activeConnections &= ~pipeTile.getBlockedConnections(); //remove blocked connections
+            boolean isActiveNodeNow = activeConnections > 0;
             boolean modeChanged = pipeNet.markNodeAsActive(pos, isActiveNodeNow);
             if(modeChanged) {
                 onActiveModeChange(worldIn, pos, isActiveNodeNow, false);
@@ -314,14 +323,21 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
         return null;
     }
 
+    @Method(modid = GTValues.MODID_FMP)
     private IPipeTile<PipeType, NodeDataType> tryGetMultipartTile(TileEntity tileEntityAtPos) {
         if(tileEntityAtPos instanceof TileMultipart) {
             TileMultipart tileMultipart = (TileMultipart) tileEntityAtPos;
             //noinspection unchecked
-            return (IPipeTile<PipeType, NodeDataType>) tileMultipart.jPartList().stream()
-                .filter(part -> part instanceof IPipeTile)
-                .filter(part -> isThisPipeBlock(((IPipeTile) part).getPipeBlock()))
-                .findFirst().orElse(null);
+            List<TMultiPart> partList = tileMultipart.jPartList();
+            for (TMultiPart multiPart : partList) {
+                if(multiPart instanceof IPipeTile) {
+                    IPipeTile<?, ?> pipePart = (IPipeTile<?, ?>) multiPart;
+                    if(isThisPipeBlock(pipePart.getPipeBlock())) {
+                        //noinspection unchecked
+                        return (IPipeTile<PipeType, NodeDataType>) pipePart;
+                    }
+                }
+            }
         }
         return null;
     }

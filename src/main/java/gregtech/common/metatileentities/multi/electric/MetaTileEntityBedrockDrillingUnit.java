@@ -83,13 +83,14 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
             .aisle("BBB", "XXX", "CCC", "#Z#", "#Z#")
             .aisle("BBB", "XXX", "CCC", "ZCZ", "ZCZ")
             .aisle("BBB", "XXX", "CSC", "#Z#", "#Z#")
+            .setAmountAtLeast('C', 18)
+            .setAmountAtLeast('B', 3)
             .where('S', selfPredicate())
             .where('X', drillHeadPredicate())
             .where('C', statePredicate(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).or(abilityPartPredicate(ALLOWED_ABILITIES)))
             .where('#', isAirPredicate())
             .where('Z', blockPredicate(MetaBlocks.FRAMES.get(Materials.Steel)))
-            .where('B', blockPredicate(Blocks.BEDROCK))
-            .setAmountAtLeast('C', 18)
+            .where('B', blockPredicate(Blocks.BEDROCK))           
             .build();
     }
     

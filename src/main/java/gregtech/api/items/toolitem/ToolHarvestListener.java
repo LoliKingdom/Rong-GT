@@ -1,19 +1,48 @@
 package gregtech.api.items.toolitem;
 
-import gregtech.api.items.toolitem.ToolMetaItem.MetaToolValueItem;
-import gregtech.api.util.GTUtility;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import java.util.List;
 
+import gregtech.api.GTValues;
+import gregtech.api.items.toolitem.ToolMetaItem.MetaToolValueItem;
+import gregtech.api.util.GTUtility;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+@EventBusSubscriber(modid = GTValues.MODID)
 public class ToolHarvestListener {
 
     private static final Object DUMMY_OBJECT = new Object();
-    private final ThreadLocal<Object> harvesting = new ThreadLocal<>();
+    private static final ThreadLocal<Object> harvesting = new ThreadLocal<>();
+    
+    @SubscribeEvent
+    public static void onXpOrbPickup(PlayerPickupXpEvent event) {
+        EntityPlayer player = event.getEntityPlayer();
+        EntityXPOrb xpOrb = event.getOrb();
+        ItemStack itemStack = EnchantmentHelper.getEnchantedItem(Enchantments.MENDING, player);
+
+        if (!itemStack.isEmpty() && itemStack.getItem() instanceof ToolMetaItem) {
+            ToolMetaItem<?> toolMetaItem = (ToolMetaItem<?>) itemStack.getItem();
+            int maxDurabilityRegain = xpToDurability(xpOrb.xpValue);
+            int durabilityRegained = toolMetaItem.regainItemDurability(itemStack, maxDurabilityRegain);
+            xpOrb.xpValue -= durabilityToXp(durabilityRegained);
+        }
+    }
+
+    private static int xpToDurability(int xp) {
+        return xp * 2;
+    }
+
+    private static int durabilityToXp(int durability) {
+        return durability / 2;
+    }
 
     @SubscribeEvent
     public void onHarvestDrops(BlockEvent.HarvestDropsEvent event) {

@@ -93,11 +93,10 @@ public class FluidPipeMultiPart extends PipeMultiPart<FluidPipeType, FluidPipePr
         }
         return false;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getParticleTexture() {
         return FluidPipeRenderer.INSTANCE.getParticleTexture(this);
     }
-
 }

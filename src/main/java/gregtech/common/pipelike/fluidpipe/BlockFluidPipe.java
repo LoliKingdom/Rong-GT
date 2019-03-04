@@ -1,18 +1,13 @@
 package gregtech.common.pipelike.fluidpipe;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
 import com.google.common.base.Preconditions;
-
 import gregtech.api.damagesources.DamageSources;
 import gregtech.api.pipenet.block.BlockPipe;
 import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.api.pipenet.tile.TileEntityPipeBase;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.util.GTUtility;
+import gregtech.common.pipelike.cable.WireProperties;
 import gregtech.common.pipelike.fluidpipe.net.FluidPipeNet;
 import gregtech.common.pipelike.fluidpipe.net.WorldFluidPipeNet;
 import gregtech.common.pipelike.fluidpipe.tile.TileEntityFluidPipe;
@@ -37,6 +32,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties, WorldFluidPipeNet> {
 
@@ -76,7 +76,7 @@ public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties
     protected FluidPipeProperties getFallbackType() {
         return enabledMaterials.values().iterator().next();
     }
-    
+
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (Material material : enabledMaterials.keySet()) {
@@ -165,10 +165,10 @@ public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     protected TextureAtlasSprite getParticleTexture(World world, BlockPos blockPos) {
         return FluidPipeRenderer.INSTANCE.getParticleTexture((TileEntityFluidPipe) world.getTileEntity(blockPos));
-}
+    }
 }

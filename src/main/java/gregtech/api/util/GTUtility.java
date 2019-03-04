@@ -443,13 +443,16 @@ public class GTUtility {
      * @return lowest tier that can handle passed voltage
      */
     public static byte getTierByVoltage(long voltage) {
-        byte tier = 0;
+        byte tier = -1;
         while (++tier < V.length) {
             if (voltage == V[tier]) {
                 return tier;
             } else if (voltage < V[tier]) {
                 return (byte) Math.max(0, tier - 1);
             }
+        }
+        if(tier == 7) {
+        	return tier = 6;
         }
         return tier;
     }

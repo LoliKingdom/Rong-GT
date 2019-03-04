@@ -15,6 +15,7 @@ import static gregtech.common.items.MetaItems.WRENCH;
 import static gregtech.common.items.MetaItems.WRENCH_HV;
 import static gregtech.common.items.MetaItems.WRENCH_LV;
 import static gregtech.common.items.MetaItems.WRENCH_MV;
+import static gregtech.common.items.MetaItems.PLUNGER;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.ToolDictNames;
@@ -32,6 +33,7 @@ import gregtech.common.tools.ToolBuzzSaw;
 import gregtech.common.tools.ToolFile;
 import gregtech.common.tools.ToolHardHammer;
 import gregtech.common.tools.ToolMortar;
+import gregtech.common.tools.ToolPlunger;
 import gregtech.common.tools.ToolSaw;
 import gregtech.common.tools.ToolScrewdriver;
 import gregtech.common.tools.ToolScrewdriverLV;
@@ -87,6 +89,9 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
         TURBINE = addItem(26, "tool.turbine").setToolStats(new ToolTurbineRotor());
+        
+        PLUNGER = addItem(27, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
+        
     }
 
     public void registerRecipes() {

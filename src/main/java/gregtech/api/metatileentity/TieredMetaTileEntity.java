@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 public abstract class TieredMetaTileEntity extends MetaTileEntity implements IEnergyChangeListener {
 
     private final int tier;
+    
     protected IEnergyContainer energyContainer;
 
     public TieredMetaTileEntity(ResourceLocation metaTileEntityId, int tier) {

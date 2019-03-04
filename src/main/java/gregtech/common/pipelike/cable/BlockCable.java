@@ -1,12 +1,6 @@
 package gregtech.common.pipelike.cable;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.base.Preconditions;
-
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.damagesources.DamageSources;
@@ -37,6 +31,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet> implements ITileEntityProvider {
 
     private final Map<Material, WireProperties> enabledMaterials = new TreeMap<>();
@@ -64,6 +63,11 @@ public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet>
     @Override
     protected WireProperties createProperties(Insulation insulation, Material material) {
         return insulation.modifyProperties(enabledMaterials.get(material));
+    }
+
+    @Override
+    protected WireProperties getFallbackType() {
+        return enabledMaterials.values().iterator().next();
     }
 
     @Override
@@ -113,11 +117,6 @@ public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet>
             }
         }
     }
-    
-    @Override
-    protected WireProperties getFallbackType() {
-        return enabledMaterials.values().iterator().next();
-    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -134,7 +133,7 @@ public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet>
     public TileEntityPipeBase<Insulation, WireProperties> createNewTileEntity(boolean supportsTicking) {
         return supportsTicking ? new TileEntityCableTickable() : new TileEntityCable();
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     protected TextureAtlasSprite getParticleTexture(World world, BlockPos blockPos) {

@@ -43,7 +43,7 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MACERATOR_RECIPES = new RecipeMap<>("macerator", 1, 2, 1, 3, 0, 0, 0, 0, 1, new SimpleRecipeBuilder().duration(150).EUt(8))
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MACERATOR_RECIPES = new RecipeMap<>("macerator", 1, 1, 1, 3, 0, 0, 0, 0, 1, new SimpleRecipeBuilder().duration(150).EUt(8))
         .setSlotOverlay(false, false, GuiTextures.CRUSHED_ORE_OVERLAY)
         .setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, MoveType.HORIZONTAL);
@@ -557,7 +557,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMap<>("canner", 1, 2, 1, 2, 1, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMap<>("canner", 0, 2, 1, 2, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
     	.setSlotOverlay(false, true, GuiTextures.FLUID_SLOT)
     	.setSlotOverlay(false, false, false, GuiTextures.CANNER_OVERLAY)
         .setSlotOverlay(false, false, true, GuiTextures.CANISTER_OVERLAY)

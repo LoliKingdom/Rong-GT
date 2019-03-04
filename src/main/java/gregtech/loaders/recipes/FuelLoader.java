@@ -11,13 +11,12 @@ import net.minecraftforge.fluids.FluidStack;
 public class FuelLoader {
 	
 	public static void registerFuels() {
-		/*
         registerDieselGeneratorFuel(Materials.Naphtha.getFluid(1), 8, GTValues.LV);
         
         registerDieselGeneratorFuel(Materials.Ethanol.getFluid(2), 1, GTValues.HV);
         registerDieselGeneratorFuel(Materials.NitroFuel.getFluid(1), 2, GTValues.HV);
         
-        registerSteamGeneratorFuel(Materials.Steam.getFluid(54), 1, GTValues.LV);
+        registerSteamGeneratorFuel(Materials.Steam.getFluid(64), 1, GTValues.LV);
 
         registerGasGeneratorFuel(Materials.Hydrogen.getFluid(1), 1, GTValues.LV);
         registerGasGeneratorFuel(Materials.Methane.getFluid(1), 2, GTValues.LV);
@@ -61,7 +60,6 @@ public class FuelLoader {
         //Plasma Generator
         registerPlasmaFuel(Materials.Helium.getPlasma(1), 2560, GTValues.LV);
         registerPlasmaFuel(Materials.Nitrogen.getPlasma(1), 4032, GTValues.LV);
-        registerPlasmaFuel(Materials.Sulfur.getPlasma(8), 6912, GTValues.LV);
         registerPlasmaFuel(Materials.Oxygen.getPlasma(1), 4096, GTValues.LV);
         registerPlasmaFuel(Materials.Iron.getPlasma(16), 103219, GTValues.LV);
         registerPlasmaFuel(Materials.Nickel.getPlasma(16), 106905, GTValues.LV);
@@ -79,8 +77,8 @@ public class FuelLoader {
         registerSemiFluidGeneratorFuel(Materials.HeavyFuel.getFluid(8), 15, GTValues.LV);
         
         //Fantasy? Other-mod fuels nonetheless
-        registerSemiFluidGeneratorFuel(FluidRegistry.getFluidStack("gelid_cryotheum", 20), 8, GTValues.MV);*/
-    }
+        //registerSemiFluidGeneratorFuel(FluidRegistry.getFluidStack("gelid_cryotheum", 20), 8, GTValues.MV);
+	}
 
     public static void registerDieselGeneratorFuel(FluidStack fuelStack, int duration, int tier) {
         RecipeMaps.DIESEL_GENERATOR_FUELS.addRecipe(new FuelRecipe(fuelStack, duration, GTValues.V[tier]));

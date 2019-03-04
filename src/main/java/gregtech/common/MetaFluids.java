@@ -107,7 +107,7 @@ public class MetaFluids {
         registerFluid(Materials.SeedOil, FluidType.LIQUID, 300, true);
         registerFluid(Materials.Oil, FluidType.LIQUID, 300, true);
         registerFluid(Materials.Fuel, FluidType.LIQUID, 300, true);
-        registerFluid(Materials.Honey, FluidType.LIQUID, 300, true);
+        //registerFluid(Materials.Honey, FluidType.LIQUID, 300, true);
         registerFluid(Materials.Biomass, FluidType.LIQUID, 300, true);
         registerFluid(Materials.Ethanol, FluidType.LIQUID, 300, true);
         registerFluid(Materials.SulfuricAcid, FluidType.LIQUID, 300, true);

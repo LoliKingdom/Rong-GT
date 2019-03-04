@@ -1,5 +1,6 @@
 package gregtech.common.pipelike.fluidpipe.net;
 
+import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import gregtech.api.GTValues;
 import gregtech.api.pipenet.MonolithicPipeNet;
@@ -8,6 +9,7 @@ import gregtech.api.pipenet.PipeNet;
 import gregtech.api.pipenet.WorldPipeNet;
 import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.common.multipart.FluidPipeMultiPart;
+import gregtech.common.pipelike.fluidpipe.BlockFluidPipe;
 import gregtech.common.pipelike.fluidpipe.FluidPipeProperties;
 import gregtech.common.pipelike.fluidpipe.FluidPipeType;
 import gregtech.common.pipelike.fluidpipe.tile.TileEntityFluidPipe;
@@ -21,7 +23,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional.Method;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -38,8 +42,9 @@ public class FluidPipeNet extends MonolithicPipeNet<FluidPipeProperties> {
     }
 
     public int getMaxThroughput() {
-        if(fluidNetTank.getCapacity() == 0)
+        if(fluidNetTank.getCapacity() == 0) {
             return 0;
+        }
         return nodeData.throughput;
     }
 
@@ -55,10 +60,7 @@ public class FluidPipeNet extends MonolithicPipeNet<FluidPipeProperties> {
                     world.setBlockToAir(nodePos);
                 }
             } else if (Loader.isModLoaded(GTValues.MODID_FMP)) {
-                if (tileEntity instanceof TileMultipart) {
-                    FluidPipeMultiPart part = (FluidPipeMultiPart) getMultipartPipeTile(tileEntity);
-                    if (part != null) ((TileMultipart) tileEntity).remPart(part);
-                }
+                removeMultipartPipePartFromTile(tileEntity);
             }
             Random random = world.rand;
             if (isBurning) {
@@ -67,22 +69,28 @@ public class FluidPipeNet extends MonolithicPipeNet<FluidPipeProperties> {
                 if (random.nextInt(4) == 0) {
                     TileEntityFluidPipe.setNeighboursToFire(world, nodePos);
                 }
-            } 
+            }
             if(isLeaking) {
-            	if (world.rand.nextInt(isBurning ? 3 : 7) == 0) {
-            		world.createExplosion(null, nodePos.getX() + 0.5, nodePos.getY() + 0.5, nodePos.getZ() + 0.5, 1.0f + world.rand.nextFloat(), false);
-            	}
+                if (world.rand.nextInt(isBurning ? 3 : 7) == 0) {
+                    world.createExplosion(null,
+                        nodePos.getX() + 0.5, nodePos.getY() + 0.5, nodePos.getZ() + 0.5,
+                        1.0f + world.rand.nextFloat(), false);
+                }
             }
         }
     }
 
-    private static IPipeTile<FluidPipeType, FluidPipeProperties> getMultipartPipeTile(TileEntity tileEntity) {
+    @Method(modid = GTValues.MODID_FMP)
+    private static void removeMultipartPipePartFromTile(TileEntity tileEntity) {
         if(tileEntity instanceof TileMultipart) {
-            return (IPipeTile<FluidPipeType, FluidPipeProperties>) ((TileMultipart) tileEntity).jPartList().stream()
-                .filter(part -> part instanceof IPipeTile)
-                .findFirst().orElse(null);
+            TileMultipart tileMultipart = (TileMultipart) tileEntity;
+            List<TMultiPart> partList = tileMultipart.jPartList();
+            for (TMultiPart tMultiPart : partList) {
+                if (tMultiPart instanceof IPipeTile) {
+                    tileMultipart.remPart(tMultiPart);
+                }
+            }
         }
-        return null;
     }
 
     @Override

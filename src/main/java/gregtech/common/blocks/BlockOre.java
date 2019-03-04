@@ -108,13 +108,13 @@ public class BlockOre extends BlockFalling implements IBlockOre {
     @Override
     @SuppressWarnings("deprecation")
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-        return blockState.getValue(STONE_TYPE).unbreakable ? -1.0f : this.blockHardness;
+        return this.blockHardness;
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion) {
-        return world.getBlockState(pos).getValue(STONE_TYPE).unbreakable ? 1200000.0F : getExplosionResistance(exploder);
+        return getExplosionResistance(exploder);
     }
 
     @SuppressWarnings("deprecation")
@@ -138,26 +138,26 @@ public class BlockOre extends BlockFalling implements IBlockOre {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        if (state.getValue(STONE_TYPE).falling)
+        if (state.getValue(STONE_TYPE).affectedByGravity)
             worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (state.getValue(STONE_TYPE).falling)
+        if (state.getValue(STONE_TYPE).affectedByGravity)
             worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (state.getValue(STONE_TYPE).falling)
+        if (state.getValue(STONE_TYPE).affectedByGravity)
             super.updateTick(worldIn, pos, state, rand);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (stateIn.getValue(STONE_TYPE).falling)
+        if (stateIn.getValue(STONE_TYPE).affectedByGravity)
             super.randomDisplayTick(stateIn, worldIn, pos, rand);
     }
 

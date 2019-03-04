@@ -1,16 +1,16 @@
-[
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+[{
+  "modid": "gregtech",
+  "name": "GregTech Community Edition",
+  "description": "Finally, the awesome technology of GregTech-Intergalactical can be used in 1.12!",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
-]
+  "logoFile": "/assets/gregtech/textures/gt_logo_long.png",
+  "url": "https://minecraft.curseforge.com/projects/gregtechce",
+  "authorList": [
+      "Archengius",
+      "Exidex",
+      "SuperCoder79"
+  ],
+  "credits": "GregoriusT for making GregTech and textures, various GT community members for help in development.",
+  "dependencies": ["codechickenlib"]
+}]

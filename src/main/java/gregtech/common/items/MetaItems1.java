@@ -60,12 +60,12 @@ public class MetaItems1 extends MaterialMetaItem {
         SHAPE_EXTRUDER_GEAR = addItem(324, "shape.extruder.gear");
         SHAPE_EXTRUDER_BOTTLE = addItem(325, "shape.extruder.bottle");
 	
-        SPRAY_EMPTY = addItem(402, "spray.empty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Materials.Tin, OrePrefix.plate.materialAmount * 2L), 
+        SPRAY_EMPTY = addItem(326, "spray.empty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Materials.Tin, OrePrefix.plate.materialAmount * 2L), 
         																			   new MaterialStack(Materials.Redstone, OrePrefix.dust.materialAmount)));
 
         for (int i = 0; i < EnumDyeColor.values().length; i++) {
         	EnumDyeColor dyeColor = EnumDyeColor.values()[i];
-            SPRAY_CAN_DYES[i] = addItem(326 + 2 * i, "spray.can.dyes." + dyeColor.getName()).setMaxStackSize(1);
+            SPRAY_CAN_DYES[i] = addItem(327 + 2 * i, "spray.can.dyes." + dyeColor.getName()).setMaxStackSize(1);
             ColorSprayBehaviour behaviour = new ColorSprayBehaviour(SPRAY_EMPTY.getStackForm(), 512, i);
             SPRAY_CAN_DYES[i].addStats(behaviour);
         }
@@ -95,8 +95,8 @@ public class MetaItems1 extends MaterialMetaItem {
         BATTERY_RE_HV_LITHIUM = addItem(416, "battery.re.hv.lithium").addStats(ElectricStats.createRechargeableBattery(1600000, 3)).setModelAmount(8);
         BATTERY_RE_HV_SODIUM = addItem(417, "battery.re.hv.sodium").addStats(ElectricStats.createRechargeableBattery(800000, 3)).setModelAmount(8);
 
-        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, 5)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
-        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(1000000000, 6)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, GTValues.IV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(1000000000, GTValues.LuV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
 	
         ELECTRIC_MOTOR_LV = addItem(420, "electric.motor.lv");
         ELECTRIC_MOTOR_MV = addItem(421, "electric.motor.mv");
@@ -169,7 +169,9 @@ public class MetaItems1 extends MaterialMetaItem {
         SENSOR_IV = addItem(481, "sensor.iv");
         SENSOR_LuV = addItem(482, "sensor.luv");
         SENSOR_UV = addItem(483, "sensor.uv");
-
+        
+        ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+        
         FLUID_FILTER = addItem(485, "fluid_filter");
 
         DYNAMITE = addItem(486, "dynamite").addStats(new DynamiteBehaviour()).setMaxStackSize(16);
@@ -228,11 +230,12 @@ public class MetaItems1 extends MaterialMetaItem {
         QUANTUM_STAR = addItem(524, "quantumstar");
         GRAVI_STAR = addItem(525, "gravistar");
         
-        ENERGY_LAPOTRONIC_ORB2 = addItem(526, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
-
-        FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
-        SUPER_FUEL_BINDER = addItem(528, "fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
-        MAGIC_FUEL_BINDER = addItem(529, "fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
+        FUEL_BINDER = addItem(526, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
+        SUPER_FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
+        MAGIC_FUEL_BINDER = addItem(528, "fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
+        
+        //TODO: ThermiteDustCrafting
+        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(100);
 	}
 	
 	public void registerRecipes() {

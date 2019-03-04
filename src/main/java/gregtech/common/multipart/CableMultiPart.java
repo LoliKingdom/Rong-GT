@@ -76,7 +76,7 @@ public class CableMultiPart extends PipeMultiPart<Insulation, WireProperties> {
         }
         return false;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getParticleTexture() {

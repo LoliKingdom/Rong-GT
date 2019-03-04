@@ -11,6 +11,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
+import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -81,15 +82,6 @@ public class OreRecipeHandler {
         ItemStack impureDustStack = OreDictUnifier.get(OrePrefix.dustImpure, material);
         DustMaterial byproductMaterial = GTUtility.selectItemInList(0, material, material.oreByProducts, DustMaterial.class);
 
-        //fallback for dirtyGravel, shard & clump
-        if (impureDustStack.isEmpty()) {
-            impureDustStack = GTUtility.copy(
-                OreDictUnifier.get(OrePrefix.dustDirty, material),
-                OreDictUnifier.get(OrePrefix.shard, material),
-                OreDictUnifier.get(OrePrefix.clump, material),
-                OreDictUnifier.get(OrePrefix.dust, material));
-        }
-
         RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder()
             .input(crushedPrefix, material)
             .outputs(impureDustStack)
@@ -120,13 +112,13 @@ public class OreRecipeHandler {
 		  	.EUt(8)
 		  	.buildAndRegister();
 		
-		RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
+		/*RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
 		  	.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + material.toString(), 2000))
-		  	.input("dustThermite", 1)
+		  	.inputs(MetaItems.THERMITE_DUST.getStackForm())
 		  	.outputs(OreDictUnifier.get(OrePrefix.crystal, material, 5))
 		  	.duration(80)
 		  	.EUt(480)
-		  	.buildAndRegister();				 
+		  	.buildAndRegister();*/				 
 
         ItemStack crushedPurifiedOre = GTUtility.copy(
             OreDictUnifier.get(OrePrefix.crushedPurified, material),

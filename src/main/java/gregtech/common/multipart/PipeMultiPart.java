@@ -1,14 +1,5 @@
 package gregtech.common.multipart;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Lists;
-
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
 import codechicken.lib.raytracer.CuboidRayTraceResult;
@@ -18,12 +9,8 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
 import codechicken.lib.vec.uv.IconTransformation;
-import codechicken.multipart.NormalOcclusionTest;
-import codechicken.multipart.NormallyOccludedPart;
-import codechicken.multipart.TMultiPart;
-import codechicken.multipart.TNormalOcclusionPart;
-import codechicken.multipart.TPartialOcclusionPart;
-import codechicken.multipart.TileMultipart;
+import codechicken.multipart.*;
+import com.google.common.collect.Lists;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.cover.CoverBehavior;
@@ -57,6 +44,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<NodeDataType>, NodeDataType> extends TMultiPart implements TNormalOcclusionPart, TPartialOcclusionPart, IPipeTile<PipeType, NodeDataType>, ICapabilityProvider {
 
@@ -341,8 +334,7 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
             this.updateActualConnections();
             this.isBeingReplaced = false;
             if (!world().isRemote) {
-                getPipeBlock().getWorldPipeNet(world()).addNode(pos(), getNodeData(), getMark(), getBlockedConnections(),
-                    pipeBlock.getActiveNodeConnections(world(), pos()) > 0);
+                getPipeBlock().getWorldPipeNet(world()).addNode(pos(), getNodeData(), getMark(), getBlockedConnections(), pipeBlock.getActiveNodeConnections(world(), pos()) > 0);
             }
         }
         reinitializeShape();
@@ -386,9 +378,6 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
 
     @Override
     public void onRemoved() {
-        if (!this.isBeingReplaced) {
-            this.isBeingReplaced = false;
-        }
         if (!this.isBeingReplaced && !world().isRemote) {
             pipeBlock.getWorldPipeNet(world()).removeNode(pos());
             getCoverableImplementation().dropAllCovers();
@@ -403,25 +392,29 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
     }
 
     @Override
+    public void onNeighborChanged() {
+        scheduleTick(1);
+    }
+
+    @Override
     public void scheduledTick() {
         updateBlockedConnections();
         updateActualConnections();
         if (!world().isRemote) {
             getWriteStream().writeByte(1);
+            updateActiveNodeStatus();
         }
     }
 
-    @Override
-    public void onNeighborChanged() {
-        scheduleTick(1);
-        if (!world().isRemote) {
-            boolean isActiveNode = pipeBlock.getActiveNodeConnections(world(), pos()) > 0;
-            PipeNet<NodeDataType> pipeNet = pipeBlock.getWorldPipeNet(world()).getNetFromPos(pos());
-            if (pipeNet != null) {
-                boolean changed = pipeNet.markNodeAsActive(pos(), isActiveNode);
-                if (changed) {
-                    onModeChange(isActiveNode);
-                }
+    public void updateActiveNodeStatus() {
+        int activeConnections = pipeBlock.getActiveNodeConnections(world(), pos());
+        activeConnections &= ~getBlockedConnections();
+        boolean isActiveNode = activeConnections > 0;
+        PipeNet<NodeDataType> pipeNet = pipeBlock.getWorldPipeNet(world()).getNetFromPos(pos());
+        if (pipeNet != null) {
+            boolean changed = pipeNet.markNodeAsActive(pos(), isActiveNode);
+            if (changed) {
+                onModeChange(isActiveNode);
             }
         }
     }
@@ -563,9 +556,11 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
     @Override
     public void notifyBlockUpdate() {
         tile().notifyTileChange();
+        updateActiveNodeStatus();
         updateActualConnections();
         if (!world().isRemote) {
             getWriteStream().writeByte(1);
+            updateActiveNodeStatus();
         }
     }
 
@@ -592,7 +587,7 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
             BlockRenderer.renderCuboid(ccrs, sidedConnection, 0);
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public abstract TextureAtlasSprite getParticleTexture();
 
@@ -605,5 +600,4 @@ public abstract class PipeMultiPart<PipeType extends Enum<PipeType> & IPipeType<
     public void addDestroyEffects(CuboidRayTraceResult hit, ParticleManager manager) {
         ParticleHandlerUtil.addBlockDestroyEffects(world(), hit, getParticleTexture(), manager);
     }
-
 }

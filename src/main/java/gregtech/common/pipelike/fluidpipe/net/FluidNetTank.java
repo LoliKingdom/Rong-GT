@@ -1,7 +1,6 @@
 package gregtech.common.pipelike.fluidpipe.net;
 
 import com.google.common.base.Preconditions;
-
 import gregtech.api.util.PerTickIntCounter;
 import gregtech.common.pipelike.fluidpipe.FluidPipeProperties;
 import net.minecraftforge.fluids.FluidStack;
@@ -30,8 +29,8 @@ public class FluidNetTank extends FluidTank {
         boolean isLeakingPipe = copyStack.getFluid().isGaseous(copyStack) && !properties.gasProof;
         boolean isBurningPipe = copyStack.getFluid().getTemperature(copyStack) > properties.maxFluidTemperature;
         if(isLeakingPipe || isBurningPipe) {
-        	handle.destroyNetwork(isLeakingPipe, isBurningPipe);
-        	return copyStack.amount;
+            handle.destroyNetwork(isLeakingPipe, isBurningPipe);
+            return copyStack.amount;
         }
         return super.fill(copyStack, doFill);
     }
@@ -39,7 +38,7 @@ public class FluidNetTank extends FluidTank {
     @Override
     public FluidStack drain(FluidStack resource, boolean doDrain) {
         if(resource == null) {
-        	return null;
+            return null;
         }
         int maxDrainLeftThisTick = getMaxThroughput() - drainedThisTick.get(handle.getWorldData());
         int originalAmount = resource.amount;
@@ -54,8 +53,8 @@ public class FluidNetTank extends FluidTank {
 
     @Override
     public FluidStack drain(int maxDrain, boolean doDrain) {
-    	int maxDrainLeftThisTick = getMaxThroughput() - drainedThisTick.get(handle.getWorldData());
-    	maxDrain = Math.min(maxDrain, maxDrainLeftThisTick);
+        int maxDrainLeftThisTick = getMaxThroughput() - drainedThisTick.get(handle.getWorldData());
+        maxDrain = Math.min(maxDrain, maxDrainLeftThisTick);
         if(maxDrain == 0) {
             return null;
         }
