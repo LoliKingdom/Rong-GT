@@ -13,6 +13,7 @@ import gregtech.api.recipes.ModHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.Validate;
@@ -50,18 +51,17 @@ public enum OrePrefix {
     crushedPurified("Purified Ores", -1, null, MaterialIconType.crushedPurified, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     crushed("Crushed Ores", -1, null, MaterialIconType.crushed, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
-    cluster("Native Ore Clusters", -1, null, MaterialIconType.cluster, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
+    cluster("Native Ore Clusters", -1, null, MaterialIconType.cluster, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("thaumcraft")),
     
-    shard("Crystallised Shards", -1, null, MaterialIconType.shard, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
-    clump("Clumps", -1, null, MaterialIconType.clump, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
-    crystal("Crystals", -1, null, MaterialIconType.crystal, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
-    dustDirty("Dirty Dusts", -1, null, MaterialIconType.dustDirty, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
+    shard("Crystallised Shards", -1, null, MaterialIconType.shard, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
+    clump("Clumps", -1, null, MaterialIconType.clump, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
+    crystal("Crystals", -1, null, MaterialIconType.crystal, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
+    dustDirty("Dirty Dusts", -1, null, MaterialIconType.dustDirty, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
     
     ingotHot("Hot Ingots", M, null, MaterialIconType.ingotHot, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> (mat instanceof IngotMaterial) && ((IngotMaterial) mat).blastFurnaceTemperature > 1750), // A hot Ingot, which has to be cooled down by a Vacuum Freezer.
     ingot("Ingots", M, null, MaterialIconType.ingot, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat instanceof IngotMaterial), // A regular Ingot. Introduced by Eloraam
 
     gem("Gemstones", M, null, MaterialIconType.gem, ENABLE_UNIFICATION, mat -> mat instanceof GemMaterial), // A regular Gem worth one Dust. Introduced by Eloraam
-    gemChipped("Chipped Gemstones", M, null, MaterialIconType.gemChipped, ENABLE_UNIFICATION, mat -> mat instanceof GemMaterial), // A gem that would need polishing.
 
     dustTiny("Tiny Dusts", M / 9, null, MaterialIconType.dustTiny, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat instanceof DustMaterial), // 1/9th of a Dust.
     dustSmall("Small Dusts", M / 4, null, MaterialIconType.dustSmall, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat instanceof DustMaterial), // 1/4th of a Dust.
@@ -204,17 +204,11 @@ public enum OrePrefix {
         gem.setIgnored(Materials.NetherQuartz);
 
         gem.setIgnored(Materials.Coal);
-        gemChipped.setIgnored(Materials.Coal);
         gem.setIgnored(Materials.Charcoal);
-        gemChipped.setIgnored(Materials.Charcoal);
         gem.setIgnored(Materials.NetherStar);
-        gemChipped.setIgnored(Materials.NetherStar);
         gem.setIgnored(Materials.EnderPearl);
-        gemChipped.setIgnored(Materials.EnderPearl);
         gem.setIgnored(Materials.EnderEye);
-        gemChipped.setIgnored(Materials.EnderEye);
         gem.setIgnored(Materials.Flint);
-        gemChipped.setIgnored(Materials.Flint);
 
         dust.setIgnored(Materials.Redstone);
         dust.setIgnored(Materials.Glowstone);

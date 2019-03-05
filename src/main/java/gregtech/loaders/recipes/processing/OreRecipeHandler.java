@@ -14,6 +14,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Loader;
 
 public class OreRecipeHandler {
 
@@ -23,7 +24,6 @@ public class OreRecipeHandler {
         OrePrefix.oreGravel.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreNetherrack.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSand.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
-        //OrePrefix.oreBedrock.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreRedSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
 
@@ -32,9 +32,6 @@ public class OreRecipeHandler {
         OrePrefix.crushedCentrifuged.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedCentrifuged);
         OrePrefix.dustImpure.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processImpureDust);
         OrePrefix.dustPure.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processPureDust);
-        
-        OrePrefix.cluster.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processClusters);
-
     }
 
     public static void processOre(OrePrefix orePrefix, DustMaterial material) {
@@ -112,13 +109,13 @@ public class OreRecipeHandler {
 		  	.EUt(8)
 		  	.buildAndRegister();
 		
-		/*RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
+		RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
 		  	.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + material.toString(), 2000))
 		  	.inputs(MetaItems.THERMITE_DUST.getStackForm())
 		  	.outputs(OreDictUnifier.get(OrePrefix.crystal, material, 5))
 		  	.duration(80)
 		  	.EUt(480)
-		  	.buildAndRegister();*/				 
+		  	.buildAndRegister();			 
 
         ItemStack crushedPurifiedOre = GTUtility.copy(
             OreDictUnifier.get(OrePrefix.crushedPurified, material),

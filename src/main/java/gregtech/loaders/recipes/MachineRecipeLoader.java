@@ -57,7 +57,8 @@ public class MachineRecipeLoader {
 		
 		initializeWoodRecipes();
 		initializeArcRecyclingRecipes();
-		initializeAlloySmeltingRecipes();
+		initiateAlloyingRecipes();
+		initializeForestrySupport();
 		
 		/**
 		 * Alloy Smelting Recipes
@@ -174,7 +175,6 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(960).input(OrePrefix.valueOf("circuit"), Tier.Elite, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderPearl)).fluidInputs(Materials.Platinum.getFluid(576)).outputs(MetaItems.EMITTER_EV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(3840).input(OrePrefix.valueOf("circuit"), Tier.Master, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderEye)).fluidInputs(Materials.Osmium.getFluid(576)).outputs(MetaItems.EMITTER_IV.getStackForm()).buildAndRegister();
 
-		
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.LEVER, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_CONTROLLER.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.REDSTONE_TORCH, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_ACTIVITY_DETECTOR.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_FLUID_DETECTOR.getStackForm()).buildAndRegister();
@@ -888,75 +888,77 @@ public class MachineRecipeLoader {
             .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Wood, 6))
             .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Wood), 8000)
             .buildAndRegister();
+        
+        ItemStack woodStack = OreDictUnifier.get(OrePrefix.log, Materials.Wood);
+        ItemStack smeltingOutput = ModHandler.getSmeltingOutput(woodStack);
+        if (!smeltingOutput.isEmpty() && smeltingOutput.getItem() == Items.COAL && smeltingOutput.getMetadata() == 1) {
+            int coalAmount = smeltingOutput.getCount();
+            RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+                .inputs(GTUtility.copyAmount(16, woodStack))
+                .circuitMeta(0)
+                .outputs(new ItemStack(Items.COAL, 24 * coalAmount, 1))
+                .fluidOutputs(Materials.Creosote.getFluid(5000 * coalAmount))
+                .duration(440)
+                .EUt(64)
+                .buildAndRegister();
 
-        List<ItemStack> allWoodLogs =  OreDictionary.getOres("logWood").stream()
-            .flatMap(stack -> ModHandler.getAllSubItems(stack).stream())
-            .collect(Collectors.toList());
+            RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+                .inputs(GTUtility.copyAmount(16, woodStack))
+                .circuitMeta(1)
+                .fluidInputs(Materials.Nitrogen.getFluid(400))
+                .outputs(new ItemStack(Items.COAL, 24, 1))
+                .fluidOutputs(Materials.Creosote.getFluid(4000))
+                .duration(200)
+                .EUt(96)
+                .buildAndRegister();
 
-        //Wood processing
-        for (ItemStack stack : allWoodLogs) {
-            ItemStack smeltingOutput = ModHandler.getSmeltingOutput(stack);
-            if (!smeltingOutput.isEmpty() && smeltingOutput.getItem() == Items.COAL && smeltingOutput.getMetadata() == 1) {
-                int coalAmount = smeltingOutput.getCount();
-                RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
-                    .inputs(GTUtility.copyAmount(16, stack))
-                    .circuitMeta(0)
-                    .outputs(new ItemStack(Items.COAL, 24 * coalAmount, 1))
-                    .fluidOutputs(Materials.Creosote.getFluid(5000 * coalAmount))
-                    .duration(440)
-                    .EUt(64)
-                    .buildAndRegister();
-
-                RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
-                    .inputs(GTUtility.copyAmount(16, stack))
-                    .circuitMeta(1)
-                    .fluidInputs(Materials.Nitrogen.getFluid(400))
-                    .outputs(new ItemStack(Items.COAL, 24, 1))
-                    .fluidOutputs(Materials.Creosote.getFluid(4000))
-                    .duration(200)
-                    .EUt(96)
-                    .buildAndRegister();
-
-                RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
-                    .inputs(GTUtility.copyAmount(16, stack))
-                    .circuitMeta(2)
-                    .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Ash, 5))
-                    .fluidOutputs(Materials.OilHeavy.getFluid(500 * coalAmount))
-                    .duration(280)
-                    .EUt(192)
-                    .buildAndRegister();
-            }
-
-            Pair<IRecipe, ItemStack> outputPair = ModHandler.getRecipeOutput(null, stack);
-            ItemStack output = outputPair.getValue();
-            int originalOutput = output.getCount();
-            if (!output.isEmpty()) {
-                IRecipe outputRecipe = outputPair.getKey();
-                GTLog.logger.info("Nerfing planks crafting recipe {} -> {}", stack, output);
-                if(originalOutput / 2 > 0) {
-                	ModHandler.addShapelessRecipe(outputRecipe.getRegistryName().toString(),
-                    GTUtility.copyAmount(originalOutput / 2, output), stack);
-                	} else {
-                		ModHandler.removeRecipeByName(outputRecipe.getRegistryName());
-                    }
-                RecipeMaps.CUTTER_RECIPES.recipeBuilder()
-                    .inputs(stack)
-                    .fluidInputs(Materials.Lubricant.getFluid(1))
-                    .outputs(GTUtility.copyAmount((int) (originalOutput * 1.5), output),
-                        OreDictUnifier.get(OrePrefix.dust, Materials.Wood, 2))
-                    .duration(200).EUt(8)
-                    .buildAndRegister();
-
-                ModHandler.addShapedRecipe(outputRecipe.getRegistryName().getResourcePath() + "_saw",
-                    GTUtility.copyAmount(originalOutput, output), "s", "L", 'L', stack);
-            }
+            RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+                .inputs(GTUtility.copyAmount(16, woodStack))
+                .circuitMeta(2)
+                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Ash, 5))
+                .fluidOutputs(Materials.OilHeavy.getFluid(500 * coalAmount))
+                .duration(280)
+                .EUt(192)
+                .buildAndRegister();
         }
+        
+        Pair<IRecipe, ItemStack> outputPair = ModHandler.getRecipeOutput(null, woodStack);
+        ItemStack output = outputPair.getValue();
+        int originalOutput = output.getCount();
+        if (!output.isEmpty()) {
+            IRecipe outputRecipe = outputPair.getKey();
+            GTLog.logger.info("Nerfing planks crafting recipe {} -> {}", woodStack, output);
+            if(originalOutput / 2 > 0) {
+            	ModHandler.addShapelessRecipe(outputRecipe.getRegistryName().toString(),
+                GTUtility.copyAmount(originalOutput / 2, output), woodStack);
+            	} else {
+            		ModHandler.removeRecipeByName(outputRecipe.getRegistryName());
+                }
+            RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                .inputs(woodStack)
+                .fluidInputs(Materials.Lubricant.getFluid(1))
+                .outputs(GTUtility.copyAmount((int) (originalOutput * 3), output),
+                    OreDictUnifier.get(OrePrefix.dust, Materials.Wood, 2))
+                .duration(200).EUt(8)
+                .buildAndRegister();
+
+            ModHandler.addShapedRecipe(outputRecipe.getRegistryName().getResourcePath() + "_saw",
+                GTUtility.copyAmount(originalOutput, output), "s", "L", 'L', woodStack);
+        }
+        
         RecipeMaps.LATHE_RECIPES.recipeBuilder()
             .input(OrePrefix.plank, Materials.Wood)
-            .outputs(OreDictUnifier.get(OrePrefix.stick, Materials.Wood, 2))
-            .duration(10)
+            .outputs(OreDictUnifier.get(OrePrefix.stick, Materials.Wood, 4))
+            .duration(20)
             .EUt(8)
             .buildAndRegister();
+        
+        RecipeMaps.LATHE_RECIPES.recipeBuilder()
+        	.input(OrePrefix.log, Materials.Wood)
+        	.outputs(OreDictUnifier.get(OrePrefix.stick, Materials.Wood, 16))
+        	.duration(40)
+        	.EUt(12)
+        	.buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.plank, Materials.Wood, 8)
@@ -969,15 +971,15 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.plank, Materials.Wood, 8)
             .input(OrePrefix.gem, Materials.Diamond)
-            .outputs(new ItemStack(Blocks.JUKEBOX, 1))
+            .outputs(new ItemStack(Blocks.JUKEBOX, 2))
             .duration(400)
             .EUt(4)
             .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .input(OrePrefix.plank, Materials.Wood, 6)
+            .input(OrePrefix.plank, Materials.Wood, 3)
             .inputs(new ItemStack(Items.BOOK, 3))
-            .outputs(new ItemStack(Blocks.BOOKSHELF, 1))
+            .outputs(new ItemStack(Blocks.BOOKSHELF, 3))
             .duration(400)
             .EUt(4)
             .buildAndRegister();
@@ -985,7 +987,7 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.plank, Materials.Wood)
             .circuitMeta(1)
-            .outputs(new ItemStack(Blocks.WOODEN_BUTTON, 1))
+            .outputs(new ItemStack(Blocks.WOODEN_BUTTON, 2))
             .duration(100)
             .EUt(4)
             .buildAndRegister();
@@ -993,15 +995,15 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.plank, Materials.Wood, 2)
             .circuitMeta(2)
-            .outputs(new ItemStack(Blocks.WOODEN_PRESSURE_PLATE))
+            .outputs(new ItemStack(Blocks.WOODEN_PRESSURE_PLATE, 2))
             .duration(200)
             .EUt(4)
             .buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .input(OrePrefix.plank, Materials.Wood, 3)
+            .input(OrePrefix.plank, Materials.Wood, 4)
             .circuitMeta(3)
-            .outputs(new ItemStack(Blocks.TRAPDOOR, 2))
+            .outputs(new ItemStack(Blocks.TRAPDOOR, 4))
             .duration(300)
             .EUt(4)
             .buildAndRegister();
@@ -1018,65 +1020,42 @@ public class MachineRecipeLoader {
             .outputs(new ItemStack(Blocks.CHEST, 1))
             .duration(800).EUt(4).circuitMeta(8)
             .buildAndRegister();
-
-        List<ItemStack> allPlanksStacks = OreDictionary.getOres("plankWood").stream()
-            .flatMap(stack -> ModHandler.getAllSubItems(stack).stream())
-            .collect(Collectors.toList());
-        HashSet<String> alreadyProcessedPlanks = new HashSet<>();
-        for (ItemStack stack : allPlanksStacks) {
-            ItemStack output = ModHandler.getRecipeOutput(null, stack, stack, stack).getValue();
-            if (!output.isEmpty() && output.getCount() >= 3) {
-                String recipeName = String.format("slab_%s_%s", stack.getUnlocalizedName(), stack.getMetadata());
-                if(alreadyProcessedPlanks.contains(recipeName)) {
-                    continue;
-                }
-                alreadyProcessedPlanks.add(recipeName);
-
-                RecipeMaps.CUTTER_RECIPES.recipeBuilder()
-                    .inputs(stack)
-                    .outputs(GTUtility.copyAmount(output.getCount() / 3, output))
-                    .duration(25).EUt(4)
-                    .buildAndRegister();
-                ModHandler.addShapedRecipe(recipeName,
-                    GTUtility.copyAmount(output.getCount() / 3, output),
-                    "sP", 'P', stack);
-            }
-        }
-        registerPlanksCuttingRecipes();
-    }
+        
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+        .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.OAK.getMetadata()))
+        .outputs(new ItemStack(Items.OAK_DOOR, 3))
+        .duration(600).EUt(4).circuitMeta(6)
+        .buildAndRegister();
+        
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+        	.inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.SPRUCE.getMetadata()))
+        	.outputs(new ItemStack(Items.SPRUCE_DOOR, 3))
+        	.duration(600).EUt(4).circuitMeta(6)
+        	.buildAndRegister();
+        
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+        	.inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.BIRCH.getMetadata()))
+        	.outputs(new ItemStack(Items.BIRCH_DOOR, 3))
+        	.duration(600).EUt(4).circuitMeta(6)
+        	.buildAndRegister();
+        
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+        	.inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.JUNGLE.getMetadata()))
+        	.outputs(new ItemStack(Items.JUNGLE_DOOR, 3))
+        	.duration(600).EUt(4).circuitMeta(6)
+        	.buildAndRegister();
     
-  //TODO move more stuff here and do it automatically
-    private static void registerPlanksCuttingRecipes() {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.OAK.getMetadata()))
-            .outputs(new ItemStack(Items.OAK_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
+        	.inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.ACACIA.getMetadata()))
+        	.outputs(new ItemStack(Items.ACACIA_DOOR, 3))
+        	.duration(600).EUt(4).circuitMeta(6)
+        	.buildAndRegister();
+    
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.SPRUCE.getMetadata()))
-            .outputs(new ItemStack(Items.SPRUCE_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.BIRCH.getMetadata()))
-            .outputs(new ItemStack(Items.BIRCH_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.JUNGLE.getMetadata()))
-            .outputs(new ItemStack(Items.JUNGLE_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.ACACIA.getMetadata()))
-            .outputs(new ItemStack(Items.ACACIA_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.DARK_OAK.getMetadata()))
-            .outputs(new ItemStack(Items.DARK_OAK_DOOR, 3))
-            .duration(600).EUt(4).circuitMeta(6)
-            .buildAndRegister();
+        	.inputs(new ItemStack(Blocks.PLANKS, 6, EnumType.DARK_OAK.getMetadata()))
+        	.outputs(new ItemStack(Items.DARK_OAK_DOOR, 3))
+        	.duration(600).EUt(4).circuitMeta(6)
+        	.buildAndRegister();
     }
     
     private static <T extends Enum<T> & IStringSerializable> void registerBrickRecipe(StoneBlock<T> stoneBlock, T normalVariant, T brickVariant) {
@@ -1130,7 +1109,7 @@ public class MachineRecipeLoader {
 
     }
     
-    public static void initializeAlloySmeltingRecipes() {
+    public static void initiateAlloyingRecipes() {
     	
     	MaterialStack[][] alloySmelterList = {
     	        {new MaterialStack(Materials.Copper, 3L), new MaterialStack(Materials.Tin, 1), new MaterialStack(Materials.Bronze, 4L)},

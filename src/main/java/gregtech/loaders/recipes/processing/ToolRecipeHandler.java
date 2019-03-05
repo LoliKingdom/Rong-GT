@@ -46,7 +46,7 @@ public class ToolRecipeHandler {
     public static void initializeMetaItems() {
         motorItems = new MetaValueItem[]{MetaItems.ELECTRIC_MOTOR_LV, MetaItems.ELECTRIC_MOTOR_MV, MetaItems.ELECTRIC_MOTOR_HV};
         //TODO: Recognise more material for electric items
-        baseMaterials = new SolidMaterial[]{Materials.Invar, Materials.Titanium, Materials.VanadiumSteel, Materials.StainlessSteel, Materials.Emerald};
+        baseMaterials = new SolidMaterial[]{Materials.StainlessSteel, Materials.Titanium, Materials.TungstenSteel};
         batteryItems = new MetaValueItem[][]{
             {MetaItems.BATTERY_RE_LV_LITHIUM, MetaItems.BATTERY_RE_LV_CADMIUM, MetaItems.BATTERY_RE_LV_SODIUM},
             {MetaItems.BATTERY_RE_MV_LITHIUM, MetaItems.BATTERY_RE_MV_CADMIUM, MetaItems.BATTERY_RE_MV_SODIUM},

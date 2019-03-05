@@ -211,6 +211,7 @@ public class CommonProxy {
     }
 
     public void onPostLoad() {
+    	//MachineRecipeLoader.init();
     }
 
 

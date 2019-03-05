@@ -834,11 +834,6 @@ public class Materials {
         StainlessSteel.setFluidPipeProperties(150, 3500, true);
         Titanium.setFluidPipeProperties(200, 5000, true);
         TungstenSteel.setFluidPipeProperties(400, 7500, true);      
-               
-        OrePrefix.gemChipped.setIgnored(Lignite);
-        OrePrefix.gemChipped.setIgnored(Coke);
-        OrePrefix.gemChipped.setIgnored(CertusQuartz);
-        OrePrefix.gemChipped.setIgnored(NetherStar);
         
         //Compatibility/Dupe issues
         OrePrefix.crystal.setIgnored(CertusQuartz);
