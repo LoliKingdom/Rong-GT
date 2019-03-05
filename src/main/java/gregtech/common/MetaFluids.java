@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.*;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -123,9 +124,9 @@ public class MetaFluids {
                 FluidType fluidType = fluidMaterial.hasFlag(MatFlags.STATE_GAS) ? FluidType.GAS : FluidType.LIQUID;
                 registerFluid(fluidMaterial, fluidType, temperature, false);                
             }
-            if(fluidMaterial.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
+            if(fluidMaterial.hasFlag(DustMaterial.MatFlags.GENERATE_ORE) && Loader.isModLoaded("mekanism")) {
             	registerFluid(material, FluidType.SLURRY, 1200);
-            	registerFluid(material, FluidType.CLEANSLURRY, 1500);
+            	registerFluid(material, FluidType.CLEANSLURRY, 1200);
             }
             if (fluidMaterial.shouldGeneratePlasma() &&
                 fluidMaterial.getMaterialPlasma() == null) {

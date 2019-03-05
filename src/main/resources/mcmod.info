@@ -1,16 +1,15 @@
 [{
   "modid": "gregtech",
-  "name": "GregTech Community Edition",
-  "description": "Finally, the awesome technology of GregTech-Intergalactical can be used in 1.12!",
+  "name": "GregTech: Chill Edition",
+  "description": "GregTech, chill, in 1.12.2.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "logoFile": "/assets/gregtech/textures/gt_logo_long.png",
-  "url": "https://minecraft.curseforge.com/projects/gregtechce",
+  "url": "https://minecraft.curseforge.com/projects/gregtech-chill-edition/",
   "authorList": [
       "Archengius",
-      "Exidex",
-      "SuperCoder79"
+      "Rongmario"
   ],
-  "credits": "GregoriusT for making GregTech and textures, various GT community members for help in development.",
+  "credits": "GregoriusT for making GregTech in the first place.",
   "dependencies": ["codechickenlib"]
 }]

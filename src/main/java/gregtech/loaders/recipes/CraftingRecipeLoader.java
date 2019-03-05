@@ -112,9 +112,9 @@ public class CraftingRecipeLoader {
         ModHandler.removeRecipeByName(new ResourceLocation("minecraft:bowl"));
 
         ModHandler.addShapedRecipe("stick_saw", new ItemStack(Items.STICK, 6), "s", "P", "P", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood));
-        ModHandler.addShapedRecipe("stick_normal", new ItemStack(Items.STICK, 2), "P", "P", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood));
-        ModHandler.addShapedRecipe("stick_saw_from_logs", new ItemStack(Items.STICK, 12), "s", "P", "P", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood));
-        ModHandler.addShapedRecipe("stick_normal_from_logs", new ItemStack(Items.STICK, 4), "P", "P", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood));
+        ModHandler.addShapedRecipe("stick_normal", new ItemStack(Items.STICK, 2), "s", "P", "P", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood));
+        ModHandler.addShapedRecipe("stick_saw_from_logs", new ItemStack(Items.STICK, 12), "s", "P", "P", 'P', new UnificationEntry(OrePrefix.log, Materials.Wood));
+        ModHandler.addShapedRecipe("stick_normal_from_logs", new ItemStack(Items.STICK, 4), "s", "P", "P", 'P', new UnificationEntry(OrePrefix.log, Materials.Wood));
         ModHandler.removeRecipeByName(new ResourceLocation("minecraft:stick"));
 
         //ModHandler.addShapelessRecipe("dust_electrum", OreDictUnifier.get(OrePrefix.dust, Materials.Electrum, 2), MetaItems.MORTAR.getStackForm(), new UnificationEntry(OrePrefix.dust, Materials.Silver), new UnificationEntry(OrePrefix.dust, Materials.Gold));

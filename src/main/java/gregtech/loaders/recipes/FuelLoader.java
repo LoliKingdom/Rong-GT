@@ -7,6 +7,7 @@ import gregtech.api.recipes.recipes.FuelRecipe;
 import gregtech.api.unification.material.Materials;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
 
 public class FuelLoader {
 	
@@ -47,13 +48,12 @@ public class FuelLoader {
         registerDieselGeneratorFuel(Materials.Oil.getFluid(2), 1, GTValues.LV);
         registerDieselGeneratorFuel(Materials.SulfuricLightFuel.getFluid(4), 5, GTValues.LV);
         registerDieselGeneratorFuel(Materials.Methanol.getFluid(8), 21, GTValues.LV);
-        registerDieselGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(1), 6, GTValues.LV);
         registerDieselGeneratorFuel(Materials.Ethanol.getFluid(1), 6, GTValues.LV);
         registerDieselGeneratorFuel(Materials.BioDiesel.getFluid(1), 8, GTValues.LV);
         registerDieselGeneratorFuel(Materials.LightFuel.getFluid(32), 305, GTValues.LV);
         registerDieselGeneratorFuel(Materials.Fuel.getFluid(1), 15, GTValues.LV);
         registerDieselGeneratorFuel(Materials.NitroFuel.getFluid(2), 45, GTValues.LV);
-
+        
         //Naquadah Reactor
         //registerNaquadahReactorFuel(Materials.NaquadahEnriched.getFluid(1), 750, GTValues.LV);
 
@@ -63,10 +63,7 @@ public class FuelLoader {
         registerPlasmaFuel(Materials.Oxygen.getPlasma(1), 4096, GTValues.LV);
         registerPlasmaFuel(Materials.Iron.getPlasma(16), 103219, GTValues.LV);
         registerPlasmaFuel(Materials.Nickel.getPlasma(16), 106905, GTValues.LV);
-
-        registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);
-        registerSemiFluidGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(32), 1, GTValues.LV);
-        registerSemiFluidGeneratorFuel(Fluids.BIOMASS.getFluid(16), 1, GTValues.LV);
+        
         registerSemiFluidGeneratorFuel(Materials.SeedOil.getFluid(64), 1, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.Creosote.getFluid(16), 1, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.Biomass.getFluid(16), 1, GTValues.LV);
@@ -76,6 +73,13 @@ public class FuelLoader {
         registerSemiFluidGeneratorFuel(Materials.SulfuricHeavyFuel.getFluid(16), 5, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.HeavyFuel.getFluid(8), 15, GTValues.LV);
         
+        if(Loader.isModLoaded("forestry")) {
+        	registerDieselGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(1), 6, GTValues.LV);
+        	
+        	registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);
+            registerSemiFluidGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(32), 1, GTValues.LV);
+            registerSemiFluidGeneratorFuel(Fluids.BIOMASS.getFluid(16), 1, GTValues.LV);
+        }        
         //Fantasy? Other-mod fuels nonetheless
         //registerSemiFluidGeneratorFuel(FluidRegistry.getFluidStack("gelid_cryotheum", 20), 8, GTValues.MV);
 	}

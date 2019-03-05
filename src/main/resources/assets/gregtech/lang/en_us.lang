@@ -1310,6 +1310,8 @@ tile.casing.luv=LuV Machine Casing
 tile.casing.uv=UV Machine Casing
 
 fluid.distilled_water=Distilled Water
+fluid.slurry=Dirty %s Slurry
+fluid.cleanslurry=Clean %s Slurry
 
 # Wire coil blocks
 tile.wire_coil.tooltip_ebf=When used in §aElectric Blast Furnace§7:

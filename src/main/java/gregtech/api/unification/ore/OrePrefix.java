@@ -51,12 +51,12 @@ public enum OrePrefix {
     crushedPurified("Purified Ores", -1, null, MaterialIconType.crushedPurified, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     crushed("Crushed Ores", -1, null, MaterialIconType.crushed, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
-    cluster("Native Ore Clusters", -1, null, MaterialIconType.cluster, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("thaumcraft")),
+    cluster("Native Ore Clusters", -1, null, MaterialIconType.cluster, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
-    shard("Crystallised Shards", -1, null, MaterialIconType.shard, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
-    clump("Clumps", -1, null, MaterialIconType.clump, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
-    crystal("Crystals", -1, null, MaterialIconType.crystal, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
-    dustDirty("Dirty Dusts", -1, null, MaterialIconType.dustDirty, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE) || Loader.isModLoaded("mekanism")),
+    shard("Crystallised Shards", -1, null, MaterialIconType.shard, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
+    clump("Clumps", -1, null, MaterialIconType.clump, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
+    crystal("Crystals", -1, null, MaterialIconType.crystal, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
+    dustDirty("Dirty Dusts", -1, null, MaterialIconType.dustDirty, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
     ingotHot("Hot Ingots", M, null, MaterialIconType.ingotHot, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> (mat instanceof IngotMaterial) && ((IngotMaterial) mat).blastFurnaceTemperature > 1750), // A hot Ingot, which has to be cooled down by a Vacuum Freezer.
     ingot("Ingots", M, null, MaterialIconType.ingot, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat instanceof IngotMaterial), // A regular Ingot. Introduced by Eloraam

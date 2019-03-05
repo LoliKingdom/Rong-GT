@@ -32,6 +32,10 @@ public class OreRecipeHandler {
         OrePrefix.crushedCentrifuged.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedCentrifuged);
         OrePrefix.dustImpure.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processImpureDust);
         OrePrefix.dustPure.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processPureDust);
+        
+        if(Loader.isModLoaded("thaumcraft")) {
+        	OrePrefix.cluster.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processClusters);
+        }
     }
 
     public static void processOre(OrePrefix orePrefix, DustMaterial material) {
@@ -78,23 +82,9 @@ public class OreRecipeHandler {
     public static void processCrushedOre(OrePrefix crushedPrefix, DustMaterial material) {
         ItemStack impureDustStack = OreDictUnifier.get(OrePrefix.dustImpure, material);
         DustMaterial byproductMaterial = GTUtility.selectItemInList(0, material, material.oreByProducts, DustMaterial.class);
-
-        RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder()
-            .input(crushedPrefix, material)
-            .outputs(impureDustStack)
-            .duration(20)
-            .EUt(8)
-            .buildAndRegister();
-
-        RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
-            .input(crushedPrefix, material)
-            .outputs(impureDustStack)
-            .duration(100)
-            .EUt(12)
-            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, byproductMaterial, material.byProductMultiplier), 1000)
-            .buildAndRegister();
         
-		RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
+        if(Loader.isModLoaded("mekanism")) {
+        	RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
 		  	.input(crushedPrefix, material)
 		  	.fluidInputs(Materials.SulfuricAcid.getFluid(600))
 		  	.fluidOutputs(FluidRegistry.getFluidStack("slurry." + material.toString(), 600))
@@ -116,6 +106,22 @@ public class OreRecipeHandler {
 		  	.duration(80)
 		  	.EUt(480)
 		  	.buildAndRegister();			 
+        }
+
+        RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder()
+            .input(crushedPrefix, material)
+            .outputs(impureDustStack)
+            .duration(20)
+            .EUt(8)
+            .buildAndRegister();
+
+        RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
+            .input(crushedPrefix, material)
+            .outputs(impureDustStack)
+            .duration(100)
+            .EUt(12)
+            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, byproductMaterial, material.byProductMultiplier), 1000)
+            .buildAndRegister();
 
         ItemStack crushedPurifiedOre = GTUtility.copy(
             OreDictUnifier.get(OrePrefix.crushedPurified, material),
@@ -275,21 +281,12 @@ public class OreRecipeHandler {
     	
     	RecipeMaps.ORE_WASHER_RECIPES.recipeBuilder()
         	      .inputs(OreDictUnifier.get(clusterPrefix, material))
-        	      .fluidInputs(ModHandler.getWater(1000))
+        	      .fluidInputs(Materials.UUMatter.getFluid(2))
         	      .outputs(crushedPurifiedOre, OreDictUnifier.get(OrePrefix.dustTiny, material))
-        	      .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, byproductMaterial), 800)
+        	      .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, byproductMaterial), 1000)
         	      .EUt(96)
         	      .duration(600)
         	      .buildAndRegister();
-
-    	RecipeMaps.ORE_WASHER_RECIPES.recipeBuilder()
-    			  .inputs(OreDictUnifier.get(clusterPrefix, material))
-        		  .fluidInputs(ModHandler.getDistilledWater(500))
-        		  .outputs(crushedPurifiedOre, OreDictUnifier.get(OrePrefix.dustTiny, material))
-        		  .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, byproductMaterial), 800)
-        		  .EUt(96)
-        		  .duration(600)
-        		  .buildAndRegister();
     	processMetalSmelting(clusterPrefix, material, 8);
     }
     
