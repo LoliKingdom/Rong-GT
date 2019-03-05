@@ -15,8 +15,8 @@ public class AssemblyLineRecipeLoader {
         AssemblyLineRecipeBuilder.start()
             .researchItem(MetaItems.ELECTRIC_MOTOR_IV.getStackForm())
             .researchTime(144000)
-            .inputs(OreDictUnifier.get(OrePrefix.stickLong, Materials.NeodymiumMagnetic, 1),
-                OreDictUnifier.get(OrePrefix.stickLong, Materials.HSSG, 2),
+            .inputs(OreDictUnifier.get(OrePrefix.stick, Materials.NeodymiumMagnetic, 4),
+                OreDictUnifier.get(OrePrefix.stick, Materials.HSSG, 8),
                 OreDictUnifier.get(OrePrefix.wireFine, Materials.AnnealedCopper, 64),
                 OreDictUnifier.get(OrePrefix.wireFine, Materials.AnnealedCopper, 64),
                 OreDictUnifier.get(OrePrefix.wireFine, Materials.AnnealedCopper, 64),
@@ -32,7 +32,7 @@ public class AssemblyLineRecipeLoader {
             .researchItem(MetaItems.ELECTRIC_MOTOR_LuV.getStackForm())
             .researchTime(L * 2000)
             .inputs(OreDictUnifier.get(OrePrefix.block, Materials.NeodymiumMagnetic, 1),
-                OreDictUnifier.get(OrePrefix.stickLong, Materials.HSSE, 4),
+                OreDictUnifier.get(OrePrefix.stick, Materials.HSSE, 12),
                 OreDictUnifier.get(OrePrefix.ring, Materials.HSSE, 4),
                 OreDictUnifier.get(OrePrefix.screw, Materials.Darmstadtium, 16),
                 OreDictUnifier.get(OrePrefix.wireGtSingle, Materials.Platinum, 64),
@@ -149,7 +149,7 @@ public class AssemblyLineRecipeLoader {
         AssemblyLineRecipeBuilder.start()
             .researchItem(MetaItems.ROBOT_ARM_IV.getStackForm())
             .researchTime(144000)
-            .inputs(OreDictUnifier.get(OrePrefix.stickLong, Materials.HSSG, 4),
+            .inputs(OreDictUnifier.get(OrePrefix.stick, Materials.HSSG, 12),
                 OreDictUnifier.get(OrePrefix.gear, Materials.HSSG, 1),
                 OreDictUnifier.get(OrePrefix.gearSmall, Materials.HSSG, 3),
                 MetaItems.ELECTRIC_MOTOR_LuV.getStackForm(2),
@@ -168,7 +168,7 @@ public class AssemblyLineRecipeLoader {
         AssemblyLineRecipeBuilder.start()
             .researchItem(MetaItems.ROBOT_ARM_LuV.getStackForm())
             .researchTime(144000)
-            .inputs(OreDictUnifier.get(OrePrefix.stickLong, Materials.Darmstadtium, 4),
+            .inputs(OreDictUnifier.get(OrePrefix.stick, Materials.Darmstadtium, 8),
                 OreDictUnifier.get(OrePrefix.gear, Materials.HSSE, 1),
                 OreDictUnifier.get(OrePrefix.gearSmall, Materials.Darmstadtium, 3),
                 MetaItems.ELECTRIC_MOTOR_UV.getStackForm(2),

@@ -34,7 +34,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BALL;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BLOCK;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_NUGGET;
-    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_NAME;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_GEAR_SMALL;
     
     public static MetaItem<?>.MetaValueItem COMPRESSED_CLAY;
@@ -53,7 +52,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_SAW;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_FILE;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_CELL;
-    public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_INGOT;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_WIRE;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_PIPE_TINY;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_PIPE_SMALL;
@@ -61,7 +59,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_PIPE_LARGE;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_BLOCK;
     public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_GEAR;
-    public static MetaItem<?>.MetaValueItem SHAPE_EXTRUDER_BOTTLE;
     
     public static MetaItem<?>.MetaValueItem SPRAY_EMPTY;
     public static MetaItem<?>.MetaValueItem[] SPRAY_CAN_DYES = new MetaItem.MetaValueItem[16];

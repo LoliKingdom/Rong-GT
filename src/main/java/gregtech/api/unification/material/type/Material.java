@@ -308,12 +308,41 @@ public abstract class Material implements Comparable<Material> {
             return Element.Tc.getMass();
         long totalMass = 0;
         for (MaterialStack material : materialComponents) {
-        	totalMass += material.amount * material.material.getMass();
+            totalMass += material.amount * material.material.getMass();
         }
         return totalMass;
     }
 
-	@ZenGetter("averageMass")
+    @ZenGetter("averageProtons")
+    public long getAverageProtons() {
+        if (element != null)
+            return element.getProtons();
+        if (materialComponents.isEmpty())
+            return Element.Tc.getProtons();
+        long totalProtons = 0, totalAmount = 0;
+        for (MaterialStack material : materialComponents) {
+            totalAmount += material.amount;
+            totalProtons += material.amount * material.material.getAverageProtons();
+        }
+        return totalProtons / totalAmount;
+    }
+
+    @ZenGetter("averageNeutrons")
+    public long getAverageNeutrons() {
+        if (element != null)
+            return element.getNeutrons();
+        if (materialComponents.isEmpty())
+            return Element.Tc.getNeutrons();
+        long totalNeutrons = 0, totalAmount = 0;
+        for (MaterialStack material : materialComponents) {
+            totalAmount += material.amount;
+            totalNeutrons += material.amount * material.material.getAverageNeutrons();
+        }
+        return totalNeutrons / totalAmount;
+    }
+
+
+    @ZenGetter("averageMass")
 	public long getAverageMass() {
         if (element != null)
             return element.getMass();
@@ -322,12 +351,12 @@ public abstract class Material implements Comparable<Material> {
         long totalMass = 0, totalAmount = 0;
         for (MaterialStack material : materialComponents) {
             totalAmount += material.amount;
-            totalMass += material.amount * material.material.getMass();
+            totalMass += material.amount * material.material.getAverageMass();
         }
         return totalMass / totalAmount;
 	}
 
-	@ZenGetter("camelCaseString")
+	@ZenGetter("camelCaseName")
 	public String toCamelCaseString() {
 		return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, toString());
 	}

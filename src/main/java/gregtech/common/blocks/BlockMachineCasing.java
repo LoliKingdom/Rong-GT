@@ -17,7 +17,7 @@ public class BlockMachineCasing extends VariantBlock<BlockMachineCasing.MachineC
         setResistance(8.0f);
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
-        setDefaultState(getState(MachineCasingType.ULV));
+        setDefaultState(getState(MachineCasingType.LV));
     }
 
     @Override
@@ -28,7 +28,6 @@ public class BlockMachineCasing extends VariantBlock<BlockMachineCasing.MachineC
     public enum MachineCasingType implements IStringSerializable {
 
         //Voltage-tiered casings
-        ULV("ultra_low_voltage"),
         LV("low_voltage"),
         MV("medium_voltage"),
         HV("high_voltage"),
@@ -36,7 +35,6 @@ public class BlockMachineCasing extends VariantBlock<BlockMachineCasing.MachineC
         IV("insane_voltage"),
         LuV("ludicrous_voltage"),
         UV("ultra_voltage"),
-        MAX("maximum_voltage"),
         BRONZE_HULL("bronze_hull"),
         BRONZE_BRICKS_HULL("bronze_bricks_hull"),
         STEEL_HULL("steel_hull"),

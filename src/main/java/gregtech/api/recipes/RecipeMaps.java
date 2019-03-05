@@ -20,7 +20,6 @@ import gregtech.api.recipes.builders.UniversalDistillationRecipeBuilder;
 import gregtech.api.recipes.machines.FuelRecipeMap;
 import gregtech.api.recipes.machines.RecipeMapBrewer;
 import gregtech.api.recipes.machines.RecipeMapFluidCanner;
-import gregtech.api.recipes.machines.RecipeMapFormingPress;
 import gregtech.api.recipes.machines.RecipeMapFurnace;
 import gregtech.api.recipes.machines.RecipeMapGroupOutput;
 import gregtech.api.recipes.recipes.CokeOvenRecipe;
@@ -71,7 +70,7 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FORMING_PRESS_RECIPES = new RecipeMapFormingPress("forming_press", 2, 6, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FORMING_PRESS_RECIPES = new RecipeMap<>("forming_press", 2, 6, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, false, GuiTextures.PRESS_OVERLAY_1)
         .setSlotOverlay(false, false, true, GuiTextures.PRESS_OVERLAY_2)
         .setSlotOverlay(true, false, GuiTextures.PRESS_OVERLAY_3)
@@ -557,7 +556,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMap<>("canner", 0, 2, 1, 2, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMapFluidCanner("canner", 0, 2, 1, 2, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
     	.setSlotOverlay(false, true, GuiTextures.FLUID_SLOT)
     	.setSlotOverlay(false, false, false, GuiTextures.CANNER_OVERLAY)
         .setSlotOverlay(false, false, true, GuiTextures.CANISTER_OVERLAY)

@@ -30,6 +30,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.multipart.GTMultipartFactory;
 import gregtech.integration.theoneprobe.TheOneProbeCompatibility;
+import gregtech.integration.tinkers.TinkersIntegration;
 import gregtech.loaders.dungeon.DungeonLootLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
@@ -90,8 +91,8 @@ public class GregTechMod {
         MetaItems.init();
         MetaFluids.init();
         MetaTileEntities.init();
-        MetaEntities.init();
-
+        MetaEntities.init();   
+        
         proxy.onPreLoad();
     }
 

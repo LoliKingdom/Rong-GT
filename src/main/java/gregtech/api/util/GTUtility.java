@@ -444,19 +444,21 @@ public class GTUtility {
      */
     public static byte getTierByVoltage(long voltage) {
         byte tier = -1;
-        while (++tier < V.length) {
-            if (voltage == V[tier]) {
+        while(++tier < V.length) {
+        	//For conductor
+        	/*if(voltage == Integer.MAX_VALUE) {
+        		return tier = 6;
+        	}*/
+        	/*else */if(voltage == V[tier]) {
                 return tier;
-            } else if (voltage < V[tier]) {
-                return (byte) Math.max(0, tier - 1);
             }
-        }
-        if(tier == 7) {
-        	return tier = 6;
+            else if (voltage < V[tier]) {
+                return (byte)Math.max(0, tier - 1);
+            }
         }
         return tier;
     }
-
+    
     public static BiomeDictionary.Type getBiomeTypeTagByName(String name) {
         Map<String, BiomeDictionary.Type> byName = ReflectionHelper.getPrivateValue(BiomeDictionary.Type.class, null, "byName");
         return byName.get(name);

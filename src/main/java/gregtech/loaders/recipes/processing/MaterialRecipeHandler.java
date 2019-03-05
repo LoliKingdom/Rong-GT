@@ -175,17 +175,6 @@ public class MaterialRecipeHandler {
                 .duration(20).EUt(8)
                 .buildAndRegister();
         }
-
-        if(material.hasFlag(NO_SMASHING)) {
-            RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                .input(OrePrefix.dust, material)
-                .notConsumable(MetaItems.SHAPE_EXTRUDER_INGOT)
-                .outputs(OreDictUnifier.get(OrePrefix.ingot, material))
-                .duration(10)
-                .EUt(24)
-                .buildAndRegister();
-        }
-
         if (material.hasFlag(MatFlags.GENERATE_PLATE) && !material.hasFlag(NO_SMASHING)) {
             ItemStack plateStack = OreDictUnifier.get(OrePrefix.plate, material);
             RecipeMaps.BENDER_RECIPES.recipeBuilder()
@@ -230,16 +219,6 @@ public class MaterialRecipeHandler {
         if (material.hasFlag(MORTAR_GRINDABLE)) {
             ModHandler.addShapedRecipe(String.format("gem_to_dust_%s_%s", material, gemPrefix), crushedStack,
                 "X", "m", 'X', new UnificationEntry(gemPrefix, material));
-        }
-
-        if (material.hasFlag(SolidMaterial.MatFlags.GENERATE_LONG_ROD) && materialAmount >= M * 2) {
-            RecipeMaps.LATHE_RECIPES.recipeBuilder()
-                .input(gemPrefix, material)
-                .outputs(OreDictUnifier.get(OrePrefix.stickLong, material, (int) (materialAmount / (M * 2))),
-                    OreDictUnifier.getDust(material, materialAmount % (M * 2)))
-                .duration((int) material.getAverageMass())
-                .EUt(16)
-                .buildAndRegister();
         } else if (materialAmount >= M && material.hasFlag(SolidMaterial.MatFlags.GENERATE_ROD)) {
             ItemStack gemStick = OreDictUnifier.get(OrePrefix.stick, material, (int) (materialAmount / M));
             ItemStack gemDust = OreDictUnifier.getDust(material, materialAmount % M);
@@ -330,19 +309,18 @@ public class MaterialRecipeHandler {
         				OreDictUnifier.get(OrePrefix.ingot, material, 9), blockStack);
         		
         		RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-            		.input(OrePrefix.ingot, material, (int)(materialAmount / M))
-            		.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
-            		.outputs(blockStack)
-            		.duration(20)
-            		.EUt(24)
-            		.buildAndRegister();
+                	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
+                	.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
+                	.outputs(blockStack)
+                	.duration(10).EUt(24)
+                	.buildAndRegister();
+        		
         		RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
-        			.input(OrePrefix.ingot, material, (int)(materialAmount / M))
-        			.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
-        			.outputs(blockStack)
-        			.duration(20)
-        			.EUt(24)
-        			.buildAndRegister();
+                	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
+                	.notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
+                	.outputs(blockStack)
+                	.duration(10).EUt(24)
+                	.buildAndRegister();
         	}
         	else {
         		ModHandler.addShapedRecipe(String.format("block_compress_%s", material.toString()), 
@@ -352,27 +330,22 @@ public class MaterialRecipeHandler {
         	}
         }
         //do not allow hand crafting or uncrafting of blacklisted blocks
-        /*if(!material.hasFlag(EXCLUDE_BLOCK_CRAFTING_RECIPES)) {
-            ModHandler.addShapelessRecipe(String.format("block_compress_%s", material.toString()), blockStack, result.toArray());
-            ModHandler.addShapelessRecipe(String.format("block_decompress_%s", material.toString()),
-                GTUtility.copyAmount((int) (materialAmount / M), OreDictUnifier.get(blockEntry)),
-                new UnificationEntry(blockPrefix, material));
+        if(!material.hasFlag(EXCLUDE_BLOCK_CRAFTING_RECIPES)) {            
             if(material instanceof IngotMaterial) {
-                int voltageMultiplier = getVoltageMultiplier(material);
                 RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
                     .input(OrePrefix.ingot, material, (int) (materialAmount / M))
                     .notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
                     .outputs(blockStack)
-                    .duration(10).EUt(8 * voltageMultiplier)
+                    .duration(10).EUt(24)
                     .buildAndRegister();
 
                 RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
                     .input(OrePrefix.ingot, material, (int) (materialAmount / M))
                     .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
                     .outputs(blockStack)
-                    .duration(10).EUt(4 * voltageMultiplier)
+                    .duration(10).EUt(24)
                     .buildAndRegister();
             }
-        }*/
+        }
     }
 }

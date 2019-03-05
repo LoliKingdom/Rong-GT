@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class PolarizingRecipeHandler {
 
     private static final OrePrefix[] POLARIZING_PREFIXES = new OrePrefix[] {
-        OrePrefix.stick, OrePrefix.stickLong, OrePrefix.plate, OrePrefix.ingot, OrePrefix.rotor,
+        OrePrefix.stick, OrePrefix.plate, OrePrefix.ingot, OrePrefix.rotor,
         OrePrefix.screw, OrePrefix.wireFine, OrePrefix.foil, OrePrefix.dust, OrePrefix.ring};
 
     public static void register() {

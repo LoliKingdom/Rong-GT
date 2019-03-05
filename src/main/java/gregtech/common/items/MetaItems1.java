@@ -43,22 +43,20 @@ public class MetaItems1 extends MaterialMetaItem {
         SHAPE_MOLD_BALL = addItem(308, "shape.mold.ball");
         SHAPE_MOLD_BLOCK = addItem(309, "shape.mold.block");
         SHAPE_MOLD_NUGGET = addItem(310, "shape.mold.nugget");
-        SHAPE_MOLD_NAME = addItem(311, "shape.mold.name");
         SHAPE_MOLD_GEAR_SMALL = addItem(312, "shape.mold.gear.small");
         
         SHAPE_EXTRUDER_PLATE = addItem(313, "shape.extruder.plate");
         SHAPE_EXTRUDER_ROD = addItem(314, "shape.extruder.rod");
-        SHAPE_EXTRUDER_SCREW = addItem(315, "shape.extruder.bolt");
+        SHAPE_EXTRUDER_SCREW = addItem(315, "shape.extruder.screw");
         SHAPE_EXTRUDER_RING = addItem(316, "shape.extruder.ring");
         SHAPE_EXTRUDER_CELL = addItem(317, "shape.extruder.cell");
-        SHAPE_EXTRUDER_INGOT = addItem(318, "shape.extruder.ingot");
+        SHAPE_EXTRUDER_BLOCK = addItem(318, "shape.extruder.block");
         SHAPE_EXTRUDER_WIRE = addItem(319, "shape.extruder.wire");
         SHAPE_EXTRUDER_PIPE_TINY = addItem(320, "shape.extruder.pipe.tiny");
         SHAPE_EXTRUDER_PIPE_SMALL = addItem(321, "shape.extruder.pipe.small");
         SHAPE_EXTRUDER_PIPE_MEDIUM = addItem(322, "shape.extruder.pipe.medium");
         SHAPE_EXTRUDER_PIPE_LARGE = addItem(323, "shape.extruder.pipe.large");
         SHAPE_EXTRUDER_GEAR = addItem(324, "shape.extruder.gear");
-        SHAPE_EXTRUDER_BOTTLE = addItem(325, "shape.extruder.bottle");
 	
         SPRAY_EMPTY = addItem(326, "spray.empty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Materials.Tin, OrePrefix.plate.materialAmount * 2L), 
         																			   new MaterialStack(Materials.Redstone, OrePrefix.dust.materialAmount)));

@@ -12,9 +12,10 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.items.PotionFluids;
 import gregtech.common.pipelike.cable.ItemBlockCable;
 import gregtech.common.pipelike.fluidpipe.ItemBlockFluidPipe;
+import gregtech.integration.botania.*;
+import gregtech.integration.tinkers.*;
 import gregtech.loaders.MaterialInfoLoader;
 import gregtech.loaders.OreDictionaryLoader;
-import gregtech.loaders.oredictionary.BotaniaODFixer;
 import gregtech.loaders.recipes.processing.DecompositionRecipeHandler;
 import gregtech.loaders.recipes.processing.RecipeHandlerList;
 import gregtech.loaders.recipes.processing.ToolRecipeHandler;
@@ -35,6 +36,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -128,8 +130,11 @@ public class CommonProxy {
         MetaBlocks.registerOreDict();
         OreDictionaryLoader.init();
         MaterialInfoLoader.init();
-        BotaniaODFixer.init();
-
+        
+        if(Loader.isModLoaded("botania")) {
+        	BotaniaODFixer.init();
+        }
+        
         GTLog.logger.info("Registering recipes...");
 
         MetaItems.registerRecipes();
@@ -199,7 +204,6 @@ public class CommonProxy {
     }
 
     public void onPreLoad() {
-
     }
 
     public void onLoad() {

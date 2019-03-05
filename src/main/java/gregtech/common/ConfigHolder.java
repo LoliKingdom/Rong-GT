@@ -28,7 +28,7 @@ public class ConfigHolder {
     public static boolean doExplosions = true;
 
     @Config.Comment("Energy use multiplier for electric items. Default: 100")
-    public static int energyUsageMultiplier = 100;
+    public static int energyUsageMultiplier = 10;
 
     @Config.RangeInt(min = 0, max = 100)
     @Config.Comment("Chance with which flint and steel will create fire. Default: 50")

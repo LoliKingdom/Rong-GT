@@ -348,22 +348,22 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         return capability == null || capability.canUse(damage);
     }
 
-    /*@Override
+    @Override
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack stack) {
         if (stack.getItemDamage() >= metaItemOffset) {
             T item = getItem(stack);
             SolidMaterial primaryMaterial = getToolMaterial(stack);
             String materialName = primaryMaterial == null ? "" : String.valueOf(primaryMaterial.getLocalizedName());
-            if(item.unlocalizedName != null) {
-            	return I18n.format("metaitem." + item.unlocalizedName + ".name", materialName);
+            if (item == null) {
+            	return I18n.format("metaitem." + "" + ".name", materialName);
             }
             else {
-            	return I18n.format("metaitem." + "wat" + ".name", materialName);
-            }    
+            	return I18n.format("metaitem." + item.unlocalizedName + ".name", materialName);
+            }       
         }
         return super.getItemStackDisplayName(stack);
-    }*/
+    }
 
     @Override
     public void addInformation(ItemStack itemStack, @Nullable World worldIn, List<String> lines, ITooltipFlag tooltipFlag) {
@@ -374,15 +374,14 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         IToolStats toolStats = item.getToolStats();
         SolidMaterial primaryMaterial = getToolMaterial(itemStack);
         int maxInternalDamage = getMaxInternalDamage(itemStack);
-
         if (maxInternalDamage > 0) {
             lines.add(I18n.format("metaitem.tool.tooltip.durability", maxInternalDamage - getInternalDamage(itemStack), maxInternalDamage));
         }
         lines.add(I18n.format("metaitem.tool.tooltip.primary_material", primaryMaterial.getLocalizedName(), getHarvestLevel(itemStack)));
-        if (toolStats.showBasicAttributes()) {
+        /*if (toolStats.showBasicAttributes()) {
             lines.add(I18n.format("metaitem.tool.tooltip.attack_damage", toolStats.getBaseDamage(itemStack) + primaryMaterial.harvestLevel));
             lines.add(I18n.format("metaitem.tool.tooltip.mining_speed", getToolDigSpeed(itemStack)));
-        }
+        }*/
         super.addInformation(itemStack, worldIn, lines, tooltipFlag);
         toolStats.addInformation(itemStack, lines, tooltipFlag.isAdvanced());
     }
@@ -442,7 +441,7 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
                 materialDurability = toolMaterial.toolDurability;
             }
             float multiplier = toolStats.getMaxDurabilityMultiplier(itemStack);
-            return (int) (materialDurability * 10 * multiplier);
+            return (int) (materialDurability * multiplier);
         }
         return 0;
     }

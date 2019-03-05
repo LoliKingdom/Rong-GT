@@ -161,7 +161,8 @@ public class MetaBlocks {
             }
         }
         FLUID_PIPE.addPipeMaterial(Materials.Wood, new FluidPipeProperties(310, 20, false));
-        CABLE.addCableMaterial(MarkerMaterials.Tier.Superconductor, new WireProperties(Integer.MAX_VALUE, 4, 0));
+        //TODO: Figure out what to do. Going to make superconductors operate at UV right now
+        CABLE.addCableMaterial(MarkerMaterials.Tier.Superconductor, new WireProperties(((int)GTValues.V[6]), 4, 0));
         registerTileEntity();
     }
 

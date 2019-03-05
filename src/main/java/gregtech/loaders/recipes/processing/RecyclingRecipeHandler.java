@@ -15,7 +15,7 @@ public class RecyclingRecipeHandler {
 
     private static final List<Object> CRUSHING_PREFIXES = Arrays.asList(
         OrePrefix.ingot, OrePrefix.gem, OrePrefix.stick, OrePrefix.plate, OrePrefix.plank,
-        OrePrefix.ring, OrePrefix.stickLong, OrePrefix.foil,
+        OrePrefix.ring, OrePrefix.foil,
         OrePrefix.screw, OrePrefix.nugget, OrePrefix.gearSmall, OrePrefix.gear,
         OrePrefix.frameGt, OrePrefix.spring,
         OrePrefix.block, OrePrefix.wireFine,

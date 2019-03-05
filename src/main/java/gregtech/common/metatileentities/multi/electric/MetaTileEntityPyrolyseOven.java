@@ -53,7 +53,7 @@ public class MetaTileEntityPyrolyseOven extends RecipeMapMultiblockController {
     }
 
     protected IBlockState getCasingState() {
-        return MetaBlocks.MACHINE_CASING.getState(MachineCasingType.ULV);
+        return MetaBlocks.MACHINE_CASING.getState(MachineCasingType.LV);
     }
 
 }

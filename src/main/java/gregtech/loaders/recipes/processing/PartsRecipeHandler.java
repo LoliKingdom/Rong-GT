@@ -27,7 +27,6 @@ public class PartsRecipeHandler {
 
     public static void register() {
         OrePrefix.stick.addProcessingHandler(DustMaterial.class, PartsRecipeHandler::processStick);
-        OrePrefix.stickLong.addProcessingHandler(DustMaterial.class, PartsRecipeHandler::processLongStick);
         OrePrefix.plate.addProcessingHandler(DustMaterial.class, PartsRecipeHandler::processPlate);
 
         OrePrefix.turbineBlade.addProcessingHandler(IngotMaterial.class, PartsRecipeHandler::processTurbine);
@@ -40,6 +39,7 @@ public class PartsRecipeHandler {
         OrePrefix.gear.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processGear);
         OrePrefix.gearSmall.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processGear);
         OrePrefix.ring.addProcessingHandler(IngotMaterial.class, PartsRecipeHandler::processRing);
+        OrePrefix.spring.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processSpring);
     }
     
 
@@ -240,16 +240,6 @@ public class PartsRecipeHandler {
                 "s ", " X",
                 'X', new UnificationEntry(OrePrefix.stick, material));
         }
-
-        if (!material.hasFlag(MatFlags.NO_SMASHING) && material.hasFlag(SolidMaterial.MatFlags.GENERATE_LONG_ROD)) {
-            RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder()
-                .input(stickPrefix, material, 2)
-                .outputs(OreDictUnifier.get(OrePrefix.stickLong, material))
-                .duration((int) Math.max(material.getAverageMass(), 1L))
-                .EUt(16)
-                .buildAndRegister();
-        }
-
         if (material.hasFlag(IngotMaterial.MatFlags.GENERATE_FINE_WIRE)) {
             RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
                 .input(OrePrefix.stick, material)
@@ -259,41 +249,23 @@ public class PartsRecipeHandler {
         }
     }
 
-    public static void processLongStick(OrePrefix longStickPrefix, DustMaterial material) {
-        ItemStack stack = OreDictUnifier.get(longStickPrefix, material);
-        ItemStack stickStack = OreDictUnifier.get(OrePrefix.stick, material);
-        if (!material.hasFlag(MatFlags.NO_WORKING)) {
-            RecipeMaps.CUTTER_RECIPES.recipeBuilder()
-                .input(longStickPrefix, material)
-                .outputs(GTUtility.copyAmount(2, stickStack))
-                .duration((int) Math.max(material.getAverageMass(), 1L)).EUt(4)
-                .buildAndRegister();
-
-            ModHandler.addShapedRecipe(String.format("stick_long_%s", material.toString()),
-                GTUtility.copyAmount(2, stickStack),
-                "s", "X", 'X', new UnificationEntry(OrePrefix.stickLong, material));
-        }
-
+    public static void processSpring(OrePrefix springPrefix, DustMaterial material) {
         if (!material.hasFlag(MatFlags.NO_SMASHING)) {
             if (material.hasFlag(GENERATE_SPRING)) {
                 RecipeMaps.BENDER_RECIPES.recipeBuilder()
-                    .input(longStickPrefix, material)
+                    .input(OrePrefix.stick, material, 4)
                     .outputs(OreDictUnifier.get(OrePrefix.spring, material))
                     .circuitMeta(1)
-                    .duration(200).EUt(16)
+                    .duration(200).EUt(24)
                     .buildAndRegister();
             }
-
-            ModHandler.addShapedRecipe(String.format("stick_long_stick_%s", material.toString()), stack,
-                "ShS",
-                'S', new UnificationEntry(OrePrefix.stick, material));
         }
     }
 
     public static void processTurbine(OrePrefix toolPrefix, SolidMaterial material) {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.turbineBlade, material, 8)
-            .input(OrePrefix.stickLong, Materials.Titanium)
+            .input(OrePrefix.stick, Materials.Titanium, 4)
             .outputs(MetaItems.TURBINE.getStackForm(material))
             .duration(320)
             .EUt(400)
