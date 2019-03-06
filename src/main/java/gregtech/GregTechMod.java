@@ -79,7 +79,7 @@ public class GregTechMod {
         AnnotatedMaterialHandlerLoader.discoverAndLoadAnnotatedMaterialHandlers(event.getAsmData());
         Material.runMaterialHandlers();
         
-        if(Loader.isModLoaded(GTValues.MODID_CT)) {
+        if(Loader.isModLoaded("crafttweaker")) {
             GTLog.logger.info("Running early CraftTweaker initialization scripts...");
             runEarlyCraftTweakerScripts();
         }
@@ -115,12 +115,12 @@ public class GregTechMod {
             }
 }
 
-        if(Loader.isModLoaded(GTValues.MODID_FMP)) {
+        if(GTValues.isModLoaded("forgemultipartcbe")) {
             GTLog.logger.info("ForgeMultiPart found. Enabling integration...");
             registerForgeMultipartCompat();
         }
 
-        if(Loader.isModLoaded(GTValues.MODID_TOP)) {
+        if(GTValues.isModLoaded("forgemultipartcbe")) {
             GTLog.logger.info("TheOneProbe found. Enabling integration...");
             TheOneProbeCompatibility.registerCompatibility();
         }
@@ -131,12 +131,12 @@ public class GregTechMod {
         DungeonLootLoader.init();
     }
 
-    @Method(modid = GTValues.MODID_FMP)
+    @Method(modid = "forgemultipartcbe")
     private void registerForgeMultipartCompat() {
         GTMultipartFactory.INSTANCE.registerFactory();
     }
 
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "forgemultipartcbe")
     private void runEarlyCraftTweakerScripts() {
         CraftTweakerAPI.tweaker.loadScript(false, "gregtech");
     }

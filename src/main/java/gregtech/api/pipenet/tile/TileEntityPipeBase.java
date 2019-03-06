@@ -249,7 +249,7 @@ public abstract class TileEntityPipeBase<PipeType extends Enum<PipeType> & IPipe
 
     @Override
     public void notifyBlockUpdate() {
-    	getWorld().notifyNeighborsOfStateChange(getPos(), getBlockType(), true);
+        getWorld().notifyNeighborsOfStateChange(getPos(), getBlockType(), true);
         getPipeBlock().updateActiveNodeStatus(getWorld(), getPos());
     }
 

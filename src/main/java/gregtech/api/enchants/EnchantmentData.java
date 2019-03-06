@@ -25,7 +25,7 @@ public class EnchantmentData {
     }
 
     @ZenGetter("enchantment")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public IEnchantmentDefinition ctGetEnchantment() {
         return new MCEnchantmentDefinition(enchantment);
     }

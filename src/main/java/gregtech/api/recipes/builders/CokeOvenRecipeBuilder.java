@@ -117,19 +117,19 @@ public class CokeOvenRecipeBuilder {
 	}
 
 	@ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public CokeOvenRecipeBuilder input(IIngredient ingredient) {
 	    return input(new CraftTweakerIngredientWrapper(ingredient), ingredient.getAmount());
     }
 
     @ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public CokeOvenRecipeBuilder fluidOutput(ILiquidStack liquidStack) {
 	    return fluidOutput(CraftTweakerMC.getLiquidStack(liquidStack));
     }
 
     @ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public CokeOvenRecipeBuilder output(IItemStack itemStack) {
 	    return output(CraftTweakerMC.getItemStack(itemStack));
     }

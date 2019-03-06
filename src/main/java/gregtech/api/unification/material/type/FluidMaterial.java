@@ -129,7 +129,7 @@ public class FluidMaterial extends Material {
     }
 
     @ZenGetter("fluid")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "forgemultipartcbe")
     @Nullable
     public ILiquidDefinition ctGetFluid() {
         Fluid materialFluid = getMaterialFluid();
@@ -137,7 +137,7 @@ public class FluidMaterial extends Material {
     }
 
     @ZenGetter("plasma")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "forgemultipartcbe")
     @Nullable
     public ILiquidDefinition ctGetPlasma() {
         Fluid materialFluid = getMaterialPlasma();

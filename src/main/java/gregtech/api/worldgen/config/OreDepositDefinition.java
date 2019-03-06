@@ -158,7 +158,7 @@ public class OreDepositDefinition {
     }
 
     @ZenMethod("getBiomeWeightModifier")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public int ctGetBiomeWeightModifier(IBiome biome) {
         int biomeIndex = ArrayUtils.indexOf(CraftTweakerMC.biomes, biome);
         Biome mcBiome = Biome.REGISTRY.getObjectById(biomeIndex);
@@ -166,14 +166,14 @@ public class OreDepositDefinition {
     }
 
     @ZenMethod("checkDimension")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public boolean ctCheckDimension(int dimensionId) {
         WorldProvider worldProvider = DimensionManager.getProvider(dimensionId);
         return worldProvider != null && getDimensionFilter().test(worldProvider);
     }
 
     @ZenMethod("canGenerateIn")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public boolean ctCanGenerateIn(crafttweaker.api.block.IBlockState blockState, crafttweaker.api.world.IBlockAccess blockAccess, crafttweaker.api.world.IBlockPos blockPos) {
         IBlockState mcBlockState = CraftTweakerMC.getBlockState(blockState);
         return getGenerationPredicate().test(mcBlockState, (IBlockAccess) blockAccess.getInternal(), (BlockPos) blockPos.getInternal());

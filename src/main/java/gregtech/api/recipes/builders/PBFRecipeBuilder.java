@@ -116,13 +116,13 @@ public class PBFRecipeBuilder {
 	}
 
 	@ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public PBFRecipeBuilder input(IIngredient ingredient) {
 	    return input(new CraftTweakerIngredientWrapper(ingredient), ingredient.getAmount());
     }
 
     @ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public PBFRecipeBuilder output(IItemStack itemStack) {
 	    return output(CraftTweakerMC.getItemStack(itemStack));
     }

@@ -35,7 +35,7 @@ public abstract class ShapeGenerator {
     public abstract void generate(Random gridRandom, IBlockGeneratorAccess relativeBlockAccess);
 
     @ZenMethod
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public void generate(long randomSeed, IWorld world, IBlockPos centerPos, IBlockState blockState) {
         World mcWorld = CraftTweakerMC.getWorld(world);
         net.minecraft.block.state.IBlockState mcBlockState = CraftTweakerMC.getBlockState(blockState);

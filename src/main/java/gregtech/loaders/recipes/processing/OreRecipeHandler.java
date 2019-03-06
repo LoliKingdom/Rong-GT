@@ -83,31 +83,6 @@ public class OreRecipeHandler {
         ItemStack impureDustStack = OreDictUnifier.get(OrePrefix.dustImpure, material);
         DustMaterial byproductMaterial = GTUtility.selectItemInList(0, material, material.oreByProducts, DustMaterial.class);
         
-        if(Loader.isModLoaded("mekanism")) {
-        	RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
-		  	.input(crushedPrefix, material)
-		  	.fluidInputs(Materials.SulfuricAcid.getFluid(600))
-		  	.fluidOutputs(FluidRegistry.getFluidStack("slurry." + material.toString(), 600))
-		  	.duration(400)
-		  	.EUt(96)
-		  	.buildAndRegister();
-		
-		RecipeMaps.MIXER_RECIPES.recipeBuilder()
-		  	.fluidInputs(FluidRegistry.getFluidStack("slurry." + material.toString(), 600), Materials.Chlorine.getFluid(1000))
-		  	.fluidOutputs(FluidRegistry.getFluidStack("clean_slurry." + material.toString(), 500))
-		  	.duration(200)
-		  	.EUt(8)
-		  	.buildAndRegister();
-		
-		RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
-		  	.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + material.toString(), 2000))
-		  	.inputs(MetaItems.THERMITE_DUST.getStackForm())
-		  	.outputs(OreDictUnifier.get(OrePrefix.crystal, material, 5))
-		  	.duration(80)
-		  	.EUt(480)
-		  	.buildAndRegister();			 
-        }
-
         RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder()
             .input(crushedPrefix, material)
             .outputs(impureDustStack)

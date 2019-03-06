@@ -63,7 +63,7 @@ public class FuelRecipeMap {
     }
 
     @ZenMethod("findRecipe")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public FuelRecipe ctFindRecipe(long maxVoltage, ILiquidStack inputFluid) {
         return findRecipe(maxVoltage, CraftTweakerMC.getLiquidStack(inputFluid));
     }

@@ -37,7 +37,7 @@ public class BlacklistedBlockFiller extends BlockFiller {
     }
 
     @ZenGetter("blacklist")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public List<crafttweaker.api.block.IBlockState> ctGetBlacklist() {
         return blacklist.stream()
             .map(CraftTweakerMC::getBlockState)

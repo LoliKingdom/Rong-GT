@@ -41,7 +41,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional.Method;
 
 import javax.annotation.Nullable;
@@ -144,6 +143,8 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
             int activeConnections = getActiveNodeConnections(worldIn, pos);
             activeConnections |= ~pipeTile.getBlockedConnections(); //remove blocked connections
             boolean isActiveNode = activeConnections > 0;
+            getWorldPipeNet(worldIn).addNode(pos, createProperties(pipeTile), 0, 0, isActiveNode);
+            onActiveModeChange(worldIn, pos, isActiveNode, true);
         }
     }
 
@@ -157,9 +158,9 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    	updateActiveNodeStatus(worldIn, pos);
+        updateActiveNodeStatus(worldIn, pos);
     }
-    
+
     public void updateActiveNodeStatus(World worldIn, BlockPos pos) {
         PipeNet<NodeDataType> pipeNet = getWorldPipeNet(worldIn).getNetFromPos(pos);
         IPipeTile<PipeType, NodeDataType> pipeTile = getPipeTileEntity(worldIn, pos);
@@ -317,17 +318,16 @@ public abstract class BlockPipe<PipeType extends Enum<PipeType> & IPipeType<Node
         if(tileEntityAtPos instanceof IPipeTile && isThisPipeBlock(((IPipeTile) tileEntityAtPos).getPipeBlock())) {
             //noinspection unchecked
             return (IPipeTile<PipeType, NodeDataType>) tileEntityAtPos;
-        } else if(Loader.isModLoaded(GTValues.MODID_FMP)) {
+        } else if(GTValues.isModLoaded("forgemultipartcbe")) {
             return tryGetMultipartTile(tileEntityAtPos);
         }
         return null;
     }
 
-    @Method(modid = GTValues.MODID_FMP)
+    @Method(modid = "forgemultipartcbe")
     private IPipeTile<PipeType, NodeDataType> tryGetMultipartTile(TileEntity tileEntityAtPos) {
         if(tileEntityAtPos instanceof TileMultipart) {
             TileMultipart tileMultipart = (TileMultipart) tileEntityAtPos;
-            //noinspection unchecked
             List<TMultiPart> partList = tileMultipart.jPartList();
             for (TMultiPart multiPart : partList) {
                 if(multiPart instanceof IPipeTile) {

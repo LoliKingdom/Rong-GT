@@ -47,13 +47,13 @@ public class PrimitiveBlastFurnaceRecipe {
     }
 
     @ZenGetter("input")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public InputIngredient ctGetInput() {
         return new InputIngredient(getInput());
     }
 
     @ZenGetter("output")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public IItemStack ctGetOutput() {
         return CraftTweakerMC.getIItemStack(getOutput());
     }

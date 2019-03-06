@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional.Method;
 
 import java.util.List;
@@ -59,7 +58,7 @@ public class FluidPipeNet extends MonolithicPipeNet<FluidPipeProperties> {
                 } else {
                     world.setBlockToAir(nodePos);
                 }
-            } else if (Loader.isModLoaded(GTValues.MODID_FMP)) {
+            } else if (GTValues.isModLoaded("forgemultipartcbe")) {
                 removeMultipartPipePartFromTile(tileEntity);
             }
             Random random = world.rand;
@@ -80,7 +79,7 @@ public class FluidPipeNet extends MonolithicPipeNet<FluidPipeProperties> {
         }
     }
 
-    @Method(modid = GTValues.MODID_FMP)
+    @Method(modid = "forgemultipartcbe")
     private static void removeMultipartPipePartFromTile(TileEntity tileEntity) {
         if(tileEntity instanceof TileMultipart) {
             TileMultipart tileMultipart = (TileMultipart) tileEntity;

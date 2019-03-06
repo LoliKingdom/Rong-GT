@@ -333,7 +333,7 @@ public class RecipeMap<R extends RecipeBuilder<R>> {
     }
 
     @ZenMethod("findRecipe")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public CTRecipe ctFindRecipe(long maxVoltage, IItemStack[] itemInputs, ILiquidStack[] fluidInputs) {
 	    List<ItemStack> mcItemInputs = itemInputs == null ? Collections.emptyList() :
             Arrays.stream(itemInputs)
@@ -348,7 +348,7 @@ public class RecipeMap<R extends RecipeBuilder<R>> {
     }
 
     @ZenGetter("recipes")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
     public List<CTRecipe> ccGetRecipeList() {
 	    return getRecipeList().stream()
             .map(recipe -> new CTRecipe(this, recipe))
@@ -371,7 +371,7 @@ public class RecipeMap<R extends RecipeBuilder<R>> {
 	}
 
 	@ZenMethod("recipeBuilder")
-    @Method(modid = GTValues.MODID_CT)
+    @Method(modid = "crafttweaker")
 	public CTRecipeBuilder ctRecipeBuilder() {
 	    return new CTRecipeBuilder(recipeBuilder());
     }
