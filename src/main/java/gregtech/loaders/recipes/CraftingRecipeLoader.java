@@ -171,6 +171,9 @@ public class CraftingRecipeLoader {
         
         MetaBlocks.FRAMES.values().forEach(CraftingRecipeLoader::registerColoringRecipes);
         
+        ModHandler.addShapedRecipe("vacuum_tube", MetaItems.CIRCUIT_VACUUM_TUBE_LV.getStackForm(), "PTP", "WWW", 'P', new ItemStack(Items.PAPER), 'T', MetaItems.GLASS_TUBE.getStackForm(), 'W', OreDictUnifier.get(OrePrefix.wireGtSingle, Materials.Copper));
+        ModHandler.addShapedRecipe("vacuum_tube_fine", MetaItems.CIRCUIT_VACUUM_TUBE_LV.getStackForm(), "PTP", "WWW", 'P', new ItemStack(Items.PAPER), 'T', MetaItems.GLASS_TUBE.getStackForm(), 'W', OreDictUnifier.get(OrePrefix.wireFine, Materials.Copper));
+        
         ModHandler.addShapedRecipe("item_filter", MetaItems.ITEM_FILTER.getStackForm(), "XXX", "XYX", "XXX", 'X', new UnificationEntry(OrePrefix.foil, Materials.Zinc), 'Y', new UnificationEntry(OrePrefix.plate, Materials.Steel));
         ModHandler.addShapedRecipe("fluid_filter", MetaItems.FLUID_FILTER.getStackForm(), "XXX", "XYX", "XXX", 'X', new UnificationEntry(OrePrefix.foil, Materials.Zinc), 'Y', new UnificationEntry(OrePrefix.plate, Materials.Lapis));
         ModHandler.addShapedRecipe("ore_dictionary_filter", MetaItems.ORE_DICTIONARY_FILTER.getStackForm(), "XXX", "XYX", "XXX", 'X', new UnificationEntry(OrePrefix.foil, Materials.Zinc), 'Y', new UnificationEntry(OrePrefix.plate, Materials.Olivine));

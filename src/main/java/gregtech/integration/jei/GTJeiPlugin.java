@@ -1,5 +1,8 @@
 package gregtech.integration.jei;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
@@ -22,15 +25,15 @@ import gregtech.integration.jei.recipe.fuel.GTFuelRecipeWrapper;
 import gregtech.integration.jei.utils.CustomItemReturnRecipeWrapper;
 import gregtech.integration.jei.utils.MetadataAwareFluidHandlerSubtype;
 import gregtech.loaders.recipes.CustomItemReturnShapedOreRecipe;
-import mezz.jei.api.*;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.ISubtypeRegistry;
+import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @JEIPlugin
 public class GTJeiPlugin implements IModPlugin {
@@ -58,7 +61,7 @@ public class GTJeiPlugin implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
         IJeiHelpers jeiHelpers = registry.getJeiHelpers();
-
+        
         MultiblockInfoCategory.registerRecipes(registry);
 
         registry.handleRecipes(CustomItemReturnShapedOreRecipe.class, recipe -> new CustomItemReturnRecipeWrapper(jeiHelpers, recipe), VanillaRecipeCategoryUid.CRAFTING);
@@ -98,6 +101,14 @@ public class GTJeiPlugin implements IModPlugin {
         for(MetaTileEntity breweryTile : MetaTileEntities.BREWERY) {
             registry.addRecipeCatalyst(breweryTile.getStackForm(), VanillaRecipeCategoryUid.BREWING);
         }
+        
+        for(MetaTileEntity furnaceTile : MetaTileEntities.ELECTRIC_FURNACE) {
+            registry.addRecipeCatalyst(furnaceTile.getStackForm(), VanillaRecipeCategoryUid.SMELTING);
+        }
+        
+        registry.addRecipeCatalyst(MetaTileEntities.MULTI_FURNACE.getStackForm(), VanillaRecipeCategoryUid.SMELTING);
+        registry.addRecipeCatalyst(MetaTileEntities.STEAM_FURNACE_BRONZE.getStackForm(), VanillaRecipeCategoryUid.SMELTING);
+        registry.addRecipeCatalyst(MetaTileEntities.STEAM_FURNACE_STEEL.getStackForm(), VanillaRecipeCategoryUid.SMELTING);
 
         String semiFluidMapId = GTValues.MODID + ":" + RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.getUnlocalizedName();
         registry.addRecipeCatalyst(MetaTileEntities.LARGE_BRONZE_BOILER.getStackForm(), semiFluidMapId);

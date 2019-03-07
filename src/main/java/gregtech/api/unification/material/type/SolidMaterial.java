@@ -97,7 +97,7 @@ public abstract class SolidMaterial extends DustMaterial {
     }
 
     @ZenMethod("addToolEnchantment")
-    @Method(modid = "forgemultipartcbe")
+    @Method(modid = "crafttweaker")
     public void ctAddEnchantmentForTools(IEnchantment enchantment) {
         Enchantment enchantmentType = (Enchantment) enchantment.getDefinition().getInternal();
         toolEnchantments.add(new EnchantmentData(enchantmentType, enchantment.getLevel()));

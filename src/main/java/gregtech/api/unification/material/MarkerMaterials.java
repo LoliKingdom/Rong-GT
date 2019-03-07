@@ -12,7 +12,7 @@ public class MarkerMaterials {
 	@SuppressWarnings("ResultOfMethodCallIgnored")
     public static void register() {
         Color.Colorless.toString();
-        Tier.Primitive.toString();
+        Tier.Basic.toString();
         Empty.toString();
     }
 
@@ -87,12 +87,12 @@ public class MarkerMaterials {
      * Circuitry, batteries and other technical things
      */
     public static class Tier {
-        public static Material Primitive = new MarkerMaterial("primitive");
         public static Material Basic = new MarkerMaterial("basic");
-        public static Material Good = new MarkerMaterial("good");
+        public static Material Intermediate = new MarkerMaterial("intermediate");
         public static Material Advanced = new MarkerMaterial("advanced");
         public static Material Elite = new MarkerMaterial("elite");
         public static Material Master = new MarkerMaterial("master");
+        public static Material Expert = new MarkerMaterial("expert");
         public static Material Ultimate = new MarkerMaterial("ultimate");
         public static Material Superconductor = new Material(500, "superconductor", 0xFFFFFF, MaterialIconSet.NONE, ImmutableList.of(), 0L, null) {};
         public static Material Data = new MarkerMaterial("data");

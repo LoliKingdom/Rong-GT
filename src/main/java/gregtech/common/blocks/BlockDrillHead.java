@@ -33,10 +33,10 @@ public class BlockDrillHead extends VariantBlock<BlockDrillHead.DrillHeadType> {
     	//Base speed of each operation would be 320
     	//Speed is in 'percentage to discount for speed, energy will be slightly less than tier specified'
     	STEEL("steel", 1, Materials.Steel, GTValues.V[GTValues.MV]),
-        DIAMOND("diamond", 5, Materials.Diamond, GTValues.V[GTValues.HV]),
-        TUNGSTEN("tungsten", 10, Materials.Tungsten, GTValues.V[GTValues.EV]),
-        TITANIUM("titanium", 20, Materials.Titanium, GTValues.V[GTValues.IV]),
-    	ADAMANTIUM("adamantium", 30, Materials.Adamantium, GTValues.V[GTValues.LuV]),
+        TUNGSTEN("tungsten", 5, Materials.Tungsten, GTValues.V[GTValues.HV]),
+        DIAMOND("diamond", 15, Materials.Diamond, GTValues.V[GTValues.EV]),
+        TITANIUM("titanium", 25, Materials.Titanium, GTValues.V[GTValues.IV]),
+    	ADAMANTIUM("adamantium", 40, Materials.Adamantium, GTValues.V[GTValues.LuV]),
     	OSMIRIDIUM("osmiridium", 60, Materials.Osmiridium, GTValues.V[GTValues.UV]);
 
         private final String name;

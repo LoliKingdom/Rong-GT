@@ -21,7 +21,7 @@ public class IngotMaterial extends SolidMaterial {
     public static final class MatFlags {
 
         public static final long GENERATE_FOIL = createFlag(25);
-        public static final long GENERATE_BOLT_SCREW = createFlag(26);
+        public static final long GENERATE_SCREW = createFlag(26);
         public static final long GENERATE_RING = createFlag(27);
         public static final long GENERATE_SPRING = createFlag(28);
         public static final long GENERATE_FINE_WIRE = createFlag(29);
@@ -121,7 +121,7 @@ public class IngotMaterial extends SolidMaterial {
             generationBits |= GENERATE_PLATE;
         }
         if((generationBits & GENERATE_ROTOR) > 0) {
-            generationBits |= GENERATE_BOLT_SCREW;
+            generationBits |= GENERATE_SCREW;
             generationBits |= GENERATE_RING;
             generationBits |= GENERATE_PLATE;
         }
@@ -134,7 +134,7 @@ public class IngotMaterial extends SolidMaterial {
         if((generationBits & GENERATE_RING) > 0) {
             generationBits |= GENERATE_ROD;
         }
-        if((generationBits & GENERATE_BOLT_SCREW) > 0) {
+        if((generationBits & GENERATE_SCREW) > 0) {
             generationBits |= GENERATE_ROD;
         }
         return super.verifyMaterialBits(generationBits);

@@ -136,7 +136,7 @@ public class GregTechMod {
         GTMultipartFactory.INSTANCE.registerFactory();
     }
 
-    @Method(modid = "forgemultipartcbe")
+    @Method(modid = "crafttweaker")
     private void runEarlyCraftTweakerScripts() {
         CraftTweakerAPI.tweaker.loadScript(false, "gregtech");
     }

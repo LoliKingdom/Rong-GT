@@ -44,8 +44,6 @@ public class EnchantmentTableTweaks {
 
     private static void onContainerOpen(EntityPlayer player, Container container) {
         if(container instanceof ContainerEnchantment) {
-            //wrap in try-catch because such kind of tweaks is subject to breaking
-            //don't let it crash game if some mod borked it
             try {
                 int index = getEnchantmentSlotIndex((ContainerEnchantment) container);
                 if(index != -1) {

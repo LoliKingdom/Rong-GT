@@ -103,14 +103,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_IV;
     public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_LuV;
     public static MetaItem<?>.MetaValueItem ELECTRIC_PUMP_UV;
-
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_LV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_MV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_HV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_EV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_IV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_LuV;
-    public static MetaItem<?>.MetaValueItem FLUID_REGULATOR_UV;
     
     public static MetaItem<?>.MetaValueItem CONVEYOR_MODULE_LV;
     public static MetaItem<?>.MetaValueItem CONVEYOR_MODULE_MV;
@@ -183,20 +175,25 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem PARTS_ULTIMATE;
     public static MetaItem<?>.MetaValueItem PARTS_MAGIC;
     
-    //Basic board made of plank and resin
     public static MetaItem<?>.MetaValueItem BOARD_BASIC;
     public static MetaItem<?>.MetaValueItem BOARD_INTERMEDIATE;
     public static MetaItem<?>.MetaValueItem BOARD_ADVANCED;
     public static MetaItem<?>.MetaValueItem BOARD_ELITE;
+    public static MetaItem<?>.MetaValueItem BOARD_MASTER;
     public static MetaItem<?>.MetaValueItem BOARD_ULTIMATE;
     public static MetaItem<?>.MetaValueItem BOARD_FIBERGLASS;
     public static MetaItem<?>.MetaValueItem BOARD_MAGIC;
-
+    
+    public static MetaItem<?>.MetaValueItem GLASS_TUBE;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_VACUUM_TUBE_LV;
+    
     public static MetaItem<?>.MetaValueItem CIRCUIT_BASIC_LV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_INTERMEDIATE_MV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_ADVANCED_HV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_ELITE_EV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_MASTER_IV;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_EXPERT_LuV;
+    public static MetaItem<?>.MetaValueItem CIRCUIT_ULTIMATE_UV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_MAGIC;
     
     public static MetaItem<?>.MetaValueItem FLUID_FILTER;

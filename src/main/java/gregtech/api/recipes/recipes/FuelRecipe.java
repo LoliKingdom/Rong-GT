@@ -28,7 +28,7 @@ public class FuelRecipe {
     }
 
     @ZenMethod("create")
-    @Method(modid = "forgemultipartcbe")
+    @Method(modid = "crafttweaker")
     public static FuelRecipe craftTweakerCreate(ILiquidStack liquidStack, int duration, long minVoltage) {
         return new FuelRecipe(CraftTweakerMC.getLiquidStack(liquidStack), duration, minVoltage);
     }
@@ -52,7 +52,7 @@ public class FuelRecipe {
     }
 
     @ZenGetter("fluid")
-    @Method(modid = "forgemultipartcbe")
+    @Method(modid = "crafttweaker")
     public ILiquidStack ctGetFluid() {
         return new MCLiquidStack(getRecipeFluid());
     }

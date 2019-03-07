@@ -7,7 +7,6 @@ import static gregtech.common.items.MetaItems.MORTAR;
 import static gregtech.common.items.MetaItems.SAW;
 import static gregtech.common.items.MetaItems.SCREWDRIVER;
 import static gregtech.common.items.MetaItems.SCREWDRIVER_LV;
-//import static gregtech.common.items.MetaItems.SOFT_HAMMER;
 import static gregtech.common.items.MetaItems.SOLDERING_IRON_LV;
 import static gregtech.common.items.MetaItems.TURBINE;
 import static gregtech.common.items.MetaItems.WIRE_CUTTER;
@@ -91,7 +90,6 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
         TURBINE = addItem(26, "tool.turbine").setToolStats(new ToolTurbineRotor());
         
         PLUNGER = addItem(27, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
-        
     }
 
     public void registerRecipes() {

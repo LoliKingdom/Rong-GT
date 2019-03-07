@@ -11,7 +11,7 @@ import gregtech.common.items.MetaItems;
 
 public class AssemblyLineRecipeLoader {
 
-    public static void registerAssemblyLineRecipes() {
+    public static void init() {
         AssemblyLineRecipeBuilder.start()
             .researchItem(MetaItems.ELECTRIC_MOTOR_IV.getStackForm())
             .researchTime(144000)

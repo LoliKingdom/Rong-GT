@@ -162,7 +162,7 @@ public class MaterialRecipeHandler {
                     .notConsumable(MetaItems.SHAPE_EXTRUDER_ROD)
                     .outputs(OreDictUnifier.get(OrePrefix.stick, material, 2))
                     .duration((int) material.getAverageMass() * 2)
-                    .EUt(24)
+                    .EUt(74)
                     .buildAndRegister();
             }
         }
@@ -195,7 +195,7 @@ public class MaterialRecipeHandler {
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_PLATE)
                 .outputs(OreDictUnifier.get(OrePrefix.plate, material))
                 .duration((int) material.getAverageMass())
-                .EUt(24)
+                .EUt(74)
                 .buildAndRegister();
 
             RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
@@ -312,14 +312,14 @@ public class MaterialRecipeHandler {
                 	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
                 	.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
                 	.outputs(blockStack)
-                	.duration(10).EUt(24)
+                	.duration(10).EUt(74)
                 	.buildAndRegister();
         		
         		RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
                 	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
                 	.notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
                 	.outputs(blockStack)
-                	.duration(10).EUt(24)
+                	.duration(100).EUt(24)
                 	.buildAndRegister();
         	}
         	else {
@@ -336,14 +336,14 @@ public class MaterialRecipeHandler {
                     .input(OrePrefix.ingot, material, (int) (materialAmount / M))
                     .notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
                     .outputs(blockStack)
-                    .duration(10).EUt(24)
+                    .duration(10).EUt(74)
                     .buildAndRegister();
 
                 RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
                     .input(OrePrefix.ingot, material, (int) (materialAmount / M))
                     .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
                     .outputs(blockStack)
-                    .duration(10).EUt(24)
+                    .duration(100).EUt(24)
                     .buildAndRegister();
             }
         }

@@ -13,15 +13,20 @@ import gregtech.common.items.PotionFluids;
 import gregtech.common.pipelike.cable.ItemBlockCable;
 import gregtech.common.pipelike.fluidpipe.ItemBlockFluidPipe;
 import gregtech.integration.botania.*;
+import gregtech.integration.mekanism.MekanismProcessingHandler;
+import gregtech.integration.thaumcraft.ThaumcraftProcessingHandler;
 import gregtech.integration.tinkers.*;
+import gregtech.loaders.FuelLoader;
 import gregtech.loaders.MaterialInfoLoader;
 import gregtech.loaders.OreDictionaryLoader;
 import gregtech.loaders.recipes.processing.DecompositionRecipeHandler;
 import gregtech.loaders.recipes.processing.RecipeHandlerList;
 import gregtech.loaders.recipes.processing.ToolRecipeHandler;
+import gregtech.loaders.recipes.AssemblyLineRecipeLoader;
+import gregtech.loaders.recipes.BedrockDrillLoader;
 import gregtech.loaders.recipes.CraftingRecipeLoader;
-import gregtech.loaders.recipes.FuelLoader;
 import gregtech.loaders.recipes.MachineRecipeLoader;
+import gregtech.loaders.recipes.MatterManipulationLoader;
 import gregtech.loaders.recipes.MetaTileEntityLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -142,7 +147,10 @@ public class CommonProxy {
         FuelLoader.registerFuels();
         CraftingRecipeLoader.init();
         MetaTileEntityLoader.init();
-        RecipeHandlerList.register();
+        BedrockDrillLoader.init();
+        AssemblyLineRecipeLoader.init();
+        MatterManipulationLoader.init();
+        RecipeHandlerList.register();       
     }
 
     //this is called almost last, to make sure all mods registered their ore dictionary
@@ -151,7 +159,11 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void runEarlyMaterialHandlers(RegistryEvent.Register<IRecipe> event) {
         GTLog.logger.info("Running early material handlers...");
-        OrePrefix.runMaterialHandlers();
+        //OrePrefix.runMaterialHandlers();
+        
+        MekanismProcessingHandler.removeRecipes();
+        MekanismProcessingHandler.initRecipes();
+        ThaumcraftProcessingHandler.init();
     }
 
     //this is called last, so all mods finished registering their stuff, as example, CraftTweaker

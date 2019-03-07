@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import static gregtech.api.unification.material.type.DustMaterial.MatFlags.GENERATE_PLATE;
 import static gregtech.api.unification.material.type.DustMaterial.MatFlags.NO_WORKING;
-import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_BOLT_SCREW;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SCREW;
 import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
 
 public class ToolRecipeHandler {
@@ -116,7 +116,7 @@ public class ToolRecipeHandler {
                 'S', new UnificationEntry(OrePrefix.stick, material),
                 'W', new UnificationEntry(OrePrefix.stick, handleMaterial));
         }
-        if (material.hasFlag(GENERATE_PLATE | GENERATE_ROD | GENERATE_BOLT_SCREW) && material.toolDurability > 0) {
+        if (material.hasFlag(GENERATE_PLATE | GENERATE_ROD | GENERATE_SCREW) && material.toolDurability > 0) {
             for (MetaValueItem batteryItem : batteryItems[0]) {
                 ItemStack batteryStack = batteryItem.getStackForm();
                 long maxCharge = batteryStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null).getMaxCharge();
@@ -195,7 +195,7 @@ public class ToolRecipeHandler {
             .notConsumable(MetaItems.SHAPE_EXTRUDER_SAW)
             .outputs(OreDictUnifier.get(OrePrefix.toolHeadSaw, solidMaterial))
             .duration((int) solidMaterial.getAverageMass() * 2)
-            .EUt(24)
+            .EUt(74)
             .buildAndRegister();
     }
 
@@ -219,7 +219,7 @@ public class ToolRecipeHandler {
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_HAMMER)
                 .outputs(OreDictUnifier.get(toolPrefix, solidMaterial))
                 .duration((int) solidMaterial.getAverageMass() * 6)
-                .EUt(24)
+                .EUt(74)
                 .buildAndRegister();
         }
     }
@@ -240,7 +240,7 @@ public class ToolRecipeHandler {
             .notConsumable(MetaItems.SHAPE_EXTRUDER_FILE)
             .outputs(OreDictUnifier.get(toolPrefix, solidMaterial))
             .duration((int) solidMaterial.getAverageMass() * 2)
-            .EUt(24)
+            .EUt(74)
             .buildAndRegister();
 
     }

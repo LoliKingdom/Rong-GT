@@ -37,8 +37,6 @@ public class CustomItemReturnRecipeWrapper extends ShapedOreRecipeWrapper implem
     }
 
     @Override
-    //straight copy-pasted from JEI CraftingRecipeCategory because JEI
-    //doesn't allow just adding tooltip to ingredients without fucking overwriting most of it's setRecipe code
     public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);

@@ -114,14 +114,6 @@ public class MetaItems1 extends MaterialMetaItem {
         ELECTRIC_PUMP_IV = addItem(432, "electric.pump.iv");
         ELECTRIC_PUMP_LuV = addItem(433, "electric.pump.luv");
         ELECTRIC_PUMP_UV = addItem(434, "electric.pump.uv");
-
-        FLUID_REGULATOR_LV = addItem(435, "fluidregulator.lv");
-        FLUID_REGULATOR_MV = addItem(436, "fluidregulator.mv");
-        FLUID_REGULATOR_HV = addItem(437, "fluidregulator.hv");
-        FLUID_REGULATOR_EV = addItem(438, "fluidregulator.ev");
-        FLUID_REGULATOR_IV = addItem(439, "fluidregulator.iv");
-        FLUID_REGULATOR_LuV = addItem(440, "fluidregulator.luv");
-        FLUID_REGULATOR_UV = addItem(441, "fluidregulator.uv");
         
         CONVEYOR_MODULE_LV = addItem(442, "conveyor.module.lv");
         CONVEYOR_MODULE_MV = addItem(443, "conveyor.module.mv");
@@ -171,6 +163,7 @@ public class MetaItems1 extends MaterialMetaItem {
         SENSOR_LuV = addItem(482, "sensor.luv");
         SENSOR_UV = addItem(483, "sensor.uv");
         
+        //TODO: Fix
         ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
         
         FLUID_FILTER = addItem(485, "fluid_filter");
@@ -181,7 +174,8 @@ public class MetaItems1 extends MaterialMetaItem {
         COMPONENT_GRINDER_DIAMOND = addItem(488, "component.grinder.diamond").addOreDict(OreDictNames.craftingGrinder);
         COMPONENT_GRINDER_TUNGSTEN = addItem(489, "component.grinder.tungsten").addOreDict(OreDictNames.craftingGrinder);
         
-        UPGRADE_MUFFLER = addItem(490, "upgrade.muffler");
+        //TODO: Sound stuff
+        UPGRADE_MUFFLER = addItem(490, "upgrade.muffler").setInvisible();
 
         ITEM_FILTER = addItem(491, "item_filter");
         ORE_DICTIONARY_FILTER = addItem(492, "ore_dictionary_filter");
@@ -232,11 +226,23 @@ public class MetaItems1 extends MaterialMetaItem {
         GRAVI_STAR = addItem(525, "gravistar");
         
         FUEL_BINDER = addItem(526, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
-        SUPER_FUEL_BINDER = addItem(527, "fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
-        MAGIC_FUEL_BINDER = addItem(528, "fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
+        SUPER_FUEL_BINDER = addItem(527, "super_fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
+        MAGIC_FUEL_BINDER = addItem(528, "magic_fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
         
         //TODO: ThermiteDustCrafting
-        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(100);
+        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(100);     
+        
+        CIRCUIT_BASIC_LV = addItem(530, "circuit.basic").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
+        CIRCUIT_INTERMEDIATE_MV = addItem(531, "circuit.intermediate").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Intermediate);
+        CIRCUIT_ADVANCED_HV = addItem(532, "circuit.advanced").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Advanced);
+        CIRCUIT_ELITE_EV = addItem(533, "circuit.elite").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Elite);
+        CIRCUIT_MASTER_IV = addItem(534, "circuit.master").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Master);
+        CIRCUIT_EXPERT_LuV = addItem(535, "circuit.expert").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Expert);
+        CIRCUIT_ULTIMATE_UV = addItem(536, "circuit.ultimate").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
+        CIRCUIT_MAGIC = addItem(537, "circuit.magic").addOreDict("circuitMagic");
+        
+        GLASS_TUBE = addItem(538, "glass_tube");
+        CIRCUIT_VACUUM_TUBE_LV = addItem(539, "vacuum_tube").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
 	}
 	
 	public void registerRecipes() {
@@ -439,43 +445,5 @@ public class MetaItems1 extends MaterialMetaItem {
             .duration(1600)
             .EUt(2)
             .buildAndRegister();
-
-        // Misc
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(ELECTRIC_PUMP_LV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Basic, 2)
-            .outputs(FLUID_REGULATOR_LV.getStackForm())
-            .duration(800)
-            .EUt(4)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(ELECTRIC_PUMP_MV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Good, 2)
-            .outputs(FLUID_REGULATOR_MV.getStackForm())
-            .duration(800)
-            .EUt(8)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(ELECTRIC_PUMP_HV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Advanced, 2)
-            .outputs(FLUID_REGULATOR_HV.getStackForm())
-            .duration(800)
-            .EUt(16)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(ELECTRIC_PUMP_EV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Elite, 2)
-            .outputs(FLUID_REGULATOR_EV.getStackForm())
-            .duration(800)
-            .EUt(32)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .inputs(ELECTRIC_PUMP_IV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Master, 2)
-            .outputs(FLUID_REGULATOR_IV.getStackForm())
-            .duration(800)
-            .EUt(64)
-            .buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-        	.inputs(ELECTRIC_PUMP_UV.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate, 2)
-        	.outputs(FLUID_REGULATOR_UV.getStackForm())
-        	.duration(800)
-        	.EUt(128)
-        	.buildAndRegister();
-    }
+	}
 }

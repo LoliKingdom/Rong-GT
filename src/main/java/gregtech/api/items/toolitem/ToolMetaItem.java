@@ -293,7 +293,7 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         IElectricItem capability = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
         if (capability == null) {
             int resultDamage = calculateToolDamage(stack, new Random(), vanillaDamage);
-            int newDamageValue = getInternalDamage(stack) + resultDamage * 10;
+            int newDamageValue = getInternalDamage(stack) + resultDamage;
             if (!simulate && !setInternalDamage(stack, newDamageValue)) {
                 stack.shrink(1);
             }
@@ -309,11 +309,11 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
     }
     
     public int regainItemDurability(ItemStack itemStack, int maxDurabilityRegain) {
-        int resultRegain = maxDurabilityRegain * 10;
+        int resultRegain = maxDurabilityRegain;
         int toolDamage = getInternalDamage(itemStack);
         int durabilityRegained = Math.min(toolDamage, resultRegain);
         setInternalDamage(itemStack, toolDamage - durabilityRegained);
-        return (int) Math.ceil(durabilityRegained / 10.0);
+        return (int) Math.ceil(durabilityRegained);
     }
 
     private static int calculateToolDamage(ItemStack itemStack, Random random, int amount) {

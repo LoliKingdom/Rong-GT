@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import static gregtech.api.GTValues.L;
 import static gregtech.api.unification.material.type.DustMaterial.MatFlags.GENERATE_PLATE;
 import static gregtech.api.unification.material.type.DustMaterial.MatFlags.NO_SMASHING;
-import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_BOLT_SCREW;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SCREW;
 import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SPRING;
 import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
 import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.MORTAR_GRINDABLE;
@@ -63,7 +63,7 @@ public class PartsRecipeHandler {
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_SCREW)
                 .input(OrePrefix.ingot, material)
                 .outputs(GTUtility.copyAmount(4, screwStack))
-                .duration(15).EUt(120)
+                .duration(15).EUt(74)
                 .buildAndRegister();
         }
     }
@@ -95,21 +95,20 @@ public class PartsRecipeHandler {
     public static void processGear(OrePrefix gearPrefix, SolidMaterial material) {
         ItemStack stack = OreDictUnifier.get(gearPrefix, material);
         if (gearPrefix == OrePrefix.gear && material instanceof IngotMaterial) {
-            int voltageMultiplier = getVoltageMultiplier(material);
             RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
                 .input(OrePrefix.ingot, material, 4)
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_GEAR)
                 .outputs(OreDictUnifier.get(gearPrefix, material))
                 .duration((int) material.getAverageMass() * 5)
-                .EUt(8 * voltageMultiplier)
+                .EUt(74)
                 .buildAndRegister();
 
             RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
-                .input(OrePrefix.ingot, material, 8)
+                .input(OrePrefix.ingot, material, 6)
                 .notConsumable(MetaItems.SHAPE_MOLD_GEAR)
                 .outputs(OreDictUnifier.get(gearPrefix, material))
                 .duration((int) material.getAverageMass() * 10)
-                .EUt(2 * voltageMultiplier)
+                .EUt(24)
                 .buildAndRegister();
         }
 
@@ -176,7 +175,7 @@ public class PartsRecipeHandler {
             .notConsumable(MetaItems.SHAPE_EXTRUDER_RING)
             .outputs(OreDictUnifier.get(ringPrefix, material, 4))
             .duration((int) material.getAverageMass() * 2)
-            .EUt(6 * getVoltageMultiplier(material))
+            .EUt(74)
             .buildAndRegister();
 
         if (!material.hasFlag(NO_SMASHING)) {
@@ -212,7 +211,7 @@ public class PartsRecipeHandler {
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_ROD)
                 .outputs(OreDictUnifier.get(OrePrefix.stick, material, 2))
                 .duration((int) material.getAverageMass() * 2)
-                .EUt(6 * getVoltageMultiplier(material))
+                .EUt(74)
                 .buildAndRegister();
         }
 
@@ -227,7 +226,7 @@ public class PartsRecipeHandler {
                 .buildAndRegister();
         }
 
-        if (material.hasFlag(GENERATE_BOLT_SCREW)) {
+        if (material.hasFlag(GENERATE_SCREW)) {
             ItemStack screwStack = OreDictUnifier.get(OrePrefix.screw, material);
             RecipeMaps.CUTTER_RECIPES.recipeBuilder()
                 .input(stickPrefix, material)
@@ -235,7 +234,7 @@ public class PartsRecipeHandler {
                 .duration((int) Math.max(material.getAverageMass() * 2L, 1L)).EUt(4)
                 .buildAndRegister();
 
-            ModHandler.addShapedRecipe(String.format("bolt_saw_%s", material.toString()),
+            ModHandler.addShapedRecipe(String.format("screw_saw_%s", material.toString()),
                 GTUtility.copyAmount(2, screwStack),
                 "s ", " X",
                 'X', new UnificationEntry(OrePrefix.stick, material));
@@ -283,10 +282,4 @@ public class PartsRecipeHandler {
         return !(material instanceof IngotMaterial) ||
             ((IngotMaterial) material).blastFurnaceTemperature <= 0;
     }
-
-    private static int getVoltageMultiplier(Material material) {
-        return material instanceof IngotMaterial && ((IngotMaterial) material)
-            .blastFurnaceTemperature >= 2800 ? 32 : 8;
-    }
-
 }
