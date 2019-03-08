@@ -6,6 +6,7 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.block.machines.BlockMachine;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.render.MetaTileEntityRenderer;
+import gregtech.api.render.MetaTileEntityTESR;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
@@ -343,6 +344,8 @@ public class MetaBlocks {
         FLUID_BLOCKS.forEach(modelHandler::addFluidBlock);
         SURFACE_ROCKS.values().stream().distinct().forEach(block -> modelHandler.addBuiltInBlock(block, "stone"));
         FLOODED_SURFACE_ROCKS.values().stream().distinct().forEach(block -> modelHandler.addBuiltInBlock(block, "stone"));
+        
+        ClientRegistry.bindTileEntitySpecialRenderer(MetaTileEntityHolder.class, new MetaTileEntityTESR());
     }
 
     @SideOnly(Side.CLIENT)

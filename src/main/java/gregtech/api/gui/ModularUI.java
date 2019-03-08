@@ -1,17 +1,23 @@
 package gregtech.api.gui;
 
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableList;
+
 import gregtech.api.gui.resources.TextureArea;
-import gregtech.api.gui.widgets.*;
+import gregtech.api.gui.widgets.DynamicLabelWidget;
+import gregtech.api.gui.widgets.ImageWidget;
+import gregtech.api.gui.widgets.LabelWidget;
+import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.ProgressWidget.MoveType;
+import gregtech.api.gui.widgets.SlotWidget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
-
-import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
 
 /**
  * ModularUI is user-interface implementation concrete, based on widgets system
@@ -29,6 +35,9 @@ public final class ModularUI implements SizeProvider {
     public final TextureArea backgroundPath;
     private int screenWidth, screenHeight;
     private final int width, height;
+    
+    private final ImmutableList<Runnable> uiOpenCallback;
+    private final ImmutableList<Runnable> uiCloseCallback;
 
     public boolean isJEIHandled;
 
@@ -38,13 +47,23 @@ public final class ModularUI implements SizeProvider {
     public final IUIHolder holder;
     public final EntityPlayer entityPlayer;
 
-    public ModularUI(ImmutableBiMap<Integer, Widget> guiWidgets, TextureArea backgroundPath, int width, int height, IUIHolder holder, EntityPlayer entityPlayer) {
+    public ModularUI(ImmutableBiMap<Integer, Widget> guiWidgets, ImmutableList<Runnable> openListeners, ImmutableList<Runnable> closeListeners, TextureArea backgroundPath, int width, int height, IUIHolder holder, EntityPlayer entityPlayer) {
         this.guiWidgets = guiWidgets;
+        this.uiCloseCallback = closeListeners;
+        this.uiOpenCallback = openListeners;
         this.backgroundPath = backgroundPath;
         this.width = width;
         this.height = height;
         this.holder = holder;
-        this.entityPlayer = entityPlayer;
+        this.entityPlayer = entityPlayer;      
+    }
+    
+    public void triggerOpenListeners() {
+        uiOpenCallback.forEach(Runnable::run);
+    }
+
+    public void triggerCloseListeners() {
+        uiCloseCallback.forEach(Runnable::run);
     }
 
     public void updateScreenSize(int screenWidth, int screenHeight) {
@@ -105,6 +124,9 @@ public final class ModularUI implements SizeProvider {
         private TextureArea background;
         private int width, height;
         private int nextFreeWidgetId = 0;
+        
+        private ImmutableList.Builder<Runnable> openListeners = ImmutableList.builder();
+        private ImmutableList.Builder<Runnable> closeListeners = ImmutableList.builder();
 
         public Builder(TextureArea background, int width, int height) {
             Preconditions.checkNotNull(background);
@@ -116,6 +138,16 @@ public final class ModularUI implements SizeProvider {
         public Builder widget(Widget widget) {
             Preconditions.checkNotNull(widget);
             widgets.put(nextFreeWidgetId++, widget);
+            return this;
+        }
+        
+        public Builder bindOpenListener(Runnable onContainerOpen) {
+            this.openListeners.add(onContainerOpen);
+            return this;
+        }
+
+        public Builder bindCloseListener(Runnable onContainerClose) {
+            this.closeListeners.add(onContainerClose);
             return this;
         }
 
@@ -196,7 +228,7 @@ public final class ModularUI implements SizeProvider {
         }
 
         public ModularUI build(IUIHolder holder, EntityPlayer player) {
-            return new ModularUI(widgets.build(), background, width, height, holder, player);
+            return new ModularUI(widgets.build(), openListeners.build(), closeListeners.build(), background, width, height, holder, player);
         }
 
     }

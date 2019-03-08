@@ -17,9 +17,9 @@ import net.minecraft.world.biome.Biome;
 
 public class CoverSolarPanel extends CoverBehavior implements ITickable {
 
-    private final int EUt;
+    private final long EUt;
 
-    public CoverSolarPanel(ICoverable coverHolder, EnumFacing attachedSide, int EUt) {
+    public CoverSolarPanel(ICoverable coverHolder, EnumFacing attachedSide, long EUt) {
         super(coverHolder, attachedSide);
         this.EUt = EUt;
     }

@@ -37,7 +37,7 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> EXTRACTOR_RECIPES = new RecipeMap<>("extractor", 1, 1, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder().duration(400).EUt(2))
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> EXTRACTOR_RECIPES = new RecipeMap<>("extractor", 0, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder().duration(400).EUt(2))
         .setSlotOverlay(false, false, GuiTextures.EXTRACTOR_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, MoveType.HORIZONTAL);
 
@@ -48,7 +48,7 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ORE_WASHER_RECIPES = new RecipeMap<>("orewasher", 1, 1, 1, 3, 0, 1, 0, 0, 1, new SimpleRecipeBuilder().duration(400).EUt(16))
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ORE_WASHER_RECIPES = new RecipeMap<>("ore_washer", 1, 1, 1, 3, 0, 1, 0, 0, 1, new SimpleRecipeBuilder().duration(400).EUt(16))
         .setSlotOverlay(false, false, GuiTextures.CRUSHED_ORE_OVERLAY)
         .setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, MoveType.HORIZONTAL);
@@ -65,24 +65,24 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> ASSEMBLER_RECIPES = new RecipeMap<>("assembler", 1, 9, 1, 1, 0, 1, 0, 0, 1, new AssemblerRecipeBuilder())
+    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> ASSEMBLER_RECIPES = new RecipeMap<>("assembler", 1, 6, 1, 1, 0, 1, 0, 0, 1, new AssemblerRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FORMING_PRESS_RECIPES = new RecipeMap<>("forming_press", 2, 6, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PRESS_RECIPES = new RecipeMap<>("press", 2, 6, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, false, GuiTextures.PRESS_OVERLAY_1)
         .setSlotOverlay(false, false, true, GuiTextures.PRESS_OVERLAY_2)
         .setSlotOverlay(true, false, GuiTextures.PRESS_OVERLAY_3)
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES = new RecipeMapFluidCanner("fluid_canner", 1, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())
+    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES = new RecipeMapFluidCanner("fluid_canner", 1, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.CANISTER_OVERLAY)
         .setSlotOverlay(true, false, GuiTextures.CANISTER_OVERLAY)
         .setSlotOverlay(false, true, GuiTextures.DARK_CANISTER_OVERLAY)
         .setSlotOverlay(true, true, GuiTextures.DARK_CANISTER_OVERLAY)
-        .setProgressBar(GuiTextures.PROGRESS_BAR_CANNER, MoveType.HORIZONTAL);
+        .setProgressBar(GuiTextures.PROGRESS_BAR_CANNER, MoveType.HORIZONTAL);*/
 
 
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 1, 1, 4, 1, 1, 0, 1, 1, new SimpleRecipeBuilder())
@@ -115,8 +115,8 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> SIFTER_RECIPES = new RecipeMap<>("sifter", 1, 1, 1, 6, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
-        .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, MoveType.HORIZONTAL);
+    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> SIFTER_RECIPES = new RecipeMap<>("sifter", 1, 1, 1, 6, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
+        .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, MoveType.HORIZONTAL);*/
 
     /**
      * Example:
@@ -183,10 +183,10 @@ public class RecipeMaps {
      * 				.buildAndRegister();
      * </pre>
      */
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ELECTROMAGNETIC_SEPARATOR_RECIPES = new RecipeMap<>("electromagnetic_separator", 1, 1, 1, 3, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
+    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ELECTROMAGNETIC_SEPARATOR_RECIPES = new RecipeMap<>("electromagnetic_separator", 1, 1, 1, 3, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.CRUSHED_ORE_OVERLAY)
         .setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY)
-        .setProgressBar(GuiTextures.PROGRESS_BAR_MAGNET, MoveType.HORIZONTAL);
+        .setProgressBar(GuiTextures.PROGRESS_BAR_MAGNET, MoveType.HORIZONTAL);*/
 
     /**
      * Example:
@@ -317,9 +317,9 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_EXTRACTION_RECIPES = new RecipeMap<>("fluid_extractor", 1, 1, 0, 1, 0, 0, 1, 1, 1, new SimpleRecipeBuilder())
+    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_EXTRACTION_RECIPES = new RecipeMap<>("fluid_extractor", 1, 1, 0, 1, 0, 0, 1, 1, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.EXTRACTOR_OVERLAY)
-        .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, MoveType.HORIZONTAL);
+        .setProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT, MoveType.HORIZONTAL);*/
 
     /**
      * Example:
@@ -556,7 +556,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMapFluidCanner("canner", 0, 2, 1, 2, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMapFluidCanner("canner", 0, 1, 0, 1, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
     	.setSlotOverlay(false, true, GuiTextures.FLUID_SLOT)
     	.setSlotOverlay(false, false, false, GuiTextures.CANNER_OVERLAY)
         .setSlotOverlay(false, false, true, GuiTextures.CANISTER_OVERLAY)

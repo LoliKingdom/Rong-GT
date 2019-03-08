@@ -45,6 +45,7 @@ public class CraftingRecipeLoader {
         ModHandler.addShapelessRecipe("wheat_to_dust", OreDictUnifier.get(OrePrefix.dust, Materials.Wheat, 1), 'm', Items.WHEAT);
         ModHandler.addShapelessRecipe("gravel_to_flint", new ItemStack(Items.FLINT, 1), 'm', Blocks.GRAVEL);
         ModHandler.addShapelessRecipe("blaze_rod_to_powder", new ItemStack(Items.BLAZE_POWDER, 3), 'm', Items.BLAZE_ROD);
+        ModHandler.removeRecipeByName(new ResourceLocation("minecraft:blaze_powder"));
 
         ModHandler.addShapedRecipe("plank_to_wooden_shape", MetaItems.WOODEN_FORM_EMPTY.getStackForm(), "   ", " X ", "s  ", 'X', new UnificationEntry(OrePrefix.plank, Materials.Wood));
         ModHandler.addShapedRecipe("wooden_shape_brick", MetaItems.WOODEN_FORM_BRICK.getStackForm(), "k ", " X", 'X', MetaItems.WOODEN_FORM_EMPTY.getStackForm());
@@ -58,15 +59,17 @@ public class CraftingRecipeLoader {
         //ModHandler.addShapedRecipe("basic_circuit", MetaItems.CIRCUIT_BASIC.getStackForm(), "XXX", "NPN", "XXX", 'P', new UnificationEntry(OrePrefix.plate, Materials.Steel), 'N', new UnificationEntry(OrePrefix.circuit, Tier.Primitive), 'X', new UnificationEntry(OrePrefix.cableGtSingle, Materials.Copper));
         //ModHandler.addShapelessRecipe("integrated_circuit", MetaItems.INTEGRATED_CIRCUIT.getStackForm(), MetaItems.CIRCUIT_BASIC.getStackForm());
 
-        ModHandler.addShapedRecipe("rubber_ring", OreDictUnifier.get(OrePrefix.ring, Materials.Rubber), "k", "X", 'X', new UnificationEntry(OrePrefix.plate, Materials.Rubber));
-
         ModHandler.addShapedRecipe("lignite_coal_torch", new ItemStack(Blocks.TORCH, 2), "X", "Y", 'X', new UnificationEntry(OrePrefix.gem, Materials.Lignite), 'Y', new UnificationEntry(OrePrefix.stick, Materials.Wood));
 
         ModHandler.addShapelessRecipe("iron_magnetic_stick", OreDictUnifier.get(OrePrefix.stick, Materials.IronMagnetic), new UnificationEntry(OrePrefix.stick, Materials.Iron), new UnificationEntry(OrePrefix.dust, Materials.Redstone), new UnificationEntry(OrePrefix.dust, Materials.Redstone), new UnificationEntry(OrePrefix.dust, Materials.Redstone), new UnificationEntry(OrePrefix.dust, Materials.Redstone));
-        ModHandler.addShapedRecipe("paper_ring", OreDictUnifier.get(OrePrefix.ring, Materials.Paper), "PPk", 'P', new UnificationEntry(OrePrefix.plate, Materials.Paper));
 
-        ModHandler.addShapedRecipe("torch_sulfur", new ItemStack(Blocks.TORCH, 2), "C", "S", 'C', new UnificationEntry(OrePrefix.dust, Materials.Sulfur), 'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
+        ModHandler.addShapedRecipe("torch_sulfur", new ItemStack(Blocks.TORCH, 3), "C", "S", 'C', new UnificationEntry(OrePrefix.dust, Materials.Sulfur), 'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
         ModHandler.addShapedRecipe("torch_phosphor", new ItemStack(Blocks.TORCH, 6), "C", "S", 'C', new UnificationEntry(OrePrefix.dust, Materials.Phosphorus), 'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
+
+        ModHandler.addShapedRecipe("paper_ring", OreDictUnifier.get(OrePrefix.ring, Materials.Paper), "k", "X", 'X', new UnificationEntry(OrePrefix.plate, Materials.Paper));
+        ModHandler.addShapedRecipe("rubber_ring", OreDictUnifier.get(OrePrefix.ring, Materials.Rubber), "k", "X", 'X', new UnificationEntry(OrePrefix.plate, Materials.Rubber));
+        ModHandler.addShapedRecipe("silicone_rubber_ring", OreDictUnifier.get(OrePrefix.ring, Materials.SiliconeRubber), "k", "P", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.SiliconeRubber));
+        ModHandler.addShapedRecipe("styrene_rubber_ring", OreDictUnifier.get(OrePrefix.ring, Materials.StyreneButadieneRubber), "k", "P", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.StyreneButadieneRubber));
 
         ModHandler.addShapedRecipe("tiny_wooden_pipe", GTUtility.copyAmount(4, MetaBlocks.FLUID_PIPE.getItem(FluidPipeType.TINY_OPAQUE, Materials.Wood)), "XX ", "rs ", "XX ", 'X', new UnificationEntry(OrePrefix.plank, Materials.Wood));
         ModHandler.addShapedRecipe("small_wooden_pipe", GTUtility.copyAmount(2, MetaBlocks.FLUID_PIPE.getItem(FluidPipeType.SMALL_OPAQUE, Materials.Wood)), "XXX", "r s", "XXX", 'X', new UnificationEntry(OrePrefix.plank, Materials.Wood));

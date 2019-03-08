@@ -19,15 +19,10 @@ import gregtech.integration.tinkers.*;
 import gregtech.loaders.FuelLoader;
 import gregtech.loaders.MaterialInfoLoader;
 import gregtech.loaders.OreDictionaryLoader;
+import gregtech.loaders.RecipeLoaders;
 import gregtech.loaders.recipes.processing.DecompositionRecipeHandler;
-import gregtech.loaders.recipes.processing.RecipeHandlerList;
 import gregtech.loaders.recipes.processing.ToolRecipeHandler;
 import gregtech.loaders.recipes.AssemblyLineRecipeLoader;
-import gregtech.loaders.recipes.BedrockDrillLoader;
-import gregtech.loaders.recipes.CraftingRecipeLoader;
-import gregtech.loaders.recipes.MachineRecipeLoader;
-import gregtech.loaders.recipes.MatterManipulationLoader;
-import gregtech.loaders.recipes.MetaTileEntityLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -143,14 +138,7 @@ public class CommonProxy {
         GTLog.logger.info("Registering recipes...");
 
         MetaItems.registerRecipes();
-        MachineRecipeLoader.init();
-        FuelLoader.registerFuels();
-        CraftingRecipeLoader.init();
-        MetaTileEntityLoader.init();
-        BedrockDrillLoader.init();
-        AssemblyLineRecipeLoader.init();
-        MatterManipulationLoader.init();
-        RecipeHandlerList.register();       
+        RecipeLoaders.init();       
     }
 
     //this is called almost last, to make sure all mods registered their ore dictionary

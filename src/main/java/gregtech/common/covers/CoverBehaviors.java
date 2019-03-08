@@ -46,13 +46,13 @@ public class CoverBehaviors {
         registerBehavior(32, new ResourceLocation(GTValues.MODID, "fluid_filter"), MetaItems.FLUID_FILTER, CoverFluidFilter::new);
         registerBehavior(33, new ResourceLocation(GTValues.MODID, "shutter"), MetaItems.COVER_SHUTTER, CoverShutter::new);
 
-        registerBehavior(34, new ResourceLocation(GTValues.MODID, "solar_panel.lv"), MetaItems.COVER_SOLAR_PANEL_LV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.LV));
-        registerBehavior(35, new ResourceLocation(GTValues.MODID, "solar_panel.mv"), MetaItems.COVER_SOLAR_PANEL_MV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.MV));
-        registerBehavior(36, new ResourceLocation(GTValues.MODID, "solar_panel.hv"), MetaItems.COVER_SOLAR_PANEL_HV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.HV));
-        registerBehavior(37, new ResourceLocation(GTValues.MODID, "solar_panel.ev"), MetaItems.COVER_SOLAR_PANEL_EV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.EV));
-        registerBehavior(38, new ResourceLocation(GTValues.MODID, "solar_panel.iv"), MetaItems.COVER_SOLAR_PANEL_IV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.IV));
-        registerBehavior(39, new ResourceLocation(GTValues.MODID, "solar_panel.luv"), MetaItems.COVER_SOLAR_PANEL_LuV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.LuV));
-        registerBehavior(40, new ResourceLocation(GTValues.MODID, "solar_panel.uv"), MetaItems.COVER_SOLAR_PANEL_UV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.UV)); 
+        registerBehavior(34, new ResourceLocation(GTValues.MODID, "solar_panel.lv"), MetaItems.COVER_SOLAR_PANEL_LV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.LV]));
+        registerBehavior(35, new ResourceLocation(GTValues.MODID, "solar_panel.mv"), MetaItems.COVER_SOLAR_PANEL_MV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.MV]));
+        registerBehavior(36, new ResourceLocation(GTValues.MODID, "solar_panel.hv"), MetaItems.COVER_SOLAR_PANEL_HV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.HV]));
+        registerBehavior(37, new ResourceLocation(GTValues.MODID, "solar_panel.ev"), MetaItems.COVER_SOLAR_PANEL_EV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.EV]));
+        registerBehavior(38, new ResourceLocation(GTValues.MODID, "solar_panel.iv"), MetaItems.COVER_SOLAR_PANEL_IV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.IV]));
+        registerBehavior(39, new ResourceLocation(GTValues.MODID, "solar_panel.luv"), MetaItems.COVER_SOLAR_PANEL_LuV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.LuV]));
+        registerBehavior(40, new ResourceLocation(GTValues.MODID, "solar_panel.uv"), MetaItems.COVER_SOLAR_PANEL_UV, (tile, side) -> new CoverSolarPanel(tile, side, GTValues.V[GTValues.UV])); 
     }
 
     public static void registerBehavior(int coverNetworkId, ResourceLocation coverId, MetaValueItem placerItem, BiFunction<ICoverable, EnumFacing, CoverBehavior> behaviorCreator) {

@@ -117,10 +117,11 @@ public class FluidMaterial extends Material {
         return materialPlasma == null ? null : new FluidStack(materialPlasma, amount);
     }
 
-    @ZenSetter("fluidTemperature")
-    public void setFluidTemperature(int fluidTemperature) {
+    @ZenSetter("setFluidTemperature")
+    public FluidMaterial setFluidTemperature(int fluidTemperature) {
         Preconditions.checkArgument(fluidTemperature > 0, "Invalid temperature");
         this.fluidTemperature = fluidTemperature;
+        return this;
     }
 
     @ZenGetter("fluidTemperature")

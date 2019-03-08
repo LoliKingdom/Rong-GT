@@ -203,7 +203,7 @@ public class OreRecipeHandler {
 
     public static void processImpureDust(OrePrefix dustPrefix, DustMaterial material) {
         ItemStack dustStack = OreDictUnifier.get(OrePrefix.dust, material);
-        if (dustPrefix == OrePrefix.dustPure && material.separatedOnto != null) {
+        /*if (dustPrefix == OrePrefix.dustPure && material.separatedOnto != null) {
             ItemStack separatedStack = OreDictUnifier.get(OrePrefix.dustSmall, material.separatedOnto);
             RecipeMaps.ELECTROMAGNETIC_SEPARATOR_RECIPES.recipeBuilder()
                 .input(dustPrefix, material)
@@ -211,7 +211,7 @@ public class OreRecipeHandler {
                 .chancedOutput(separatedStack, 4000)
                 .duration((int) material.separatedOnto.getMass()).EUt(24)
                 .buildAndRegister();
-        }
+        }*/
 
         FluidMaterial byproduct = GTUtility.selectItemInList(0, material, material.oreByProducts, FluidMaterial.class);
 

@@ -32,12 +32,12 @@ public class Materials {
     public static MarkerMaterial _NULL = new MarkerMaterial("_null");
     
     /**
-     * Direct Elements, not all as some are useless in this context
+     * 'Direct Elements'
      */
     public static IngotMaterial Aluminium = new IngotMaterial(1, "aluminium", 0x80C8F0, MaterialIconSet.DULL, 2, of(), EXT2_METAL | GENERATE_SMALL_GEAR | GENERATE_ORE | GENERATE_RING, Element.Al, 9.0F, 2.5F, 966, 1700);
     public static IngotMaterial Americium = new IngotMaterial(2, "americium", 0xC8C8C8, MaterialIconSet.METALLIC, 3, of(), STD_METAL | GENERATE_ROD, Element.Am, 11.0F, 4.0F, 1556);
     public static IngotMaterial Antimony = new IngotMaterial(3, "antimony", 0xDCDCC8, MaterialIconSet.SHINY, 2, of(), EXT_METAL | MORTAR_GRINDABLE, Element.Sb, 5.0F, 1.2F, 120);
-    public static FluidMaterial Argon = new FluidMaterial(4, "argon", 0xBBBB00, MaterialIconSet.FLUID, of(), STATE_GAS | GENERATE_PLASMA | DECOMPOSITION_BY_CENTRIFUGING, Element.Ar);
+    public static FluidMaterial Argon = new FluidMaterial(4, "argon", 0xBBBB00, MaterialIconSet.FLUID, of(), STATE_GAS | DECOMPOSITION_BY_CENTRIFUGING, Element.Ar);
     public static DustMaterial Arsenic = new DustMaterial(5, "arsenic", 0xDDDDDD, MaterialIconSet.SAND, 2, of(), 0, Element.As);
     public static IngotMaterial Barium = new IngotMaterial(6, "barium", 0xFFFFFF, MaterialIconSet.SHINY, 2, of(), 0, Element.Ba);
     public static IngotMaterial Beryllium = new IngotMaterial(7, "beryllium", 0x64B464, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_ORE, Element.Be, 13.0F, 2.0F, 380);
@@ -828,8 +828,7 @@ public class Materials {
         //Fluid Pipes
         Plastic.setFluidPipeProperties(200, 400, true);
         Polytetrafluoroethylene.setFluidPipeProperties(300, 600, true);
-        Copper.setFluidPipeProperties(25, 1000, true);
-        BismuthBronze.setFluidPipeProperties(35, 2000, true);
+        Bronze.setFluidPipeProperties(30, 2000, true);
         Steel.setFluidPipeProperties(50, 2500, true);
         StainlessSteel.setFluidPipeProperties(150, 3500, true);
         Titanium.setFluidPipeProperties(200, 5000, true);

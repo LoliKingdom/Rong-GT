@@ -43,14 +43,14 @@ public class WireRecipeHandler {
             .notConsumable(MetaItems.SHAPE_EXTRUDER_WIRE)
             .outputs(OreDictUnifier.get(OrePrefix.wireGtSingle, material, 2))
             .duration((int) material.getAverageMass() * 2)
-            .EUt(6 * getVoltageMultiplier(material))
+            .EUt(74)
             .buildAndRegister();
 
         RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
             .input(OrePrefix.ingot, material)
             .outputs(OreDictUnifier.get(OrePrefix.wireGtSingle, material, 2))
             .duration((int) material.getAverageMass())
-            .EUt(getVoltageMultiplier(material))
+            .EUt(28)
             .buildAndRegister();
 
         if (!material.hasFlag(MatFlags.NO_WORKING)) {
@@ -79,19 +79,12 @@ public class WireRecipeHandler {
 
         if(isPaperInsulatedCable(material)) {
             ItemStack carpetStack = new ItemStack(Blocks.CARPET, cableAmount, EnumDyeColor.BLACK.getMetadata());
-            /*RecipeMaps.PACKER_RECIPES.recipeBuilder()
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                 .input(wirePrefix, material)
                 .inputs(carpetStack)
                 .outputs(cableStack)
                 .duration(100).EUt(8)
                 .buildAndRegister();
-
-            RecipeMaps.UNPACKER_RECIPES.recipeBuilder()
-                .input(cablePrefix, material)
-                .outputs(OreDictUnifier.get(wirePrefix, material))
-                .outputs(carpetStack)
-                .duration(100).EUt(8)
-                .buildAndRegister();*/
 
         } else {
             if(wirePrefix != OrePrefix.wireGtSingle) {
@@ -148,11 +141,6 @@ public class WireRecipeHandler {
 
     public static boolean isPaperInsulatedCable(IngotMaterial material) {
         return material.cableProperties != null && GTUtility.getTierByVoltage(material.cableProperties.voltage) <= 1;
-    }
-
-    private static int getVoltageMultiplier(Material material) {
-        return material instanceof IngotMaterial && ((IngotMaterial) material)
-            .blastFurnaceTemperature >= 2800 ? 32 : 8;
     }
 
 }

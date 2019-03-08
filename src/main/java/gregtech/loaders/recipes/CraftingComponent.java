@@ -28,28 +28,9 @@ public enum CraftingComponent {
                 case 4:
                     return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Master);
                 case 5:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
-                default:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Superconductor);
-            }
-        }
-    },
-    BETTER_CIRCUIT {
-        @Override
-        Object getIngredient(int tier) {
-            switch (tier + 1) {
-                case 0:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
-                case 1:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Intermediate);
-                case 2:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Advanced);
-                case 3:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Elite);
-                case 4:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Master);
-                case 5:
-                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Expert);
+                case 6:
+                	return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
                 default:
                     return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Superconductor);
             }
@@ -155,12 +136,6 @@ public enum CraftingComponent {
             return MetaTileEntities.HULL[tier].getStackForm();
         }
     },
-    WORSE_HULL {
-        @Override
-        Object getIngredient(int tier) {
-            return MetaTileEntities.HULL[tier - 1].getStackForm();
-        }
-    },
     PIPE {
         @Override
         Object getIngredient(int tier) {
@@ -181,10 +156,27 @@ public enum CraftingComponent {
             }
         }
     },
-    GLASS {
+    TANK {
         @Override
         Object getIngredient(int tier) {
-            return new ItemStack(Blocks.GLASS, 1, W);
+            switch (tier) {
+            case 0:
+            	return MetaTileEntities.BRONZE_TANK.getStackForm();
+            case 1:
+            	return MetaTileEntities.STEEL_TANK.getStackForm();
+            case 2:
+            	return MetaTileEntities.STAINLESS_STEEL_TANK.getStackForm();
+            case 3:
+            	return MetaTileEntities.TITANIUM_TANK.getStackForm();
+            case 4:
+            	return MetaTileEntities.TUNGSTENSTEEL_TANK.getStackForm();
+            case 5:
+            	return MetaTileEntities.IRIDIUM_TANK.getStackForm();
+            case 6:
+            	return MetaTileEntities.ADAMANTIUM_TANK.getStackForm();
+            default:
+            	return MetaTileEntities.WOODEN_TANK.getStackForm();           		
+            }
         }
     },
     PLATE {
@@ -529,5 +521,5 @@ public enum CraftingComponent {
             }
         }
     };
-    abstract Object getIngredient(int tier);
+	abstract Object getIngredient(int tier);
 }

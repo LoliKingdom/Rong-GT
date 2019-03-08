@@ -199,7 +199,7 @@ public class PartsRecipeHandler {
             .outputs(stack)
             .fluidInputs(Materials.SolderingAlloy.getFluid(32))
             .duration(240)
-            .EUt(24)
+            .EUt(74)
             .buildAndRegister();
     }
 

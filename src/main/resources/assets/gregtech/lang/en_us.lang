@@ -33,35 +33,6 @@ metaitem.int_circuit.configuration=Configuration: %d
 item.invalid.name=Invalid item
 fluid.empty=Empty
 
-metaitem.credit.copper.name=Copper Credit
-metaitem.credit.copper.tooltip=0.125 Credits
-metaitem.credit.cupronickel.name=Cupronickel Credit
-metaitem.credit.cupronickel.tooltip=1 Credit
-metaitem.credit.silver.name=Silver Credit
-metaitem.credit.silver.tooltip=8 Credits
-metaitem.credit.gold.name=Gold Credit
-metaitem.credit.gold.tooltip=64 Credits
-metaitem.credit.platinum.name=Platinum Credit
-metaitem.credit.platinum.tooltip=512 Credits
-metaitem.credit.osmium.name=Osmium Credit
-metaitem.credit.osmium.tooltip=4096 Credits
-metaitem.credit.naquadah.name=Naquadah Credit
-metaitem.credit.naquadah.tooltip=32768 Credits
-metaitem.credit.darmstadtium.name=Darmstadtium Credit
-metaitem.credit.darmstadtium.tooltip=262144 Credits
-
-metaitem.coin.gold.ancient.name=Ancient Gold Coin
-metaitem.coin.gold.ancient.tooltip=Found in ancient Ruins
-metaitem.coin.doge.name=Doge Coin
-metaitem.coin.doge.tooltip=wow much coin how money so crypto plz mine v rich very currency wow
-metaitem.coin.chocolate.name=Chocolate Coin
-metaitem.coin.chocolate.tooltip=Wrapped in Gold
-
-metaitem.minecart.wheels.iron.name=Iron Minecart Wheels
-metaitem.minecart.wheels.iron.tooltip=To get things rolling
-metaitem.minecart.wheels.steel.name=Steel Minecart Wheels
-metaitem.minecart.wheels.steel.tooltip=To get things rolling
-
 metaitem.shape.empty.name=Empty Shape Plate
 
 metaitem.dynamite.name=Dynamite
@@ -96,11 +67,6 @@ metaitem.fuel.can.plastic.filled.tooltip=Burns well in Diesel Generators
 
 metaitem.spray.empty.name=Spray Can (Empty)
 metaitem.spray.empty.tooltip=Can be filled with sprays of various colors
-
-metaitem.thermos_can.empty.name=Empty Thermos Can
-metaitem.thermos_can.empty.tooltip=Keeping hot things hot and cold things cold
-
-metaitem.plant.ball.name=Plantball
 
 metaitem.fluid_cell.empty=Empty
 metaitem.fluid_cell.name=%s Cell
@@ -147,15 +113,7 @@ metaitem.tool.lighter.platinum.name=Platinum Lighter
 metaitem.tool.lighter.platinum.tooltip=A known Prank Master is engraved on it
 
 metaitem.ingot.iridiumalloy.name=Iridium Alloy Ingot
-metaitem.ingot.iridiumalloy.tooltip=Used to make Iridium Plates
-
-metaitem.paper.printed.pages.name=Printed Pages
-metaitem.paper.printed.pages.tooltip=Used to make written Books
-metaitem.paper.magic.empty.name=Magic Paper
-metaitem.paper.magic.page.name=Enchanted Page
-metaitem.paper.magic.pages.name=Enchanted Pages
-metaitem.paper.punch.card.empty.name=Punch Card
-metaitem.paper.punch.card.encoded.name=Punched Card
+metaitem.ingot.iridiumalloy.tooltip=Used to make Iridium Plate
 
 metaitem.battery.hull.lv.name=Small Battery Hull
 metaitem.battery.hull.lv.tooltip=An empty LV Battery Hull
@@ -206,10 +164,11 @@ metaitem.battery.re.hv.sodium.tooltip=Reusable
 metaitem.energy_crystal.name=Energy Crystal
 metaitem.lapotron_crystal.name=Lapotron Crystal
 metaitem.energy.lapotronicorb.name=Lapotronic Energy Orb
-metaitem.energy.lapotronicorb2.name=Lapotronic Energy Orb Cluster
+metaitem.energy.lapotronicorb2.name=Advanced Lapotronic Energy Orb
 metaitem.zpm.name=Zero Point Module
-metaitem.zpm2.name=Ultimate Battery
+metaitem.zpm2.name=Master Module
 metaitem.zpm2.tooltip=Fill this to win minecraft
+metaitem.zpm2.name=Ultimate Module
 
 metaitem.electric.motor.lv.name=Electric Motor (LV)
 metaitem.electric.motor.mv.name=Electric Motor (MV)
@@ -221,44 +180,46 @@ metaitem.electric.motor.zpm.name=Electric Motor (ZPM)
 metaitem.electric.motor.uv.name=Electric Motor (UV)
 
 metaitem.electric.pump.lv.name=Electric Pump (LV)
-metaitem.electric.pump.lv.tooltip=640 mb/sec (as Cover)
+metaitem.electric.pump.lv.tooltip=640MB / Second (as Cover)
 metaitem.electric.pump.mv.name=Electric Pump (MV)
-metaitem.electric.pump.mv.tooltip=2560 mb/sec (as Cover)
+metaitem.electric.pump.mv.tooltip=2560MB / Second (as Cover)
 metaitem.electric.pump.hv.name=Electric Pump (HV)
-metaitem.electric.pump.hv.tooltip=10240 mb/sec (as Cover)
+metaitem.electric.pump.hv.tooltip=10240MB / Second (as Cover)
 metaitem.electric.pump.ev.name=Electric Pump (EV)
-metaitem.electric.pump.ev.tooltip=40,960 mb/sec (as Cover)
+metaitem.electric.pump.ev.tooltip=40,960MB / Second (as Cover)
 metaitem.electric.pump.iv.name=Electric Pump (IV)
-metaitem.electric.pump.iv.tooltip=163,840 mb/sec (as Cover)
+metaitem.electric.pump.iv.tooltip=163,840MB / Second (as Cover)
 metaitem.electric.pump.luv.name=Electric Pump (LuV)
-metaitem.electric.pump.luv.tooltip=655,360 mb/sec (as Cover)
+metaitem.electric.pump.luv.tooltip=655,360MB / Second (as Cover)
 metaitem.electric.pump.zpm.name=Electric Pump (ZPM)
-metaitem.electric.pump.zpm.tooltip=655,360 mb/sec (as Cover)
+metaitem.electric.pump.zpm.tooltip=655,360MB / Second (as Cover)
 metaitem.electric.pump.uv.name=Electric Pump (UV)
-metaitem.electric.pump.uv.tooltip=655,360 mb/sec (as Cover)
+metaitem.electric.pump.uv.tooltip=655,360MB / Second (as Cover)
 
 metaitem.fluidregulator.lv.name=Fluid Regulator (LV)
 metaitem.fluidregulator.mv.name=Fluid Regulator (MV)
 metaitem.fluidregulator.hv.name=Fluid Regulator (HV)
 metaitem.fluidregulator.ev.name=Fluid Regulator (EV)
 metaitem.fluidregulator.iv.name=Fluid Regulator (IV)
+metaitem.fluidregulator.luv.name=Fluid Regulator (LuV)
+metaitem.fluidregulator.uv.name=Fluid Regulator (UV)
 
 metaitem.conveyor.module.lv.name=Conveyor Module (LV)
-metaitem.conveyor.module.lv.tooltip=8 Items every second (as Cover)
+metaitem.conveyor.module.lv.tooltip=8 Items / Second
 metaitem.conveyor.module.mv.name=Conveyor Module (MV)
-metaitem.conveyor.module.mv.tooltip=32 Items every second (as Cover)
+metaitem.conveyor.module.mv.tooltip=32 Items / Second
 metaitem.conveyor.module.hv.name=Conveyor Module (HV)
-metaitem.conveyor.module.hv.tooltip=64 Items every second (as Cover)
+metaitem.conveyor.module.hv.tooltip=1 Stack / Second
 metaitem.conveyor.module.ev.name=Conveyor Module (EV)
-metaitem.conveyor.module.ev.tooltip=3 Stacks every second (as Cover)
+metaitem.conveyor.module.ev.tooltip=3 Stacks / Second
 metaitem.conveyor.module.iv.name=Conveyor Module (IV)
-metaitem.conveyor.module.iv.tooltip=8 Stacks every second (as Cover)
+metaitem.conveyor.module.iv.tooltip=8 Stacks / Second
 metaitem.conveyor.module.luv.name=Conveyor Module (LuV)
-metaitem.conveyor.module.luv.tooltip=16 Stacks every second (as Cover)
+metaitem.conveyor.module.luv.tooltip=16 Stacks / Second
 metaitem.conveyor.module.zpm.name=Conveyor Module (ZPM)
-metaitem.conveyor.module.zpm.tooltip=16 Stacks every second (as Cover)
+metaitem.conveyor.module.zpm.tooltip=16 Stacks / Second
 metaitem.conveyor.module.uv.name=Conveyor Module (UV)
-metaitem.conveyor.module.uv.tooltip=16 Stacks every second (as Cover)
+metaitem.conveyor.module.uv.tooltip=16 Stacks / Second
 
 metaitem.electric.piston.lv.name=Electric Piston (LV)
 metaitem.electric.piston.mv.name=Electric Piston (MV)
@@ -270,21 +231,21 @@ metaitem.electric.piston.zpm.name=Electric Piston (ZPM)
 metaitem.electric.piston.uv.name=Electric Piston (UV)
 
 metaitem.robot.arm.lv.name=Robot Arm (LV)
-metaitem.robot.arm.lv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.lv.tooltip=Inserts at specified rates
 metaitem.robot.arm.mv.name=Robot Arm (MV)
-metaitem.robot.arm.mv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.mv.tooltip=Inserts at specified rates
 metaitem.robot.arm.hv.name=Robot Arm (HV)
-metaitem.robot.arm.hv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.hv.tooltip=Inserts at specified rates
 metaitem.robot.arm.ev.name=Robot Arm (EV)
-metaitem.robot.arm.ev.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.ev.tooltip=Inserts at specified rates
 metaitem.robot.arm.iv.name=Robot Arm (IV)
-metaitem.robot.arm.iv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.iv.tooltip=Inserts at specified rates
 metaitem.robot.arm.luv.name=Robot Arm (LuV)
-metaitem.robot.arm.luv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.luv.tooltip=Inserts at specified rates
 metaitem.robot.arm.zpm.name=Robot Arm (ZPM)
-metaitem.robot.arm.zpm.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.zpm.tooltip=Inserts at specified rates
 metaitem.robot.arm.uv.name=Robot Arm (UV)
-metaitem.robot.arm.uv.tooltip=Inserts at specified rates (as Cover)
+metaitem.robot.arm.uv.tooltip=Inserts at specified rates
 
 metaitem.field.generator.lv.name=Field Generator (LV)
 metaitem.field.generator.mv.name=Field Generator (MV)
@@ -313,51 +274,19 @@ metaitem.sensor.luv.name=Sensor (LuV)
 metaitem.sensor.zpm.name=Sensor (ZPM)
 metaitem.sensor.uv.name=Sensor (UV)
 
+metaitem.circuit.basic.name=Basic LV Circuit
+metaitem.circuit.intermediate.name=Intermediate MV Circuit
+metaitem.circuit.advanced.name=Advanced HV Circuit
+metaitem.circuit.elite.name=Elite EV Circuit
+metaitem.circuit.master.name=Master IV Circuit
+metaitem.circuit.expert.name=Expert LuV Circuit
+metaitem.circuit.ultimate.name=Ultimate UV Circuit
+metaitem.circuit.magic.name=Magical Circuit
+
 metaitem.tool.datastick.name=Data Stick
 metaitem.tool.datastick.tooltip=A Low Capacity Data Storage
 metaitem.tool.dataorb.name=Data Orb
 metaitem.tool.dataorb.tooltip=A High Capacity Data Storage
-metaitem.circuit.integrated.name=Integrated circuit
-metaitem.circuit.integrated.tooltip=Right-click to open configuration GUI
-metaitem.circuit.integrated.gui=Integrated circuit configuration
-
-metaitem.circuit.primitive.name=NAND Chip
-metaitem.circuit.primitive.tooltip=A very simple Circuit
-metaitem.circuit.basic.name=Basic Electronic Circuit
-metaitem.circuit.basic.tooltip=A basic Circuit
-metaitem.circuit.good.name=Good Electronic Circuit
-metaitem.circuit.good.tooltip=A good Circuit
-metaitem.circuit.advanced.name=Advanced Circuit
-metaitem.circuit.advanced.tooltip=An advanced Circuit
-metaitem.circuit.data.name=Data Storage Circuit
-metaitem.circuit.data.tooltip=A Data Storage Chip
-metaitem.circuit.elite.name=Data Control Circuit
-metaitem.circuit.elite.tooltip=A Processor
-metaitem.circuit.master.name=Energy Flow Circuit
-metaitem.circuit.master.tooltip=A High Voltage Processor
-
-metaitem.circuit.board.basic.name=Basic Circuit Board
-metaitem.circuit.board.basic.tooltip=A basic Board
-metaitem.circuit.board.advanced.name=Advanced Circuit Board
-metaitem.circuit.board.advanced.tooltip=An advanced Board
-metaitem.circuit.board.elite.name=Processor Board
-metaitem.circuit.board.elite.tooltip=A Processor Board
-metaitem.circuit.parts.crystal.chip.elite.name=Engraved Crystal Chip
-metaitem.circuit.parts.crystal.chip.elite.tooltip=Needed for Circuits
-metaitem.circuit.parts.crystal.chip.master.name=Engraved Lapotron Chip
-metaitem.circuit.parts.crystal.chip.master.tooltip=Needed for Circuits
-metaitem.circuit.parts.advanced.name=Advanced Circuit Parts
-metaitem.circuit.parts.advanced.tooltip=Advanced Circuit Parts
-metaitem.circuit.parts.wiring.basic.name=Etched Medium Voltage Wiring
-metaitem.circuit.parts.wiring.basic.tooltip=Part of Circuit Boards
-metaitem.circuit.parts.wiring.advanced.name=Etched High Voltage Wiring
-metaitem.circuit.parts.wiring.advanced.tooltip=Part of Circuit Boards
-metaitem.circuit.parts.wiring.elite.name=Etched Extreme Voltage Wiring
-metaitem.circuit.parts.wiring.elite.tooltip=Part of Circuit Boards
-metaitem.empty.board.basic.name=Empty Circuit Board
-metaitem.empty.board.basic.tooltip=A Board Part
-metaitem.empty.board.elite.name=Empty Processor Board
-metaitem.empty.board.elite.tooltip=A Processor Board Part
 
 metaitem.component.sawblade.diamond.name=Diamond Sawblade
 metaitem.component.grinder.diamond.name=Diamond Grinding Head
@@ -376,7 +305,7 @@ metaitem.upgrade.lock.name=Lock Upgrade
 metaitem.upgrade.lock.tooltip=Protects your Machines
 
 metaitem.item_filter.name=Item Filter
-metaitem.item_filter.tooltip=Filters item extract and insert (as Cover)/nCan be used as a Conveyor upgrade
+metaitem.item_filter.tooltip=Filters item extract and insert as a cover/nCan be used as a Conveyor upgrade
 metaitem.ore_dictionary_filter.name=Ore Dictionary Filter
 metaitem.ore_dictionary_filter.tooltip=Filters item extract and insert with ore dictionary (as Cover)/nCan be used as a Conveyor upgrade
 metaitem.fluid_filter.name=Fluid Filter
@@ -400,17 +329,17 @@ metaitem.cover.screen.tooltip=Displays Data
 metaitem.cover.crafting.name=Crafting Table Cover
 metaitem.cover.crafting.tooltip=Advanced workbench on the machine's side
 metaitem.cover.shutter.name=Shutter Module
-metaitem.cover.shutter.tooltip=Blocks side of machine from any interactions
+metaitem.cover.shutter.tooltip=Blocks side of the machine from any interactions
 
-metaitem.cover.solar.panel.name=Solar Panel
-metaitem.cover.solar.panel.tooltip=May the Sun be with you
-metaitem.cover.solar.panel.ulv.name=Solar Panel (8V)
-metaitem.cover.solar.panel.ulv.tooltip=8 Volt Solar Panel
+metaitem.cover.solar.panel.name=Base Solar Panel
 metaitem.cover.solar.panel.lv.name=Solar Panel (LV)
-metaitem.cover.solar.panel.lv.tooltip=Low Voltage Solar Panel
+metaitem.cover.solar.panel.mv.name=Solar Panel (MV)
+metaitem.cover.solar.panel.hv.name=Solar Panel (HV)
+metaitem.cover.solar.panel.ev.name=Solar Panel (EV)
+metaitem.cover.solar.panel.iv.name=Solar Panel (IV)
+metaitem.cover.solar.panel.luv.name=Solar Panel (LuV)
+metaitem.cover.solar.panel.uv.name=Solar Panel (UV)
 
-metaitem.tool.cheat.name=Debug Scanner
-metaitem.tool.cheat.tooltip=Also an Infinite Energy Source
 metaitem.tool.scanner.name=Portable Scanner
 metaitem.tool.scanner.tooltip=Tricorder
 
@@ -420,38 +349,13 @@ metaitem.duct.tape.tooltip=If you can't fix it with this, use more of it!
 metaitem.gelled_toluene.name=Gelled Toluene
 metaitem.gelled_toluene.tooltip=Raw Explosive
 
-metaitem.bottle.purple.drink.name=Purple Drink
-metaitem.bottle.purple.drink.tooltip=How about Lemonade. Or some Ice Tea? I got Purple Drink!
+metaitem.bottle.purple.drink.name=Purple Drank
 
-metaitem.food.chum.name=Chum
-metaitem.food.chum.tooltip=Chum is Fum!
-metaitem.food.chum.on.stick.name=Chum on a Stick
-metaitem.food.chum.on.stick.tooltip=Don't forget to try our Chum-balaya
+metaitem.fuel_binder.name=Fuel Binder
+metaitem.super_fuel_binder.name=Super Fuel Binder
+metaitem.magic_fuel_binder.name=Magic Fuel Binder
 
-metaitem.dye.indigo.name=Indigo Dye
-metaitem.dye.indigo.tooltip=Blue Dye
-
-metaitem.dye.white.name=White Dye
-metaitem.dye.orange.name=Orange Dye
-metaitem.dye.magenta.name=Magenta Dye
-metaitem.dye.light_blue.name=Light Blue Dye
-metaitem.dye.yellow.name=Yellow Dye
-metaitem.dye.lime.name=Lime Dye
-metaitem.dye.pink.name=Pink Dye
-metaitem.dye.gray.name=Gray Dye
-metaitem.dye.silver.name=Silver Dye
-metaitem.dye.cyan.name=Cyan Dye
-metaitem.dye.purple.name=Purple Dye
-metaitem.dye.blue.name=Blue Dye
-metaitem.dye.brown.name=Brown Dye
-metaitem.dye.green.name=Green Dye
-metaitem.dye.red.name=Red Dye
-metaitem.dye.black.name=Black Dye
-
-metaitem.sfmixture.name=Super Fuel Binder
-metaitem.sfmixture.tooltip=Raw Material
-metaitem.msfmixture.name=Magic Super Fuel Binder
-metaitem.msfmixture.tooltip=Raw Material
+metaitem.thermite_dust.name=Thermite Dust
 
 metaitem.rubber_drop.name=Rubber
 metaitem.plant_ball.name=Plant Ball
@@ -545,7 +449,7 @@ cover.filter.mode.filter_insert=Filter Insert
 cover.filter.mode.filter_extract=Filter Extract
 
 cover.conveyor.title=Conveyor Cover Settings (%s)
-cover.conveyor.transfer_rate=%s items/sec
+cover.conveyor.transfer_rate=%s Items / Second
 cover.conveyor.mode.export=Mode: Export
 cover.conveyor.mode.import=Mode: Import
 cover.conveyor.item_filter.title=Item Filter
@@ -559,7 +463,7 @@ cover.robotic_arm.transfer_mode.keep_exact=Keep Exact
 cover.robotic_arm.transfer_mode.description=§eTransfer Any§r - in this mode, cover will transfer as much items matching it's filter as possible./n§eSupply Exact§r - in this mode, cover will supply items in portions specified in item filter slots (or transfer rate for ore dictionary filter). If amount of items is less than portion size, items won't be moved./n§eKeep Exact§r - in this mode, cover will keep specified amount of items in the destination inventory, supplying additional amount of items if required./n§7Tip: left/right click on filter slots to change item amount,  use shift clicking to change amount faster.
 
 cover.pump.title=Pump Cover Settings (%s)
-cover.pump.transfer_rate=%s mb/s
+cover.pump.transfer_rate=%sMB/s
 cover.pump.mode.export=Mode: Export
 cover.pump.mode.import=Mode: Import
 cover.pump.fluid_filter.title=Fluid Filter
@@ -1041,6 +945,119 @@ material.hssg=HSS-G
 material.hsse=HSS-E
 material.hsss=HSS-S
 
+material.phosphorous_pentoxide=Phosphorous Pentoxide
+material.phosphoric_acid=Phosphoric Acid
+material.polyvinyl_acetate=Polyvinyl Acetate
+material.phenol=Phenol
+material.bisphenol_a=Bisphenol A
+material.epoxid=Epoxy Resin
+material.reinforced_epoxy_resin=Fiber-Reinforced Epoxy Resin
+material.borosilicate_glass=Borosilicate Glass
+material.polyvinyl_chloride=Polyvinyl Chloride
+material.vinyl_chloride=Vinyl Chloride
+material.ethylene=Ethylene
+material.charcoal_byproducts=Charcoal Byproducts
+material.benzene=Benzene
+material.wood_gas=Wood Gas
+material.wood_vinegar=Wood Vinegar
+material.wood_tar=Wood Tar
+material.sodium_hydroxide=Sodium Hydroxide
+material.quicklime=Quicklime
+material.acetone=Acetone
+material.sulfur_trioxide=Sulfur Trioxide
+material.sulfur_dioxide=Sulfur Dioxide
+material.glycerol=Glycerol
+material.methanol=Methanol
+material.carbon_monoxide=Carbon Monoxide
+material.nitro_fuel=Cetane-Boosted Diesel
+material.diluted_sulfuric_acid=Diluted Sulfuric Acid
+material.sodium_bisulfate=Sodium Bisulfate
+material.chloroform=Chloroform
+material.diluted_hydrochloric_acid=Diluted Hydrochloric Acid
+material.hypochlorous_acid=Hypochlorous Acid
+material.ammonia=Ammonia
+material.chloramine=Chloramine
+material.dimethylamine=Dimethylamine
+material.dimethylhidrazine=1,1-Dimethylhydrazine
+material.rocket_fuel=Rocket Fuel
+material.dinitrogen_tetroxide=Dinitrogen Tetroxide
+material.silicon_rubber=Silicone Rubber
+material.polydimethylsiloxane=Polydimethylsiloxane
+material.dimethyldichlorosilane=Dimethyldichlorosilane
+material.styrene=Styrene
+material.polystyrene=Polystyrene
+material.butadiene=Butadiene
+material.raw_styrene_butadiene_rubber=Raw Styrene-Butadiene Rubber
+material.styrene_butadiene_rubber=Styrene-Butadiene Rubber
+material.dichlorobenzene=Dichlorobenzene
+material.hydrochloric_acid=Hydrochloric Acid
+material.acetic_acid=Acetic Acid
+material.fermented_biomass=Fermented Biomass
+material.potash=Potash
+material.soda_ash=Soda Ash
+material.hydrofluoric_acid=Hydrofluoric Acid
+material.nitric_oxide=Nitric Oxide
+material.methyl_acetate=Methyl Acetate
+material.ethenone=Ethenone
+material.tetranitromethane=Tetranitromethane
+material.bio_diesel=Bio Diesel
+material.raw_growth_medium=Raw Growth Medium
+material.sterilized_growth_medium=Sterilized Growth Medium
+material.vinyl_acetate=Vinyl Acetate
+material.gallium_arsenide=Gallium Arsenide
+material.polyphenylene_sulfide=Polyphenylene Sulfide
+material.nickel_sulfate_water_solution=Nickel Sulfate Water Solution
+material.blue_vitriol_water_solution=Blue Vitriol Water Solution
+material.propane=Propane
+material.propene=Propene
+material.ethane=Ethane
+material.butene=Butene
+material.butane=Butane
+material.calcium_acetate=Calcium Acetate Solution
+material.cumene=Cumene
+material.indium_gallium_phosphide=Indium Gallium Phosphide
+material.platinum_group_sludge=Platinum Group Sludge
+material.ferrite_mixture=Ferrite Mixture
+material.nickel_zinc_ferrite=Nickel Zinc Ferrite
+material.indium_concentrate=Indium Concentrate
+material.lead_zinc_solution=Lead-Zinc Solution
+material.tetrafluoroethylene=Tetrafluoroethylene
+material.salt_water=Salt Water
+material.hydrocracked_ethane=Hydro-Cracked Ethane
+material.hydrocracked_ethylene=Hydro-Cracked Ethylene
+material.hydrocracked_propene=Hydro-Cracked Propene
+material.hydrocracked_propane=Hydro-Cracked Propane
+material.hydrocracked_light_fuel=Hydro-Cracked Light Fuel
+material.hydrocracked_butane=Hydro-Cracked Butane
+material.hydrocracked_naphtha=Hydro-Cracked Naphtha
+material.hydrocracked_heavy_fuel=Hydro-Cracked Heavy Fuel
+material.hydrocracked_gas=Hydro-Cracked Refinery Gas
+material.hydrocracked_butene=Hydro-Cracked Butene
+material.hydrocracked_butadiene=Hydro-Cracked Butadiene
+material.steamcracked_ethane=Steam-Cracked Ethane
+material.steamcracked_ethylene=Steam-Cracked Ethylene
+material.steamcracked_propene=Steam-Cracked Propene
+material.steamcracked_propane=Steam-Cracked Propane
+material.cracked_light_fuel=Steam-Cracked Light Fuel
+material.steamcracked_butane=Steam-Cracked Butane
+material.steamcracked_naphtha=Steam-Cracked Naphtha
+material.cracked_heavy_fuel=Steam-Cracked Heavy Fuel
+material.steamcracked_gas=Steam-Cracked Refinery Gas
+material.steamcracked_butene=Steam-Cracked Butene
+material.steamcracked_butadiene=Steam-Cracked Butadiene
+material.biogas=Bio Gas
+material.chloromethane=Chloromethane
+material.allyl_chloride=Allyl Chloride
+material.isoprene=Isoprene
+material.massicot=Massicot
+material.antimony_trioxide=Antimony Trioxide
+material.zincite=Zincite
+material.cobalt_oxide=Cobalt Oxide
+material.arsenic_trioxide=Arsenic Trioxide
+material.cupric_oxide=Cupric Oxide
+material.ferrosilite=Ferrosilite
+material.magnesia=Magnesia
+
 material.primitive=Primitive
 material.basic=Basic
 material.good=Good
@@ -1226,7 +1243,7 @@ recipemap.byproductlist.name=Ore Byproduct List
 recipemap.replicator.name=Replicator
 recipemap.assemblyline.name=Assembly Line
 recipemap.assembler.name=Assembler
-recipemap.press.name=Forming Press
+recipemap.press.name=Press
 recipemap.macerator.name=Pulverization
 recipemap.unpackager.name=Unpackager
 recipemap.fluid_canner.name=Fluid Canning Machine
@@ -1277,7 +1294,7 @@ recipemap.semifluidboilerfuels.name=Semifluid Boiler Fuels
 recipemap.plasmageneratorfuels.name=Plasma generator Fuels
 recipemap.magicfuels.name=Magic Fuels
 recipemap.magicfuels.value=Fuel Value: %s EU
-recipemap.forming_press.name=Forming Press
+recipemap.press.name=Press
 recipemap.forge_hammer.name=Forge Hammer
 recipemap.compressor.name=Compressor
 recipemap.packer.name=Packer
@@ -1287,8 +1304,7 @@ recipemap.gas_turbine.name=Gas Turbine
 recipemap.steam_turbine.name=Steam Turbine
 recipemap.semi_fluid_generator.name=Semi Fluid Fuels
 
-behaviour.soft_hammer=Click machine to allow or disallow it to work!
-behavior.plunger.description=Right click on machine to clear 1000 mb out of the machine's output tank./nOr use it while sneaking to clear 1000 mb out of the machine's input tank./nPlease note: input tank clearing works only on GregTech machines!
+behavior.plunger.description=Right click on machine to clear 1000MB out of the machine's output tank./nOr use it while sneaking to clear 1000MB out of the machine's input tank./nPlease note: input tank clearing works only on GregTech machines!
 
 tile.gt.foam.name=Foam
 tile.gt.reinforced_foam.name=Reinforced Foam
@@ -1437,17 +1453,17 @@ gregtech.machine.steam_alloy_smelter_steel.name=High Pressure Steam Alloy Smelte
 
 # Generators
 gregtech.machine.diesel_generator.lv.name=Basic Diesel Generator
-gregtech.machine.diesel_generator.mv.name=Advanced Diesel Generator
+gregtech.machine.diesel_generator.mv.name=Intermediate Diesel Generator
 gregtech.machine.diesel_generator.hv.name=Turbo Diesel Generator
 gregtech.machine.diesel_generator.ev.name=Turbo Diesel Generator II
 
 gregtech.machine.steam_turbine.lv.name=Basic Steam Turbine
-gregtech.machine.steam_turbine.mv.name=Advanced Steam Turbine
+gregtech.machine.steam_turbine.mv.name=Intermediate Steam Turbine
 gregtech.machine.steam_turbine.hv.name=Turbo Steam Turbine
 gregtech.machine.steam_turbine.ev.name=Turbo Steam Turbine II
 
 gregtech.machine.gas_turbine.lv.name=Basic Gas Turbine
-gregtech.machine.gas_turbine.mv.name=Advanced Gas Turbine
+gregtech.machine.gas_turbine.mv.name=Intermediate Gas Turbine
 gregtech.machine.gas_turbine.hv.name=Turbo Gas Turbine
 gregtech.machine.gas_turbine.ev.name=Turbo Gas Turbine II
 
@@ -1458,29 +1474,25 @@ gregtech.machine.magic_energy_converter.tooltip=Voltage OUT: §a128 §7(§aMV§7
 
 # Machines
 gregtech.machine.electric_furnace.lv.name=Basic Electric Furnace
-gregtech.machine.electric_furnace.mv.name=Advanced Electric Furnace
+gregtech.machine.electric_furnace.mv.name=Intermediate Electric Furnace
 gregtech.machine.electric_furnace.hv.name=Advanced Electric Furnace II
 gregtech.machine.electric_furnace.ev.name=Advanced Electric Furnace III
 
 gregtech.machine.macerator.lv.name=Basic Macerator
-gregtech.machine.macerator.mv.name=Advanced Macerator
+gregtech.machine.macerator.mv.name=Intermediate Macerator
 gregtech.machine.macerator.hv.name=Universal Macerator
 gregtech.machine.macerator.ev.name=Universal Pulverizer
 
 gregtech.machine.alloy_smelter.lv.name=Basic Alloy Smelter
-gregtech.machine.alloy_smelter.mv.name=Advanced Alloy Smelter
+gregtech.machine.alloy_smelter.mv.name=Intermediate Alloy Smelter
 gregtech.machine.alloy_smelter.hv.name=Advanced Alloy Smelter II
 gregtech.machine.alloy_smelter.ev.name=Advanced Alloy Smelter III
 
-
 gregtech.machine.amplifab.lv.name=Basic Amplifabricator
-gregtech.machine.amplifab.mv.name=Advanced Amplifabricator
+gregtech.machine.amplifab.mv.name=Intermediate Amplifabricator
 gregtech.machine.amplifab.hv.name=Advanced Amplifabricator II
 gregtech.machine.amplifab.ev.name=Advanced Amplifabricator III
 
-
-gregtech.machine.arc_furnace.lv.name=Basic Arc Furnace
-gregtech.machine.arc_furnace.mv.name=Advanced Arc Furnace
 gregtech.machine.arc_furnace.hv.name=Advanced Arc Furnace II
 gregtech.machine.arc_furnace.ev.name=Advanced Arc Furnace III
 
@@ -1615,10 +1627,10 @@ gregtech.machine.forge_hammer.mv.name=Advanced Forge Hammer
 gregtech.machine.forge_hammer.hv.name=Advanced Forge Hammer II
 gregtech.machine.forge_hammer.ev.name=Advanced Forge Hammer III
 
-gregtech.machine.forming_press.lv.name=Basic Forming Press
-gregtech.machine.forming_press.mv.name=Advanced Forming Press
-gregtech.machine.forming_press.hv.name=Advanced Forming Press II
-gregtech.machine.forming_press.ev.name=Advanced Forming Press III
+gregtech.machine.press.lv.name=Basic Forming Press
+gregtech.machine.press.mv.name=Advanced Forming Press
+gregtech.machine.press.hv.name=Advanced Forming Press II
+gregtech.machine.press.ev.name=Advanced Forming Press III
 
 gregtech.machine.lathe.tooltip=Produces Rods more efficiently
 
@@ -1796,38 +1808,37 @@ gregtech.machine.pump.hv.name=Advanced Pump II
 gregtech.machine.pump.ev.name=Advanced Pump III
 
 #Quantum chests
-gregtech.machine.quantum_chest.tooltip=Better than JABBA.
 gregtech.machine.quantum_chest.capacity=Item Capacity: %d items
-gregtech.machine.quantum_chest.items_stored=Item Amount:
+gregtech.machine.quantum_chest.items_stored=Current Item Amount:
 
-gregtech.machine.quantum_chest.mv.name=Basic Quantum Chest
-gregtech.machine.quantum_chest.hv.name=Advanced Quantum Chest
-gregtech.machine.quantum_chest.ev.name=Advanced Quantum Chest II
-gregtech.machine.quantum_chest.iv.name=Black Hole-Quantum Chest III
+gregtech.machine.quantum_chest.ev.name=Quantum Chest
+gregtech.machine.quantum_chest.iv.name=Master Quantum Chest
+gregtech.machine.quantum_chest.luv.name=Expert Quantum Chest
+gregtech.machine.quantum_chest.uv.name=Black Hole Chest
 
 #Quantum tanks
-gregtech.machine.quantum_tank.tooltip=Compact place to store all your fluids.
-gregtech.machine.quantum_tank.capacity=Fluid Capacity: %d mb
+gregtech.machine.quantum_tank.capacity=Fluid Capacity: %dMB
 
-gregtech.machine.quantum_tank.mv.name=Basic Quantum Tank
-gregtech.machine.quantum_tank.hv.name=Advanced Quantum Tank
-gregtech.machine.quantum_tank.ev.name=Advanced Quantum Tank II
-gregtech.machine.quantum_tank.iv.name=Black Hole-Quantum Tank III
+gregtech.machine.quantum_tank.ev.name=Quantum Tank
+gregtech.machine.quantum_tank.iv.name=Master Quantum Tank
+gregtech.machine.quantum_tank.luv.name=Expert Quantum Tank
+gregtech.machine.quantum_tank.uv.name=Black Hole Tank
 
 #Air Collectors
 gregtech.machine.air_collector.lv.name=Basic Air Collector
 gregtech.machine.air_collector.mv.name=Advanced Air Collector
 gregtech.machine.air_collector.hv.name=Advanced Air Collector II
 gregtech.machine.air_collector.ev.name=Atmosphere Collector III
-gregtech.machine.air_collector.description=Collects air from adjacent blocks
+gregtech.machine.air_collector.description=Collects air from adjacent air blocks
 
 #Tesla Coil
 gregtech.machine.tesla_coil.name=Tesla Coil
 gregtech.machine.tesla_coil.description=Damages all living entities within 7 blocks range/nConsumes 2500 EU for 1 damage point/nInternal buffer Capacity: §e256k EU
 
-# General machinery
+#General machinery
 gregtech.machine.basic.output_override.reset=Output filter: all tanks.
 gregtech.machine.basic.output_override.set=Output filter: tank #%s.
+
 #Creative Tabs
 itemGroup.gregtech.main=Main
 itemGroup.gregtech.materials=Materials
@@ -2015,9 +2026,9 @@ gregtech.universal.tooltip.amperage_in_till=Amperage IN up to: §e%d
 gregtech.universal.tooltip.amperage_out=Amperage OUT: §e%d
 gregtech.universal.tooltip.amperage_out_till=Amperage OUT up to: §e%d
 gregtech.universal.tooltip.item_storage_capacity=Item Slots: %d
-gregtech.universal.tooltip.fluid_storage_capacity=Fluid Capacity: %d mb
+gregtech.universal.tooltip.fluid_storage_capacity=Fluid Capacity: %dMB
 
-gregtech.machine.fluid_tank.fluid=Contains %s mb of %s
+gregtech.machine.fluid_tank.fluid=Contains %sMB of %s
 
 gregtech.recipe.total=Total: %d EU
 gregtech.recipe.eu=Usage: %d EU/t
@@ -2051,7 +2062,7 @@ gregtech.cable.voltage=Voltage: §a%d §7(§a%s§7)
 gregtech.cable.amperage=Amperage: §e%d
 gregtech.cable.loss_per_block=Loss per block: §c%d
 
-gregtech.fluid_pipe.throughput=Transfer: §e%d mb/t
+gregtech.fluid_pipe.throughput=Transfer: §e%dMB/t
 gregtech.fluid_pipe.max_temperature=Max Temperature: §c%dK
 gregtech.fluid_pipe.non_gas_proof=Can't transfer gases.
 
@@ -2084,7 +2095,7 @@ gregtech.multiblock.turbine.rotor_durability=Rotor Durability: %s%%
 gregtech.multiblock.turbine.low_rotor_durability=WARNING: Rotor Durability below %s%% (%s%%)
 
 gregtech.multiblock.large_boiler.temperature=Temperature: %s / %s C
-gregtech.multiblock.large_boiler.steam_output=Steam Output: %s mb/t
+gregtech.multiblock.large_boiler.steam_output=Steam Output: %sMB/t
 
 gregtech.command.usage=Usage: /gregtech <worldgen/util>
 gregtech.command.worldgen.usage=Usage: /gregtech worldgen <reload>
@@ -2095,7 +2106,7 @@ gregtech.command.util.usage=Usage: /gregtech util <hand>
 gregtech.command.util.hand.usage=Usage: /gregtech util hand
 gregtech.command.util.hand.item_id=Item: %s (Metadata: %d)
 gregtech.command.util.hand.electric=Electric Info: %d / %d EU - Tier: %d; Is Battery: %s
-gregtech.command.util.hand.fluid=Fluid Info: %s %d / %d mb; Can Fill: %s; Can Drain: %s
+gregtech.command.util.hand.fluid=Fluid Info: %s %d / %dMB; Can Fill: %s; Can Drain: %s
 gregtech.command.util.hand.material_meta_item=Ore Prefix: %s; Material: %s
 gregtech.command.util.hand.tool_stats=Tool Stats Class: %s
 gregtech.command.util.hand.meta_item=Meta Item Name: %s

@@ -163,6 +163,9 @@ public abstract class MetaTileEntity implements ICoverable {
             Textures.renderFace(renderState, translation, renderPipeline, face, Cuboid6.full, atlasSprite);
         }
     }
+    
+    @SideOnly(Side.CLIENT)
+    public void renderMetaTileEntityDynamic(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline, float partialTicks) { }
 
     @SideOnly(Side.CLIENT)
     public int getPaintingColorForRendering() {
@@ -525,6 +528,19 @@ public abstract class MetaTileEntity implements ICoverable {
 
     public int getLightOpacity() {
         return 255;
+    }
+    
+    /**
+     * Whether this tile entity should get it's {@link #renderMetaTileEntityDynamic(CCRenderState, Matrix4, IVertexOperation[], float)} called
+     * It will be called every render frame to render meta tile entity with fast TESR
+     * @return true if meta tile entity should use FastTESR
+     */
+    public boolean requiresDynamicRendering() {
+        return true;
+    }
+
+    public boolean shouldRenderInPass(int pass) {
+        return pass == 0;
     }
 
     /**

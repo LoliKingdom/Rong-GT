@@ -124,7 +124,7 @@ public class MetaFluids {
                 FluidType fluidType = fluidMaterial.hasFlag(MatFlags.STATE_GAS) ? FluidType.GAS : FluidType.LIQUID;
                 registerFluid(fluidMaterial, fluidType, temperature, false);                
             }
-            if(fluidMaterial.hasFlag(DustMaterial.MatFlags.GENERATE_ORE) && Loader.isModLoaded("mekanism")) {
+            if(fluidMaterial.hasFlag(DustMaterial.MatFlags.GENERATE_ORE) && GTValues.isModLoaded("mekanism")) {
             	registerFluid(material, FluidType.SLURRY, 1200);
             	registerFluid(material, FluidType.CLEANSLURRY, 1200);
             }

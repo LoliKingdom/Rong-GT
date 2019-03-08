@@ -47,12 +47,19 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
     public ModularUI getModularUI() {
         return modularUI;
     }
+    
+    @Override
+    public void onContainerClosed(EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
+        modularUI.triggerCloseListeners();
+    }
 
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
         modularUI.guiWidgets.values().forEach(Widget::detectAndSendChanges);
-    }
+        modularUI.triggerOpenListeners();
+    }    
 
     @Override
     public void detectAndSendChanges() {
