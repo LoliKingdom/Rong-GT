@@ -309,11 +309,10 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
     }
     
     public int regainItemDurability(ItemStack itemStack, int maxDurabilityRegain) {
-        int resultRegain = maxDurabilityRegain;
         int toolDamage = getInternalDamage(itemStack);
-        int durabilityRegained = Math.min(toolDamage, resultRegain);
+        int durabilityRegained = Math.min(toolDamage, maxDurabilityRegain);
         setInternalDamage(itemStack, toolDamage - durabilityRegained);
-        return (int) Math.ceil(durabilityRegained);
+        return durabilityRegained;
     }
 
     private static int calculateToolDamage(ItemStack itemStack, Random random, int amount) {
@@ -517,11 +516,11 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         return getInternalDamage(itemStack) < getMaxInternalDamage(itemStack);
     }
 
-    protected static NBTTagCompound getToolStatsTag(ItemStack itemStack) {
+    public static NBTTagCompound getToolStatsTag(ItemStack itemStack) {
         return itemStack.getSubCompound("GT.ToolStats");
     }
 
-    protected static NBTTagCompound getOrCreateToolStatsTag(ItemStack itemStack) {
+    public static NBTTagCompound getOrCreateToolStatsTag(ItemStack itemStack) {
         return itemStack.getOrCreateSubCompound("GT.ToolStats");
     }
 

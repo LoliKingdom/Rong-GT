@@ -56,12 +56,12 @@ public class DecompositionRecipeHandler {
         RecipeBuilder builder;
         if (material.hasFlag(Material.MatFlags.DECOMPOSITION_BY_ELECTROLYZING)) {
             builder = RecipeMaps.ELECTROLYZER_RECIPES.recipeBuilder()
-                .duration((int) material.getProtons() * totalInputAmount * 8)
+                .duration((int) material.getAverageProtons() * totalInputAmount * 8)
                 .EUt(getElectrolyzingVoltage(material.materialComponents.stream()
                     .map(s -> s.material).collect(Collectors.toList())));
         } else {
             builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
-                .duration((int) material.getMass() * totalInputAmount * 2)
+                .duration((int) material.getAverageMass() * totalInputAmount * 2)
                 .EUt(30);
         }
         builder.outputs(outputs);
@@ -83,12 +83,14 @@ public class DecompositionRecipeHandler {
 
     //todo think something better with this
     private static int getElectrolyzingVoltage(List<Material> components) {
-        //titanium or tungsten-containing materials electrolyzing requires 1920
-        if (components.contains(Materials.Tungsten) ||
-            components.contains(Materials.Titanium))
+        //tungsten-containing materials electrolyzing requires 1920
+        if (components.contains(Materials.Tungsten))
             return 1920; //EV voltage (tungstate and scheelite electrolyzing)
-        //otherwise, use logic that requires at least 120 EU/t for electrolyzing
-        return Math.min(4, components.size()) * 30;
+        //Binary compound materials require 30 EU/t
+        if(components.size() <= 2) {
+            return 30;
+        }
+        return Math.min(2, components.size()) * 30;
     }
 
 }

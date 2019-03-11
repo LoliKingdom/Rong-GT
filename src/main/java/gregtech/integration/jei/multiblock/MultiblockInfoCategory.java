@@ -37,6 +37,7 @@ public class MultiblockInfoCategory implements IRecipeCategory<MultiblockInfoRec
             new MultiblockInfoRecipeWrapper(new DistillationTowerInfo()),
             new MultiblockInfoRecipeWrapper(new ElectricBlastFurnaceInfo()),
             new MultiblockInfoRecipeWrapper(new MultiSmelterInfo()),
+            new MultiblockInfoRecipeWrapper(new BedrockDrillUnitInfo()),
             new MultiblockInfoRecipeWrapper(new LargeBoilerInfo(MetaTileEntities.LARGE_BRONZE_BOILER)),
             new MultiblockInfoRecipeWrapper(new LargeBoilerInfo(MetaTileEntities.LARGE_STEEL_BOILER)),
             new MultiblockInfoRecipeWrapper(new LargeBoilerInfo(MetaTileEntities.LARGE_TITANIUM_BOILER)),

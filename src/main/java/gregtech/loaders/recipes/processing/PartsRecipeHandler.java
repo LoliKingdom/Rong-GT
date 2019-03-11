@@ -12,6 +12,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
+import gregtech.common.items.behaviors.TurbineRotorBehaviour;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
@@ -88,6 +89,13 @@ public class PartsRecipeHandler {
                 .outputs(OreDictUnifier.get(OrePrefix.wireFine, material, 4))
                 .duration(200).EUt(8)
                 .buildAndRegister();
+        } 
+        else {
+            RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
+            .input(OrePrefix.ingot, material)
+            .outputs(OreDictUnifier.get(OrePrefix.wireFine, material, 8))
+            .duration(400).EUt(8)
+            .buildAndRegister();
         }
     }
 
@@ -261,11 +269,13 @@ public class PartsRecipeHandler {
         }
     }
 
-    public static void processTurbine(OrePrefix toolPrefix, SolidMaterial material) {
+    public static void processTurbine(OrePrefix toolPrefix, IngotMaterial material) {
+        ItemStack rotorStack = MetaItems.TURBINE_ROTOR.getStackForm();
+        TurbineRotorBehaviour.getInstanceFor(rotorStack).setPartMaterial(rotorStack, material);
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.turbineBlade, material, 8)
             .input(OrePrefix.stick, Materials.Titanium, 4)
-            .outputs(MetaItems.TURBINE.getStackForm(material))
+            .outputs(rotorStack)
             .duration(320)
             .EUt(400)
             .buildAndRegister();

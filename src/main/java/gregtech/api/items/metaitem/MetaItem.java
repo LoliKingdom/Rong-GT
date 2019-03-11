@@ -36,6 +36,7 @@ import gregtech.api.items.metaitem.stats.IItemContainerItemProvider;
 import gregtech.api.items.metaitem.stats.IItemDurabilityManager;
 import gregtech.api.items.metaitem.stats.IItemMaxStackSizeProvider;
 import gregtech.api.items.metaitem.stats.IItemModelIndexProvider;
+import gregtech.api.items.metaitem.stats.IItemNameProvider;
 import gregtech.api.items.metaitem.stats.IItemUseManager;
 import gregtech.api.items.metaitem.stats.IMetaItemStats;
 import gregtech.api.unification.OreDictUnifier;
@@ -428,14 +429,18 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
             if(item == null) {
                 return "unnamed";
             }
+            String unlocalizedName = String.format("metaitem.%s.name", item.unlocalizedName);
+            if(item.getNameProvider() != null) {
+                return item.getNameProvider().getItemStackDisplayName(stack, unlocalizedName);
+            }
             IFluidHandlerItem fluidHandlerItem = ItemHandlerHelper.copyStackWithSize(stack, 1)
                 .getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
             if(fluidHandlerItem != null) {
                 FluidStack fluidInside = fluidHandlerItem.drain(Integer.MAX_VALUE, false);
                 String name = fluidInside == null ? "metaitem.fluid_cell.empty" : fluidInside.getUnlocalizedName();
-                return I18n.format("metaitem." + item.unlocalizedName + ".name", I18n.format(name));
+                return I18n.format(unlocalizedName, I18n.format(name));
             }
-            return I18n.format("metaitem." + item.unlocalizedName + ".name");
+            return I18n.format(unlocalizedName);
         }
         return super.getItemStackDisplayName(stack);
     }
@@ -559,7 +564,7 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
         private IItemColorProvider colorProvider;
         private IItemModelIndexProvider modelIndexProvider;
         private IItemContainerItemProvider containerItemProvider;
-
+        private IItemNameProvider nameProvider;
 
         private int burnValue = 0;
         private boolean visible = true;
@@ -646,6 +651,8 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
                     this.stackSizeProvider = (IItemMaxStackSizeProvider) metaItemStats;
                 if(metaItemStats instanceof IItemColorProvider)
                     this.colorProvider = (IItemColorProvider) metaItemStats;
+                if(metaItemStats instanceof IItemNameProvider)
+                    this.nameProvider = (IItemNameProvider) metaItemStats;
                 if(metaItemStats instanceof IItemContainerItemProvider)
                     this.containerItemProvider = (IItemContainerItemProvider) metaItemStats;
                 if(metaItemStats instanceof IItemModelIndexProvider)
@@ -687,6 +694,11 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
         @Nullable
         public IItemColorProvider getColorProvider() {
             return colorProvider;
+        }
+        
+        @Nullable
+        public IItemNameProvider getNameProvider() {
+            return nameProvider;
         }
 
         @Nullable

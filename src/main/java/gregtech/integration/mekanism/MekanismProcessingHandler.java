@@ -1,5 +1,7 @@
 package gregtech.integration.mekanism;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -33,16 +35,21 @@ import net.minecraftforge.fml.common.Loader;
 
 public class MekanismProcessingHandler {
 	
-	/*public static void initGas() {
+	private static HashMap<Material, OreGas> registeredSlurries = new HashMap<>();
+	private static HashMap<Material, OreGas> registeredCleanSlurries = new HashMap<>();
+	
+	public static void initGas() {
 		for(Material m : DustMaterial.MATERIAL_REGISTRY) {
 			if(m.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
 				OreGas cleanSlurry = new OreGas("clean_" + m.toString(), "_slurry");
 				cleanSlurry.setVisible(false).setTint(m.materialRGB);
+				registeredCleanSlurries.put(m, cleanSlurry);
 				OreGas dirtySlurry = new OreGas("dirty_" + m.toString(), "_slurry");
 				dirtySlurry.setCleanGas(cleanSlurry).setVisible(false).setTint(m.materialRGB);
+				registeredSlurries.put(m, dirtySlurry);
 			}
 		}
-	}*/
+	}
 	
 	public static void removeRecipes() {
 		for(Gas gas : GasRegistry.getRegisteredGasses()) {
@@ -67,78 +74,62 @@ public class MekanismProcessingHandler {
 			if(m.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {		
 				//TIL: Can input Fluid as a GasStack
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreEndstone, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreNetherrack, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreGravel, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSand, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSandstone, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreRedSandstone, m), getSlurry(m, false, 1000));
 				
-				RecipeHandler.addChemicalWasherRecipe(getSlurry(m, false, 5), getSlurry(m, true, 5));
+				RecipeHandler.addChemicalWasherRecipe(getSlurry(m, false, 20), getSlurry(m, true, 10));
 				
 				RecipeHandler.addChemicalCrystallizerRecipe(getSlurry(m, true, 250), OreDictUnifier.get(OrePrefix.crystal, m));
-				RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
+				
+				RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
 					.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 200))
 					.outputs(OreDictUnifier.get(OrePrefix.crystal, m))
-					.EUt(320)
+					.EUt(1480)
 					.duration((int)m.getAverageMass() / 2)
 					.buildAndRegister();
 				
 				RecipeHandler.addChemicalInjectionChamberRecipe(OreDictUnifier.get(OrePrefix.crystal, m), MekanismFluids.HydrogenChloride, OreDictUnifier.get(OrePrefix.shard, m));
 
 				RecipeHandler.addPurificationChamberRecipe(OreDictUnifier.get(OrePrefix.shard, m), OreDictUnifier.get(OrePrefix.clump, m));				
-				RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().input(OrePrefix.shard, m).fluidInputs(Materials.Oxygen.getFluid(400)).outputs(OreDictUnifier.get(OrePrefix.clump, m)).duration(350).EUt(480).buildAndRegister();
+				RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().input(OrePrefix.shard, m).fluidInputs(Materials.Oxygen.getFluid(400)).outputs(OreDictUnifier.get(OrePrefix.clump, m)).duration(350).EUt(320).buildAndRegister();
 				
 				RecipeHandler.addCrusherRecipe(OreDictUnifier.get(OrePrefix.clump, m), OreDictUnifier.get(OrePrefix.dustDirty, m));
 				RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.clump, m).outputs(OreDictUnifier.get(OrePrefix.dustDirty, m)).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, m), 2500).duration(140).EUt(18).buildAndRegister();
 				RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder().input(OrePrefix.clump, m).outputs(OreDictUnifier.get(OrePrefix.dustDirty, m)).duration(20).EUt(12).buildAndRegister();
 
 				RecipeHandler.addEnrichmentChamberRecipe(OreDictUnifier.get(OrePrefix.dustDirty, m), OreDictUnifier.get(OrePrefix.dust, m));
-				
-				RecipeHandler.addChemicalInjectionChamberRecipe(OreDictUnifier.get(OrePrefix.dustImpure, m), MekanismFluids.HydrogenChloride, OreDictUnifier.get(OrePrefix.shard, m, 4));
-				
-				RecipeHandler.addPurificationChamberRecipe(OreDictUnifier.get(OrePrefix.shard, m), OreDictUnifier.get(OrePrefix.clump, m));
-				RecipeHandler.addCrusherRecipe(OreDictUnifier.get(OrePrefix.clump, m), OreDictUnifier.get(OrePrefix.dust, m));
 
 		        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
 				  	.input(OrePrefix.crushed, m)
 				  	.fluidInputs(Materials.SulfuricAcid.getFluid(600))
-				  	.fluidOutputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 600))
+				  	.fluidOutputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 1000))
 				  	.duration(400)
 				  	.EUt(96)
 				  	.buildAndRegister();
 				
+		        //TODO: Add chanceOutput
 				RecipeMaps.MIXER_RECIPES.recipeBuilder()
-				  	.fluidInputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 600), Materials.Chlorine.getFluid(1000))
-				  	.fluidOutputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 500))
-				  	.duration(200)
+				  	.fluidInputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 20), ModHandler.getWater(50))
+				  	.fluidOutputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 10))
+				  	.duration(40)
 				  	.EUt(24)
-				  	.buildAndRegister();
-				
-				RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
-			  		.fluidInputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 2000))
-			  		.inputs(MetaItems.THERMITE_DUST.getStackForm())
-			  		.outputs(OreDictUnifier.get(OrePrefix.dustDirty, m, 3))
-			  		.chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, m), 1000)
-			  		.duration(80)
-			  		.EUt(96)
-			  		.buildAndRegister();	
-				
-				RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
-				  	.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 2000))
-				  	.inputs(MetaItems.THERMITE_DUST.getStackForm())
-				  	.outputs(OreDictUnifier.get(OrePrefix.crystal, m, 5))
-				  	.duration(80)
-				  	.EUt(480)
-				  	.buildAndRegister();			 
+				  	.buildAndRegister(); 
 			}
 		}
 	}
 	
 	private static GasStack getSlurry(Material m, boolean isClean, int amount) {
-		if(isClean) {
-			return new GasStack(GasRegistry.getGas(FluidRegistry.getFluid("clean_slurry." + m.toString())), amount);	
+		if(isClean && registeredCleanSlurries.containsKey(m)) {
+			return new GasStack(registeredCleanSlurries.get(m), amount);
 		}
-		else {
-			return new GasStack(GasRegistry.getGas(FluidRegistry.getFluid("slurry." + m.toString())), amount);
+		else if (!isClean && registeredSlurries.containsKey(m)){
+			return new GasStack(registeredSlurries.get(m), amount);
 		}
+		//Again, this should not happen
+		return null;
 	}
 }

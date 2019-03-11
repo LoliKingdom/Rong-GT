@@ -13,7 +13,6 @@ public class MetaItems {
 	
 	public static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
 	
-	public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_LV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_MV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_HV;
@@ -30,9 +29,7 @@ public class MetaItems {
 
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_PLATE;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_GEAR;
-    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BOTTLE;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_INGOT;
-    public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BALL;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_BLOCK;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_NUGGET;
     public static MetaItem<?>.MetaValueItem SHAPE_MOLD_GEAR_SMALL;
@@ -240,9 +237,11 @@ public class MetaItems {
     
     public static MetaItem<?>.MetaValueItem THERMITE_DUST;
     
+    public static MetaItem<?>.MetaValueItem TURBINE_ROTOR;
+    
     public static ToolMetaItem<?>.MetaToolValueItem SAW;
     public static ToolMetaItem<?>.MetaToolValueItem HARD_HAMMER;
-    //public static ToolMetaItem<?>.MetaToolValueItem SOFT_HAMMER;
+    public static ToolMetaItem<?>.MetaToolValueItem SOFT_HAMMER;
     public static ToolMetaItem<?>.MetaToolValueItem WRENCH;
     public static ToolMetaItem<?>.MetaToolValueItem FILE;
     public static ToolMetaItem<?>.MetaToolValueItem SCREWDRIVER;
@@ -255,7 +254,6 @@ public class MetaItems {
     public static ToolMetaItem<?>.MetaToolValueItem BUZZSAW;
     public static ToolMetaItem<?>.MetaToolValueItem SCREWDRIVER_LV;
     public static ToolMetaItem<?>.MetaToolValueItem SOLDERING_IRON_LV;
-    public static ToolMetaItem<?>.MetaToolValueItem TURBINE;
     
     public static void init() {
     	MetaItems1 first = new MetaItems1();

@@ -8,13 +8,13 @@ import static gregtech.common.items.MetaItems.SAW;
 import static gregtech.common.items.MetaItems.SCREWDRIVER;
 import static gregtech.common.items.MetaItems.SCREWDRIVER_LV;
 import static gregtech.common.items.MetaItems.SOLDERING_IRON_LV;
-import static gregtech.common.items.MetaItems.TURBINE;
 import static gregtech.common.items.MetaItems.WIRE_CUTTER;
 import static gregtech.common.items.MetaItems.WRENCH;
 import static gregtech.common.items.MetaItems.WRENCH_HV;
 import static gregtech.common.items.MetaItems.WRENCH_LV;
 import static gregtech.common.items.MetaItems.WRENCH_MV;
 import static gregtech.common.items.MetaItems.PLUNGER;
+import static gregtech.common.items.MetaItems.SOFT_HAMMER;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.ToolDictNames;
@@ -38,7 +38,6 @@ import gregtech.common.tools.ToolScrewdriver;
 import gregtech.common.tools.ToolScrewdriverLV;
 import gregtech.common.tools.ToolSoftHammer;
 import gregtech.common.tools.ToolSolderingIron;
-import gregtech.common.tools.ToolTurbineRotor;
 import gregtech.common.tools.ToolWireCutter;
 import gregtech.common.tools.ToolWrench;
 import gregtech.common.tools.ToolWrenchHV;
@@ -58,7 +57,7 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
     public void registerSubItems() {
         SAW = addItem(1, "tool.saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
         HARD_HAMMER = addItem(2, "tool.hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
-        //SOFT_HAMMER = addItem(3, "tool.soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
+        SOFT_HAMMER = addItem(3, "tool.soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
         WRENCH = addItem(4, "tool.wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
         FILE = addItem(5, "tool.file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
         SCREWDRIVER = addItem(6, "tool.screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
@@ -87,48 +86,6 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
             .addOreDict(ToolDictNames.craftingToolSaw)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        TURBINE = addItem(26, "tool.turbine").setToolStats(new ToolTurbineRotor());
-        
         PLUNGER = addItem(27, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
-    }
-
-    public void registerRecipes() {
-        ModHandler.addShapedRecipe("mortar_flint", MORTAR.getStackForm(Materials.Flint),
-            " I ", "SIS", "SSS",
-            'I', new ItemStack(Items.FLINT, 1),
-            'S', OrePrefix.stone);
-
-        IngotMaterial[] mortarMaterials = new IngotMaterial[] {Materials.BismuthBronze, Materials.DamascusSteel, Materials.VanadiumSteel};
-
-        for (IngotMaterial material : mortarMaterials) {
-            ModHandler.addShapedRecipe("mortar_" + material.toString(),
-                MORTAR.getStackForm(material),
-                " I ", "SIS", "SSS",
-                'I', new UnificationEntry(OrePrefix.ingot, material),
-                'S', OrePrefix.stone);
-        }
-        
-        /*SolidMaterial[] softHammerMaterials = new SolidMaterial[] {Materials.Rubber, Materials.Plastic, Materials.Polytetrafluoroethylene};
-            for(int i = 0; i < softHammerMaterials.length; i++) {
-                SolidMaterial solidMaterial = softHammerMaterials[i];
-                ItemStack itemStack = MetaItems.SOFT_HAMMER.getStackForm();
-                MetaItems.SOFT_HAMMER.setToolData(itemStack, solidMaterial, 128 * (1 << i), 1, 4.0f, 1.0f);
-                ModHandler.addShapedRecipe(String.format("soft_hammer_%s", solidMaterial.toString()), itemStack,
-                    "XX ", "XXS", "XX ",
-                    'X', new UnificationEntry(OrePrefix.ingot, solidMaterial),
-                    'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
-            }*/
-
-        ModHandler.addShapelessRecipe("clay_to_dust", OreDictUnifier.get(OrePrefix.dust, Materials.Clay, 1),
-            ToolDictNames.craftingToolMortar,
-            new ItemStack(Blocks.CLAY, 1));
-
-        ModHandler.addShapelessRecipe("wheat_to_dust", OreDictUnifier.get(OrePrefix.dust, Materials.Wheat, 1),
-            ToolDictNames.craftingToolMortar,
-            new ItemStack(Items.WHEAT, 1));
-
-        ModHandler.addShapelessRecipe("gravel_to_flint", new ItemStack(Items.FLINT, 1),
-            ToolDictNames.craftingToolMortar,
-            new ItemStack(Blocks.GRAVEL, 1));
     }
 }

@@ -18,8 +18,9 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.util.RandomPotionEffect;
 import gregtech.common.items.behaviors.ColorSprayBehaviour;
 import gregtech.common.items.behaviors.DynamiteBehaviour;
-import gregtech.common.items.behaviors.FoamSprayerBehavior;
+import gregtech.common.items.behaviors.FoamSprayerBehaviour;
 import gregtech.common.items.behaviors.IntCircuitBehaviour;
+import gregtech.common.items.behaviors.TurbineRotorBehaviour;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
@@ -38,9 +39,7 @@ public class MetaItems1 extends MaterialMetaItem {
 
         SHAPE_MOLD_PLATE = addItem(304, "shape.mold.plate");
         SHAPE_MOLD_GEAR = addItem(305, "shape.mold.gear");
-        SHAPE_MOLD_BOTTLE = addItem(306, "shape.mold.bottle");
         SHAPE_MOLD_INGOT = addItem(307, "shape.mold.ingot");
-        SHAPE_MOLD_BALL = addItem(308, "shape.mold.ball");
         SHAPE_MOLD_BLOCK = addItem(309, "shape.mold.block");
         SHAPE_MOLD_NUGGET = addItem(310, "shape.mold.nugget");
         SHAPE_MOLD_GEAR_SMALL = addItem(312, "shape.mold.gear.small");
@@ -193,7 +192,6 @@ public class MetaItems1 extends MaterialMetaItem {
 
         COVER_SHUTTER = addItem(502, "cover.shutter");
 
-        COVER_SOLAR_PANEL = addItem(503, "cover.solar.panel");
         COVER_SOLAR_PANEL_LV = addItem(504, "cover.solar.panel.lv");
         COVER_SOLAR_PANEL_MV = addItem(505, "cover.solar.panel.mv");
         COVER_SOLAR_PANEL_HV = addItem(506, "cover.solar.panel.hv");
@@ -206,7 +204,7 @@ public class MetaItems1 extends MaterialMetaItem {
 
         INTEGRATED_CIRCUIT = addItem(512, "circuit.integrated").addStats(new IntCircuitBehaviour());
         
-        FOAM_SPRAYER = addItem(513, "foam_sprayer").addStats(new FoamSprayerBehavior());
+        FOAM_SPRAYER = addItem(513, "foam_sprayer").addStats(new FoamSprayerBehaviour());
         
         ENERGY_CRYSTAL = addItem(514, "energy_crystal").addStats(ElectricStats.createRechargeableBattery(1000000L, GTValues.HV)).setModelAmount(8).setMaxStackSize(1);
         LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(4000000L, GTValues.EV)).setModelAmount(8).setMaxStackSize(1);
@@ -243,6 +241,8 @@ public class MetaItems1 extends MaterialMetaItem {
         
         GLASS_TUBE = addItem(538, "glass_tube");
         CIRCUIT_VACUUM_TUBE_LV = addItem(539, "vacuum_tube").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
+        
+        TURBINE_ROTOR = addItem(550, "turbine_rotor").addStats(new TurbineRotorBehaviour());
 	}
 	
 	public void registerRecipes() {

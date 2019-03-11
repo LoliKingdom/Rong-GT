@@ -147,11 +147,8 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void runEarlyMaterialHandlers(RegistryEvent.Register<IRecipe> event) {
         GTLog.logger.info("Running early material handlers...");
-        //OrePrefix.runMaterialHandlers();
-        
-        MekanismProcessingHandler.removeRecipes();
-        MekanismProcessingHandler.initRecipes();
-        ThaumcraftProcessingHandler.init();
+        //Checks
+        //OrePrefix.runMaterialHandlers();        
     }
 
     //this is called last, so all mods finished registering their stuff, as example, CraftTweaker
@@ -160,7 +157,10 @@ public class CommonProxy {
     public static void registerRecipesLowest(RegistryEvent.Register<IRecipe> event) {
         GTLog.logger.info("Running late material handlers...");
         OrePrefix.runMaterialHandlers();
-        DecompositionRecipeHandler.runRecipeGeneration();
+        //DecompositionRecipeHandler.runRecipeGeneration();
+        MekanismProcessingHandler.removeRecipes();
+        MekanismProcessingHandler.initRecipes();
+        ThaumcraftProcessingHandler.init();
     }
     
     @SubscribeEvent

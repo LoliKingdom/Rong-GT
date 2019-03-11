@@ -7,6 +7,7 @@ import gregtech.loaders.recipes.MachineRecipeLoader;
 import gregtech.loaders.recipes.MatterManipulationRecipeLoader;
 import gregtech.loaders.recipes.MetaTileEntityRecipeLoader;
 import gregtech.loaders.recipes.RecyclingRecipeLoader;
+import gregtech.loaders.recipes.processing.DecompositionRecipeHandler;
 import gregtech.loaders.recipes.processing.MaterialRecipeHandler;
 import gregtech.loaders.recipes.processing.OreRecipeHandler;
 import gregtech.loaders.recipes.processing.PartsRecipeHandler;
@@ -28,6 +29,7 @@ public class RecipeLoaders {
         ToolRecipeHandler.register();
         PolarizingRecipeHandler.register();
         RecyclingRecipeHandler.register();
+        DecompositionRecipeHandler.runRecipeGeneration();
 		
 		MachineRecipeLoader.init();
 		MetaTileEntityRecipeLoader.init();
@@ -37,5 +39,4 @@ public class RecipeLoaders {
 		MatterManipulationRecipeLoader.init();
 		RecyclingRecipeLoader.init();
 	}
-
 }

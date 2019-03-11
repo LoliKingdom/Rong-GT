@@ -223,7 +223,13 @@ public class Materials {
     public static DustMaterial Powellite = new DustMaterial(242, "powellite", 0xFFFF00, MaterialIconSet.ROUGH, 2, of(new MaterialStack(Calcium, 1), new MaterialStack(Molybdenum, 1), new MaterialStack(Oxygen, 4)), GENERATE_ORE);
     public static DustMaterial RockSalt = new DustMaterial(243, "rock_salt", 0xF0C8C8, MaterialIconSet.FINE, 1, of(new MaterialStack(Potassium, 1), new MaterialStack(Chlorine, 1)), GENERATE_ORE | NO_SMASHING);
     public static DustMaterial Grossular = new DustMaterial(244, "grossular", 0xC86400, MaterialIconSet.GEM_VERTICAL, 1, of(new MaterialStack(Calcium, 3), new MaterialStack(Aluminium, 2), new MaterialStack(Silicon, 3), new MaterialStack(Oxygen, 12)), GENERATE_ORE);
-    
+    public static DustMaterial Cuprite = new DustMaterial(247, "cuprite", 0x770000, MaterialIconSet.RUBY, 2, of(new MaterialStack(Copper, 2), new MaterialStack(Oxygen, 1)), GENERATE_ORE);
+    public static DustMaterial Bornite = new DustMaterial(248, "bornite", 0xC11800, MaterialIconSet.DULL, 1, of(new MaterialStack(Copper, 5), new MaterialStack(Iron, 1), new MaterialStack(Sulfur, 4)), GENERATE_ORE);
+    public static DustMaterial Chalcocite = new DustMaterial(249, "chalcocite", 0x353535, MaterialIconSet.GEM_VERTICAL, 2, of(new MaterialStack(Copper, 2), new MaterialStack(Sulfur, 1)), GENERATE_ORE);
+    public static DustMaterial Enargite = new DustMaterial(250, "enargite", 0xBBBBBB, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Copper, 3), new MaterialStack(Arsenic, 1), new MaterialStack(Sulfur, 4)), GENERATE_ORE);
+    public static DustMaterial Tennantite = new DustMaterial(251, "tennantite", 0x909090, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Copper, 12), new MaterialStack(Arsenic, 4), new MaterialStack(Sulfur, 13)), GENERATE_ORE);
+
+
     public static IngotMaterial Graphite = new IngotMaterial(245, "graphite", 0x808080, MaterialIconSet.DULL, 2, of(), GENERATE_PLATE | GENERATE_ORE | NO_SMASHING | NO_SMELTING | FLAMMABLE);
     
     /**
@@ -354,7 +360,7 @@ public class Materials {
     public static IngotMaterial TungstenSteel = new IngotMaterial(508, "tungsten_steel", 0x6464A0, MaterialIconSet.METALLIC, 4, of(new MaterialStack(Steel, 1), new MaterialStack(Tungsten, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_DENSE, null, 9.0F, 3.0F, 2560, 3000);
     //public static IngotMaterial TungstenCarbide = new IngotMaterial(510, "tungsten_carbide", 0x330066, MaterialIconSet.METALLIC, 4, of(new MaterialStack(Tungsten, 1), new MaterialStack(Carbon, 1)), EXT2_METAL, null, 13.0F, 3.5F, 1280, 2460);
     public static IngotMaterial Invar = new IngotMaterial(511, "invar", 0xB4B478, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 2), new MaterialStack(Nickel, 1)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING, 6.0F, 2.5F, 256);
-    public static IngotMaterial VanadiumSteel = new IngotMaterial(512, "vanadium_steel", 0xC0C0C0, MaterialIconSet.METALLIC, 3, of(new MaterialStack(Vanadium, 1), new MaterialStack(Chrome, 1), new MaterialStack(Steel, 7)), EXT2_METAL, null, 1453);
+    public static IngotMaterial VanadiumSteel = new IngotMaterial(512, "vanadium_steel", 0xC0C0C0, MaterialIconSet.METALLIC, 3, of(new MaterialStack(Vanadium, 1), new MaterialStack(Chrome, 1), new MaterialStack(Steel, 7)), EXT2_METAL, null, 6.0F, 5.0F, 400, 1453);
     public static IngotMaterial HSSG = new IngotMaterial(513, "hssg", 0x999900, MaterialIconSet.METALLIC, 3, of(new MaterialStack(TungstenSteel, 5), new MaterialStack(Chrome, 1), new MaterialStack(Molybdenum, 2), new MaterialStack(Vanadium, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, null, 10.0F, 5.0F, 3584, 4500);
     public static IngotMaterial HSSE = new IngotMaterial(515, "hsse", 0x336600, MaterialIconSet.METALLIC, 4, of(new MaterialStack(HSSG, 6), new MaterialStack(Cobalt, 1), new MaterialStack(Manganese, 1), new MaterialStack(Silicon, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, null, 10.0F, 5.0F, 5120, 5400);
     public static IngotMaterial HSSS = new IngotMaterial(514, "hsss", 0x660033, MaterialIconSet.METALLIC, 5, of(new MaterialStack(HSSG, 6), new MaterialStack(Iridium, 2), new MaterialStack(Osmium, 1)), EXT2_METAL | GENERATE_GEAR, null, 14.0F, 6.0F, 3200, 5400);
@@ -400,9 +406,9 @@ public class Materials {
     //Botania
     public static RoughSolidMaterial Livingwood = new RoughSolidMaterial(607, "livingwood", 0x896727, MaterialIconSet.WOOD, 1, of(), FLAMMABLE | NO_SMELTING | GENERATE_PLATE, () -> OrePrefix.plank);
     public static DustMaterial Livingrock = new DustMaterial(608, "livingrock", 0xCDCDCD, MaterialIconSet.ROUGH, 1, of(), MORTAR_GRINDABLE | GENERATE_PLATE | NO_SMASHING | NO_RECYCLING);
-    public static IngotMaterial Manasteel = new IngotMaterial(609, "manasteel", 0x0000FF, MaterialIconSet.SHINY, 2, of(), EXT2_METAL);
-    public static IngotMaterial Terrasteel = new IngotMaterial(610, "terrasteel", 0x32CD32, MaterialIconSet.SHINY, 3, of(), EXT2_METAL);
-    public static IngotMaterial ElvenElementium = new IngotMaterial(611, "elven_elementium", 0xFF1493, MaterialIconSet.SHINY, 3, of(), EXT2_METAL);
+    public static IngotMaterial Manasteel = new IngotMaterial(609, "manasteel", 0x0000FF, MaterialIconSet.SHINY, 2, of(), EXT2_METAL, 7.5F, 3.0F, 480);
+    public static IngotMaterial Terrasteel = new IngotMaterial(610, "terrasteel", 0x32CD32, MaterialIconSet.SHINY, 3, of(), EXT2_METAL, 8.5F, 4.0F, 780);
+    public static IngotMaterial ElvenElementium = new IngotMaterial(611, "elven_elementium", 0xFF1493, MaterialIconSet.SHINY, 3, of(), EXT2_METAL, 12.5F, 5.0F, 1560);
     public static IngotMaterial Gaia = new IngotMaterial(612, "gaia", 0x708090, MaterialIconSet.DULL, 4, of(), EXT2_METAL);
     public static GemMaterial ManaPearl = new GemMaterial(613, "mana_pearl", 0x0000FF, MaterialIconSet.GEM_VERTICAL, 1, of(), GENERATE_PLATE | GENERATE_LENSE | NO_SMASHING | NO_SMELTING);
     public static GemMaterial ManaDiamond = new GemMaterial(614, "mana_diamond", 0x42F4F1, MaterialIconSet.GEM_VERTICAL, 3, of(), GENERATE_PLATE | GENERATE_LENSE | NO_SMASHING | NO_SMELTING);
@@ -598,19 +604,19 @@ public class Materials {
         Iron.magneticMaterial = IronMagnetic;
 
         NeodymiumMagnetic.setSmeltingInto(Neodymium);
-        NeodymiumMagnetic.setArcSmeltingInto(Neodymium);
+        NeodymiumMagnetic.setRecycleTo(Neodymium);
         NeodymiumMagnetic.setMaceratingInto(Neodymium);
 
         SteelMagnetic.setSmeltingInto(Steel);
-        SteelMagnetic.setArcSmeltingInto(Steel);
+        SteelMagnetic.setRecycleTo(Steel);
         SteelMagnetic.setMaceratingInto(Steel);
 
         IronMagnetic.setSmeltingInto(Iron);
-        IronMagnetic.setArcSmeltingInto(WroughtIron);
+        IronMagnetic.setRecycleTo(WroughtIron);
         IronMagnetic.setMaceratingInto(Iron);
 
-        Iron.setArcSmeltingInto(WroughtIron);
-        Copper.setArcSmeltingInto(AnnealedCopper);
+        Iron.setRecycleTo(WroughtIron);
+        Copper.setRecycleTo(AnnealedCopper);
 
         Tetrahedrite.setDirectSmelting(Copper);
         Chalcopyrite.setDirectSmelting(Copper);
@@ -783,7 +789,6 @@ public class Materials {
         Tin.setCableProperties(GTValues.V[0], 1, 1);
         Cobalt.setCableProperties(GTValues.V[0], 2, 2);
         Lead.setCableProperties(GTValues.V[0], 2, 2);
-        Tin.setCableProperties(GTValues.V[0], 1, 1);
         Zinc.setCableProperties(GTValues.V[0], 1, 1);
         SolderingAlloy.setCableProperties(GTValues.V[0], 1, 1);
 

@@ -7,7 +7,7 @@ import gregtech.api.cover.ICoverable;
 import gregtech.api.items.metaitem.MetaItem.MetaValueItem;
 import gregtech.api.util.GTLog;
 import gregtech.common.items.MetaItems;
-import gregtech.common.items.behaviors.CoverPlaceBehavior;
+import gregtech.common.items.behaviors.CoverPlaceBehaviour;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
@@ -58,6 +58,6 @@ public class CoverBehaviors {
     public static void registerBehavior(int coverNetworkId, ResourceLocation coverId, MetaValueItem placerItem, BiFunction<ICoverable, EnumFacing, CoverBehavior> behaviorCreator) {
         CoverDefinition coverDefinition = new CoverDefinition(coverId, behaviorCreator, placerItem.getStackForm());
         CoverDefinition.registerCover(coverNetworkId, coverDefinition);
-        placerItem.addStats(new CoverPlaceBehavior(coverDefinition));
+        placerItem.addStats(new CoverPlaceBehaviour(coverDefinition));
     }
 }

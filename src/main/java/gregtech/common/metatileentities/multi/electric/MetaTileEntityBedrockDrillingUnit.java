@@ -49,11 +49,6 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
 			MultiblockAbility.IMPORT_FLUIDS, MultiblockAbility.EXPORT_ITEMS, MultiblockAbility.INPUT_ENERGY
 	};
 
-	protected int speed;
-	protected long energyLevel;
-	
-	Random random = new Random();
-	
 	public MetaTileEntityBedrockDrillingUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.BEDROCK_DRILL_RECIPES);
     }
@@ -66,15 +61,11 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        this.speed = context.getOrDefault("DrillHeadType", DrillHeadType.STEEL).getSpeed();
-        this.energyLevel = context.getOrDefault("DrillHeadType", DrillHeadType.STEEL).getEnergyLevel();
     }
     
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.speed = 0;
-        this.energyLevel = 0;
     }
     
     @Override
@@ -83,21 +74,14 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
             .aisle("BBB", "XXX", "CCC", "#Z#", "#Z#")
             .aisle("BBB", "XXX", "CCC", "ZCZ", "ZCZ")
             .aisle("BBB", "XXX", "CSC", "#Z#", "#Z#")
-            .setAmountAtLeast('C', 18)
             .setAmountAtLeast('B', 3)
             .where('S', selfPredicate())
             .where('X', drillHeadPredicate())
-            .where('C', statePredicate(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).or(abilityPartPredicate(ALLOWED_ABILITIES)))
+            .where('C', statePredicate(MetaBlocks.METAL_CASING.getState(MetalCasingType.INVAR_HEATPROOF)).or(abilityPartPredicate(ALLOWED_ABILITIES)))
             .where('#', isAirPredicate())
             .where('Z', blockPredicate(MetaBlocks.FRAMES.get(Materials.Steel)))
             .where('B', blockPredicate(Blocks.BEDROCK))           
             .build();
-    }
-    
-    @Override
-    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
-    	long requiredTier = (long)recipe.getIntegerProperty("level");
-    	return requiredTier == this.energyLevel;
     }
     
     public static Predicate<BlockWorldState> drillHeadPredicate() {

@@ -54,7 +54,7 @@ public class MaterialRecipeHandler {
 
                 RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
                     .input(dustPrefix, material)
-                    .fluidInputs(ModHandler.getDistilledWater(200))
+                    .fluidInputs(Materials.DistilledWater.getFluid(200))
                     .chancedOutput(gemStack, 9000)
                     .duration(1500)
                     .EUt(24)
@@ -103,11 +103,6 @@ public class MaterialRecipeHandler {
                             .outputs(OreDictUnifier.get(OrePrefix.ingot, metalMaterial))
                             .duration(metalMaterial.blastFurnaceTemperature / 16)
                             .buildAndRegister();
-                    }
-
-                    if (metalMaterial.blastFurnaceTemperature <= 1000) {
-                        ModHandler.addRCFurnaceRecipe(new UnificationEntry(dustPrefix, metalMaterial), ingotStack, duration);
-                        ModHandler.addRCFurnaceRecipe(new UnificationEntry(OrePrefix.nugget, metalMaterial), nuggetStack, Math.max(1, duration / 9));
                     }
                 }
             }

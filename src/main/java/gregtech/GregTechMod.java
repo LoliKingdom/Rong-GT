@@ -29,6 +29,7 @@ import gregtech.common.covers.CoverBehaviors;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.multipart.GTMultipartFactory;
+import gregtech.integration.mekanism.MekanismProcessingHandler;
 import gregtech.integration.theoneprobe.TheOneProbeCompatibility;
 import gregtech.integration.tinkers.TinkersIntegration;
 import gregtech.loaders.dungeon.DungeonLootLoader;
@@ -92,6 +93,10 @@ public class GregTechMod {
         MetaFluids.init();
         MetaTileEntities.init();
         MetaEntities.init();   
+        
+        if(GTValues.isModLoaded("mekanism")) {
+        	MekanismProcessingHandler.initGas();
+        }
         
         proxy.onPreLoad();
     }

@@ -125,7 +125,7 @@ public interface IToolStats {
      * This lets you modify the Drop List, when this type of Tool has been used.
      * Allows special behaviors like timber axe, leaves cutting, etc
      */
-    default int convertBlockDrops(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer harvester, List<ItemStack> drops, boolean recursive) {
+    default int convertBlockDrops(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer harvester, List<ItemStack> drops, boolean recursive, ItemStack toolStack) {
         return 0; //do not convert anything by default
     }
 

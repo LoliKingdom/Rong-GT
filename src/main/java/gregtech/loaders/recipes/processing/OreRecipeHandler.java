@@ -110,7 +110,7 @@ public class OreRecipeHandler {
 
         RecipeMaps.ORE_WASHER_RECIPES.recipeBuilder()
             .input(crushedPrefix, material)
-            .fluidInputs(ModHandler.getDistilledWater(500))
+            .fluidInputs(Materials.DistilledWater.getFluid(500))
             .outputs(crushedPurifiedOre,
                 OreDictUnifier.get(OrePrefix.dustTiny, byproductMaterial, material.byProductMultiplier))
             .duration(300)

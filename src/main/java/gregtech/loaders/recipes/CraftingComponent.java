@@ -41,17 +41,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.ELECTRIC_PUMP_LV;
-                case 2:
+                case 1:
                     return MetaItems.ELECTRIC_PUMP_MV;
-                case 3:
+                case 2:
                     return MetaItems.ELECTRIC_PUMP_HV;
-                case 4:
+                case 3:
                     return MetaItems.ELECTRIC_PUMP_EV;
-                case 5:
+                case 4:
                     return MetaItems.ELECTRIC_PUMP_IV;
-                case 6:
+                case 5:
                     return MetaItems.ELECTRIC_PUMP_LuV;
                 default:
                     return MetaItems.ELECTRIC_PUMP_UV;
@@ -63,25 +62,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                    return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Lead);
-                case 1:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Tin);
-                case 2:
+                case 1:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Copper);
-                case 3:
+                case 2:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Gold);
-                case 4:
+                case 3:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Aluminium);
-                case 5:
+                case 4:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Platinum);
-                case 6:
+                case 5:
                     return new UnificationEntry(OrePrefix.cableGtSingle, Materials.NiobiumTitanium);
-                case 7:
-                    return new UnificationEntry(OrePrefix.cableGtSingle, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.NaquadahAlloy);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtSingle, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.cableGtSingle, MarkerMaterials.Tier.Superconductor);
             }
         }
     },
@@ -90,16 +83,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
+                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Lead);
                 case 1:
-                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Gold);
+                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Nickel);
                 case 2:
                     return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Silver);
                 case 3:
-                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Electrum);
+                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Titanium);
                 case 4:
-                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Platinum);
-                default:
                     return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Osmium);
+                case 5:
+                    return new UnificationEntry(OrePrefix.wireGtSingle, Materials.VanadiumGallium);
+                default:
+                    return new UnificationEntry(OrePrefix.wireGtSingle, MarkerMaterials.Tier.Superconductor);
             }
         }
     },
@@ -108,25 +104,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Lead);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.RedAlloy);
                 case 1:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Tin);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Iron);
                 case 2:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Copper);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Electrum);
                 case 3:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Gold);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Nichrome);
                 case 4:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Aluminium);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Graphene);
                 case 5:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Platinum);
-                case 6:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.NiobiumTitanium);
-                case 7:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.cableGtSingle, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.YttriumBariumCuprate);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, MarkerMaterials.Tier.Superconductor);
             }
         }
     },
@@ -184,22 +174,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return new UnificationEntry(OrePrefix.plate, Materials.Steel);
-                case 2:
+                case 1:
                     return new UnificationEntry(OrePrefix.plate, Materials.Aluminium);
-                case 3:
+                case 2:
                     return new UnificationEntry(OrePrefix.plate, Materials.StainlessSteel);
-                case 4:
+                case 3:
                     return new UnificationEntry(OrePrefix.plate, Materials.Titanium);
-                case 5:
+                case 4:
                     return new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel);
-                case 6:
+                case 5:
                     return new UnificationEntry(OrePrefix.plate, Materials.HSSG);
-                case 7:
+                case 6:
                     return new UnificationEntry(OrePrefix.plate, Materials.HSSE);
-                case 8:
-                    return new UnificationEntry(OrePrefix.plate, Materials.Darmstadtium);
                 default:
                     return new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel);
             }
@@ -210,17 +197,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.ELECTRIC_MOTOR_LV;
-                case 2:
+                case 1:
                     return MetaItems.ELECTRIC_MOTOR_MV;
-                case 3:
+                case 2:
                     return MetaItems.ELECTRIC_MOTOR_HV;
-                case 4:
+                case 3:
                     return MetaItems.ELECTRIC_MOTOR_EV;
-                case 5:
+                case 4:
                     return MetaItems.ELECTRIC_MOTOR_IV;
-                case 6:
+                case 5:
                     return MetaItems.ELECTRIC_MOTOR_LuV;
                 default:
                     return MetaItems.ELECTRIC_MOTOR_UV;
@@ -232,22 +218,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.Tin);
-                case 2:
                     return new UnificationEntry(OrePrefix.rotor, Materials.Bronze);
+                case 1:
+                    return new UnificationEntry(OrePrefix.rotor, Materials.SterlingSilver);
+                case 2:
+                    return new UnificationEntry(OrePrefix.rotor, Materials.VanadiumSteel);
                 case 3:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.Steel);
+                    return new UnificationEntry(OrePrefix.rotor, Materials.Magnalium);
                 case 4:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.StainlessSteel);
-                case 5:
                     return new UnificationEntry(OrePrefix.rotor, Materials.TungstenSteel);
-                case 6:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.Chrome);
-                case 7:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.Iridium);
+                case 5:
+                    return new UnificationEntry(OrePrefix.rotor, Materials.Ultimet);
                 default:
-                    return new UnificationEntry(OrePrefix.rotor, Materials.Osmium);
+                    return new UnificationEntry(OrePrefix.rotor, Materials.Osmiridium);
             }
         }
     },
@@ -256,17 +239,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.SENSOR_LV;
-                case 2:
+                case 1:
                     return MetaItems.SENSOR_MV;
-                case 3:
+                case 2:
                     return MetaItems.SENSOR_HV;
-                case 4:
+                case 3:
                     return MetaItems.SENSOR_EV;
-                case 5:
+                case 4:
                     return MetaItems.SENSOR_IV;
-                case 6:
+                case 5:
                     return MetaItems.SENSOR_LuV;
                 default:
                     return MetaItems.SENSOR_UV;
@@ -278,19 +260,14 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
+                	return new UnificationEntry(OrePrefix.block, Materials.Flint);
                 case 1:
-                    return new UnificationEntry(OrePrefix.gem, Materials.Diamond);
+                    return new UnificationEntry(OrePrefix.gem, Materials.Peridot);
                 case 2:
-                    return new UnificationEntry(OrePrefix.gem, Materials.Diamond);
+                    return new UnificationEntry(OrePrefix.gem, Materials.Emerald);
                 default:
                     return OreDictNames.craftingGrinder;
             }
-        }
-    },
-    DIAMOND {
-        @Override
-        Object getIngredient(int tier) {
-            return new UnificationEntry(OrePrefix.gem, Materials.Diamond);
         }
     },
     PISTON {
@@ -298,17 +275,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.ELECTRIC_PISTON_LV;
-                case 2:
+                case 1:
                     return MetaItems.ELECTRIC_PISTON_MV;
-                case 3:
+                case 2:
                     return MetaItems.ELECTRIC_PISTON_HV;
-                case 4:
+                case 3:
                     return MetaItems.ELECTRIC_PISTON_EV;
-                case 5:
+                case 4:
                     return MetaItems.ELECTRIC_PISTON_IV;
-                case 6:
+                case 5:
                     return MetaItems.ELECTRIC_PISTON_LuV;
                 default:
                     return MetaItems.ELECTRIC_PISTON_UV;
@@ -320,17 +296,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.EMITTER_LV;
-                case 2:
+                case 1:
                     return MetaItems.EMITTER_MV;
-                case 3:
+                case 2:
                     return MetaItems.EMITTER_HV;
-                case 4:
+                case 3:
                     return MetaItems.EMITTER_EV;
-                case 5:
+                case 4:
                     return MetaItems.EMITTER_IV;
-                case 6:
+                case 5:
                     return MetaItems.EMITTER_LuV;
                 default:
                     return MetaItems.EMITTER_UV;
@@ -342,17 +317,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.CONVEYOR_MODULE_LV;
-                case 2:
+                case 1:
                     return MetaItems.CONVEYOR_MODULE_MV;
-                case 3:
+                case 2:
                     return MetaItems.CONVEYOR_MODULE_HV;
-                case 4:
+                case 3:
                     return MetaItems.CONVEYOR_MODULE_EV;
-                case 5:
+                case 4:
                     return MetaItems.CONVEYOR_MODULE_IV;
-                case 6:
+                case 5:
                     return MetaItems.CONVEYOR_MODULE_LuV;
                 default:
                     return MetaItems.CONVEYOR_MODULE_UV;
@@ -364,17 +338,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.ROBOT_ARM_LV;
-                case 2:
+                case 1:
                     return MetaItems.ROBOT_ARM_MV;
-                case 3:
+                case 2:
                     return MetaItems.ROBOT_ARM_HV;
-                case 4:
+                case 3:
                     return MetaItems.ROBOT_ARM_EV;
-                case 5:
+                case 4:
                     return MetaItems.ROBOT_ARM_IV;
-                case 6:
+                case 5:
                     return MetaItems.ROBOT_ARM_LuV;
                 default:
                     return MetaItems.ROBOT_ARM_UV;
@@ -386,22 +359,17 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Copper);
-                case 2:
+                case 1:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Cupronickel);
-                case 3:
+                case 2:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Kanthal);
-                case 4:
+                case 3:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Nichrome);
-                case 5:
+                case 4:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.TungstenSteel);
-                case 6:
+                case 5:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.HSSG);
-                case 7:
-                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.NaquadahAlloy);
                 default:
                     return new UnificationEntry(OrePrefix.wireGtOctal, Materials.Nichrome);
             }
@@ -414,21 +382,17 @@ public enum CraftingComponent {
                 case 0:
                     return new UnificationEntry(OrePrefix.wireGtSingle, Materials.Tin);
                 case 1:
-                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Tin);
+                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Lead);
                 case 2:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Copper);
                 case 3:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Copper);
+                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Nickel);
                 case 4:
                     return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
                 case 5:
-                    return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
-                case 6:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.YttriumBariumCuprate);
-                case 7:
-                    return new UnificationEntry(OrePrefix.wireGtOctal, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.wireGtOctal, Materials.Graphene);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtHex, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.YttriumBariumCuprate);
             }
         }
     },
@@ -437,23 +401,18 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return new UnificationEntry(OrePrefix.stick, Materials.IronMagnetic);
+                case 1:
+                	return new UnificationEntry(OrePrefix.stick, Materials.SteelMagnetic);
                 case 2:
-                case 3:
                     return new UnificationEntry(OrePrefix.stick, Materials.SteelMagnetic);
+                case 3:
+                	return new UnificationEntry(OrePrefix.stick, Materials.NeodymiumMagnetic);
                 case 4:
-                case 5:
                     return new UnificationEntry(OrePrefix.stick, Materials.NeodymiumMagnetic);
                 default:
                     return new UnificationEntry(OrePrefix.block, Materials.NeodymiumMagnetic);
             }
-        }
-    },
-    STICK_DISTILLATION {
-        @Override
-        Object getIngredient(int tier) {
-            return new UnificationEntry(OrePrefix.stick, Materials.Blaze);
         }
     },
     FIELD_GENERATOR {
@@ -461,17 +420,16 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return MetaItems.FIELD_GENERATOR_LV;
-                case 2:
+                case 1:
                     return MetaItems.FIELD_GENERATOR_MV;
-                case 3:
+                case 2:
                     return MetaItems.FIELD_GENERATOR_HV;
-                case 4:
+                case 3:
                     return MetaItems.FIELD_GENERATOR_EV;
-                case 5:
+                case 4:
                     return MetaItems.FIELD_GENERATOR_IV;
-                case 6:
+                case 5:
                     return MetaItems.FIELD_GENERATOR_LuV;
                 default:
                     return MetaItems.FIELD_GENERATOR_UV;
@@ -483,24 +441,19 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Copper);
-                case 2:
+                case 1:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Cupronickel);
-                case 3:
+                case 2:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Kanthal);
-                case 4:
+                case 3:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Nichrome);
-                case 5:
+                case 4:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.TungstenSteel);
-                case 6:
+                case 5:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.HSSG);
-                case 7:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.NaquadahAlloy);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtHex, Materials.Nichrome);
+                    return new UnificationEntry(OrePrefix.wireGtHex, Materials.Naquadah);
             }
         }
     },
@@ -509,12 +462,12 @@ public enum CraftingComponent {
         Object getIngredient(int tier) {
             switch (tier) {
                 case 0:
-                case 1:
                     return new UnificationEntry(OrePrefix.stick, Materials.Iron);
+                case 1:
+                	return new UnificationEntry(OrePrefix.stick, Materials.Steel);
                 case 2:
-                case 3:
                     return new UnificationEntry(OrePrefix.stick, Materials.Steel);
-                case 4:
+                case 3:
                     return new UnificationEntry(OrePrefix.stick, Materials.Neodymium);
                 default:
                     return new UnificationEntry(OrePrefix.stick, Materials.VanadiumGallium);

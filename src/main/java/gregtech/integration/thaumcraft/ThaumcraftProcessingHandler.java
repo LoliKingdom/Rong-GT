@@ -52,7 +52,9 @@ public class ThaumcraftProcessingHandler {
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreNetherrack + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.FIRE, 2).add(Aspect.ENTROPY, 2));
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreGravel + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3));
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreSand + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3));		
-				
+				ThaumcraftApi.registerObjectTag(OrePrefix.oreSandstone + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3).add(Aspect.EARTH, 2));		
+				ThaumcraftApi.registerObjectTag(OrePrefix.oreRedSandstone + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3).add(Aspect.EARTH, 2));		
+
 				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "ore" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
 				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "end_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreGravel" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
 				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "gravel_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m, 3), "oreEndstone" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5).merge(Aspect.VOID, 2)));

@@ -21,6 +21,7 @@ import gregtech.api.recipes.recipes.FuelRecipe;
 import gregtech.api.render.ICubeRenderer;
 import gregtech.api.render.SimpleCubeRenderer;
 import gregtech.api.render.Textures;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockFireboxCasing;
@@ -163,7 +164,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
                 double outputMultiplier = currentTemperature / (boilerType.maxTemperature * 1.0);
                 steamOutput = (int) (boilerType.baseSteamOutput * outputMultiplier);
                 if(fluidImportInventory.drain(ModHandler.getWater(1), false) == null &&
-                    fluidImportInventory.drain(ModHandler.getDistilledWater(1), false) == null) {
+                    fluidImportInventory.drain(Materials.DistilledWater.getFluid(1), false) == null) {
                     steamOutput = 0;
                 }
             }
@@ -191,7 +192,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
             boolean doWaterDrain = getTimer() % 20 == 0;
             FluidStack drainedWater = fluidImportInventory.drain(ModHandler.getWater(1), doWaterDrain);
             if(drainedWater == null || drainedWater.amount == 0) {
-                drainedWater = fluidImportInventory.drain(ModHandler.getDistilledWater(1), doWaterDrain);
+                drainedWater = fluidImportInventory.drain(Materials.DistilledWater.getFluid(1), doWaterDrain);
             }
             if(drainedWater != null && drainedWater.amount > 0) {
                 if(currentTemperature > 100 && hasNoWater) {

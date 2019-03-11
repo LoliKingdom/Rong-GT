@@ -24,21 +24,21 @@ import static gregtech.api.GTValues.M;
 public class RecyclingRecipeLoader {
 
     public static void init() {
-        initializeArcRecyclingRecipes();
+    	initializeRecyclingRecipes();
     }
 
-    private static void initializeArcRecyclingRecipes() {
+    private static void initializeRecyclingRecipes() {
         for(Entry<ItemStack, ItemMaterialInfo> entry : OreDictUnifier.getAllItemInfos()) {
             ItemStack itemStack = entry.getKey();
             ItemMaterialInfo materialInfo = entry.getValue();
             ArrayList<MaterialStack> materialStacks = new ArrayList<>();
             materialStacks.add(materialInfo.material);
             materialStacks.addAll(materialInfo.additionalComponents);
-            registerArcRecyclingRecipe(b -> b.inputs(itemStack), materialStacks, false);
+            registerRecyclingRecipe(b -> b.inputs(itemStack), materialStacks, false);
         }
     }
 
-    public static void registerArcRecyclingRecipe(Consumer<RecipeBuilder<?>> inputSupplier, List<MaterialStack> components, boolean ignoreArcSmelting) {
+    public static void registerRecyclingRecipe(Consumer<RecipeBuilder<?>> inputSupplier, List<MaterialStack> components, boolean ignoreArcSmelting) {
         List<MaterialStack> dustMaterials = components.stream()
             .filter(stack -> stack.material instanceof DustMaterial)
             .filter(stack -> stack.amount >= M / 9) //do only materials which have at least one nugget
@@ -49,9 +49,10 @@ public class RecyclingRecipeLoader {
         int voltageMultiplier = 1;
         if(dustMaterial instanceof IngotMaterial) {
             int blastFurnaceTemperature = ((IngotMaterial) dustMaterial).blastFurnaceTemperature;
-            voltageMultiplier = blastFurnaceTemperature == 0 ? 1 : blastFurnaceTemperature > 2000 ? 16 : 4;
-        } 
-        else {
+            voltageMultiplier = blastFurnaceTemperature == 0 ? 16 : blastFurnaceTemperature > 2000 ? 480 : 96;
+        } else {
+            //do not apply arc smelting for gems, solid materials and dust materials
+            //only generate recipes for ingot materials
             ignoreArcSmelting = true;
         }
 
@@ -75,22 +76,21 @@ public class RecyclingRecipeLoader {
             List<ItemStack> resultList = dustMaterials.stream().map(RecyclingRecipeLoader::getArcSmeltingResult).collect(Collectors.toList());
             resultList.removeIf(ItemStack::isEmpty);
             if(resultList.isEmpty()) return;
-            RecipeBuilder<?> arcFurnaceRecipeBuilder = RecipeMaps.ARC_FURNACE_RECIPES.recipeBuilder()
+            RecipeBuilder<?> recycleBuilder = RecipeMaps.RECYCLING_RECIPES.recipeBuilder()
                 .outputs(resultList)
                 .duration((int) Math.max(1L, firstStack.amount * 60 / M))
                 .EUt(30 * voltageMultiplier);
-            inputSupplier.accept(arcFurnaceRecipeBuilder);
-            arcFurnaceRecipeBuilder.buildAndRegister();
+            inputSupplier.accept(recycleBuilder);
+            recycleBuilder.buildAndRegister();
         }
     }
 
     private static ItemStack getArcSmeltingResult(MaterialStack materialStack) {
-    	DustMaterial material = (DustMaterial)materialStack.material;
+        DustMaterial material = (DustMaterial) materialStack.material;
         long materialAmount = materialStack.amount;
         if(material.hasFlag(MatFlags.FLAMMABLE)) {
             return OreDictUnifier.getDust(Materials.Ash, materialAmount);
-        } 
-        else if(material instanceof GemMaterial) {
+        } else if(material instanceof GemMaterial) {
             if(materialStack.material.materialComponents.stream()
                 .anyMatch(stack -> stack.material == Materials.Oxygen)) {
                 return OreDictUnifier.getDust(Materials.Ash, materialAmount);
@@ -100,15 +100,12 @@ public class RecyclingRecipeLoader {
                 return OreDictUnifier.getDust(Materials.Carbon, materialAmount);
             }
             return OreDictUnifier.getDust(Materials.DarkAsh, materialAmount);
-        } 
-        else if(material instanceof IngotMaterial) {
+        } else if(material instanceof IngotMaterial) {
             IngotMaterial ingotMaterial = (IngotMaterial) material;
-            if(ingotMaterial.arcSmeltInto != null) {
-                ingotMaterial = ingotMaterial.arcSmeltInto;
-            }
+            if(ingotMaterial.recycleTo != null)
+                ingotMaterial = ingotMaterial.recycleTo;
             return OreDictUnifier.getIngot(ingotMaterial, materialAmount);
-        } 
-        else {
+        } else {
             return OreDictUnifier.getDust(material, materialAmount);
         }
     }

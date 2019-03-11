@@ -20,7 +20,8 @@ public class OreDictionaryLoader {
     public static void init() {
         GTLog.logger.info("Registering OreDict entries.");
         
-        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL, 1, W), OrePrefix.ingot, Materials.Clay);
+        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL, 1), OrePrefix.ingot, Materials.Clay);
+        OreDictUnifier.registerOre(new ItemStack(Items.FLINT, 1), OrePrefix.gem, Materials.Flint);
         OreDictUnifier.registerOre(new ItemStack(Blocks.HARDENED_CLAY, 1, W), new ItemMaterialInfo(new MaterialStack(Materials.Clay, M * 4)));
         OreDictUnifier.registerOre(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, W), new ItemMaterialInfo(new MaterialStack(Materials.Clay, M * 4)));
 

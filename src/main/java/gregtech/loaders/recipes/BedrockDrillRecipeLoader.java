@@ -10,6 +10,8 @@ public class BedrockDrillRecipeLoader {
 	
 	public static void init() {
 		
+		//TODO: Better recipes
+		
 		//MV
 		RecipeMaps.BEDROCK_DRILL_RECIPES.recipeBuilder()
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.RareEarth), 100)
@@ -18,8 +20,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Gold), 2400)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Carbon), 5000)
-				  .level(GTValues.V[GTValues.MV])
-				  .modifier(0)
+				  .EUt(96)
 				  .buildAndRegister();
 				  
 		//HV
@@ -30,8 +31,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Rutile), 2400)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Neodymium), 2400)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
-				  .level(GTValues.V[GTValues.HV])
-				  .modifier(20)
+				  .EUt(320)
 				  .buildAndRegister();
 		
 		//EV
@@ -42,8 +42,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Cobaltite), 2000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Platinum), 4000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
-				  .level(GTValues.V[GTValues.EV])
-				  .modifier(50)
+				  .EUt(1440)
 				  .buildAndRegister();
 		
 		//IV
@@ -53,8 +52,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Adamantium), 3500)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Tungstate), 3500)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
-				  .level(GTValues.V[GTValues.IV])
-				  .modifier(80)
+				  .EUt(4096)
 				  .buildAndRegister();
 		
 		//LuV
@@ -62,8 +60,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Lutetium), 1000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.RareEarth, 2), 3500)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Iridium), 4000)
-				  .level(GTValues.V[GTValues.LuV])
-				  .modifier(140)
+				  .EUt(12105)
 				  .buildAndRegister();			  
 	}
 }

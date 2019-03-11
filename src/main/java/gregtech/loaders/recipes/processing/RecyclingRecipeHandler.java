@@ -27,7 +27,7 @@ public class RecyclingRecipeHandler {
         (Predicate<OrePrefix>) orePrefix -> orePrefix.name().startsWith("wireGt")
     );
 
-    private static final List<OrePrefix> IGNORE_ARC_SMELTING = Arrays.asList(
+    private static final List<OrePrefix> IGNORE_RECYCLING = Arrays.asList(
         OrePrefix.ingot, OrePrefix.gem, OrePrefix.nugget, OrePrefix.block);
 
     public static void register() {
@@ -39,19 +39,18 @@ public class RecyclingRecipeHandler {
                 else if(object instanceof Predicate)
                     return ((Predicate<OrePrefix>) object).test(orePrefix);
                 else return false;
-            })) orePrefix.addProcessingHandler(DustMaterial.class, RecyclingRecipeHandler::processCrushing);
+            })) orePrefix.addProcessingHandler(DustMaterial.class, RecyclingRecipeHandler::process);
         }
     }
 
-    public static void processCrushing(OrePrefix thingPrefix, DustMaterial material) {
+    public static void process(OrePrefix prefix, DustMaterial material) {
         ArrayList<MaterialStack> materialStacks = new ArrayList<>();
-        materialStacks.add(new MaterialStack(material, thingPrefix.getMaterialAmount(material)));
-        materialStacks.addAll(thingPrefix.secondaryMaterials);
+        materialStacks.add(new MaterialStack(material, prefix.getMaterialAmount(material)));
+        materialStacks.addAll(prefix.secondaryMaterials);
         //only ignore arc smelting for blacklisted prefixes if yielded material is the same as input material
         //if arc smelting gives different material, allow it
-        boolean ignoreArcSmelting = IGNORE_ARC_SMELTING.contains(thingPrefix) && !(
-            material instanceof IngotMaterial && ((IngotMaterial) material).arcSmeltInto != material);
-        RecyclingRecipeLoader.registerArcRecyclingRecipe(builder -> builder.input(thingPrefix, material), materialStacks, ignoreArcSmelting);
+        boolean ignoreArcSmelting = IGNORE_RECYCLING.contains(prefix) && !(
+            material instanceof IngotMaterial && ((IngotMaterial)material).recycleTo != material);
+        RecyclingRecipeLoader.registerRecyclingRecipe(builder -> builder.input(prefix, material), materialStacks, ignoreArcSmelting);
     }
-
 }

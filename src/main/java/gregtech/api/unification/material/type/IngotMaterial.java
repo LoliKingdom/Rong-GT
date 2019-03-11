@@ -48,9 +48,9 @@ public class IngotMaterial extends SolidMaterial {
     public IngotMaterial smeltInto;
 
     /**
-     * Specifies a material into which this material parts turn when heated in arc furnace
+     * Specifies a material into which this material parts turn when processed in the recycler
      */
-    public IngotMaterial arcSmeltInto;
+    public IngotMaterial recycleTo;
 
     /**
      * Material which obtained when this material is polarized
@@ -83,7 +83,7 @@ public class IngotMaterial extends SolidMaterial {
         super(metaItemSubId, name, materialRGB, materialIconSet, harvestLevel, materialComponents, materialGenerationFlags, element, toolSpeed, attackDamage, toolDurability);
         this.blastFurnaceTemperature = blastFurnaceTemperature;
         this.smeltInto = this;
-        this.arcSmeltInto = this;
+        this.recycleTo = this;
         addFlag(SMELT_INTO_FLUID);
     }
 
@@ -128,6 +128,9 @@ public class IngotMaterial extends SolidMaterial {
         if((generationBits & GENERATE_SMALL_GEAR) > 0) {
             generationBits |= GENERATE_PLATE;
         }
+        if((generationBits & GENERATE_FINE_WIRE) > 0) {
+            generationBits |= GENERATE_FOIL;
+        }
         if((generationBits & GENERATE_FOIL) > 0) {
             generationBits |= GENERATE_PLATE;
         }
@@ -144,8 +147,8 @@ public class IngotMaterial extends SolidMaterial {
         this.smeltInto = smeltInto;
     }
 
-    public void setArcSmeltingInto(IngotMaterial arcSmeltingInto) {
-        this.arcSmeltInto = arcSmeltingInto;
+    public void setRecycleTo(IngotMaterial recycleInto) {
+        this.recycleTo = recycleInto;
     }
 
     @ZenMethod

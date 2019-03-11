@@ -65,7 +65,7 @@ public class ToolUtility {
         return 0;
     }
 
-    public static int applyHammerDrops(Random random, IBlockState blockState, List<ItemStack> drops, boolean randomizeDrop) {
+    public static int applyHammerDrops(Random random, IBlockState blockState, List<ItemStack> drops, int fortuneLevel) {
         ItemStack itemStack = new ItemStack(blockState.getBlock(), 1, blockState.getBlock().getMetaFromState(blockState));
         Recipe recipe = RecipeMaps.FORGE_HAMMER_RECIPES.findRecipe(Long.MAX_VALUE, Collections.singletonList(itemStack), Collections.emptyList());
 
@@ -74,8 +74,12 @@ public class ToolUtility {
             for(ItemStack outputStack : recipe.getResultItemOutputs(random, 1)) {
                 outputStack = outputStack.copy();
                 if(OreDictUnifier.getPrefix(outputStack) == OrePrefix.crushed) {
-                	int growAmount = randomizeDrop ? Math.round(outputStack.getCount() * random.nextFloat()) : outputStack.getCount();
-                	outputStack.grow(growAmount);
+                    int growAmount = Math.round(outputStack.getCount() * random.nextFloat());
+                    if(fortuneLevel > 0) {
+                        int i = Math.max(0, random.nextInt(fortuneLevel + 2) - 1);
+                        growAmount += outputStack.getCount() * i;
+                    }
+                    outputStack.grow(growAmount);
                 }
                 drops.add(outputStack);
             }
