@@ -156,7 +156,7 @@ public class MetaFluids {
                 Fluid fluid = registerFluid(fluidMaterial, FluidType.PLASMA, 30000);
                 fluidMaterial.setMaterialPlasma(fluid);
             }
-            if(material instanceof DustMaterial) {
+            if(material instanceof DustMaterial && GTValues.isModLoaded("mekanism")) {
             	DustMaterial slurryMaterial = (DustMaterial)material;
             	if(slurryMaterial.shouldGenerateSlurries()) {
             		Fluid dirtySlurry = registerFluid(slurryMaterial, FluidType.DIRTYSLURRY, 1200);

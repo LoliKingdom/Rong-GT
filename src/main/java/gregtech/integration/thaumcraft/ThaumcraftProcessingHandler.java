@@ -17,6 +17,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.loaders.recipes.processing.OreRecipeHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Optional.Method;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -25,6 +26,7 @@ import thaumcraft.common.lib.utils.Utils;
 
 public class ThaumcraftProcessingHandler {
 	
+	@Method(modid = "thaumcraft")
 	public static void init() {
 		//init aspects
 		ThaumcraftApi.registerObjectTag(MetaItems.FLUID_CELL.getStackForm(), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));

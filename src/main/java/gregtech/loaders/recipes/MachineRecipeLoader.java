@@ -55,6 +55,7 @@ import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneBlock;
 import gregtech.common.blocks.StoneBlock.ChiselingVariant;
+import gregtech.common.blocks.wood.BlockRubberLog.LogVariant;
 import gregtech.common.items.MetaItems;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.init.Blocks;
@@ -72,16 +73,17 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class MachineRecipeLoader {
 	
-	public static void init() {		
-		
+	public static void init() {				
 		initializeAssemblingRecipes();
 		initializeAlloyingRecipes();
 		initializeBatteryRecipes();
 		initializeBendingRecipes();
 		initializeBlastRecipes();
 		initializeCentrifugingRecipes();
+		initializeCokeOvenRecipes();
 		initializeCompressingRecipes();	
 		initializeElectrolyzingRecipes();
+		initializeExtractingRecipes();
 		initializeExtrudingRecipes();
 		initializeForestrySupport();
 		initializeFusionRecipes();
@@ -91,39 +93,6 @@ public class MachineRecipeLoader {
 		initializePlasmaArcRecipes();
 		initializePyrolyseRecipes();
 		initializeStoneBricksRecipes();
-
-		/**
-		 * Coke Oven Recipes
-		 */
-		CokeOvenRecipeBuilder.start().input(OrePrefix.log, Materials.Wood).output(OreDictUnifier.get(OrePrefix.gem, Materials.Charcoal)).fluidOutput(Materials.Creosote.getFluid(250)).duration(900).buildAndRegister();
-		CokeOvenRecipeBuilder.start().input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).duration(900).buildAndRegister();
-		CokeOvenRecipeBuilder.start().input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).duration(8000).buildAndRegister();
-
-        /**
-         * Compressor Recipes
-         */
-		
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Blocks.ICE, 2, OreDictionary.WILDCARD_VALUE)).outputs(new ItemStack(Blocks.PACKED_ICE)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Ice, 1).outputs(new ItemStack(Blocks.ICE)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.QUARTZ, 4)).outputs(new ItemStack(Blocks.QUARTZ_BLOCK)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.WHEAT, 9)).outputs(new ItemStack(Blocks.HAY_BLOCK)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Glowstone, 4).outputs(new ItemStack(Blocks.GLOWSTONE)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().duration(400).EUt(2).input(OrePrefix.dust, Materials.NetherQuartz).outputs(OreDictUnifier.get(OrePrefix.plate, Materials.NetherQuartz)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().duration(400).EUt(2).input(OrePrefix.dust, Materials.CertusQuartz).outputs(OreDictUnifier.get(OrePrefix.plate, Materials.CertusQuartz)).buildAndRegister();
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Fireclay).outputs(MetaItems.COMPRESSED_FIRECLAY.getStackForm()).duration(100).EUt(2).buildAndRegister();
-
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.CLAY_BALL, 2)).outputs(MetaItems.COMPRESSED_CLAY.getStackForm()).buildAndRegister();
-        /**
-         * Extraction Recipes
-         */
-       
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(128).EUt(4).inputs(new ItemStack(Items.COAL, 1, 1)).chancedOutput(OreDictUnifier.get(OrePrefix.dust,Materials.Ash,1), 1000).fluidOutputs(Materials.Creosote.getFluid(50)).buildAndRegister();
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(32).EUt(4).inputs(new ItemStack(Items.SNOWBALL)).fluidOutputs(Materials.Water.getFluid(250)).buildAndRegister();
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(128).EUt(4).inputs(new ItemStack(Blocks.SNOW)).fluidOutputs(Materials.Water.getFluid(1000)).buildAndRegister();
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(80).EUt(24).input(OrePrefix.dust, Materials.Redstone).fluidOutputs(Materials.Redstone.getFluid(144)).buildAndRegister();
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(80).EUt(24).input(OrePrefix.dust, Materials.Glowstone).fluidOutputs(Materials.Glowstone.getFluid(144)).buildAndRegister();
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(600).EUt(28).input(OrePrefix.dust, Materials.Quartzite, 1).fluidOutputs(Materials.Glass.getFluid(72)).buildAndRegister();
-
 	}
 	
 	private static void initializeAssemblingRecipes() {
@@ -264,13 +233,13 @@ public class MachineRecipeLoader {
     private static void initializeCompressingRecipes() {
         RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Blocks.ICE, 2, OreDictionary.WILDCARD_VALUE)).outputs(new ItemStack(Blocks.PACKED_ICE)).buildAndRegister();
         RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Ice, 1).outputs(new ItemStack(Blocks.ICE)).buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.QUARTZ, 4)).outputs(new ItemStack(Blocks.QUARTZ_BLOCK)).buildAndRegister();
         RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.WHEAT, 9)).outputs(new ItemStack(Blocks.HAY_BLOCK)).buildAndRegister();
-
-        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder()
-            .input(OrePrefix.dust, Materials.Fireclay)
-            .outputs(MetaItems.COMPRESSED_FIRECLAY.getStackForm())
-            .duration(100).EUt(2)
-            .buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Glowstone, 4).outputs(new ItemStack(Blocks.GLOWSTONE)).buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().duration(400).EUt(2).input(OrePrefix.dust, Materials.NetherQuartz, 4).outputs(OreDictUnifier.get(OrePrefix.plate, Materials.NetherQuartz)).buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().duration(400).EUt(2).input(OrePrefix.dust, Materials.CertusQuartz, 4).outputs(OreDictUnifier.get(OrePrefix.plate, Materials.CertusQuartz)).buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Fireclay).outputs(MetaItems.COMPRESSED_FIRECLAY.getStackForm()).duration(100).EUt(2).buildAndRegister();
+        RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().inputs(new ItemStack(Items.CLAY_BALL, 2)).outputs(MetaItems.COMPRESSED_CLAY.getStackForm()).buildAndRegister();
     }
     
     private static void initializeBendingRecipes() {
@@ -670,6 +639,9 @@ public class MachineRecipeLoader {
     }
     
     private static void initializeCentrifugingRecipes() {
+        RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(300).EUt(16).inputs(MetaItems.RUBBER_DROP.getStackForm()).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber, 3)).fluidOutputs(Materials.Glue.getFluid(100)).buildAndRegister();
+        RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(200).EUt(20).inputs(MetaBlocks.LOG.getItem(LogVariant.RUBBER_WOOD)).chancedOutput(MetaItems.RUBBER_DROP.getStackForm(), 5000).chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Carbon), 2500).chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Wood), 2500).fluidOutputs(Materials.Methane.getFluid(60)).buildAndRegister();
+
     	RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(144).EUt(5).inputs(new ItemStack(Items.NETHER_WART)).fluidOutputs(Materials.Methane.getFluid(18)).buildAndRegister();
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(144).EUt(5).inputs(new ItemStack(Blocks.BROWN_MUSHROOM)).fluidOutputs(Materials.Methane.getFluid(18)).buildAndRegister();
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(144).EUt(5).inputs(new ItemStack(Blocks.RED_MUSHROOM)).fluidOutputs(Materials.Methane.getFluid(18)).buildAndRegister();
@@ -943,6 +915,15 @@ public class MachineRecipeLoader {
 		  	.EUt(96)
 		  	.buildAndRegister();
 
+    }
+    
+    private static void initializeExtractingRecipes() {
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(128).EUt(4).inputs(new ItemStack(Items.COAL, 1, 1)).chancedOutput(OreDictUnifier.get(OrePrefix.dust,Materials.Ash,1), 1000).fluidOutputs(Materials.Creosote.getFluid(50)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(32).EUt(4).inputs(new ItemStack(Items.SNOWBALL)).fluidOutputs(Materials.Water.getFluid(250)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(128).EUt(4).inputs(new ItemStack(Blocks.SNOW)).fluidOutputs(Materials.Water.getFluid(1000)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(80).EUt(24).input(OrePrefix.dust, Materials.Redstone).fluidOutputs(Materials.Redstone.getFluid(144)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(80).EUt(24).input(OrePrefix.dust, Materials.Glowstone).fluidOutputs(Materials.Glowstone.getFluid(144)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(600).EUt(28).input(OrePrefix.dust, Materials.Quartzite, 1).fluidOutputs(Materials.Glass.getFluid(144)).buildAndRegister();
     }
     
     private static void initializeMiscRecipes() {		

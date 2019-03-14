@@ -33,12 +33,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional.Method;
 
 public class MekanismProcessingHandler {
 	
 	private static HashMap<Material, OreGas> registeredSlurries = new HashMap<>();
 	private static HashMap<Material, OreGas> registeredCleanSlurries = new HashMap<>();
 	
+	@Method(modid = "mekanism")
 	public static void initGas() {
 		for(Material m : DustMaterial.MATERIAL_REGISTRY) {
 			if(m.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
@@ -52,6 +54,7 @@ public class MekanismProcessingHandler {
 		}
 	}
 	
+	@Method(modid = "mekanism")
 	public static void removeRecipes() {
 		for(Gas gas : GasRegistry.getRegisteredGasses()) {
 			if(gas instanceof OreGas && !((OreGas)gas).isClean()) {
@@ -70,6 +73,7 @@ public class MekanismProcessingHandler {
 	}
 
 	//Still needs revision
+	@Method(modid = "mekanism")
 	public static void initRecipes() {
 		for(Material material : DustMaterial.MATERIAL_REGISTRY) {
 			if(material instanceof DustMaterial && material.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
