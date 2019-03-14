@@ -30,8 +30,8 @@ public class ThaumcraftProcessingHandler {
 		ThaumcraftApi.registerObjectTag(MetaItems.FLUID_CELL.getStackForm(), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));
 		
 		for(MetaItem item : MetaItem.getMetaItems()) {
-			if(item instanceof ToolMetaItem) {
-				ToolMetaItem tool = (ToolMetaItem)item;
+			if(item instanceof ToolMetaItem<?>) {
+				ToolMetaItem<?> tool = (ToolMetaItem<?>)item;
 				if(tool.getToolMaterial(new ItemStack(tool)).getAverageMass() < 20) {
 					ThaumcraftApi.registerObjectTag(new ItemStack(item), new AspectList().add(Aspect.TOOL, 7).add(Aspect.CRAFT, 10).add(Aspect.MECHANISM, 5));
 				}
@@ -68,7 +68,8 @@ public class ThaumcraftProcessingHandler {
 				RecipeMaps.ORE_WASHER_RECIPES.recipeBuilder()
       	      		.inputs(OreDictUnifier.get(OrePrefix.cluster, m, 2))
       	      		.fluidInputs(Materials.UUMatter.getFluid(2))
-      	      		.outputs(OreDictUnifier.get(OrePrefix.crushedPurified, m, 2), GTValues.isModLoaded("mekanism") ? OreDictUnifier.get(OrePrefix.dustPure, m) : OreDictUnifier.get(OrePrefix.shard, m))
+      	      		.outputs(OreDictUnifier.get(OrePrefix.crushedPurified, m, 2), 
+      	      				GTValues.isModLoaded("mekanism") ? OreDictUnifier.get(OrePrefix.dustPure, m) : OreDictUnifier.get(OrePrefix.shard, m))
       	      		.chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, GTUtility.selectItemInList(1, m, m.oreByProducts, DustMaterial.class)), 1000)
       	      		.EUt(340)
       	      		.duration((int)m.getAverageMass() * 2)

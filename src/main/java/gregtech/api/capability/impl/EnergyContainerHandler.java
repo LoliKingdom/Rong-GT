@@ -83,6 +83,7 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
     @Override
     public void deserializeNBT(NBTTagCompound compound) {
         this.energyStored = compound.getLong("EnergyStored");
+        notifyEnergyListener(true);
     }
 
     @Override
@@ -94,9 +95,13 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
         this.energyStored = energyStored;
         if(!metaTileEntity.getWorld().isRemote) {
             metaTileEntity.markDirty();
-            if(metaTileEntity instanceof IEnergyChangeListener) {
-                ((IEnergyChangeListener) metaTileEntity).onEnergyChanged(this);
-            }
+            notifyEnergyListener(false);
+        }
+    }
+
+    protected void notifyEnergyListener(boolean isInitialChange) {
+        if(metaTileEntity instanceof IEnergyChangeListener) {
+            ((IEnergyChangeListener) metaTileEntity).onEnergyChanged(this, isInitialChange);
         }
     }
 
@@ -149,7 +154,9 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
                 BlockPos pos = metaTileEntity.getPos();
                 metaTileEntity.getWorld().setBlockToAir(pos);
                 if(ConfigHolder.doExplosions) {
-                    metaTileEntity.getWorld().createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, GTUtility.getTierByVoltage(voltage), true);
+                    metaTileEntity.getWorld().createExplosion(null, 
+                    		pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 
+                    		GTUtility.getTierByVoltage(voltage), true);
                 }
                 return Math.min(amperage, getInputAmperage());
             }
@@ -210,6 +217,6 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
     }
 
     public interface IEnergyChangeListener {
-        void onEnergyChanged(IEnergyContainer container);
+        void onEnergyChanged(IEnergyContainer container, boolean isInitialChange);
     }
 }

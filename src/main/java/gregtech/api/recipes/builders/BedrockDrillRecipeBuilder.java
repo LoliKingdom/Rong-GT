@@ -16,9 +16,6 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.ValidationResult;
 
 public class BedrockDrillRecipeBuilder extends RecipeBuilder<BedrockDrillRecipeBuilder> {
-	
-	private long level;
-	private int modifier;
 
 	public BedrockDrillRecipeBuilder() {
 		
@@ -26,8 +23,6 @@ public class BedrockDrillRecipeBuilder extends RecipeBuilder<BedrockDrillRecipeB
 
     public BedrockDrillRecipeBuilder(Recipe recipe, RecipeMap<BedrockDrillRecipeBuilder> recipeMap) {
         super(recipe, recipeMap);
-        this.level = recipe.getLongProperty("level");
-        this.modifier = recipe.getIntegerProperty("modifier");
     }
 
     public BedrockDrillRecipeBuilder(RecipeBuilder<BedrockDrillRecipeBuilder> recipeBuilder) {
@@ -49,10 +44,9 @@ public class BedrockDrillRecipeBuilder extends RecipeBuilder<BedrockDrillRecipeB
     public void buildAndRegister() {
     	if(fluidInputs.isEmpty()) {
     		recipeMap.addRecipe(this.copy()
-    				 .fluidInputs(Materials.DrillingFluid.getFluid(50 * GTUtility.getTierByVoltage(this.EUt)))
+    				 .fluidInputs(Materials.DrillingFluid.getFluid(50 * (GTUtility.getTierByVoltage(this.EUt) + 2)))
     				 //.outputs(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Bedrock, 2))
-    				 .duration(2200 - (GTUtility.getTierByVoltage(this.EUt) * 10))
-    				 .EUt(this.EUt)
+    				 .duration(2200 - ((GTUtility.getTierByVoltage(this.EUt) + 1) * 40))
     				 .build());
     	}
     }

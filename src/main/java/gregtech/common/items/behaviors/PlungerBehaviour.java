@@ -58,6 +58,6 @@ public class PlungerBehaviour implements IItemBehaviour {
 
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
-        lines.addAll(Arrays.asList(I18n.format("behavior.plunger.description").split("/n")));
+        lines.addAll(Arrays.asList(I18n.format("behaviour.plunger.description").split("/n")));
     }
 }

@@ -2,11 +2,14 @@ package gregtech.loaders;
 
 import gregtech.loaders.recipes.AssemblyLineRecipeLoader;
 import gregtech.loaders.recipes.BedrockDrillRecipeLoader;
+import gregtech.loaders.recipes.ChemicalRecipeLoader;
 import gregtech.loaders.recipes.CraftingRecipeLoader;
+import gregtech.loaders.recipes.DyeRecipeLoader;
 import gregtech.loaders.recipes.MachineRecipeLoader;
 import gregtech.loaders.recipes.MatterManipulationRecipeLoader;
 import gregtech.loaders.recipes.MetaTileEntityRecipeLoader;
 import gregtech.loaders.recipes.RecyclingRecipeLoader;
+import gregtech.loaders.recipes.WoodRecipeLoader;
 import gregtech.loaders.recipes.processing.DecompositionRecipeHandler;
 import gregtech.loaders.recipes.processing.MaterialRecipeHandler;
 import gregtech.loaders.recipes.processing.OreRecipeHandler;
@@ -38,5 +41,10 @@ public class RecipeLoaders {
 		BedrockDrillRecipeLoader.init();
 		MatterManipulationRecipeLoader.init();
 		RecyclingRecipeLoader.init();
+		DyeRecipeLoader.init();
+		ChemicalRecipeLoader.init();
+		WoodRecipeLoader.init();
+		
+		FuelLoader.registerFuels();
 	}
 }

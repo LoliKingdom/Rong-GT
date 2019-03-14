@@ -22,6 +22,9 @@ import gregtech.common.blocks.foam.BlockPetrifiedFoam;
 import gregtech.common.blocks.modelfactories.BakedModelHandler;
 import gregtech.common.blocks.surfacerock.BlockSurfaceRock;
 import gregtech.common.blocks.surfacerock.BlockSurfaceRockFlooded;
+import gregtech.common.blocks.wood.BlockRubberLeaves;
+import gregtech.common.blocks.wood.BlockRubberLog;
+import gregtech.common.blocks.wood.BlockRubberSapling;
 import gregtech.common.pipelike.cable.BlockCable;
 import gregtech.common.pipelike.cable.Insulation;
 import gregtech.common.pipelike.cable.WireProperties;
@@ -88,6 +91,10 @@ public class MetaBlocks {
     public static BlockPetrifiedFoam PETRIFIED_FOAM;
     public static BlockPetrifiedFoam REINFORCED_PETRIFIED_FOAM;
     
+    public static BlockRubberLog LOG;
+    public static BlockRubberLeaves LEAVES;
+    public static BlockRubberSapling SAPLING;
+    
     public static BlockDrillHead DRILL_HEAD;
 
     public static Map<DustMaterial, BlockCompressed> COMPRESSED = new HashMap<>();
@@ -118,6 +125,13 @@ public class MetaBlocks {
         MUTLIBLOCK_CASING.setRegistryName("multiblock_casing");
         WIRE_COIL = new BlockWireCoil();
         WIRE_COIL.setRegistryName("wire_coil");
+        
+        LOG = new BlockRubberLog();
+        LOG.setRegistryName("log");
+        LEAVES = new BlockRubberLeaves();
+        LEAVES.setRegistryName("leaves");
+        SAPLING = new BlockRubberSapling();
+        SAPLING.setRegistryName("sapling");
 
         CONCRETE = new BlockConcrete();
         CONCRETE.setRegistryName("concrete");
@@ -261,6 +275,9 @@ public class MetaBlocks {
         registerItemModel(WIRE_COIL);
         registerItemModel(CONCRETE);
         registerItemModel(DRILL_HEAD);
+        registerItemModelWithOverride(LOG, ImmutableMap.of(BlockRubberLog.LOG_AXIS, EnumAxis.Y));
+        registerItemModel(LEAVES);
+        registerItemModel(SAPLING);
 
         COMPRESSED.values().stream().distinct().forEach(MetaBlocks::registerItemModel);
         FRAMES.values().forEach(it -> registerItemModelWithFilteredProperties(it));
@@ -375,7 +392,9 @@ public class MetaBlocks {
     }
 
     public static void registerOreDict() {
-
+    	OreDictUnifier.registerOre(new ItemStack(LOG, 1, GTValues.W), OrePrefix.log, Materials.Wood);
+        OreDictUnifier.registerOre(new ItemStack(LEAVES, 1, GTValues.W), "treeLeaves");
+        OreDictUnifier.registerOre(new ItemStack(SAPLING, 1, GTValues.W), "treeSapling");
         for(Entry<DustMaterial, BlockCompressed> entry : COMPRESSED.entrySet()) {
             DustMaterial material = entry.getKey();
             BlockCompressed block = entry.getValue();

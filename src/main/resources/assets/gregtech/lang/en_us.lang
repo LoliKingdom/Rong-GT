@@ -402,10 +402,6 @@ metaitem.tool.sense.tooltip=Because a scythe doesn't make sense
 metaitem.tool.plow.name=%s Plow
 metaitem.tool.plow.tooltip=Used to get rid of snow
 metaitem.tool.plunger.name=%s Plunger
-metaitem.tool.rolling_pin.name=%s Rolling Pin
-metaitem.tool.drill.lv.name=%s Drill (LV)
-metaitem.tool.drill.mv.name=%s Drill (MV)
-metaitem.tool.drill.hv.name=%s Drill (HV)
 metaitem.tool.chainsaw.lv.name=%s Chainsaw (LV)
 metaitem.tool.chainsaw.lv.tooltip=Can also harvest Ice
 metaitem.tool.chainsaw.mv.name=%s Chainsaw (MV)
@@ -418,16 +414,12 @@ metaitem.tool.wrench.mv.name=%s Wrench (MV)
 metaitem.tool.wrench.mv.tooltip=Hold Leftclick to dismantle Machines
 metaitem.tool.wrench.hv.name=%s Wrench (HV)
 metaitem.tool.wrench.hv.tooltip=Hold Leftclick to dismantle Machines
-metaitem.tool.jackhammer.name=%s JackHammer (HV)
-metaitem.tool.jackhammer.tooltip=Breaks Rocks into pieces
 metaitem.tool.buzzsaw.name=%s Buzzsaw (LV)
 metaitem.tool.buzzsaw.tooltip=Not suitable for harvesting Blocks
 metaitem.tool.screwdriver.lv.name=%s Screwdriver (LV)
 metaitem.tool.screwdriver.lv.tooltip=Adjusts Covers and Machines
-metaitem.tool.soldering_iron.lv.name=%s Soldering Iron (LV)
-metaitem.tool.soldering_iron.lv.tooltip=Fixes burned out Circuits. Needs soldering materials in inventory and 10kEU
-metaitem.tool.turbine.name=%s Turbine Rotor
-metaitem.tool.turbine.tooltip=Turbine Rotors for your power station
+metaitem.turbine_rotor.name=%s Turbine Rotor
+metaitem.turbine_rotor.tooltip=Turbine Rotors for your Power Station
 metaitem.tool.magnifying_glass.name=%s Magnifying Glass
 
 metaitem.tool.tooltip.primary_material=Primary material: %s (Level %s)
@@ -663,6 +655,7 @@ material.palladium=Palladium
 material.phosphorus=Phosphorus
 material.platinum=Platinum
 material.plutonium=Plutonium 244
+material.plutonium239=Plutonium 239
 material.plutonium241=Plutonium 241
 material.potassium=Potassium
 material.praseodymium=Praseodymium
@@ -1059,6 +1052,34 @@ material.cupric_oxide=Cupric Oxide
 material.ferrosilite=Ferrosilite
 material.magnesia=Magnesia
 
+material.adamantine=Adamantine
+material.xenotime=Xenotime
+material.terrasteel=Terrasteel
+material.manasteel=Manasteel
+material.mana_pearl=Mana Pearl
+material.mana_diamond=Mana Diamond
+material.thaumium=Thaumium
+material.void=Void
+material.livingwood=Livingwood
+material.livingrock=Livingrock
+material.elven_elementium=Elven Elementium
+material.gaia=Gaia
+material.peridot=Peridot
+material.aquamarine=Aquamarine
+material.certus_quartz=Certus Quartz
+material.charged_certus_quartz=Charged Certus Quartz
+material.tenorite=Tenorite
+material.cuprite=Cuprite
+material.bornite=Bornite
+material.chalcocite=Chalcocite
+material.enargite=Enargite
+material.tennantite=Tennantite
+material.siderite=Siderite
+material.geothite=Geothite
+material.hematite=Hematite
+material.taconite=Taconite
+material.vibranium=Vibranium
+
 material.primitive=Primitive
 material.basic=Basic
 material.good=Good
@@ -1067,6 +1088,7 @@ material.data=Data
 material.elite=Elite
 material.master=Master
 material.ultimate=Ultimate
+material.magic=Magical
 material.superconductor=Superconductor
 material.infinite=Infinite
 
@@ -1076,9 +1098,86 @@ material.uumatter=UU-Matter
 material.naquadah=Naquadah
 material.naquadah_alloy=Naquadah Alloy
 material.naquadah_enriched=Enriched Naquadah
-material.naquadria=Naquadria
 material.tritanium=Tritanium
 material.duranium=Duranium
+
+material.water_dye_black=Water-Based Black Dye
+material.water_dye_red=Water-Based Red Dye
+material.water_dye_green=Water-Based Green Dye
+material.water_dye_brown=Water-Based Brown Dye
+material.water_dye_blue=Water-Based Blue Dye
+material.water_dye_purple=Water-Based Purple Dye
+material.water_dye_cyan=Water-Based Cyan Dye
+material.water_dye_lightgray=Water-Based Light Gray Dye
+material.water_dye_gray=Water-Based Gray Dye
+material.water_dye_pink=Water-Based Pink Dye
+material.water_dye_lime=Water-Based Lime Dye
+material.water_dye_yellow=Water-Based Yellow Dye
+material.water_dye_lightblue=Water-Based Light Blue Dye
+material.water_dye_magenta=Water-Based Magenta Dye
+material.water_dye_orange=Water-Based Orange Dye
+material.water_dye_white=Water-Based White Dye
+material.chemical_dye_black=Chemical Black Dye
+material.chemical_dye_red=Chemical Red Dye
+material.chemical_dye_green=Chemical Green Dye
+material.chemical_dye_brown=Chemical Brown Dye
+material.chemical_dye_blue=Chemical Blue Dye
+material.chemical_dye_purple=Chemical Purple Dye
+material.chemical_dye_cyan=Chemical Cyan Dye
+material.chemical_dye_lightgray=Chemical Light Gray Dye
+material.chemical_dye_gray=Chemical Gray Dye
+material.chemical_dye_pink=Chemical Pink Dye
+material.chemical_dye_lime=Chemical Lime Dye
+material.chemical_dye_yellow=Chemical Yellow Dye
+material.chemical_dye_lightblue=Chemical Light Blue Dye
+material.chemical_dye_magenta=Chemical Magenta Dye
+material.chemical_dye_orange=Chemical Orange Dye
+material.chemical_dye_white=Chemical White Dye
+material.positive_matter=Positive Matter
+material.neutral_matter=Neutral Matter
+
+material.urea=Urea
+material.sodium_cyanate=Sodium Cyanate
+material.sodium_hydroxide=Sodium Hydroxide
+material.sodium_bicarbonate=Sodium Bicarbonate
+material.sodium_carbonate=Sodium Carbonate
+
+material.ammonia=Ammonia
+material.nitric_oxide=Nitric Oxide
+material.dimethylamine=Dimethylamine
+material.methanol=Methanol
+material.hypochlorous_acid=Hypochlorous Acid
+material.chloramine=Chloramine
+material.nitrogen_tetroxide=Nitrogen Tetroxide
+material.hydrochloric_acid=Hydrochloric Acid
+material.acetic_acid=Acetic Acid
+material.fermented_biomass=Fermented Biomass
+material.wood_gas=Wood Gas
+material.wood_vinegar=Wood Vinegar
+material.wood_tar=Wood Tar
+material.bio_diesel=Bio Diesel
+material.acetone=Acetone
+material.sulfur_trioxide=Sulfur Trioxide
+material.sulfur_dioxide=Sulfur Dioxide
+material.glycerol=Glycerol
+material.diluted_sulfuric_acid=Diluted Sulfuric Acid
+material.diluted_hydrochloric_acid=Diluted Hydrochloric Acid
+material.ethylene=Ethylene
+material.methyl_acetate=Methyl Acetate
+material.calcium_acetate=Calcium Acetate
+material.ethenone=Ethenone
+material.bisphenol_a=Bisphenol A
+material.allyl_chloride=Allyl Chloride
+material.propane=Propane
+material.propene=Propene
+material.ethane=Ethane
+material.butene=Butene
+material.butane=Butane
+material.sodium_cyanide=Sodium Cyanide
+material.acetone_cyanohydrin=Acetone Cyanohydrin
+material.methyl_methacrylate=Methyl Methacrylate
+material.acrylic=Acrylic
+material.hydrogen_peroxide=Hydrogen Peroxide
 
 material.milk=Milk
 material.cocoa=Cocoa
@@ -1265,11 +1364,11 @@ recipemap.fluid_solidifier.name=Fluid Solidifier
 recipemap.fluid_extractor.name=Fluid Extractor
 recipemap.packager.name=Packager
 recipemap.fusion_reactor.name=Fusion Reactor
-recipemap.fusion_reactor.value=Start: %s EU
+recipemap.fusion_reactor.value=Start: %sEU
 recipemap.centrifuge.name=Centrifuge
 recipemap.electrolyzer.name=Electrolyzer
 recipemap.blast_furnace.name=Blast Furnace
-recipemap.blast_furnace.value=Heat Capacity: %s K
+recipemap.blast_furnace.value=Heat Capacity: %sK
 recipemap.implosion_compressor.name=Implosion Compressor
 recipemap.vacuum_freezer.name=Vacuum Freezer
 recipemap.chemical_reactor.name=Chemical Reactor
@@ -1277,9 +1376,9 @@ recipemap.distillation_tower.name=Distillation Tower
 recipemap.cracker.name=Cracking Unit
 recipemap.pyrolyse.name=Pyrolyse Oven
 recipemap.wiremill.name=Wiremill
-recipemap.metal_bender.name=Metal Bender
+recipemap.bender.name=Metal Bender
 recipemap.alloy_smelter.name=Alloy Smelter
-recipemap.canner.name=Canning Machine
+recipemap.canner.name=Canner
 recipemap.lathe.name=Lathe
 recipemap.cutting_saw.name=Cutting Saw
 recipemap.slicer.name=Slicer
@@ -1304,14 +1403,15 @@ recipemap.diesel_generator.name=Diesel Generator
 recipemap.gas_turbine.name=Gas Turbine
 recipemap.steam_turbine.name=Steam Turbine
 recipemap.semi_fluid_generator.name=Semi Fluid Fuels
+recipemap.mass_fabricator.name=Mass Fabricator
+recipemap.replicator.name=Replicator
 
-behavior.plunger.description=Right click on machine to clear 1000MB out of the machine's output tank./nOr use it while sneaking to clear 1000MB out of the machine's input tank./nPlease note: input tank clearing works only on GregTech machines!
+behaviour.plunger.description=Right click on machine to clear 1000MB out of the machine's output tank./nOr use it while sneaking to clear 1000MB out of the machine's input tank./nPlease note: input tank clearing works only on GregTech machines!
 
 tile.gt.foam.name=Foam
 tile.gt.reinforced_foam.name=Reinforced Foam
 tile.gt.petrified_foam.name=Petrified Foam
 tile.gt.reinforced_stone.name=Reinforced Stone
-tile.gt.crusher_blade.name=Crusher Blade
 tile.gt.log.rubber_wood.name=Rubber Wood
 tile.gt.leaves.rubber_wood.name=Rubber Tree Leaves
 tile.gt.sapling.rubber_wood.name=Rubber Tree Sapling
@@ -1398,7 +1498,7 @@ tile.multiblock_casing.engine_intake.name=Engine Intake Casing
 tile.multiblock_casing.grate.name=Grate Machine Casing
 tile.multiblock_casing.assembler.name=Assembler Machine Casing
 tile.multiblock_casing.fusion.name=Fusion Machine Casing
-tile.multiblock_casing.fusion_mk2.name=Fusion Machine Casing MK II
+tile.multiblock_casing.fusion_mk2.name=Fusion Machine Casing [Mark II]
 
 #Machine general things
 gregtech.machine.tooltip.added_by=§c§oAdded by: %s
@@ -1431,7 +1531,7 @@ tile.concrete.dark_bricks.mossy.name=Mossy Dark Concrete Bricks
 tile.concrete.dark_bricks.chiseled.name=Chiseled Dark Concrete Bricks
 
 # Steam machines
-gregtech.machine.steam_boiler.tooltip_produces=Produces %dmb of Steam in %d ticks
+gregtech.machine.steam_boiler.tooltip_produces=Produces %dMB of Steam in %d ticks
 
 gregtech.machine.steam_boiler_coal_bronze.name=Small Steam Coal Boiler
 gregtech.machine.steam_boiler_coal_steel.name=High Pressure Steam Coal Boiler
@@ -1455,20 +1555,25 @@ gregtech.machine.steam_alloy_smelter_steel.name=High Pressure Steam Alloy Smelte
 # Generators
 gregtech.machine.diesel_generator.lv.name=Basic Diesel Generator
 gregtech.machine.diesel_generator.mv.name=Intermediate Diesel Generator
-gregtech.machine.diesel_generator.hv.name=Turbo Diesel Generator
-gregtech.machine.diesel_generator.ev.name=Turbo Diesel Generator II
+gregtech.machine.diesel_generator.hv.name=Advanced Diesel Generator
+gregtech.machine.diesel_generator.ev.name=Elite Diesel Generator
 
 gregtech.machine.steam_turbine.lv.name=Basic Steam Turbine
 gregtech.machine.steam_turbine.mv.name=Intermediate Steam Turbine
-gregtech.machine.steam_turbine.hv.name=Turbo Steam Turbine
-gregtech.machine.steam_turbine.ev.name=Turbo Steam Turbine II
+gregtech.machine.steam_turbine.hv.name=Advanced Steam Turbine
+gregtech.machine.steam_turbine.ev.name=Elite Steam Turbine
 
 gregtech.machine.gas_turbine.lv.name=Basic Gas Turbine
 gregtech.machine.gas_turbine.mv.name=Intermediate Gas Turbine
-gregtech.machine.gas_turbine.hv.name=Turbo Gas Turbine
-gregtech.machine.gas_turbine.ev.name=Turbo Gas Turbine II
+gregtech.machine.gas_turbine.hv.name=Advanced Gas Turbine
+gregtech.machine.gas_turbine.ev.name=Elite Gas Turbine
 
-gregtech.machine.magic_energy_absorber.name=Magic Energy Absorber
+gregtech.machine.magic_energy_absorber.mv.name=Intermediate Magic Energy Absorber
+gregtech.machine.magic_energy_absorber.hv.name=Advanced Magic Energy Absorber
+gregtech.machine.magic_energy_absorber.ev.name=Elite Magic Energy Absorber
+gregtech.machine.magic_energy_absorber.iv.name=Master Magic Energy Absorber
+gregtech.machine.magic_energy_absorber.luv.name=Expert Magic Energy Absorber
+
 gregtech.machine.magic_energy_absorber.tooltip=Max Voltage OUT: §a2048 §7(§aEV§7)/nCollects energy from ender crystals in 64 blocks/nEach ender crystal adds 32 EU/t to output/nPlace Dragon Egg on top to amplify output/n/nWhen amplified:/nEach ender crystal adds 128 EU/t
 gregtech.machine.magic_energy_converter.name=Magic Energy Converter
 gregtech.machine.magic_energy_converter.tooltip=Voltage OUT: §a128 §7(§aMV§7)/nCollects essentia from containers within 16 blocks/nConsumes 20 Potentia per second
@@ -1476,238 +1581,196 @@ gregtech.machine.magic_energy_converter.tooltip=Voltage OUT: §a128 §7(§aMV§7
 # Machines
 gregtech.machine.electric_furnace.lv.name=Basic Electric Furnace
 gregtech.machine.electric_furnace.mv.name=Intermediate Electric Furnace
-gregtech.machine.electric_furnace.hv.name=Advanced Electric Furnace II
-gregtech.machine.electric_furnace.ev.name=Advanced Electric Furnace III
+gregtech.machine.electric_furnace.hv.name=Advanced Electric Furnace
+gregtech.machine.electric_furnace.ev.name=Elite Electric Furnace
 
 gregtech.machine.macerator.lv.name=Basic Macerator
 gregtech.machine.macerator.mv.name=Intermediate Macerator
-gregtech.machine.macerator.hv.name=Universal Macerator
-gregtech.machine.macerator.ev.name=Universal Pulverizer
+gregtech.machine.macerator.hv.name=Advanced Macerator
+gregtech.machine.macerator.ev.name=Elite Pulverizer
+gregtech.machine.macerator.iv.name=Master Pulverizer
 
 gregtech.machine.alloy_smelter.lv.name=Basic Alloy Smelter
 gregtech.machine.alloy_smelter.mv.name=Intermediate Alloy Smelter
-gregtech.machine.alloy_smelter.hv.name=Advanced Alloy Smelter II
-gregtech.machine.alloy_smelter.ev.name=Advanced Alloy Smelter III
+gregtech.machine.alloy_smelter.hv.name=Advanced Alloy Smelter
+gregtech.machine.alloy_smelter.ev.name=Elite Alloy Smelter
+gregtech.machine.alloy_smelter.iv.name=Master Alloy Smelter
+gregtech.machine.alloy_smelter.luv.name=Expert Alloy Smelter
+gregtech.machine.alloy_smelter.uv.name=Ultimate Alloy Smelter
 
-gregtech.machine.amplifab.lv.name=Basic Amplifabricator
-gregtech.machine.amplifab.mv.name=Intermediate Amplifabricator
-gregtech.machine.amplifab.hv.name=Advanced Amplifabricator II
-gregtech.machine.amplifab.ev.name=Advanced Amplifabricator III
-
-gregtech.machine.arc_furnace.hv.name=Advanced Arc Furnace II
-gregtech.machine.arc_furnace.ev.name=Advanced Arc Furnace III
-
-
-gregtech.machine.assembler.lv.name=Basic Assembling Machine
-gregtech.machine.assembler.mv.name=Advanced Assembling Machine
-gregtech.machine.assembler.hv.name=Advanced Assembling Machine II
-gregtech.machine.assembler.ev.name=Advanced Assembling Machine III
-
-
-gregtech.machine.autoclave.tooltip=Crystallizing your Dusts
+gregtech.machine.assembler.lv.name=Basic Assembler
+gregtech.machine.assembler.mv.name=Intermediate Assembler
+gregtech.machine.assembler.hv.name=Advanced Assembler
+gregtech.machine.assembler.ev.name=Elite Assembler
+gregtech.machine.assembler.iv.name=Master Assembler
+gregtech.machine.assembler.luv.name=Expert Assembler
+gregtech.machine.assembler.uv.name=Ultimate Assembler
 
 gregtech.machine.autoclave.lv.name=Basic Autoclave
-gregtech.machine.autoclave.mv.name=Advanced Autoclave
-gregtech.machine.autoclave.hv.name=Advanced Autoclave II
-gregtech.machine.autoclave.ev.name=Advanced Autoclave III
-
-gregtech.machine.bender.tooltip=Produces Plates more efficiently
+gregtech.machine.autoclave.mv.name=Intermediate Autoclave
+gregtech.machine.autoclave.hv.name=Advanced Autoclave
+gregtech.machine.autoclave.ev.name=Elite Autoclave
+gregtech.machine.autoclave.iv.name=Master Autoclave
+gregtech.machine.autoclave.luv.name=Expert Autoclave
+gregtech.machine.autoclave.uv.name=Ultimate Autoclave
 
 gregtech.machine.bender.lv.name=Basic Bending Machine
-gregtech.machine.bender.mv.name=Advanced Bending Machine
-gregtech.machine.bender.hv.name=Advanced Bending Machine II
-gregtech.machine.bender.ev.name=Advanced Bending Machine III
-
-gregtech.machine.brewery.tooltip=Brewing your Drinks
+gregtech.machine.bender.mv.name=Intermediate Bending Machine
+gregtech.machine.bender.hv.name=Advanced Bending Machine
+gregtech.machine.bender.ev.name=Elite Bending Machine
+gregtech.machine.bender.iv.name=Master Bending Machine
 
 gregtech.machine.brewery.lv.name=Basic Brewery
-gregtech.machine.brewery.mv.name=Advanced Brewery
-gregtech.machine.brewery.hv.name=Advanced Brewery II
-gregtech.machine.brewery.ev.name=Advanced Brewery III
+gregtech.machine.brewery.mv.name=Intermediate Brewery
+gregtech.machine.brewery.hv.name=Advanced Brewery
+gregtech.machine.brewery.ev.name=Elite Brewery
+gregtech.machine.brewery.iv.name=Master Brewery
+gregtech.machine.brewery.luv.name=Expert Brewery
+gregtech.machine.brewery.uv.name=Ultimate Brewery
 
-gregtech.machine.canner.lv.name=Basic Canning Machine
-gregtech.machine.canner.mv.name=Advanced Canning Machine
-gregtech.machine.canner.hv.name=Advanced Canning Machine II
-gregtech.machine.canner.ev.name=Advanced Canning Machine III
+gregtech.machine.canner.lv.name=Basic Canner
+gregtech.machine.canner.mv.name=Intermediate Canner
+gregtech.machine.canner.hv.name=Advanced Canner
+gregtech.machine.canner.ev.name=Elite Canner
+gregtech.machine.canner.iv.name=Master Canner
+gregtech.machine.canner.luv.name=Expert Canner
+gregtech.machine.canner.uv.name=Ultimate Canner
+
+gregtech.machine.canner.tooltip=Can fill or drain any fluid container!
 
 gregtech.machine.centrifuge.lv.name=Basic Centrifuge
-gregtech.machine.centrifuge.mv.name=Advanced Centrifuge
-gregtech.machine.centrifuge.hv.name=Turbo Centrifuge
-gregtech.machine.centrifuge.ev.name=Turbo Centrifuge II
-
-gregtech.machine.chemical_bath.tooltip=Bathing Ores in Chemicals to separate them
+gregtech.machine.centrifuge.mv.name=Intermediate Centrifuge
+gregtech.machine.centrifuge.hv.name=Advanced Centrifuge
+gregtech.machine.centrifuge.ev.name=Elite Centrifuge
+gregtech.machine.centrifuge.iv.name=Master Centrifuge
+gregtech.machine.centrifuge.luv.name=Expert Centrifuge
+gregtech.machine.centrifuge.uv.name=Ultimate Centrifuge
 
 gregtech.machine.chemical_bath.lv.name=Basic Chemical Bath
-gregtech.machine.chemical_bath.mv.name=Advanced Chemical Bath
-gregtech.machine.chemical_bath.hv.name=Advanced Chemical Bath II
-gregtech.machine.chemical_bath.ev.name=Advanced Chemical Bath III
-
-gregtech.machine.chemical_reactor.tooltip=Letting Chemicals react with each other
+gregtech.machine.chemical_bath.mv.name=Intermediate Chemical Bath
+gregtech.machine.chemical_bath.hv.name=Advanced Chemical Bath
+gregtech.machine.chemical_bath.ev.name=Elite Chemical Bath
+gregtech.machine.chemical_bath.iv.name=Master Chemical Bath
+gregtech.machine.chemical_bath.luv.name=Expert Chemical Bath
+gregtech.machine.chemical_bath.uv.name=Ultimate Chemical Bath
 
 gregtech.machine.chemical_reactor.lv.name=Basic Chemical Reactor
-gregtech.machine.chemical_reactor.mv.name=Advanced Chemical Reactor
-gregtech.machine.chemical_reactor.hv.name=Advanced Chemical Reactor II
-gregtech.machine.chemical_reactor.ev.name=Advanced Chemical Reactor III
+gregtech.machine.chemical_reactor.mv.name=Intermediate Chemical Reactor
+gregtech.machine.chemical_reactor.hv.name=Advanced Chemical Reactor
+gregtech.machine.chemical_reactor.ev.name=Elite Chemical Reactor
+gregtech.machine.chemical_reactor.iv.name=Master Chemical Reactor
+gregtech.machine.chemical_reactor.luv.name=Expert Chemical Reactor
+gregtech.machine.chemical_reactor.uv.name=Ultimate Chemical Reactor
 
 gregtech.machine.compressor.lv.name=Basic Compressor
-gregtech.machine.compressor.mv.name=Advanced Compressor
-gregtech.machine.compressor.hv.name=Advanced Compressor II
-gregtech.machine.compressor.ev.name=Singularity Compressor
+gregtech.machine.compressor.mv.name=Intermediate Compressor
+gregtech.machine.compressor.hv.name=Advanced Compressor
+gregtech.machine.compressor.ev.name=Elite Compressor
+gregtech.machine.compressor.iv.name=Master Compressor
+gregtech.machine.compressor.luv.name=Expert Compressor
+gregtech.machine.compressor.uv.name=Ultimate Compressor
 
-gregtech.machine.cutter.lv.name=Basic Cutting Machine
-gregtech.machine.cutter.mv.name=Advanced Cutting Machine
-gregtech.machine.cutter.hv.name=Advanced Cutting Machine II
-gregtech.machine.cutter.ev.name=Advanced Cutting Machine III
-
-gregtech.machine.distillery.tooltip=Distilling most relevant parts of Fluids
+gregtech.machine.cutter.lv.name=Basic Cutter
+gregtech.machine.cutter.mv.name=Intermediate Cutter
+gregtech.machine.cutter.hv.name=Advanced Cutter
+gregtech.machine.cutter.ev.name=Elite Cutter
+gregtech.machine.cutter.iv.name=Master Cutter
+gregtech.machine.cutter.luv.name=Expert Cutter
+gregtech.machine.cutter.uv.name=Ultimate Cutter
 
 gregtech.machine.distillery.lv.name=Basic Distillery
-gregtech.machine.distillery.mv.name=Advanced Distillery
-gregtech.machine.distillery.hv.name=Advanced Distillery II
-gregtech.machine.distillery.ev.name=Advanced Distillery III
+gregtech.machine.distillery.mv.name=Intermediate Distillery
+gregtech.machine.distillery.hv.name=Advanced Distillery
 
 gregtech.machine.electrolyzer.lv.name=Basic Electrolyzer
-gregtech.machine.electrolyzer.mv.name=Advanced Electrolyzer
-gregtech.machine.electrolyzer.hv.name=Advanced Electrolyzer II
-gregtech.machine.electrolyzer.ev.name=Molecular Disintegrator E-4908
-
-gregtech.machine.electromagnetic_separator.tooltip=Separating the magnetic Ores from the rest
-
-gregtech.machine.electromagnetic_separator.lv.name=Basic Electromagnetic Separator
-gregtech.machine.electromagnetic_separator.mv.name=Advanced Electromagnetic Separator
-gregtech.machine.electromagnetic_separator.hv.name=Advanced Electromagnetic Separator II
-gregtech.machine.electromagnetic_separator.ev.name=Advanced Electromagnetic Separator III
+gregtech.machine.electrolyzer.mv.name=Intermediate Electrolyzer
+gregtech.machine.electrolyzer.hv.name=Advanced Electrolyzer
+gregtech.machine.electrolyzer.ev.name=Elite Electrolyzer
+gregtech.machine.electrolyzer.iv.name=Master Electrolyzer
+gregtech.machine.electrolyzer.luv.name=Expert Electrolyzer
+gregtech.machine.electrolyzer.uv.name=Ultimate Electrolyzer
 
 gregtech.machine.extractor.lv.name=Basic Extractor
-gregtech.machine.extractor.mv.name=Advanced Extractor
-gregtech.machine.extractor.hv.name=Advanced Extractor II
-gregtech.machine.extractor.ev.name=Vacuum Extractor
+gregtech.machine.extractor.mv.name=Intermediate Extractor
+gregtech.machine.extractor.hv.name=Advanced Extractor
+gregtech.machine.extractor.ev.name=Elite Extractor
 
-gregtech.machine.extruder.tooltip=Universal Machine for Metal Working
-
-gregtech.machine.extruder.lv.name=Basic Extruder
-gregtech.machine.extruder.mv.name=Advanced Extruder
-gregtech.machine.extruder.hv.name=Advanced Extruder II
-gregtech.machine.extruder.ev.name=Advanced Extruder III
+gregtech.machine.extruder.mv.name=Intermediate Extruder
+gregtech.machine.extruder.hv.name=Advanced Extruder
+gregtech.machine.extruder.ev.name=Elite Extruder
 
 gregtech.machine.fermenter.tooltip=Fermenting Fluids
 
 gregtech.machine.fermenter.lv.name=Basic Fermenter
-gregtech.machine.fermenter.mv.name=Advanced Fermenter
-gregtech.machine.fermenter.hv.name=Advanced Fermenter II
-gregtech.machine.fermenter.ev.name=Advanced Fermenter III
-
-gregtech.machine.fluid_canner.tooltip=Puts Fluids into and out of Containers
-
-gregtech.machine.fluid_canner.lv.name=Basic Fluid Canner
-gregtech.machine.fluid_canner.mv.name=Advanced Fluid Canner
-gregtech.machine.fluid_canner.hv.name=Quick Fluid Canner
-gregtech.machine.fluid_canner.ev.name=Turbo Fluid Canner
-
-gregtech.machine.fluid_extractor.tooltip=Extracting Fluids from Items
+gregtech.machine.fermenter.mv.name=Intermediate Fermenter
+gregtech.machine.fermenter.hv.name=Advanced Fermenter
+gregtech.machine.fermenter.ev.name=Elite Fermenter
 
 gregtech.machine.fluid_extractor.lv.name=Basic Fluid Extractor
-gregtech.machine.fluid_extractor.mv.name=Advanced Fluid Extractor
-gregtech.machine.fluid_extractor.hv.name=Advanced Fluid Extractor II
-gregtech.machine.fluid_extractor.ev.name=Advanced Fluid Extractor III
+gregtech.machine.fluid_extractor.mv.name=Intermediate Fluid Extractor
+gregtech.machine.fluid_extractor.hv.name=Advanced Fluid Extractor
+gregtech.machine.fluid_extractor.ev.name=Elite Fluid Extractor
 
 gregtech.machine.fluid_heater.lv.name=Basic Fluid Heater
-gregtech.machine.fluid_heater.mv.name=Advanced Fluid Heater
-gregtech.machine.fluid_heater.hv.name=Advanced Fluid Heater II
-gregtech.machine.fluid_heater.ev.name=Advanced Fluid Heater III
-
-gregtech.machine.fluid_solidifier.tooltip=Cools Fluids down to form Solids
+gregtech.machine.fluid_heater.mv.name=Intermediate Fluid Heater
+gregtech.machine.fluid_heater.hv.name=Advanced Fluid Heater
+gregtech.machine.fluid_heater.ev.name=Elite Fluid Heater
 
 gregtech.machine.fluid_solidifier.lv.name=Basic Fluid Solidifier
-gregtech.machine.fluid_solidifier.mv.name=Advanced Fluid Solidifier
-gregtech.machine.fluid_solidifier.hv.name=Advanced Fluid Solidifier II
-gregtech.machine.fluid_solidifier.ev.name=Advanced Fluid Solidifier III
+gregtech.machine.fluid_solidifier.mv.name=Intermediate Fluid Solidifier
+gregtech.machine.fluid_solidifier.hv.name=Advanced Fluid Solidifier
+gregtech.machine.fluid_solidifier.ev.name=Elite Fluid Solidifier
 
 gregtech.machine.forge_hammer.lv.name=Basic Forge Hammer
-gregtech.machine.forge_hammer.mv.name=Advanced Forge Hammer
-gregtech.machine.forge_hammer.hv.name=Advanced Forge Hammer II
-gregtech.machine.forge_hammer.ev.name=Advanced Forge Hammer III
+gregtech.machine.forge_hammer.mv.name=Intermediate Forge Hammer
+gregtech.machine.forge_hammer.hv.name=Advanced Forge Hammer
 
-gregtech.machine.press.lv.name=Basic Forming Press
-gregtech.machine.press.mv.name=Advanced Forming Press
-gregtech.machine.press.hv.name=Advanced Forming Press II
-gregtech.machine.press.ev.name=Advanced Forming Press III
-
-gregtech.machine.lathe.tooltip=Produces Rods more efficiently
+gregtech.machine.press.lv.name=Basic Press
+gregtech.machine.press.mv.name=Intermediate Press
+gregtech.machine.press.hv.name=Advanced Press
+gregtech.machine.press.ev.name=Elite Press
 
 gregtech.machine.lathe.lv.name=Basic Lathe
-gregtech.machine.lathe.mv.name=Advanced Lathe
-gregtech.machine.lathe.hv.name=Advanced Lathe II
-gregtech.machine.lathe.ev.name=Advanced Lathe III
-
-gregtech.machine.microwave.lv.name=Basic Microwave
-gregtech.machine.microwave.mv.name=Advanced Microwave
-gregtech.machine.microwave.hv.name=Advanced Microwave II
-gregtech.machine.microwave.ev.name=Advanced Microwave III
+gregtech.machine.lathe.mv.name=Intermediate Lathe
+gregtech.machine.lathe.hv.name=Advanced Lathe
+gregtech.machine.lathe.ev.name=Elite Lathe
 
 gregtech.machine.mixer.lv.name=Basic Mixer
-gregtech.machine.mixer.mv.name=Advanced Mixer
-gregtech.machine.mixer.hv.name=Advanced Mixer II
-gregtech.machine.mixer.ev.name=Advanced Mixer III
-
-gregtech.machine.ore_washer.tooltip=Washing your Ores to get more Byproducts
+gregtech.machine.mixer.mv.name=Intermediate Mixer
+gregtech.machine.mixer.hv.name=Advanced Mixer
+gregtech.machine.mixer.ev.name=Elite Mixer
 
 gregtech.machine.ore_washer.lv.name=Basic Ore Washing Plant
-gregtech.machine.ore_washer.mv.name=Advanced Ore Washing Plant
-gregtech.machine.ore_washer.hv.name=Advanced Ore Washing Plant II
-gregtech.machine.ore_washer.ev.name=Advanced Ore Washing Plant III
+gregtech.machine.ore_washer.mv.name=Intermediate Ore Washing Plant
+gregtech.machine.ore_washer.hv.name=Advanced Ore Washing Plant
+gregtech.machine.ore_washer.ev.name=Elite Ore Washing Plant
 
-gregtech.machine.packer.lv.name=Basic Packager
-gregtech.machine.packer.mv.name=Advanced Packager
-gregtech.machine.packer.hv.name=Advanced Packager II
-gregtech.machine.packer.ev.name=Advanced Packager III
-
-gregtech.machine.unpacker.lv.name=Basic Unpackager
-gregtech.machine.unpacker.mv.name=Advanced Unpackager
-gregtech.machine.unpacker.hv.name=Advanced Unpackager II
-gregtech.machine.unpacker.ev.name=Advanced Unpackager III
-
-gregtech.machine.plasma_arc_furnace.lv.name=Basic Plasma Arc Furnace
-gregtech.machine.plasma_arc_furnace.mv.name=Advanced Plasma Arc Furnace
-gregtech.machine.plasma_arc_furnace.hv.name=Advanced Plasma Arc Furnace II
-gregtech.machine.plasma_arc_furnace.ev.name=Advanced Plasma Arc Furnace III
-
-gregtech.machine.polarizer.tooltip=Bipolarising your Magnets
+gregtech.machine.plasma_arc_furnace.hv.name=Advanced Plasma Arc Furnace
+gregtech.machine.plasma_arc_furnace.ev.name=Elite Plasma Arc Furnace
+gregtech.machine.plasma_arc_furnace.iv.name=Master Plasma Arc Furnace
+gregtech.machine.plasma_arc_furnace.luv.name=Expert Plasma Arc Furnace
 
 gregtech.machine.polarizer.lv.name=Basic Polarizer
-gregtech.machine.polarizer.mv.name=Advanced Polarizer
-gregtech.machine.polarizer.hv.name=Advanced Polarizer II
-gregtech.machine.polarizer.ev.name=Advanced Polarizer III
+gregtech.machine.polarizer.mv.name=Intermediate Polarizer
+gregtech.machine.polarizer.hv.name=Advanced Polarizer
+gregtech.machine.polarizer.ev.name=Elite Polarizer
 
 gregtech.machine.laser_engraver.lv.name=Basic Precision Laser Engraver
-gregtech.machine.laser_engraver.mv.name=Advanced Precision Laser Engraver
-gregtech.machine.laser_engraver.hv.name=Advanced Precision Laser Engraver II
-gregtech.machine.laser_engraver.ev.name=Advanced Precision Laser Engraver III
-
-gregtech.machine.sifter.tooltip=Stay calm and keep sifting
-
-gregtech.machine.sifter.lv.name=Basic Sifting Machine
-gregtech.machine.sifter.mv.name=Advanced Sifting Machine
-gregtech.machine.sifter.hv.name=Advanced Sifting Machine II
-gregtech.machine.sifter.ev.name=Advanced Sifting Machine III
-
-gregtech.machine.thermal_centrifuge.tooltip=Separating Ores more precisely
+gregtech.machine.laser_engraver.mv.name=Intermediate Precision Laser Engraver
+gregtech.machine.laser_engraver.hv.name=Advanced Precision Laser Engraver
+gregtech.machine.laser_engraver.ev.name=Elite Precision Laser Engraver
 
 gregtech.machine.thermal_centrifuge.lv.name=Basic Thermal Centrifuge
-gregtech.machine.thermal_centrifuge.mv.name=Advanced Thermal Centrifuge
-gregtech.machine.thermal_centrifuge.hv.name=Advanced Thermal Centrifuge II
-gregtech.machine.thermal_centrifuge.ev.name=Advanced Thermal Centrifuge III
-
-gregtech.machine.wiremill.tooltip=Produces Wires more efficiently
+gregtech.machine.thermal_centrifuge.mv.name=Intermediate Thermal Centrifuge
+gregtech.machine.thermal_centrifuge.hv.name=Advanced Thermal Centrifuge
+gregtech.machine.thermal_centrifuge.ev.name=Elite Thermal Centrifuge
 
 gregtech.machine.wiremill.lv.name=Basic Wiremill
-gregtech.machine.wiremill.mv.name=Advanced Wiremill
-gregtech.machine.wiremill.hv.name=Advanced Wiremill II
-gregtech.machine.wiremill.ev.name=Advanced Wiremill III
+gregtech.machine.wiremill.mv.name=Intermediate Wiremill
+gregtech.machine.wiremill.hv.name=Advanced Wiremill
+gregtech.machine.wiremill.ev.name=Elite Wiremill
 
 # Machine hulls
-gregtech.machine.hull.tooltip=§fYou just need §5I§dm§4a§cg§ei§an§ba§3t§7i§1o§5n§f to use this
-
 gregtech.machine.hull.ulv.name=ULV Machine Hull
 gregtech.machine.hull.lv.name=LV Machine Hull
 gregtech.machine.hull.mv.name=MV Machine Hull
@@ -1720,11 +1783,6 @@ gregtech.machine.hull.uv.name=UV Machine Hull
 gregtech.machine.hull.max.name=Max Machine Hull
 
 # Battery buffers
-gregtech.machine.battery_buffer.ulv.1.name=Ultra Low Voltage Battery Buffer
-gregtech.machine.battery_buffer.ulv.4.name=Ultra Low Voltage Battery Buffer
-gregtech.machine.battery_buffer.ulv.9.name=Ultra Low Voltage Battery Buffer
-gregtech.machine.battery_buffer.ulv.16.name=Ultra Low Voltage Battery Buffer
-
 gregtech.machine.battery_buffer.lv.1.name=Low Voltage Battery Buffer
 gregtech.machine.battery_buffer.lv.4.name=Low Voltage Battery Buffer
 gregtech.machine.battery_buffer.lv.9.name=Low Voltage Battery Buffer
@@ -1771,7 +1829,6 @@ gregtech.machine.battery_buffer.max.9.name=MAX Voltage Battery Buffer
 gregtech.machine.battery_buffer.max.16.name=MAX Voltage Battery Buffer
 
 # Transformers
-gregtech.machine.transformer.tooltip_tool_usage=Use Soft Hammer to invert (Starts as Transform Down)
 gregtech.machine.transformer.tooltip_transform_down=Transform Down:
 gregtech.machine.transformer.message_transform_down=Transforming Down, In: %dV %d Amp, Out: %dV %d Amp
 gregtech.machine.transformer.tooltip_transform_up=Transform Up:
@@ -1788,7 +1845,6 @@ gregtech.machine.transformer.uv.name=Ultimate Voltage Transformer
 gregtech.machine.transformer.max.name=MAX Voltage Transformer
 
 # Chargers
-gregtech.machine.charger.ulv.name=Ultra Low Voltage Battery Charger
 gregtech.machine.charger.lv.name=Low Voltage Battery Charger
 gregtech.machine.charger.mv.name=Medium Voltage Battery Charger
 gregtech.machine.charger.hv.name=High Voltage Battery Charger
@@ -1827,14 +1883,23 @@ gregtech.machine.quantum_tank.uv.name=Black Hole Tank
 
 #Air Collectors
 gregtech.machine.air_collector.lv.name=Basic Air Collector
-gregtech.machine.air_collector.mv.name=Advanced Air Collector
-gregtech.machine.air_collector.hv.name=Advanced Air Collector II
-gregtech.machine.air_collector.ev.name=Atmosphere Collector III
+gregtech.machine.air_collector.mv.name=Intermediate Air Collector
+gregtech.machine.air_collector.hv.name=Advanced Air Collector
+gregtech.machine.air_collector.ev.name=Elite Air Collector
 gregtech.machine.air_collector.description=Collects air from adjacent air blocks
 
 #Tesla Coil
 gregtech.machine.tesla_coil.name=Tesla Coil
 gregtech.machine.tesla_coil.description=Damages all living entities within 7 blocks range/nConsumes 2500 EU for 1 damage point/nInternal buffer Capacity: §e256k EU
+
+#Fusion Reactor
+gregtech.machine.fusion_reactor.luv.name=Fusion Reactor
+gregtech.machine.fusion_reactor.uv.name=Fusion Reactor [Mark II]
+gregtech.machine.fusion_reactor.luv.description=The Fusion Reactor is a large multiblock structure used for fusing elements into heavier ones. The Mark 1 Fusion Reactor can use LuV, ZPM or UV Energy Hatches./nFor every Hatch it has its buffer increases by 100k.
+gregtech.machine.fusion_reactor.uv.description=The Fusion Reactor Mark 2 is a large multiblock structure used for fusing elements into heavier ones./nThe Mark 2 Fusion Reactor can only use UV Energy Hatches./nFor every Hatch it has its buffer increases by 200k.
+
+#Assembly Line
+gregtech.multiblock.assembly_line.description=The Assembly Line is a large multiblock structure consisting of 5 to 16 "slices"./nIn theory, it's a large Assembler, used for creating advanced crafting components.
 
 #General machinery
 gregtech.machine.basic.output_override.reset=Output filter: all tanks.
@@ -1880,7 +1945,7 @@ for.bees.species.plutonium=Plutonium
 for.bees.species.naquadah=Naquadah
 
 behaviour.scoop=Catches Butterflies on Leftclick
-behaviour.softhammer=Activates and Deactivates Machines
+behaviour.soft_hammer=Activates and Deactivates Machines
 behaviour.wrench=Rotates Blocks on Rightclick
 behaviour.boor.by=by %s
 behaviour.paintspray.white.tooltip=Can paint things in white
@@ -2048,6 +2113,8 @@ gregtech.fluid.click_to_empty=§7Click with a filled fluid container to empty in
 gregtech.fluid.click_to_empty.shift=§7(Shift-clicking will empty all containers in your hand)
 
 gregtech.fluid.plasma=%s Plasma
+gregtech.fluid.dirtyslurry=Dirty %s Slurry
+gregtech.fluid.cleanslurry=Clean %s Slurry
 gregtech.fluid.empty=Empty
 gregtech.fluid.amount=§7%,d/%,d
 gregtech.fluid.temperature=§7Temperature: %dK

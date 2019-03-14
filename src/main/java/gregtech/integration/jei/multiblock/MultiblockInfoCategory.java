@@ -44,7 +44,9 @@ public class MultiblockInfoCategory implements IRecipeCategory<MultiblockInfoRec
             new MultiblockInfoRecipeWrapper(new LargeBoilerInfo(MetaTileEntities.LARGE_TUNGSTENSTEEL_BOILER)),
             new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_STEAM_TURBINE)),
             new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_GAS_TURBINE)),
-            new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_PLASMA_TURBINE))
+            new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_PLASMA_TURBINE)),
+            new MultiblockInfoRecipeWrapper(new FusionReactorMarkOneInfo()),
+            new MultiblockInfoRecipeWrapper(new FusionReactorMarkOneInfo())
         ), "gregtech:multiblock_info");
     }
 

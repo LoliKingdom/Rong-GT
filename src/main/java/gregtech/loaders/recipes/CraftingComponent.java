@@ -126,6 +126,12 @@ public enum CraftingComponent {
             return MetaTileEntities.HULL[tier].getStackForm();
         }
     },
+    TRANSFORMER {
+        @Override
+        Object getIngredient(int tier) {
+            return MetaTileEntities.TRANSFORMER[tier].getStackForm();
+        }
+    },
     PIPE {
         @Override
         Object getIngredient(int tier) {
@@ -163,7 +169,7 @@ public enum CraftingComponent {
             case 5:
             	return MetaTileEntities.IRIDIUM_TANK.getStackForm();
             case 6:
-            	return MetaTileEntities.ADAMANTIUM_TANK.getStackForm();
+            	return MetaTileEntities.ADAMANTINE_TANK.getStackForm();
             default:
             	return MetaTileEntities.WOODEN_TANK.getStackForm();           		
             }
@@ -473,6 +479,25 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.stick, Materials.VanadiumGallium);
             }
         }
+    },
+    BATTERY {
+    	@Override
+    	Object getIngredient(int tier) {
+    		switch (tier) {
+    			case 1:
+    				return MetaItems.BATTERY_SU_HV_SULFURIC_ACID;
+    			case 2:
+    				return MetaItems.BATTERY_RE_HV_CADMIUM;
+    			case 3:
+    				return MetaItems.ENERGY_CRYSTAL;
+    			case 4:
+    				return MetaItems.ENERGY_LAPOTRONIC_ORB;
+    			case 5:
+    				return MetaItems.ENERGY_LAPOTRONIC_ORB2;
+    			default:
+    				return MetaItems.ENERGY_LAPOTRONIC_ORB3;
+    		}
+    	}
     };
 	abstract Object getIngredient(int tier);
 }

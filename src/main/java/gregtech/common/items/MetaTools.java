@@ -7,7 +7,6 @@ import static gregtech.common.items.MetaItems.MORTAR;
 import static gregtech.common.items.MetaItems.SAW;
 import static gregtech.common.items.MetaItems.SCREWDRIVER;
 import static gregtech.common.items.MetaItems.SCREWDRIVER_LV;
-import static gregtech.common.items.MetaItems.SOLDERING_IRON_LV;
 import static gregtech.common.items.MetaItems.WIRE_CUTTER;
 import static gregtech.common.items.MetaItems.WRENCH;
 import static gregtech.common.items.MetaItems.WRENCH_HV;
@@ -63,7 +62,7 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
         SCREWDRIVER = addItem(6, "tool.screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
         MORTAR = addItem(7, "tool.mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
         WIRE_CUTTER = addItem(8, "tool.wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
-
+        
         WRENCH_LV = addItem(20, "tool.wrench.lv").setToolStats(new ToolWrenchLV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
@@ -77,15 +76,11 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
         SCREWDRIVER_LV = addItem(23, "tool.screwdriver.lv").setToolStats(new ToolScrewdriverLV())
             .addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
-        SOLDERING_IRON_LV = addItem(24, "tool.soldering_iron.lv").setToolStats(new ToolSolderingIron())
-            .addOreDict(ToolDictNames.craftingToolSolderingIron)
-            .addToList(GregTechAPI.solderingToolList)
-            .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        BUZZSAW = addItem(25, "tool.buzzsaw").setToolStats(new ToolBuzzSaw())
+        BUZZSAW = addItem(24, "tool.buzzsaw").setToolStats(new ToolBuzzSaw())
             .addOreDict(ToolDictNames.craftingToolSaw)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        PLUNGER = addItem(27, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
+        PLUNGER = addItem(25, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
     }
 }

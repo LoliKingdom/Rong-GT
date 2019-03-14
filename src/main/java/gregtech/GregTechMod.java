@@ -112,11 +112,11 @@ public class GregTechMod {
                 GTLog.logger.fatal("Loading cannot continue. Either fix or report invalid recipes, or enable ignoreErrorOrInvalidRecipes in the config as a temporary solution");
                 throw new LoaderException("Found at least one invalid recipe. Please read the log above for more details.");
             } else {
-                GTLog.logger.fatal("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                GTLog.logger.fatal("Ignoring invalid recipes and continuing loading");
+                GTLog.logger.fatal("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                GTLog.logger.fatal("Ignoring invalid recipes and continuing loading!");
                 GTLog.logger.fatal("Some things may lack recipes or have invalid ones, proceed at your own risk");
-                GTLog.logger.fatal("Report to GTCE github to get more help and fix the problem");
-                GTLog.logger.fatal("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                GTLog.logger.fatal("Report to GregTech: Chill Edition's Github/Curse page to get help and fix the problem");
+                GTLog.logger.fatal("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
 }
 

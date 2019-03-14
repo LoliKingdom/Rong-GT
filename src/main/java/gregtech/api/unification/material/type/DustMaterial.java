@@ -1,17 +1,36 @@
 package gregtech.api.unification.material.type;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import crafttweaker.annotations.ZenRegister;
+import gregtech.api.GTValues;
 import gregtech.api.unification.Element;
 import gregtech.api.unification.material.MaterialIconSet;
+import gregtech.api.unification.material.type.FluidMaterial.MatFlags;
 import gregtech.api.unification.stack.MaterialStack;
+import net.minecraftforge.fluids.Fluid;
 import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenProperty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static gregtech.api.unification.material.type.DustMaterial.MatFlags.GENERATE_PLATE;
+import static gregtech.api.unification.material.type.DustMaterial.MatFlags.GENERATE_ORE;
+import static gregtech.api.unification.material.type.DustMaterial.MatFlags.EXCLUDE_BLOCK_CRAFTING_RECIPES;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_DENSE;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_FINE_WIRE;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_FOIL;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_RING;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_ROTOR;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SCREW;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SMALL_GEAR;
+import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
 import static gregtech.api.util.GTUtility.createFlag;
 
 @ZenClass("mods.gregtech.material.DustMaterial")
@@ -119,6 +138,16 @@ public class DustMaterial extends FluidMaterial {
      */
     @ZenProperty
     public int burnTime = 0;
+    
+    /**
+     * For Mekanism, when it is loaded, slurries will load.
+     * This is mainly for the purpose of better ore processing methods.
+     */
+    @Nullable
+    private Fluid materialDirtySlurry;
+    
+    @Nullable
+    private Fluid materialCleanSlurry;
 
     public DustMaterial(int metaItemSubId, String name, int materialRGB, MaterialIconSet materialIconSet, int harvestLevel, ImmutableList<MaterialStack> materialComponents, long materialGenerationFlags, Element element) {
         super(metaItemSubId, name, materialRGB, materialIconSet, materialComponents, materialGenerationFlags, element);
@@ -137,10 +166,23 @@ public class DustMaterial extends FluidMaterial {
             setFluidTemperature(1200); //default value for dusts
         }
     }
+    
+    @Override
+    protected long verifyMaterialBits(long generationBits) {
+        if((generationBits & GENERATE_ORE) > 0) {
+            generationBits |= EXCLUDE_BLOCK_CRAFTING_RECIPES;
+        }
+        return super.verifyMaterialBits(generationBits);
+    }
 
     @Override
     public boolean shouldGenerateFluid() {
         return hasFlag(MatFlags.SMELT_INTO_FLUID);
+    }
+    
+    @ZenGetter("hasSlurry")
+    public boolean shouldGenerateSlurries() {
+        return hasFlag(GENERATE_ORE) && GTValues.isModLoaded("mekanism");
     }
 
     public void addOreByProducts(FluidMaterial... byProducts) {
@@ -170,5 +212,26 @@ public class DustMaterial extends FluidMaterial {
 
     public void setBurnTime(int burnTime) {
         this.burnTime = burnTime;
+    }
+    
+    /**
+     * Internal usage only
+     */    
+    public final void setMaterialDirtySlurry(@Nonnull Fluid dirtySlurry) {
+        Preconditions.checkNotNull(dirtySlurry);
+        this.materialDirtySlurry = dirtySlurry;
+    }
+    
+    public final void setMaterialCleanSlurry(@Nonnull Fluid cleanSlurry) {
+        Preconditions.checkNotNull(cleanSlurry);
+        this.materialCleanSlurry = cleanSlurry;
+    }  
+
+    public final @Nullable Fluid getMaterialDirtySlurry() {
+        return materialDirtySlurry;
+    }
+
+    public final @Nullable Fluid getMaterialCleanSlurry() {
+        return materialCleanSlurry;
     }
 }

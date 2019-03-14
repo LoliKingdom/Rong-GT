@@ -95,6 +95,9 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
     public void update() {
         if (!getMetaTileEntity().getWorld().isRemote) {
             if(workingEnabled) {
+            	if(notEnoughEnergy()) {
+            		completeRecipe();
+            	}
                 if(progressTime > 0) {
                     updateRecipeProgress();
                 }
@@ -138,7 +141,8 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
         if (previousRecipe != null && previousRecipe.matches(false, importInventory, importFluids)) {
             //if previous recipe still matches inputs, try to use it
             currentRecipe = previousRecipe;
-        } else {
+        }
+        else {
             boolean dirty = checkRecipeInputsDirty(importInventory, importFluids);
             if (dirty || forceRecipeRecheck) {
                 this.forceRecipeRecheck = false;
@@ -347,7 +351,7 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
         }
     }
 
-    public boolean isHasNotEnoughEnergy() {
+    public boolean notEnoughEnergy() {
         return hasNotEnoughEnergy;
     }
 
@@ -359,6 +363,10 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
     @Override
     public boolean isActive() {
         return isActive;
+    }
+    
+    public Recipe getPreviousRecipe() {
+    	return previousRecipe;
     }
 
     @Override

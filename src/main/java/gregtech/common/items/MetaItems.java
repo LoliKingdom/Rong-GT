@@ -239,6 +239,8 @@ public class MetaItems {
     
     public static MetaItem<?>.MetaValueItem TURBINE_ROTOR;
     
+    public static MetaItem<?>.MetaValueItem RUBBER_DROP;
+    
     public static ToolMetaItem<?>.MetaToolValueItem SAW;
     public static ToolMetaItem<?>.MetaToolValueItem HARD_HAMMER;
     public static ToolMetaItem<?>.MetaToolValueItem SOFT_HAMMER;
@@ -253,7 +255,6 @@ public class MetaItems {
     public static ToolMetaItem<?>.MetaToolValueItem WRENCH_HV;
     public static ToolMetaItem<?>.MetaToolValueItem BUZZSAW;
     public static ToolMetaItem<?>.MetaToolValueItem SCREWDRIVER_LV;
-    public static ToolMetaItem<?>.MetaToolValueItem SOLDERING_IRON_LV;
     
     public static void init() {
     	MetaItems1 first = new MetaItems1();

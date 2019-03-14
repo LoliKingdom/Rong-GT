@@ -186,10 +186,6 @@ public class MetaItems1 extends MaterialMetaItem {
         COVER_ENERGY_DETECTOR = addItem(497, "cover.energy.detector").setInvisible();
         COVER_PLAYER_DETECTOR = addItem(498, "cover.player.detector").setInvisible();
 
-        COVER_SCREEN = addItem(499, "cover.screen").setInvisible();
-        COVER_CRAFTING = addItem(500, "cover.crafting").setInvisible();
-        COVER_DRAIN = addItem(501, "cover.drain").setInvisible();
-
         COVER_SHUTTER = addItem(502, "cover.shutter");
 
         COVER_SOLAR_PANEL_LV = addItem(504, "cover.solar.panel.lv");
@@ -209,10 +205,6 @@ public class MetaItems1 extends MaterialMetaItem {
         ENERGY_CRYSTAL = addItem(514, "energy_crystal").addStats(ElectricStats.createRechargeableBattery(1000000L, GTValues.HV)).setModelAmount(8).setMaxStackSize(1);
         LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(4000000L, GTValues.EV)).setModelAmount(8).setMaxStackSize(1);
         ENERGIUM_DUST = addItem(516, "energium_dust");
-        
-        IItemContainerItemProvider selfContainerItemProvider = itemStack -> itemStack;
-        WOODEN_FORM_EMPTY = addItem(517, "wooden_form.empty").addStats(selfContainerItemProvider);
-        WOODEN_FORM_BRICK = addItem(518, "wooden_form.brick").addStats(selfContainerItemProvider);
 
         COMPRESSED_CLAY = addItem(519, "compressed.clay");
         COMPRESSED_FIRECLAY = addItem(520, "compressed.fireclay");
@@ -228,7 +220,7 @@ public class MetaItems1 extends MaterialMetaItem {
         MAGIC_FUEL_BINDER = addItem(528, "magic_fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
         
         //TODO: ThermiteDustCrafting
-        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(100);     
+        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(200);     
         
         CIRCUIT_BASIC_LV = addItem(530, "circuit.basic").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
         CIRCUIT_INTERMEDIATE_MV = addItem(531, "circuit.intermediate").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Intermediate);
@@ -243,6 +235,8 @@ public class MetaItems1 extends MaterialMetaItem {
         CIRCUIT_VACUUM_TUBE_LV = addItem(539, "vacuum_tube").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
         
         TURBINE_ROTOR = addItem(550, "turbine_rotor").addStats(new TurbineRotorBehaviour());
+        
+        RUBBER_DROP = addItem(551, "rubber_drop");
 	}
 	
 	public void registerRecipes() {
@@ -340,72 +334,6 @@ public class MetaItems1 extends MaterialMetaItem {
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_RE_HV_SODIUM.getStackForm())
             .outputs(BATTERY_HULL_HV.getStackForm())
-            .buildAndRegister();
-
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_LV.getStackForm())
-            .input(OrePrefix.dust, Materials.Cadmium, 2)
-            .outputs(BATTERY_RE_LV_CADMIUM.getStackForm())
-            .duration(100)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_LV.getStackForm())
-            .input(OrePrefix.dust, Materials.Lithium, 2)
-            .outputs(BATTERY_RE_LV_LITHIUM.getStackForm())
-            .duration(100)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_LV.getStackForm())
-            .input(OrePrefix.dust, Materials.Sodium, 2)
-            .outputs(BATTERY_RE_LV_SODIUM.getStackForm())
-            .duration(100)
-            .EUt(2)
-            .buildAndRegister();
-
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_MV.getStackForm())
-            .input(OrePrefix.dust, Materials.Cadmium, 8)
-            .outputs(BATTERY_RE_MV_CADMIUM.getStackForm())
-            .duration(400)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_MV.getStackForm())
-            .input(OrePrefix.dust, Materials.Lithium, 8)
-            .outputs(BATTERY_RE_MV_LITHIUM.getStackForm())
-            .duration(400)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_MV.getStackForm())
-            .input(OrePrefix.dust, Materials.Sodium, 8)
-            .outputs(BATTERY_RE_MV_SODIUM.getStackForm())
-            .duration(400)
-            .EUt(2)
-            .buildAndRegister();
-
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_HV.getStackForm())
-            .input(OrePrefix.dust, Materials.Cadmium, 16)
-            .outputs(BATTERY_RE_HV_CADMIUM.getStackForm())
-            .duration(1600)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_HV.getStackForm())
-            .input(OrePrefix.dust, Materials.Lithium, 16)
-            .outputs(BATTERY_RE_HV_LITHIUM.getStackForm())
-            .duration(1600)
-            .EUt(2)
-            .buildAndRegister();
-        RecipeMaps.CANNER_RECIPES.recipeBuilder()
-            .inputs(BATTERY_HULL_HV.getStackForm())
-            .input(OrePrefix.dust, Materials.Sodium, 16)
-            .outputs(BATTERY_RE_HV_SODIUM.getStackForm())
-            .duration(1600)
-            .EUt(2)
             .buildAndRegister();
 
         // Upgrades recipes

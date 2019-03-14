@@ -37,6 +37,7 @@ public class OreDictUnifier {
     private static final Map<UnificationEntry, ArrayList<SimpleItemStack>> stackUnificationItems = new HashMap<>();
     private static final Map<SimpleItemStack, Set<String>> stackOreDictName = new WildcardAwareHashMap<>();
 
+    @Nullable
     private static Comparator<SimpleItemStack> stackComparator;
 
 
@@ -141,10 +142,11 @@ public class OreDictUnifier {
             UnificationEntry unificationEntry = new UnificationEntry(orePrefix, material);
             stackUnificationInfo.put(simpleItemStack, unificationEntry);
             stackUnificationItems.computeIfAbsent(unificationEntry, p -> new ArrayList<>()).add(simpleItemStack);
-            if(!(material instanceof MarkerMaterial)) {
-                //trigger processOreRegistration only for real materials
-                orePrefix.processOreRegistration(material);
+            if (!stackUnificationInfo.containsKey(simpleItemStack) &&
+                    unificationEntry.orePrefix.generationCondition != null) {
+                    stackUnificationInfo.put(simpleItemStack, unificationEntry);
             }
+            orePrefix.processOreRegistration(material);
         }
     }
 

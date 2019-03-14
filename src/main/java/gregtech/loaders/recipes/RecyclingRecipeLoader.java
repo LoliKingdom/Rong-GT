@@ -50,28 +50,28 @@ public class RecyclingRecipeLoader {
         if(dustMaterial instanceof IngotMaterial) {
             int blastFurnaceTemperature = ((IngotMaterial) dustMaterial).blastFurnaceTemperature;
             voltageMultiplier = blastFurnaceTemperature == 0 ? 16 : blastFurnaceTemperature > 2000 ? 480 : 96;
-        } else {
+        } 
+        else {
             //do not apply arc smelting for gems, solid materials and dust materials
             //only generate recipes for ingot materials
             ignoreArcSmelting = true;
         }
-
-        RecipeBuilder<?> maceratorRecipeBuilder = RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
-            .outputs(dustMaterials.stream().map(OreDictUnifier::getDust).collect(Collectors.toList()))
-            .duration((int) Math.max(1L, firstStack.amount * 30 / M))
-            .EUt(8 * voltageMultiplier);
-        inputSupplier.accept(maceratorRecipeBuilder);
-        maceratorRecipeBuilder.buildAndRegister();
-
         if(dustMaterial.shouldGenerateFluid()) {
             RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .fluidOutputs(dustMaterial.getFluid((int) (firstStack.amount * L / M)))
                 .duration((int) Math.max(1L, firstStack.amount * 80 / M))
-                .EUt(32 * voltageMultiplier);
+                .EUt(4 * voltageMultiplier);
             inputSupplier.accept(fluidExtractorRecipeBuilder);
             fluidExtractorRecipeBuilder.buildAndRegister();
         }
-
+        else {
+        	RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+                    .outputs(dustMaterials.stream().map(OreDictUnifier::getDust).findFirst().get())
+                    .duration((int) Math.max(1L, firstStack.amount * 80 / M))
+                    .EUt(4 * voltageMultiplier);
+                inputSupplier.accept(fluidExtractorRecipeBuilder);
+                fluidExtractorRecipeBuilder.buildAndRegister();
+        }
         if(!ignoreArcSmelting) {
             List<ItemStack> resultList = dustMaterials.stream().map(RecyclingRecipeLoader::getArcSmeltingResult).collect(Collectors.toList());
             resultList.removeIf(ItemStack::isEmpty);
@@ -90,7 +90,8 @@ public class RecyclingRecipeLoader {
         long materialAmount = materialStack.amount;
         if(material.hasFlag(MatFlags.FLAMMABLE)) {
             return OreDictUnifier.getDust(Materials.Ash, materialAmount);
-        } else if(material instanceof GemMaterial) {
+        } 
+        else if(material instanceof GemMaterial) {
             if(materialStack.material.materialComponents.stream()
                 .anyMatch(stack -> stack.material == Materials.Oxygen)) {
                 return OreDictUnifier.getDust(Materials.Ash, materialAmount);
@@ -100,12 +101,15 @@ public class RecyclingRecipeLoader {
                 return OreDictUnifier.getDust(Materials.Carbon, materialAmount);
             }
             return OreDictUnifier.getDust(Materials.DarkAsh, materialAmount);
-        } else if(material instanceof IngotMaterial) {
+        } 
+        else if(material instanceof IngotMaterial) {
             IngotMaterial ingotMaterial = (IngotMaterial) material;
-            if(ingotMaterial.recycleTo != null)
+            if(ingotMaterial.recycleTo != null) {
                 ingotMaterial = ingotMaterial.recycleTo;
+            }
             return OreDictUnifier.getIngot(ingotMaterial, materialAmount);
-        } else {
+        } 
+        else {
             return OreDictUnifier.getDust(material, materialAmount);
         }
     }

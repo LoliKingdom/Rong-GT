@@ -33,7 +33,7 @@ public class FusionRecipeBuilder extends RecipeBuilder<FusionRecipeBuilder> {
     @Override
     public boolean applyProperty(String key, Object value) {
         if(key.equals("eu_to_start")) {
-            this.EUToStart(((Number) value).intValue());
+            this.EUToStart(((Number)value).intValue());
             return true;
         }
         return false;

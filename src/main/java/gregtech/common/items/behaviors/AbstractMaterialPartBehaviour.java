@@ -2,6 +2,7 @@ package gregtech.common.items.behaviors;
 
 import gregtech.api.items.metaitem.stats.*;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.type.GemMaterial;
 import gregtech.api.unification.material.type.IngotMaterial;
 import gregtech.api.unification.material.type.Material;
 import net.minecraft.client.resources.I18n;
@@ -22,6 +23,20 @@ public abstract class AbstractMaterialPartBehaviour implements IItemBehaviour, I
 
     protected NBTTagCompound getOrCreatePartStatsTag(ItemStack itemStack) {
         return itemStack.getOrCreateSubCompound("GT.PartStats");
+    }
+    
+    public GemMaterial getGemPartMaterial(ItemStack itemStack) {
+        NBTTagCompound compound = getPartStatsTag(itemStack);
+        GemMaterial defaultMaterial = Materials.Diamond;
+        if(compound == null || !compound.hasKey("Material", NBT.TAG_STRING)) {
+            return defaultMaterial;
+        }
+        String materialName = compound.getString("Material");
+        Material material = Material.MATERIAL_REGISTRY.getObject(materialName);
+        if(!(material instanceof GemMaterial)) {
+            return defaultMaterial;
+        }
+        return (GemMaterial) material;
     }
 
     public IngotMaterial getPartMaterial(ItemStack itemStack) {
@@ -53,9 +68,9 @@ public abstract class AbstractMaterialPartBehaviour implements IItemBehaviour, I
         return compound.getInteger("Damage");
     }
 
-    public void setPartDamage(ItemStack itemStack, int rotorDamage) {
+    public void setPartDamage(ItemStack itemStack, int damage) {
         NBTTagCompound compound = getOrCreatePartStatsTag(itemStack);
-        compound.setInteger("Damage", Math.min(getPartMaxDurability(itemStack), rotorDamage));
+        compound.setInteger("Damage", Math.min(getPartMaxDurability(itemStack), damage));
     }
 
     @Override
@@ -68,9 +83,9 @@ public abstract class AbstractMaterialPartBehaviour implements IItemBehaviour, I
     @Override
     public void addInformation(ItemStack stack, List<String> lines) {
         IngotMaterial material = getPartMaterial(stack);
-        int maxRotorDurability = getPartMaxDurability(stack);
-        int rotorDamage = getPartDamage(stack);
-        lines.add(I18n.format("metaitem.tool.tooltip.durability", maxRotorDurability - rotorDamage, maxRotorDurability));
+        int maxDurability = getPartMaxDurability(stack);
+        int damage = getPartDamage(stack);
+        lines.add(I18n.format("metaitem.tool.tooltip.durability", maxDurability - damage, maxDurability));
         lines.add(I18n.format("metaitem.tool.tooltip.primary_material", material.getLocalizedName(), material.harvestLevel));
     }
 

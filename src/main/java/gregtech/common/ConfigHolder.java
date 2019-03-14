@@ -21,22 +21,15 @@ public class ConfigHolder {
     @Config.Comment("Whether to disable vanilla ores generation in world. Default is false.")
     public static boolean disableVanillaOres = true;
 
-    @Config.Comment("Whether to disable rubber tree world generation. Default is false.")
-    public static boolean disableRubberTreeGeneration = false;
-
     @Config.Comment("Whether machines should explode when overloaded with power. Default: true")
     public static boolean doExplosions = true;
 
-    @Config.Comment("Energy use multiplier for electric items. Default: 100")
+    @Config.Comment("Energy use multiplier for electric items. Default: 10")
     public static int energyUsageMultiplier = 10;
 
     @Config.RangeInt(min = 0, max = 100)
-    @Config.Comment("Chance with which flint and steel will create fire. Default: 50")
+    @Config.Comment("Chance with which flint and steel will create fire. Default: 75")
     public static int flintChanceToCreateFire = 75;
-
-    @Config.Comment("Recipes for machine hulls use more materials. Default: false")
-    @Config.RequiresMcRestart
-    public static boolean harderMachineHulls = true;
 
     @Config.Comment("If true, insufficient energy supply will reset recipe progress to zero. If false, progress will slowly go back (with 2x speed)")
     @Config.RequiresWorldRestart

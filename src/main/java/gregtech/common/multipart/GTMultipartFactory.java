@@ -79,15 +79,7 @@ public final class GTMultipartFactory implements IDynamicPartFactory, IPartConve
 
     @Override
     public TMultiPart createPartServer(ResourceLocation identifier, NBTTagCompound compound) {
-        TMultiPart resultPart = createPart(identifier);
-        //TODO remove in the net major update
-        //prevents creation of invalid parts if material tag is missing
-        if(resultPart instanceof PipeMultiPart) {
-            if(!compound.hasKey("PipeMaterial", NBT.TAG_STRING)) {
-                return null;
-            }
-        }
-        return resultPart;
+    	return createPart(identifier);
     }
 
     @Override

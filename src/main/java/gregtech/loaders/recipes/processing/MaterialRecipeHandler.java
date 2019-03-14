@@ -305,7 +305,6 @@ public class MaterialRecipeHandler {
         				OreDictUnifier.get(OrePrefix.gem, material, 9), blockStack);
         	}
         	else if(material instanceof IngotMaterial) {
-        		System.out.println(material.toString());
         		ModHandler.addShapedRecipe(String.format("block_compress_%s", material.toString()), 
         				blockStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(OrePrefix.ingot, material));
         		ModHandler.addShapelessRecipe(String.format("block_decompress_%s", material.toString()), 

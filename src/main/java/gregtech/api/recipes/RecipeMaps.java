@@ -18,8 +18,9 @@ import gregtech.api.recipes.builders.IntCircuitRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.recipes.builders.UniversalDistillationRecipeBuilder;
 import gregtech.api.recipes.machines.FuelRecipeMap;
+import gregtech.api.recipes.machines.RecipeMapAssemblyLine;
 import gregtech.api.recipes.machines.RecipeMapBrewer;
-import gregtech.api.recipes.machines.RecipeMapFluidCanner;
+import gregtech.api.recipes.machines.RecipeMapCanner;
 import gregtech.api.recipes.machines.RecipeMapFurnace;
 import gregtech.api.recipes.machines.RecipeMapGroupOutput;
 import gregtech.api.recipes.recipes.CokeOvenRecipe;
@@ -75,15 +76,6 @@ public class RecipeMaps {
         .setSlotOverlay(false, false, true, GuiTextures.PRESS_OVERLAY_2)
         .setSlotOverlay(true, false, GuiTextures.PRESS_OVERLAY_3)
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
-
-
-    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_CANNER_RECIPES = new RecipeMapFluidCanner("fluid_canner", 1, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())
-        .setSlotOverlay(false, false, GuiTextures.CANISTER_OVERLAY)
-        .setSlotOverlay(true, false, GuiTextures.CANISTER_OVERLAY)
-        .setSlotOverlay(false, true, GuiTextures.DARK_CANISTER_OVERLAY)
-        .setSlotOverlay(true, true, GuiTextures.DARK_CANISTER_OVERLAY)
-        .setProgressBar(GuiTextures.PROGRESS_BAR_CANNER, MoveType.HORIZONTAL);*/
-
 
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 4, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
@@ -293,7 +285,6 @@ public class RecipeMaps {
      */
 
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FLUID_SOLIDFICATION_RECIPES = new RecipeMap<>("fluid_solidifier", 0, 1, 1, 1, 1, 1, 0, 0, 1, new SimpleRecipeBuilder())
-        .setSlotOverlay(false, false, GuiTextures.SOLIDIFIER_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
 
     /**
@@ -555,7 +546,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMapFluidCanner("canner", 0, 2, 0, 1, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> CANNER_RECIPES = new RecipeMapCanner("canner", 0, 2, 0, 1, 0, 1, 0, 0, 1, new SimpleRecipeBuilder())   	
     	.setSlotOverlay(false, true, GuiTextures.FLUID_SLOT)
     	.setSlotOverlay(false, false, false, GuiTextures.CANNER_OVERLAY)
         .setSlotOverlay(false, false, true, GuiTextures.CANISTER_OVERLAY)
@@ -632,6 +623,12 @@ public class RecipeMaps {
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> FORGE_HAMMER_RECIPES = new RecipeMap<>("forge_hammer", 1, 1, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.HAMMER_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, MoveType.VERTICAL);
+    
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ASSEMBLY_LINE_RECIPES = new RecipeMapAssemblyLine("assembly_line", 1, 12, 1, 1, 0, 4, 0, 1, 1, new SimpleRecipeBuilder())
+		.setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
+    
+    /*@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> ASSEMBLY_LINE_RECIPES = new RecipeMapAssemblyLine("assembly_line", 4, 16, 1, 1, 0, 4, 0, 0, 1, new SimpleRecipeBuilder())
+    		.setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);*/
 
     @ZenProperty public static final FuelRecipeMap DIESEL_GENERATOR_FUELS = new FuelRecipeMap("diesel_generator");
 

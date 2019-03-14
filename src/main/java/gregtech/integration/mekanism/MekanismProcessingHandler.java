@@ -31,6 +31,7 @@ import mekanism.common.recipe.machines.WasherRecipe;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 
 public class MekanismProcessingHandler {
@@ -70,8 +71,9 @@ public class MekanismProcessingHandler {
 
 	//Still needs revision
 	public static void initRecipes() {
-		for(Material m : DustMaterial.MATERIAL_REGISTRY) {
-			if(m.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {		
+		for(Material material : DustMaterial.MATERIAL_REGISTRY) {
+			if(material instanceof DustMaterial && material.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
+				DustMaterial m = (DustMaterial)material;	
 				//TIL: Can input Fluid as a GasStack
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreEndstone, m), getSlurry(m, false, 1000));
@@ -84,9 +86,9 @@ public class MekanismProcessingHandler {
 				RecipeHandler.addChemicalWasherRecipe(getSlurry(m, false, 20), getSlurry(m, true, 10));
 				
 				RecipeHandler.addChemicalCrystallizerRecipe(getSlurry(m, true, 250), OreDictUnifier.get(OrePrefix.crystal, m));
-				
+
 				RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
-					.fluidInputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 200))
+					.fluidInputs(new FluidStack(m.getMaterialCleanSlurry(), 220))
 					.outputs(OreDictUnifier.get(OrePrefix.crystal, m))
 					.EUt(1480)
 					.duration((int)m.getAverageMass() / 2)
@@ -106,15 +108,15 @@ public class MekanismProcessingHandler {
 		        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
 				  	.input(OrePrefix.crushed, m)
 				  	.fluidInputs(Materials.SulfuricAcid.getFluid(600))
-				  	.fluidOutputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 1000))
+				  	.fluidOutputs(new FluidStack(m.getMaterialDirtySlurry(), 1000))
 				  	.duration(400)
 				  	.EUt(96)
 				  	.buildAndRegister();
 				
-		        //TODO: Add chanceOutput
+		        //TODO: Add chanceOutput and waste output
 				RecipeMaps.MIXER_RECIPES.recipeBuilder()
-				  	.fluidInputs(FluidRegistry.getFluidStack("slurry." + m.toString(), 20), ModHandler.getWater(50))
-				  	.fluidOutputs(FluidRegistry.getFluidStack("clean_slurry." + m.toString(), 10))
+				  	.fluidInputs(new FluidStack(m.getMaterialDirtySlurry(), 20), ModHandler.getWater(50))
+				  	.fluidOutputs(new FluidStack(m.getMaterialCleanSlurry(), 10))
 				  	.duration(40)
 				  	.EUt(24)
 				  	.buildAndRegister(); 

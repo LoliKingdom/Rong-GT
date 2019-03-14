@@ -130,7 +130,7 @@ public abstract class RecipeMapMultiblockController extends MultiblockWithDispla
                 textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
             }
 
-            if (recipeMapWorkable.isHasNotEnoughEnergy()) {
+            if (recipeMapWorkable.notEnoughEnergy()) {
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         }

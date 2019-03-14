@@ -40,7 +40,6 @@ public class PartsRecipeHandler {
         OrePrefix.gear.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processGear);
         OrePrefix.gearSmall.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processGear);
         OrePrefix.ring.addProcessingHandler(IngotMaterial.class, PartsRecipeHandler::processRing);
-        OrePrefix.spring.addProcessingHandler(SolidMaterial.class, PartsRecipeHandler::processSpring);
     }
     
 
@@ -87,14 +86,14 @@ public class PartsRecipeHandler {
             RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
                 .input(OrePrefix.wireGtSingle, material)
                 .outputs(OreDictUnifier.get(OrePrefix.wireFine, material, 4))
-                .duration(200).EUt(8)
+                .duration(100).EUt(24)
                 .buildAndRegister();
         } 
         else {
             RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
             .input(OrePrefix.ingot, material)
             .outputs(OreDictUnifier.get(OrePrefix.wireFine, material, 8))
-            .duration(400).EUt(8)
+            .duration(240).EUt(24)
             .buildAndRegister();
         }
     }
@@ -251,21 +250,8 @@ public class PartsRecipeHandler {
             RecipeMaps.WIREMILL_RECIPES.recipeBuilder()
                 .input(OrePrefix.stick, material)
                 .outputs(OreDictUnifier.get(OrePrefix.wireFine, material, 4))
-                .duration(50).EUt(4)
+                .duration(240).EUt(74)
                 .buildAndRegister();
-        }
-    }
-
-    public static void processSpring(OrePrefix springPrefix, DustMaterial material) {
-        if (!material.hasFlag(MatFlags.NO_SMASHING)) {
-            if (material.hasFlag(GENERATE_SPRING)) {
-                RecipeMaps.BENDER_RECIPES.recipeBuilder()
-                    .input(OrePrefix.stick, material, 4)
-                    .outputs(OreDictUnifier.get(OrePrefix.spring, material))
-                    .circuitMeta(1)
-                    .duration(200).EUt(24)
-                    .buildAndRegister();
-            }
         }
     }
 

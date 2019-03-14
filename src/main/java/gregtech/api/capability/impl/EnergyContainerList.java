@@ -13,7 +13,7 @@ import static gregtech.api.util.GTUtility.*;
 
 public class EnergyContainerList implements IEnergyContainer.IEnergyContainerOverflowSafe {
 
-    private List<IEnergyContainer> energyContainerList;
+    public List<IEnergyContainer> energyContainerList;
 
     public EnergyContainerList(List<IEnergyContainer> energyContainerList) {
         this.energyContainerList = energyContainerList;

@@ -36,7 +36,7 @@ public class BlockDrillHead extends VariantBlock<BlockDrillHead.DrillHeadType> {
         TUNGSTEN("tungsten", 5, Materials.Tungsten, GTValues.V[GTValues.HV]),
         DIAMOND("diamond", 15, Materials.Diamond, GTValues.V[GTValues.EV]),
         TITANIUM("titanium", 25, Materials.Titanium, GTValues.V[GTValues.IV]),
-    	ADAMANTIUM("adamantium", 40, Materials.Adamantium, GTValues.V[GTValues.LuV]),
+    	ADAMANTINE("adamantine", 40, Materials.Adamantine, GTValues.V[GTValues.LuV]),
     	OSMIRIDIUM("osmiridium", 60, Materials.Osmiridium, GTValues.V[GTValues.UV]);
 
         private final String name;
