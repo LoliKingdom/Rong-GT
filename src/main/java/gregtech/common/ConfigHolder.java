@@ -30,6 +30,9 @@ public class ConfigHolder {
     @Config.RangeInt(min = 0, max = 100)
     @Config.Comment("Chance with which flint and steel will create fire. Default: 75")
     public static int flintChanceToCreateFire = 75;
+    
+    @Config.Comment("Generate rubber trees or not?")
+    public static boolean disableRubberTreeGeneration = false;
 
     @Config.Comment("If true, insufficient energy supply will reset recipe progress to zero. If false, progress will slowly go back (with 2x speed)")
     @Config.RequiresWorldRestart

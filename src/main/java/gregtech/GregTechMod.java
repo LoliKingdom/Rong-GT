@@ -20,6 +20,7 @@ import gregtech.common.CommonProxy;
 import gregtech.common.ConfigHolder;
 import gregtech.common.MetaEntities;
 import gregtech.common.MetaFluids;
+import gregtech.common.RubberTreeGenerator;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.modelfactories.BlockCompressedFactory;
 import gregtech.common.blocks.modelfactories.BlockFrameFactory;
@@ -118,7 +119,11 @@ public class GregTechMod {
                 GTLog.logger.fatal("Report to GregTech: Chill Edition's Github/Curse page to get help and fix the problem");
                 GTLog.logger.fatal("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
-}
+        }
+        
+        if(!ConfigHolder.disableRubberTreeGeneration) {
+            GameRegistry.registerWorldGenerator(new RubberTreeGenerator(), 10000);
+        }
 
         if(GTValues.isModLoaded("forgemultipartcbe")) {
             GTLog.logger.info("ForgeMultiPart found. Enabling integration...");
