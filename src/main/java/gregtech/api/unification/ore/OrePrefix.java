@@ -53,6 +53,7 @@ public enum OrePrefix {
     
     cluster("Native Ore Clusters", -1, null, MaterialIconType.cluster, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
+    //Mekanism
     shard("Crystallised Shards", -1, null, MaterialIconType.shard, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     clump("Clumps", -1, null, MaterialIconType.clump, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     crystal("Crystals", -1, null, MaterialIconType.crystal, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
@@ -72,8 +73,7 @@ public enum OrePrefix {
     nugget("Nuggets", M / 9, null, MaterialIconType.nugget, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat instanceof IngotMaterial), // A Nugget. Introduced by Eloraam
 
     plate("Plates", M, null, MaterialIconType.plate, ENABLE_UNIFICATION, mat -> mat instanceof DustMaterial && mat.hasFlag(GENERATE_PLATE)), // Regular Plate made of one Ingot/Dust. Introduced by Calclavia
-    plateDense("Dense Plates", M * 9, null, MaterialIconType.plateDense, ENABLE_UNIFICATION, mat -> mat instanceof IngotMaterial && mat.hasFlag(GENERATE_PLATE | GENERATE_DENSE) && !mat.hasFlag(NO_SMASHING)), // 9 Plates combined in one Item.
-    compressed("Compressed Materials", M * 2, null, null, ENABLE_UNIFICATION, null), // Compressed Material, worth 1 Unit. Introduced by Galacticraft
+    plateDense("Dense Plates", M * 9, null, MaterialIconType.plateDense, ENABLE_UNIFICATION, mat -> mat.hasFlag(GENERATE_PLATE | GENERATE_DENSE) && !mat.hasFlag(NO_SMASHING)), // 9 Plates combined in one Item.
 
     foil("Foils", M / 4, null, MaterialIconType.foil, ENABLE_UNIFICATION, mat -> mat instanceof IngotMaterial && mat.hasFlag(GENERATE_FOIL)), // Foil made of 1/4 Ingot/Dust.
 
@@ -112,7 +112,7 @@ public enum OrePrefix {
 
     block("Storage Blocks", M * 9, null, MaterialIconType.block, ENABLE_UNIFICATION, null), // Storage Block consisting out of 9 Ingots/Gems/Dusts. Introduced by CovertJaguar
 
-    //craftingTool("Crafting Tools", -1, null, null, DISALLOW_RECYCLING, null), // Special Prefix used mainly for the Crafting Handler.
+    craftingTool("Crafting Tools", -1, null, null, DISALLOW_RECYCLING, null), // Special Prefix used mainly for the Crafting Handler.
     craftingLens("Crafting Ingredients", -1, null, null, DISALLOW_RECYCLING, null), // Special Prefix used mainly for the Crafting Handler.
 
     log("Logs", -1, null, null, DISALLOW_RECYCLING, null), // Prefix used for Logs. Usually as "logWood". Introduced by Eloraam
@@ -193,6 +193,13 @@ public enum OrePrefix {
         toolHeadWrench.maxStackSize = 1;
         
         plateDense.maxStackSize = 8;
+        
+        craftingLens.setMarkerPrefix(true);
+        dye.setMarkerPrefix(true);
+        batterySingleUse.setMarkerPrefix(true);
+        battery.setMarkerPrefix(true);
+        circuit.setMarkerPrefix(true);
+        chipset.setMarkerPrefix(true);
 
         gem.setIgnored(Materials.Diamond);
         gem.setIgnored(Materials.Emerald);
@@ -301,6 +308,8 @@ public enum OrePrefix {
     private final List<IOreRegistrationHandler> oreProcessingHandlers = new ArrayList<>();
     private final Set<Material> ignoredMaterials = new HashSet<>();
     private final Set<Material> generatedMaterials = new HashSet<>();
+    
+    private boolean isMarkerPrefix = false;
 
     public byte maxStackSize = 64;
     public final List<MaterialStack> secondaryMaterials = new ArrayList<>();
@@ -324,6 +333,10 @@ public enum OrePrefix {
     public void addSecondaryMaterial(MaterialStack secondaryMaterial) {
         Preconditions.checkNotNull(secondaryMaterial, "secondaryMaterial");
         secondaryMaterials.add(secondaryMaterial);
+    }
+    
+    public void setMarkerPrefix(boolean isMarkerPrefix) {
+        this.isMarkerPrefix = isMarkerPrefix;
     }
 
     public long getMaterialAmount(Material material) {
@@ -430,5 +443,9 @@ public enum OrePrefix {
 
     public void setIgnored(Material material) {
         ignoredMaterials.add(material);
+    }
+    
+    public boolean isMarkerPrefix() {
+        return isMarkerPrefix;
     }
 }

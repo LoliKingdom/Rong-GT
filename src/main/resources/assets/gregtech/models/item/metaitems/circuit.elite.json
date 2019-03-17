@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gregtech:items/metaitems/circuit.elite"
+    "layer0": "gregtech:items/metaitems/circuits/circuit.elite",
+	"layer1": "gregtech:items/metaitems/circuits/wiring.elite"
   }
 }

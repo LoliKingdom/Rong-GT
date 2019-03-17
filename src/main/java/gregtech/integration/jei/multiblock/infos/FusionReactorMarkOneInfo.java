@@ -40,7 +40,7 @@ public class FusionReactorMarkOneInfo extends MultiblockInfoPage {
                 .aisle("######DCD######", "####CCcccCC####", "######UCU######")
                 .aisle("###############", "######NMN######", "###############")
                 .where('M', MetaTileEntities.FUSION_REACTOR[0], EnumFacing.SOUTH)
-                .where('C', MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING))
+                .where('C', MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING))
                 .where('c', MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.SUPERCONDUCTOR))
                 .where('W', MetaTileEntities.FLUID_EXPORT_HATCH[5], EnumFacing.WEST)
                 .where('E', MetaTileEntities.FLUID_EXPORT_HATCH[5], EnumFacing.EAST)

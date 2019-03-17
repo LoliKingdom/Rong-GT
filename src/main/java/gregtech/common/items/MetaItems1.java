@@ -95,8 +95,8 @@ public class MetaItems1 extends MaterialMetaItem {
         BATTERY_RE_HV_LITHIUM = addItem(416, "battery.re.hv.lithium").addStats(ElectricStats.createRechargeableBattery(1600000, 3)).setModelAmount(8);
         BATTERY_RE_HV_SODIUM = addItem(417, "battery.re.hv.sodium").addStats(ElectricStats.createRechargeableBattery(800000, 3)).setModelAmount(8);
 
-        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, GTValues.IV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
-        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(1000000000, GTValues.LuV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, GTValues.IV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Master).setModelAmount(8);
+        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.LuV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Expert).setModelAmount(8);
 	
         ELECTRIC_MOTOR_LV = addItem(420, "electric.motor.lv");
         ELECTRIC_MOTOR_MV = addItem(421, "electric.motor.mv");
@@ -162,8 +162,7 @@ public class MetaItems1 extends MaterialMetaItem {
         SENSOR_LuV = addItem(482, "sensor.luv");
         SENSOR_UV = addItem(483, "sensor.uv");
         
-        //TODO: Fix
-        ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
+        ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.infused_lapotronicorb").addStats(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
         
         FLUID_FILTER = addItem(485, "fluid_filter");
 
@@ -218,8 +217,7 @@ public class MetaItems1 extends MaterialMetaItem {
         FUEL_BINDER = addItem(526, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
         SUPER_FUEL_BINDER = addItem(527, "super_fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
         MAGIC_FUEL_BINDER = addItem(528, "magic_fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
-        
-        //TODO: ThermiteDustCrafting
+
         THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(200);     
         
         CIRCUIT_BASIC_LV = addItem(530, "circuit.basic").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
@@ -229,23 +227,45 @@ public class MetaItems1 extends MaterialMetaItem {
         CIRCUIT_MASTER_IV = addItem(534, "circuit.master").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Master);
         CIRCUIT_EXPERT_LuV = addItem(535, "circuit.expert").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Expert);
         CIRCUIT_ULTIMATE_UV = addItem(536, "circuit.ultimate").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
-        CIRCUIT_MAGIC = addItem(537, "circuit.magic").addOreDict("circuitMagic");
+        CIRCUIT_MAGIC = addItem(537, "circuit.magic").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Magic);
+        
+        BOARD_BASIC = addItem(542, "board.basic").addOreDict("boardBasic");
+        BOARD_INTERMEDIATE = addItem(543, "board.intermediate").addOreDict("boardIntermediate");
+        BOARD_ADVANCED = addItem(544, "board.advanced").addOreDict("boardAdvanced");
+        BOARD_ELITE = addItem(545, "board.elite").addOreDict("boardElite");
+        BOARD_MASTER = addItem(546, "board.master").addOreDict("boardMaster");
+        BOARD_EXPERT = addItem(547, "board.expert").addOreDict("boardExpert");
+        BOARD_ULTIMATE = addItem(548, "board.ultimate").addOreDict("boardUltimate");
+        BOARD_MAGIC = addItem(549, "board.magic").addOreDict("boardMagic");
+        
+        WIRING_BASIC = addItem(550, "wiring.basic").addOreDict("wiringBasic");
+        WIRING_INTERMEDIATE = addItem(551, "wiring.intermediate").addOreDict("wiringIntermediate");
+        WIRING_ADVANCED = addItem(552, "wiring.advanced").addOreDict("wiringAdvanced");
+        WIRING_ELITE = addItem(553, "wiring.elite").addOreDict("wiringElite");
+        WIRING_MASTER = addItem(554, "wiring.master").addOreDict("wiringMaster");
+        WIRING_EXPERT = addItem(555, "wiring.expert").addOreDict("wiringExpert");
+        WIRING_ULTIMATE = addItem(556, "wiring.ultimate").addOreDict("wiringUltimate");
+        WIRING_MAGIC = addItem(557, "wiring.magic").addOreDict("wiringMagic");
+        
+        SOC_BASIC = addItem(558, "soc.basic").addOreDict("socBasic");
+        SOC_INTERMEDIATE = addItem(559, "soc.intermediate").addOreDict("socIntermediate");
+        SOC_ADVANCED = addItem(560, "soc.advanced").addOreDict("socAdvanced");
+        SOC_ELITE = addItem(561, "soc.elite").addOreDict("socElite");
+        SOC_MASTER = addItem(562, "soc.master").addOreDict("socMaster");
+        SOC_EXPERT = addItem(563, "soc.expert").addOreDict("socExpert");
+        SOC_ULTIMATE = addItem(564, "soc.ultimate").addOreDict("socUltimate");
+        SOC_MAGIC = addItem(565, "soc.magic").addOreDict("socMagic");
         
         GLASS_TUBE = addItem(538, "glass_tube");
         CIRCUIT_VACUUM_TUBE_LV = addItem(539, "vacuum_tube").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
+        PHENOLIC_BOARD = addItem(566, "phenolic_board");
         
-        TURBINE_ROTOR = addItem(550, "turbine_rotor").addStats(new TurbineRotorBehaviour());
+        TURBINE_ROTOR = addItem(540, "turbine_rotor").addStats(new TurbineRotorBehaviour());
         
-        RUBBER_DROP = addItem(551, "rubber_drop");
+        RUBBER_DROP = addItem(541, "rubber_drop");
 	}
 	
 	public void registerRecipes() {
-		//Replace with IF rubber drop
-        /*RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-            .inputs(RUBBER_DROP.getStackForm())
-            .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber, 3))
-            .duration(800).EUt(6)
-            .buildAndRegister();*/
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.dust, Materials.Redstone).input(OrePrefix.plate, Materials.Tin, 3)

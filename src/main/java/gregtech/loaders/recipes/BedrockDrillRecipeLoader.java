@@ -10,8 +10,7 @@ public class BedrockDrillRecipeLoader {
 	
 	public static void init() {
 		
-		//TODO: Better recipes
-		
+		//TODO: Better recipes		
 		//MV
 		RecipeMaps.BEDROCK_DRILL_RECIPES.recipeBuilder()
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.RareEarth), 200)

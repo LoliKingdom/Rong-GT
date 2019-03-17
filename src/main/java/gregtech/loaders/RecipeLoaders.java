@@ -3,6 +3,7 @@ package gregtech.loaders;
 import gregtech.loaders.recipes.AssemblyLineRecipeLoader;
 import gregtech.loaders.recipes.BedrockDrillRecipeLoader;
 import gregtech.loaders.recipes.ChemicalRecipeLoader;
+import gregtech.loaders.recipes.CircuitRecipeLoader;
 import gregtech.loaders.recipes.CraftingRecipeLoader;
 import gregtech.loaders.recipes.DyeRecipeLoader;
 import gregtech.loaders.recipes.MachineRecipeLoader;
@@ -44,6 +45,7 @@ public class RecipeLoaders {
 		DyeRecipeLoader.init();
 		ChemicalRecipeLoader.init();
 		WoodRecipeLoader.init();
+		CircuitRecipeLoader.init();
 		
 		FuelLoader.registerFuels();
 	}

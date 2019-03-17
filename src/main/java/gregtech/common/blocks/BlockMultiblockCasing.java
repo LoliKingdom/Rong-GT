@@ -4,9 +4,12 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.MultiblockCasingType> {
 
@@ -25,13 +28,11 @@ public class BlockMultiblockCasing extends VariantBlock<BlockMultiblockCasing.Mu
         return false;
     }
 
-
     public enum MultiblockCasingType implements IStringSerializable {
 
         ENGINE_INTAKE_CASING("engine_intake"),
         GRATE_CASING("grate"),
         ASSEMBLER_CASING("assembler"),
-        REINFORCED_GLASS("reinforced_glass"),
         FUSION_CASING("fusion"),
         FUSION_CASING_MK2("fusion_mk2");
 

@@ -66,15 +66,12 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> ASSEMBLER_RECIPES = new RecipeMap<>("assembler", 1, 6, 1, 1, 0, 1, 0, 0, 1, new AssemblerRecipeBuilder())
+    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> ASSEMBLER_RECIPES = new RecipeMap<>("assembler", 1, 6, 1, 1, 0, 2, 0, 0, 1, new AssemblerRecipeBuilder())
         .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, MoveType.HORIZONTAL);
 
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PRESS_RECIPES = new RecipeMap<>("press", 2, 6, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
-        .setSlotOverlay(false, false, false, GuiTextures.PRESS_OVERLAY_1)
-        .setSlotOverlay(false, false, true, GuiTextures.PRESS_OVERLAY_2)
-        .setSlotOverlay(true, false, GuiTextures.PRESS_OVERLAY_3)
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PRESS_RECIPES = new RecipeMap<>("press", 2, 3, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
 
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 4, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())

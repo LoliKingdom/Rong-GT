@@ -7,7 +7,11 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType;
+import gregtech.common.blocks.BlockTransparent.BlockTypes;
 import gregtech.common.items.MetaItems;
+import net.minecraft.item.ItemStack;
 
 public class AssemblyLineRecipeLoader {
 
@@ -56,7 +60,7 @@ public class AssemblyLineRecipeLoader {
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
             .inputs(MetaItems.ELECTRIC_MOTOR_LuV.getStackForm(),
-            		OreDictUnifier.get(OrePrefix.pipeMedium, MarkerMaterials.Tier.Superconductor, 2),
+            		OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Tritanium, 2),
             		OreDictUnifier.get(OrePrefix.plate, Materials.HSSE, 2),
             		OreDictUnifier.get(OrePrefix.screw, Materials.Darmstadtium, 8),
             		OreDictUnifier.get(OrePrefix.ring, Materials.Rubber, 16),
@@ -242,5 +246,35 @@ public class AssemblyLineRecipeLoader {
             .duration(600)
             .EUt(61440)
             .buildAndRegister();
+        
+        RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
+        	.inputs(MetaItems.COVER_SOLAR_PANEL_IV.getStackForm(4),
+        		OreDictUnifier.get(OrePrefix.plateDense, Materials.Osmiridium, 4),
+        		MetaBlocks.TRANSPARENT.getItemVariant(BlockTypes.REINFORCED, 4),
+        		OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Expert, 12),
+        		OreDictUnifier.get(OrePrefix.wireFine, Materials.Iridium, 64),
+        		OreDictUnifier.get(OrePrefix.wireFine, Materials.Osmium, 64),
+        		OreDictUnifier.get(OrePrefix.cableGtQuadruple, Materials.YttriumBariumCuprate, 8))
+        .fluidInputs(Materials.SolderingAlloy.getFluid(8 * L))
+        .outputs(MetaItems.COVER_SOLAR_PANEL_LuV.getStackForm())
+        .duration(600)
+        .EUt(10240)
+        .buildAndRegister();
+        
+        RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
+    		.inputs(MetaItems.COVER_SOLAR_PANEL_LuV.getStackForm(4),
+    		    OreDictUnifier.get(OrePrefix.plate, Materials.Lutetium, 16),
+    		    MetaBlocks.TRANSPARENT.getItemVariant(BlockTypes.REINFORCED, 8),
+    		    OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate, 8),
+    		    OreDictUnifier.get(OrePrefix.wireFine, Materials.Iridium, 64),
+    		    OreDictUnifier.get(OrePrefix.wireFine, Materials.Iridium, 64),
+    		    OreDictUnifier.get(OrePrefix.wireFine, Materials.Iridium, 64),
+    		    OreDictUnifier.get(OrePrefix.wireFine, Materials.Osmium, 64),
+    		    OreDictUnifier.get(OrePrefix.cableGtQuadruple, Materials.NiobiumTitanium, 12))
+    		.fluidInputs(Materials.SolderingAlloy.getFluid(16 * L))
+    		.outputs(MetaItems.COVER_SOLAR_PANEL_UV.getStackForm())
+    		.duration(600)
+    		.EUt(10240)
+    		.buildAndRegister();
     }
 }

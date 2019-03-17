@@ -72,12 +72,13 @@ public class CommonProxy {
         registry.register(METAL_CASING);
         registry.register(TURBINE_CASING);
         registry.register(MACHINE_CASING);
-        registry.register(MUTLIBLOCK_CASING);
+        registry.register(MULTIBLOCK_CASING);
         registry.register(WIRE_COIL);
         registry.register(CONCRETE);
         registry.register(LOG);
         registry.register(LEAVES);
         registry.register(SAPLING);
+        registry.register(TRANSPARENT);
 
         COMPRESSED.values().stream().distinct().forEach(registry::register);
         SURFACE_ROCKS.values().stream().distinct().forEach(registry::register);
@@ -108,12 +109,13 @@ public class CommonProxy {
         registry.register(createItemBlock(METAL_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(TURBINE_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(MACHINE_CASING, VariantItemBlock::new));
-        registry.register(createItemBlock(MUTLIBLOCK_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(MULTIBLOCK_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(WIRE_COIL, VariantItemBlock::new));
         registry.register(createItemBlock(CONCRETE, StoneItemBlock::new));
         registry.register(createMultiTexItemBlock(LOG, state -> state.getValue(BlockRubberLog.VARIANT).getName()));
         registry.register(createMultiTexItemBlock(LEAVES, state -> state.getValue(BlockRubberLeaves.VARIANT).getName()));
         registry.register(createMultiTexItemBlock(SAPLING, state -> state.getValue(BlockRubberSapling.VARIANT).getName()));
+        registry.register(createItemBlock(TRANSPARENT, VariantItemBlock::new));
 
         COMPRESSED.values()
             .stream().distinct()

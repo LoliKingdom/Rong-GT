@@ -103,9 +103,9 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 	private IBlockState getCasingState() {
 		switch(tier) {
 		case 5:
-			return MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING);
+			return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING);
 		default:
-			return MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING_MK2);
+			return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING_MK2);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 	}
 
 	private long getMaxEU() {
-		return this.inputEnergyContainers.energyContainerList.size() * 100000L * (tier - 4);
+		return this.inputEnergyContainers.getContainerList().size() * 100000L * (tier - 4);
 	}
 
 	@Override

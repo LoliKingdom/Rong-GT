@@ -18,6 +18,7 @@ import gregtech.common.blocks.BlockMultiblockCasing.MultiblockCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import static gregtech.api.multiblock.BlockPattern.RelativeDirection.*;
@@ -46,9 +47,9 @@ public class MetaTileEntityAssemblyLine extends RecipeMapMultiblockController {
 				.where('I', tilePredicate((state, tile) -> {
 					return tile.metaTileEntityId.equals(MetaTileEntities.ITEM_IMPORT_BUS[0].metaTileEntityId);
 					}))
-				.where('G', statePredicate(MetaBlocks.MUTLIBLOCK_CASING.getState(MultiblockCasingType.GRATE_CASING)))
-				.where('A', statePredicate(MetaBlocks.MUTLIBLOCK_CASING.getState(MultiblockCasingType.ASSEMBLER_CASING)))
-				.where('R', statePredicate(MetaBlocks.MUTLIBLOCK_CASING.getState(MultiblockCasingType.REINFORCED_GLASS)))
+				.where('G', statePredicate(MetaBlocks.MULTIBLOCK_CASING.getState(MultiblockCasingType.GRATE_CASING)))
+				.where('A', statePredicate(MetaBlocks.MULTIBLOCK_CASING.getState(MultiblockCasingType.ASSEMBLER_CASING)))
+				.where('R', blockPredicate(MetaBlocks.TRANSPARENT))
 				.where('T', statePredicate(MetaBlocks.METAL_CASING.getState(MetalCasingType.TUNGSTENSTEEL_ROBUST)))
 				.where('#', (tile) -> {
 			return true;

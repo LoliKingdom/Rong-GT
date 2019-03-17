@@ -14,6 +14,7 @@ import static gregtech.common.items.MetaItems.WRENCH_LV;
 import static gregtech.common.items.MetaItems.WRENCH_MV;
 import static gregtech.common.items.MetaItems.PLUNGER;
 import static gregtech.common.items.MetaItems.SOFT_HAMMER;
+import static gregtech.common.items.MetaItems.KNIFE;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.ToolDictNames;
@@ -30,6 +31,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.tools.ToolBuzzSaw;
 import gregtech.common.tools.ToolFile;
 import gregtech.common.tools.ToolHardHammer;
+import gregtech.common.tools.ToolKnife;
 import gregtech.common.tools.ToolMortar;
 import gregtech.common.tools.ToolPlunger;
 import gregtech.common.tools.ToolSaw;
@@ -54,33 +56,34 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
 
     @Override
     public void registerSubItems() {
-        SAW = addItem(1, "tool.saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
-        HARD_HAMMER = addItem(2, "tool.hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
-        SOFT_HAMMER = addItem(3, "tool.soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
-        WRENCH = addItem(4, "tool.wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
-        FILE = addItem(5, "tool.file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
-        SCREWDRIVER = addItem(6, "tool.screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
-        MORTAR = addItem(7, "tool.mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
-        WIRE_CUTTER = addItem(8, "tool.wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
+        SAW = addItem(1, "saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
+        HARD_HAMMER = addItem(2, "hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
+        SOFT_HAMMER = addItem(3, "soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
+        WRENCH = addItem(4, "wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
+        FILE = addItem(5, "file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
+        SCREWDRIVER = addItem(6, "screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
+        MORTAR = addItem(7, "mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
+        WIRE_CUTTER = addItem(8, "wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
+        KNIFE = addItem(9, "knife").setToolStats(new ToolKnife()).addOreDict(ToolDictNames.craftingToolKnife);
         
-        WRENCH_LV = addItem(20, "tool.wrench.lv").setToolStats(new ToolWrenchLV())
+        WRENCH_LV = addItem(10, "wrench.lv").setToolStats(new ToolWrenchLV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
-        WRENCH_MV = addItem(21, "tool.wrench.mv").setToolStats(new ToolWrenchMV())
+        WRENCH_MV = addItem(11, "wrench.mv").setToolStats(new ToolWrenchMV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(400000L, 2L));
-        WRENCH_HV = addItem(22, "tool.wrench.hv").setToolStats(new ToolWrenchHV())
+        WRENCH_HV = addItem(12, "wrench.hv").setToolStats(new ToolWrenchHV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(1600000L, 3L));
 
-        SCREWDRIVER_LV = addItem(23, "tool.screwdriver.lv").setToolStats(new ToolScrewdriverLV())
+        SCREWDRIVER_LV = addItem(13, "screwdriver.lv").setToolStats(new ToolScrewdriverLV())
             .addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        BUZZSAW = addItem(24, "tool.buzzsaw").setToolStats(new ToolBuzzSaw())
+        BUZZSAW = addItem(14, "buzzsaw").setToolStats(new ToolBuzzSaw())
             .addOreDict(ToolDictNames.craftingToolSaw)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
-        PLUNGER = addItem(25, "tool.plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
+        PLUNGER = addItem(15, "plunger").setToolStats(new ToolPlunger()).addOreDict(ToolDictNames.craftingToolPlunger);
     }
 }

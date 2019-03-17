@@ -27,35 +27,7 @@ public class PlungerBehaviour implements IItemBehaviour {
     public PlungerBehaviour(int cost) {
         this.cost = cost;
     }
-
-    @Override
-    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null) {
-            return EnumActionResult.PASS;
-        }
-        IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-        if(fluidHandler == null) {
-            return EnumActionResult.PASS;
-        }
-        ItemStack toolStack = player.getHeldItem(hand);
-        boolean isShiftClick = player.isSneaking();
-        IFluidHandler handlerToRemoveFrom = isShiftClick ?
-            (fluidHandler instanceof FluidHandlerProxy ? ((FluidHandlerProxy) fluidHandler).input : null) :
-            (fluidHandler instanceof FluidHandlerProxy ? ((FluidHandlerProxy) fluidHandler).output : fluidHandler);
-        if(handlerToRemoveFrom != null && GTUtility.doDamageItem(toolStack, cost, false)) {
-            if(!world.isRemote) {
-                FluidStack drainStack = fluidHandler.drain(1000, true);
-                int amountOfFluid = drainStack == null ? 0 : drainStack.amount;
-                if(amountOfFluid > 0) {
-                    player.playSound(SoundEvents.ENTITY_SLIME_SQUISH, 1.0f, amountOfFluid / 1000.0f);
-                }
-            }
-            return EnumActionResult.SUCCESS;
-        }
-        return EnumActionResult.PASS;
-    }
-
+    
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
         lines.addAll(Arrays.asList(I18n.format("behaviour.plunger.description").split("/n")));

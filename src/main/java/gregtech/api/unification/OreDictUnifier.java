@@ -142,8 +142,7 @@ public class OreDictUnifier {
             UnificationEntry unificationEntry = new UnificationEntry(orePrefix, material);
             stackUnificationInfo.put(simpleItemStack, unificationEntry);
             stackUnificationItems.computeIfAbsent(unificationEntry, p -> new ArrayList<>()).add(simpleItemStack);
-            if (!stackUnificationInfo.containsKey(simpleItemStack) &&
-                    unificationEntry.orePrefix.generationCondition != null) {
+            if (!unificationEntry.orePrefix.isMarkerPrefix()) {
                     stackUnificationInfo.put(simpleItemStack, unificationEntry);
             }
             orePrefix.processOreRegistration(material);

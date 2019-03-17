@@ -357,6 +357,42 @@ metaitem.super_fuel_binder.name=Super Fuel Binder
 metaitem.magic_fuel_binder.name=Magic Fuel Binder
 
 metaitem.thermite_dust.name=Thermite Dust
+metaitem.phenolic_board.name=Phenolic Board
+metaitem.glass_tube.name=Glass Tube
+metaitem.vacuum_tube.name=Vacuum Tube LV Circuit
+
+metaitem.circuit.basic.name=Basic LV Circuit
+metaitem.circuit.intermediate.name=Intermediate MV Circuit
+metaitem.circuit.advanced.name=Advanced HV Circuit
+metaitem.circuit.elite.name=Elite EV Circuit
+metaitem.circuit.master.name=Master IV Circuit
+metaitem.circuit.expert.name=Expert LuV Circuit
+metaitem.circuit.ultimate.name=Ultimate UV Circuit
+
+metaitem.board.basic.name=Silicon Dioxide PCB
+metaitem.board.intermediate.name=Phenolic PCB
+metaitem.board.advanced.name=Reinforced Epoxy PCB
+metaitem.board.elite.name=Plastic PCB
+metaitem.board.master.name=Epoxid PCB
+metaitem.board.expert.name=Fiberglass PCB
+metaitem.board.ultimate.name=Duranium-Fused Acrylic PCB
+
+metaitem.wiring.basic.name=Red Alloy Circuit Wiring
+metaitem.wiring.intermediate.name=Copper Circuit Wiring
+metaitem.wiring.advanced.name=Electrum Circuit Wiring
+metaitem.wiring.elite.name=Aluminium Circuit Wiring
+metaitem.wiring.master.name=Graphene Circuit Wiring
+metaitem.wiring.expert.name=Yttrium Barium Cuprate Circuit Wiring
+metaitem.wiring.ultimate.name=Tritanium Circuit Wiring
+
+metaitem.soc.basic.name=Topaz System-on-Chip
+metaitem.soc.intermediate.name=Ender System-on-Chip
+metaitem.soc.advanced.name=Nether Quartz System-on-Chip
+metaitem.soc.elite.name=Lapis System-on-Chip
+metaitem.soc.master.name=Olivine System-on-Chip
+metaitem.soc.expert.name=Emerald System-on-Chip
+metaitem.soc.ultimate.name=Diamond System-on-Chip
+
 
 metaitem.rubber_drop.name=Rubber
 metaitem.plant_ball.name=Plant Ball
@@ -945,7 +981,8 @@ material.polyvinyl_acetate=Polyvinyl Acetate
 material.phenol=Phenol
 material.bisphenol_a=Bisphenol A
 material.epoxid=Epoxy Resin
-material.reinforced_epoxy_resin=Fiber-Reinforced Epoxy Resin
+material.reinforced_epoxy_resin=Reinforced Epoxy Resin
+material.fiberglass=Fiberglass
 material.borosilicate_glass=Borosilicate Glass
 material.polyvinyl_chloride=Polyvinyl Chloride
 material.vinyl_chloride=Vinyl Chloride
@@ -1178,6 +1215,18 @@ material.acetone_cyanohydrin=Acetone Cyanohydrin
 material.methyl_methacrylate=Methyl Methacrylate
 material.acrylic=Acrylic
 material.hydrogen_peroxide=Hydrogen Peroxide
+
+material.dymalloy=Dymalloy
+material.beryllium_copper=Beryllium-Copper Alloy
+material.aluminium_copper=Aluminium-Copper Alloy
+material.duranium_fused_acrylic=Duranium-Fused Acrylic
+
+material.zircon=Zircon
+material.zirconium=Zirconium
+material.citrine=Citrine
+material.alexandrite=Alexandrite
+material.onyx=Onyx
+material.spinel=Spinel
 
 material.milk=Milk
 material.cocoa=Cocoa
@@ -1892,6 +1941,8 @@ gregtech.machine.fusion_reactor.uv.name=Fusion Reactor [Mark II]
 gregtech.machine.fusion_reactor.luv.description=The Fusion Reactor is a large multiblock structure used for fusing elements into heavier ones. The Mark 1 Fusion Reactor can use LuV, ZPM or UV Energy Hatches./nFor every Hatch it has its buffer increases by 100k.
 gregtech.machine.fusion_reactor.uv.description=The Fusion Reactor Mark 2 is a large multiblock structure used for fusing elements into heavier ones./nThe Mark 2 Fusion Reactor can only use UV Energy Hatches./nFor every Hatch it has its buffer increases by 200k.
 
+#Bedrock Drill
+gregtech.machine.bedrock_drill.name=Bedrock Drill
 #Assembly Line
 gregtech.multiblock.assembly_line.description=The Assembly Line is a large multiblock structure consisting of 5 to 16 "slices"./nIn theory, it's a large Assembler, used for creating advanced crafting components.
 
@@ -1972,7 +2023,7 @@ gregtech.machine.multi_furnace.name=Multi Smelter
 gregtech.machine.cracker.name=Cracker Unit
 gregtech.machine.coke_oven.name=Coke Oven
 gregtech.machine.coke_oven_hatch.name=Coke Oven Hatch
-gregtech.machine.coke_oven_hatch.tooltip=Allows automation access to coke oven
+gregtech.machine.coke_oven_hatch.tooltip=Allows automation access to coke oven. Must be centered on coke oven side.
 
 gregtech.machine.diesel_engine.name=Diesel Engine
 gregtech.machine.large_turbine.steam.name=Large Steam Turbine

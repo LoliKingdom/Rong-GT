@@ -148,41 +148,37 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem SENSOR_IV;
     public static MetaItem<?>.MetaValueItem SENSOR_LuV;
     public static MetaItem<?>.MetaValueItem SENSOR_UV;
-    
-    //Plates compose of epoxy + base material
-    public static MetaItem<?>.MetaValueItem PLATE_EPOXY;
-    public static MetaItem<?>.MetaValueItem PLATE_SILVER;
-    public static MetaItem<?>.MetaValueItem PLATE_GOLD;
-    public static MetaItem<?>.MetaValueItem PLATE_PLATINUM;
-    public static MetaItem<?>.MetaValueItem PLATE_ENDERIUM;
-    public static MetaItem<?>.MetaValueItem PLATE_MANA;
 
-    //Wiring (from 8 fine wires + wirecutter)
-    public static MetaItem<?>.MetaValueItem WIRING_COPPER;
-    public static MetaItem<?>.MetaValueItem WIRING_SILVER;
-    public static MetaItem<?>.MetaValueItem WIRING_GOLD;
-    public static MetaItem<?>.MetaValueItem WIRING_PLATINUM;
-    public static MetaItem<?>.MetaValueItem WIRING_ENDERIUM;
-    public static MetaItem<?>.MetaValueItem WIRING_MANA;
+    public static MetaItem<?>.MetaValueItem WIRING_BASIC;
+    public static MetaItem<?>.MetaValueItem WIRING_INTERMEDIATE;
+    public static MetaItem<?>.MetaValueItem WIRING_ADVANCED;
+    public static MetaItem<?>.MetaValueItem WIRING_ELITE;
+    public static MetaItem<?>.MetaValueItem WIRING_MASTER;
+    public static MetaItem<?>.MetaValueItem WIRING_EXPERT;
+    public static MetaItem<?>.MetaValueItem WIRING_ULTIMATE;
+    public static MetaItem<?>.MetaValueItem WIRING_MAGIC;
 
-    public static MetaItem<?>.MetaValueItem PARTS_BASIC;
-    public static MetaItem<?>.MetaValueItem PARTS_INTERMEDIATE;
-    public static MetaItem<?>.MetaValueItem PARTS_ADVANCED;
-    public static MetaItem<?>.MetaValueItem PARTS_ELITE;
-    public static MetaItem<?>.MetaValueItem PARTS_ULTIMATE;
-    public static MetaItem<?>.MetaValueItem PARTS_MAGIC;
+    public static MetaItem<?>.MetaValueItem SOC_BASIC;
+    public static MetaItem<?>.MetaValueItem SOC_INTERMEDIATE;
+    public static MetaItem<?>.MetaValueItem SOC_ADVANCED;
+    public static MetaItem<?>.MetaValueItem SOC_ELITE;
+    public static MetaItem<?>.MetaValueItem SOC_MASTER;
+    public static MetaItem<?>.MetaValueItem SOC_EXPERT;
+    public static MetaItem<?>.MetaValueItem SOC_ULTIMATE;
+    public static MetaItem<?>.MetaValueItem SOC_MAGIC;
     
     public static MetaItem<?>.MetaValueItem BOARD_BASIC;
     public static MetaItem<?>.MetaValueItem BOARD_INTERMEDIATE;
     public static MetaItem<?>.MetaValueItem BOARD_ADVANCED;
     public static MetaItem<?>.MetaValueItem BOARD_ELITE;
     public static MetaItem<?>.MetaValueItem BOARD_MASTER;
-    public static MetaItem<?>.MetaValueItem BOARD_ULTIMATE;
-    public static MetaItem<?>.MetaValueItem BOARD_FIBERGLASS;
+    public static MetaItem<?>.MetaValueItem BOARD_EXPERT;
+    public static MetaItem<?>.MetaValueItem BOARD_ULTIMATE;   
     public static MetaItem<?>.MetaValueItem BOARD_MAGIC;
     
     public static MetaItem<?>.MetaValueItem GLASS_TUBE;
     public static MetaItem<?>.MetaValueItem CIRCUIT_VACUUM_TUBE_LV;
+    public static MetaItem<?>.MetaValueItem PHENOLIC_BOARD;
     
     public static MetaItem<?>.MetaValueItem CIRCUIT_BASIC_LV;
     public static MetaItem<?>.MetaValueItem CIRCUIT_INTERMEDIATE_MV;
@@ -255,7 +251,8 @@ public class MetaItems {
     public static ToolMetaItem<?>.MetaToolValueItem WRENCH_HV;
     public static ToolMetaItem<?>.MetaToolValueItem BUZZSAW;
     public static ToolMetaItem<?>.MetaToolValueItem SCREWDRIVER_LV;
-    
+    public static ToolMetaItem<?>.MetaToolValueItem KNIFE;
+
     public static void init() {
     	MetaItems1 first = new MetaItems1();
     	first.setRegistryName("meta_item");

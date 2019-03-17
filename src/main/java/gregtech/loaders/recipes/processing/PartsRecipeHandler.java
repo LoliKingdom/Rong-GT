@@ -7,7 +7,6 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.*;
-import gregtech.api.unification.material.type.DustMaterial.MatFlags;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
@@ -21,6 +20,7 @@ import static gregtech.api.unification.material.type.DustMaterial.MatFlags.GENER
 import static gregtech.api.unification.material.type.DustMaterial.MatFlags.NO_SMASHING;
 import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SCREW;
 import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_SPRING;
+import static gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_DENSE;
 import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
 import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.MORTAR_GRINDABLE;
 
@@ -167,12 +167,20 @@ public class PartsRecipeHandler {
                 .EUt(8)
                 .buildAndRegister();
         }
-
         if (material.hasFlag(MORTAR_GRINDABLE)) {
             ItemStack dustStack = OreDictUnifier.get(OrePrefix.dust, material);
             ModHandler.addShapedRecipe(String.format("plate_to_dust_%s", material),
                 dustStack, "X", "m",
                 'X', new UnificationEntry(OrePrefix.plate, material));
+        }
+        if(material.hasFlag(GENERATE_DENSE) && !material.hasFlag(NO_SMASHING)) {
+        	RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder()
+            	.input(OrePrefix.plate, material, 9)
+            	.outputs(OreDictUnifier.get(OrePrefix.plateDense, material))
+            	.duration((int) material.getAverageMass() * 3)
+            	.EUt(24)
+            .buildAndRegister();
+
         }
     }
 
@@ -185,7 +193,7 @@ public class PartsRecipeHandler {
             .EUt(74)
             .buildAndRegister();
 
-        if (!material.hasFlag(NO_SMASHING)) {
+        if (material == Materials.Copper || !material.hasFlag(NO_SMASHING)) {
             ModHandler.addShapedRecipe(String.format("ring_%s", material),
                 OreDictUnifier.get(ringPrefix, material),
                 "h ", " X",

@@ -81,7 +81,7 @@ public class MetaBlocks {
     public static BlockMetalCasing METAL_CASING;
     public static BlockTurbineCasing TURBINE_CASING;
     public static BlockMachineCasing MACHINE_CASING;
-    public static BlockMultiblockCasing MUTLIBLOCK_CASING;
+    public static BlockMultiblockCasing MULTIBLOCK_CASING;
     public static BlockWireCoil WIRE_COIL;
 
     public static BlockConcrete CONCRETE;
@@ -96,6 +96,8 @@ public class MetaBlocks {
     public static BlockRubberSapling SAPLING;
     
     public static BlockDrillHead DRILL_HEAD;
+    
+    public static BlockTransparent TRANSPARENT;
 
     public static Map<DustMaterial, BlockCompressed> COMPRESSED = new HashMap<>();
     public static Map<IngotMaterial, BlockSurfaceRock> SURFACE_ROCKS = new HashMap<>();
@@ -121,11 +123,12 @@ public class MetaBlocks {
         TURBINE_CASING.setRegistryName("turbine_casing");
         MACHINE_CASING = new BlockMachineCasing();
         MACHINE_CASING.setRegistryName("machine_casing");
-        MUTLIBLOCK_CASING = new BlockMultiblockCasing();
-        MUTLIBLOCK_CASING.setRegistryName("multiblock_casing");
+        MULTIBLOCK_CASING = new BlockMultiblockCasing();
+        MULTIBLOCK_CASING.setRegistryName("multiblock_casing");
         WIRE_COIL = new BlockWireCoil();
         WIRE_COIL.setRegistryName("wire_coil");
-        
+        TRANSPARENT = new BlockTransparent();
+        TRANSPARENT.setRegistryName("block_transparent");        
         LOG = new BlockRubberLog();
         LOG.setRegistryName("log");
         LEAVES = new BlockRubberLeaves();
@@ -271,13 +274,14 @@ public class MetaBlocks {
         registerItemModel(METAL_CASING);
         registerItemModel(TURBINE_CASING);
         registerItemModel(MACHINE_CASING);
-        registerItemModel(MUTLIBLOCK_CASING);
+        registerItemModel(MULTIBLOCK_CASING);
         registerItemModel(WIRE_COIL);
         registerItemModel(CONCRETE);
         registerItemModel(DRILL_HEAD);
         registerItemModelWithOverride(LOG, ImmutableMap.of(BlockRubberLog.LOG_AXIS, EnumAxis.Y));
         registerItemModel(LEAVES);
         registerItemModel(SAPLING);
+        registerItemModel(TRANSPARENT);
 
         COMPRESSED.values().stream().distinct().forEach(MetaBlocks::registerItemModel);
         FRAMES.values().forEach(it -> registerItemModelWithFilteredProperties(it));
