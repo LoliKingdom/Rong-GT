@@ -122,9 +122,9 @@ public class MetaFluids {
         setDefaultTexture(Materials.SteamCrackedLightFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.HydroCrackedHeavyFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.SteamCrackedHeavyFuel, FluidType.NORMAL);
-        setDefaultTexture(Materials.UUMatter, FluidType.NORMAL);
-        setDefaultTexture(Materials.PositiveMatter, FluidType.NORMAL);
-        setDefaultTexture(Materials.NeutralMatter, FluidType.NORMAL);
+        //setDefaultTexture(Materials.UUMatter, FluidType.NORMAL);
+        //setDefaultTexture(Materials.PositiveMatter, FluidType.NORMAL);
+        //setDefaultTexture(Materials.NeutralMatter, FluidType.NORMAL);
         setDefaultTexture(Materials.Chlorine, FluidType.NORMAL);
         setDefaultTexture(Materials.Mercury, FluidType.NORMAL);
         setDefaultTexture(Materials.NitroFuel, FluidType.NORMAL);

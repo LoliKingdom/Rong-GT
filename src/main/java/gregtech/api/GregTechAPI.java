@@ -41,8 +41,7 @@ public class GregTechAPI {
      * Registered tool items list
      * Damageable and electric items are accepted.
      */
-    public static final HashSet<SimpleItemStack> crowbarList = new HashSet<>(),
-            screwdriverList = new HashSet<>(),
+    public static final HashSet<SimpleItemStack> screwdriverList = new HashSet<>(),
             wrenchList = new HashSet<>(),
             softHammerList = new HashSet<>(),
             hardHammerList = new HashSet<>(),

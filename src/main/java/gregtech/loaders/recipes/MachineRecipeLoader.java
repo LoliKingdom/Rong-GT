@@ -162,8 +162,6 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(120).EUt(8).inputs(MetaItems.GLASS_TUBE.getStackForm(), OreDictUnifier.get(OrePrefix.wireFine, Materials.Copper, 2), new ItemStack(Items.PAPER, 2)).outputs(MetaItems.CIRCUIT_VACUUM_TUBE_LV.getStackForm()).buildAndRegister();
 		
         //Automatic Machine Component Recipes
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).inputs(CountableIngredient.from(OrePrefix.circuit, Tier.Basic, 4), CountableIngredient.from(OrePrefix.dust, Materials.EnderPearl)).fluidInputs(Materials.Osmium.getFluid(288)).outputs(MetaItems.FIELD_GENERATOR_LV.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(120).inputs(CountableIngredient.from(OrePrefix.circuit, Tier.Intermediate, 4), CountableIngredient.from(OrePrefix.dust, Materials.EnderEye)).fluidInputs(Materials.Osmium.getFluid(576)).outputs(MetaItems.FIELD_GENERATOR_MV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(480).inputs(CountableIngredient.from(OrePrefix.circuit, Tier.Advanced, 4), CountableIngredient.from(MetaItems.QUANTUM_EYE.getStackForm())).fluidInputs(Materials.Osmium.getFluid(1152)).outputs(MetaItems.FIELD_GENERATOR_HV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(1920).inputs(CountableIngredient.from(OrePrefix.circuit, Tier.Elite, 4), CountableIngredient.from(OrePrefix.dust, Materials.NetherStar)).fluidInputs(Materials.Osmium.getFluid(2304)).outputs(MetaItems.FIELD_GENERATOR_EV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(7680).inputs(CountableIngredient.from(OrePrefix.circuit, Tier.Master, 4), CountableIngredient.from(MetaItems.QUANTUM_STAR.getStackForm())).fluidInputs(Materials.Osmium.getFluid(4608)).outputs(MetaItems.FIELD_GENERATOR_IV.getStackForm()).buildAndRegister();
@@ -191,12 +189,6 @@ public class MachineRecipeLoader {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.REDSTONE_TORCH, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_ACTIVITY_DETECTOR.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_FLUID_DETECTOR.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(16).inputs(new ItemStack(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, 1, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.plate, Materials.Lead, 1).fluidInputs(Materials.SolderingAlloy.getFluid(144 / 2)).outputs(MetaItems.COVER_ITEM_DETECTOR.getStackForm()).buildAndRegister();
-        
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(30).input(OrePrefix.dust, Materials.EnderPearl, 1).input(OrePrefix.circuit, MarkerMaterials.Tier.Basic, 4).fluidInputs(Materials.Osmium.getFluid(L * 2)).outputs(MetaItems.FIELD_GENERATOR_LV.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(120).input(OrePrefix.dust, Materials.EnderEye, 1).input(OrePrefix.circuit, MarkerMaterials.Tier.Intermediate, 4).fluidInputs(Materials.Osmium.getFluid(576)).outputs(MetaItems.FIELD_GENERATOR_MV.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(480).inputs(MetaItems.QUANTUM_EYE.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Advanced, 4).fluidInputs(Materials.Osmium.getFluid(1152)).outputs(MetaItems.FIELD_GENERATOR_HV.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(1920).input(OrePrefix.dust, Materials.NetherStar, 1).input(OrePrefix.circuit, MarkerMaterials.Tier.Elite, 4).fluidInputs(Materials.Osmium.getFluid(2304)).outputs(MetaItems.FIELD_GENERATOR_EV.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(7680).inputs(MetaItems.QUANTUM_STAR.getStackForm()).input(OrePrefix.circuit, MarkerMaterials.Tier.Master, 4).fluidInputs(Materials.Osmium.getFluid(4608)).outputs(MetaItems.FIELD_GENERATOR_IV.getStackForm()).buildAndRegister();
 
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(1).inputs(new ItemStack(Blocks.REDSTONE_TORCH, 2, OreDictionary.WILDCARD_VALUE)).input(OrePrefix.dust, Materials.Redstone, 1).fluidInputs(Materials.Concrete.getFluid(144)).outputs(new ItemStack(Items.REPEATER)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(100).EUt(8).inputs(new ItemStack(Items.LEATHER, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.LEAD, 1, OreDictionary.WILDCARD_VALUE)).fluidInputs(Materials.Glue.getFluid(50)).outputs(new ItemStack(Items.NAME_TAG)).buildAndRegister();
@@ -500,25 +492,32 @@ public class MachineRecipeLoader {
 		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Gold.getFluid(16), Materials.Mercury.getFluid(16)).fluidOutputs(Materials.Radon.getFluid(125)).duration(64).EUt(32768).EUToStart(2000000).buildAndRegister();
 		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Silver.getFluid(16), Materials.Lithium.getFluid(16)).fluidOutputs(Materials.Indium.getFluid(16)).duration(32).EUt(24576).EUToStart(3800000).buildAndRegister();
 		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Lithium.getFluid(16), Materials.Tungsten.getFluid(16)).fluidOutputs(Materials.Iridium.getFluid(16)).duration(32).EUt(32768).EUToStart(3000000).buildAndRegister();
-		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Americium.getFluid(32), Materials.Tritanium.getFluid(32)).fluidOutputs(Materials.Darmstadtium.getFluid(32)).duration(32).EUt(32768).EUToStart(1400000).buildAndRegister();
-		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Darmstadtium.getFluid(32), Materials.Adamantine.getFluid(16)).fluidOutputs(Materials.Vibranium.getFluid(48)).duration(125).EUt(85240).EUToStart(3800000).buildAndRegister();
+		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Americium.getFluid(16), Materials.Tritanium.getFluid(16)).fluidOutputs(Materials.Darmstadtium.getFluid(16)).duration(32).EUt(32768).EUToStart(1400000).buildAndRegister();
+		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Darmstadtium.getFluid(32), Materials.Adamantine.getFluid(16)).fluidOutputs(Materials.Vibranium.getFluid(32)).duration(125).EUt(85240).EUToStart(3800000).buildAndRegister();
 		
 		//Fantasy Recipes
 		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Acrylic.getFluid(32), Materials.Duranium.getFluid(16)).fluidOutputs(Materials.DuraniumFusedAcrylic.getFluid(48)).duration(200).EUt(8964).EUToStart(1200000).buildAndRegister();
-		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Adamantine.getFluid(12), Materials.Iron.getFluid(12)).fluidOutputs(Materials.Tungsten.getFluid(24)).duration(100).EUt(4096).EUToStart(1200000).buildAndRegister();
-		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Silicon.getFluid(8), Materials.Gold.getFluid(8)).fluidOutputs(Materials.Mercury.getFluid(16)).duration(60).EUt(4096).EUToStart(1500000).buildAndRegister();
+		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Adamantine.getFluid(16), Materials.Iron.getFluid(16)).fluidOutputs(Materials.Tungsten.getFluid(24)).duration(100).EUt(4096).EUToStart(1200000).buildAndRegister();
+		RecipeMaps.FUSION_RECIPES.recipeBuilder().fluidInputs(Materials.Silicon.getFluid(16), Materials.Gold.getFluid(16)).fluidOutputs(Materials.Mercury.getFluid(16)).duration(60).EUt(4096).EUToStart(1500000).buildAndRegister();
 
     }
     
     private static void initializePlasmaArcRecipes() {
+    	//Ore materials over @link:OreRecipeHandler.java
     	for(FluidMaterial plasma : new FluidMaterial[] {Materials.Nitrogen, Materials.Argon}) {
-    		int plasmaAmount = (int)(plasma.getAverageMass());
+    		int plasmaAmount = (int)(plasma.getAverageMass());    		    		
     		RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(240).EUt(480)
     			.fluidInputs(plasma.getPlasma(plasmaAmount))
     			.inputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Adamantine), OreDictUnifier.get(OrePrefix.ingot, Materials.Naquadah))
     			.outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Tritanium))
-    			.buildAndRegister();
+    			.buildAndRegister(); 
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(100).EUt(190).input(OrePrefix.dust, Materials.Silicon).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Silicon)).buildAndRegister();
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(40).EUt(120).input(OrePrefix.dust, Materials.Iron).input(OrePrefix.dust, Materials.Carbon).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Steel)).buildAndRegister();
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(90).EUt(320).input(OrePrefix.dust, Materials.Titanium).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Titanium)).buildAndRegister();
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(90).EUt(760).input(OrePrefix.dust, Materials.Rutile).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Titanium, 2)).buildAndRegister();
     	}  	
+        RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(480).EUt(29130).input(OrePrefix.ingot, Materials.Naquadah, 1).input(OrePrefix.ingot, Materials.Osmiridium, 1).fluidInputs(Materials.Argon.getPlasma(1000)).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.NaquadahAlloy, 2)).buildAndRegister();
+        RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().duration(240).EUt(23400).input(OrePrefix.ingot, Materials.NaquadahEnriched, 1).input(OrePrefix.ingot, Materials.Osmiridium, 1).fluidInputs(Materials.Argon.getPlasma(100)).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.NaquadahAlloy, 2)).buildAndRegister();
     }
     
     private static void initializeBlastRecipes() {
@@ -540,8 +539,6 @@ public class MachineRecipeLoader {
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(500).EUt(120).input(OrePrefix.dust, Materials.Copper, 1).fluidInputs(Materials.Oxygen.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.ingot,Materials.AnnealedCopper,1)).blastFurnaceTemp(1200).buildAndRegister();
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(500).EUt(120).input(OrePrefix.ingot, Materials.Copper, 1).fluidInputs(Materials.Oxygen.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.ingot,Materials.AnnealedCopper,1)).blastFurnaceTemp(1200).buildAndRegister();
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(500).EUt(1920).input(OrePrefix.ingot, Materials.Iridium, 3).input(OrePrefix.ingot, Materials.Osmium, 1).fluidInputs(Materials.Helium.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.Osmiridium, 4)).blastFurnaceTemp(Materials.Osmiridium.blastFurnaceTemperature).buildAndRegister();
-        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(500).EUt(30720).input(OrePrefix.ingot, Materials.Naquadah, 1).input(OrePrefix.ingot, Materials.Osmiridium, 1).fluidInputs(Materials.Argon.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.NaquadahAlloy, 2)).blastFurnaceTemp(Materials.NaquadahAlloy.blastFurnaceTemperature).buildAndRegister();
-        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(240).EUt(30720).input(OrePrefix.ingot, Materials.NaquadahEnriched, 1).input(OrePrefix.ingot, Materials.Osmiridium, 1).fluidInputs(Materials.Argon.getFluid(100)).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.NaquadahAlloy, 2)).blastFurnaceTemp(Materials.NaquadahAlloy.blastFurnaceTemperature).buildAndRegister();
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(120).EUt(120).blastFurnaceTemp(1200).input(OrePrefix.dust, Materials.Galena).fluidInputs(Materials.Oxygen.getFluid(3000)).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Massicot), OreDictUnifier.get(OrePrefix.nugget, Materials.Lead, 6)).fluidOutputs(Materials.SulfurDioxide.getFluid(1000)).buildAndRegister();
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(120).EUt(120).blastFurnaceTemp(1200).input(OrePrefix.dust, Materials.Stibnite).fluidInputs(Materials.Oxygen.getFluid(3000)).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.AntimonyTrioxide), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Ash)).fluidOutputs(Materials.SulfurDioxide.getFluid(1000)).buildAndRegister();
@@ -568,9 +565,7 @@ public class MachineRecipeLoader {
 
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(944).EUt(120).input(OrePrefix.dust, Materials.Silicon).notConsumable(new IntCircuitIngredient(1)).blastFurnaceTemp(1687).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Silicon)).buildAndRegister();
         
-        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(300).EUt(120).input(OrePrefix.dust, Materials.Copper, 5).input(OrePrefix.dust, Materials.Beryllium, 2).fluidInputs(Materials.Nickel.getFluid(L)).blastFurnaceTemp(Materials.BerylliumCopper.blastFurnaceTemperature).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.BerylliumCopper, 7)).buildAndRegister();
-        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(300).EUt(220).input(OrePrefix.dust, Materials.Copper, 3).input(OrePrefix.dust, Materials.Aluminium).blastFurnaceTemp(Materials.AluminiumCopper.blastFurnaceTemperature).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.AluminiumCopper, 4)).buildAndRegister();
-        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(100).EUt(6722).input(OrePrefix.dust, Materials.Copper).input(OrePrefix.dust, Materials.Diamond).fluidInputs(Materials.Silver.getFluid(L * 3)).blastFurnaceTemp(Materials.Dymalloy.blastFurnaceTemperature).outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Dymalloy, 5)).buildAndRegister();
+        RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(100).EUt(6722).input(OrePrefix.dust, Materials.Copper).input(OrePrefix.dust, Materials.Diamond).fluidInputs(Materials.Silver.getFluid(L * 3)).blastFurnaceTemp(Materials.Dymalloy.blastFurnaceTemperature).outputs(OreDictUnifier.get(OrePrefix.ingotHot, Materials.Dymalloy, 5)).buildAndRegister();
 
         MaterialStack[] ironOres = {
                 new MaterialStack(Materials.Pyrite, 1),
@@ -664,7 +659,9 @@ public class MachineRecipeLoader {
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(900).EUt(30).input(OrePrefix.dust, Materials.PlatinumGroupSludge).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.SiliconDioxide), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Gold), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Platinum)).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Palladium), 8000).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Iridium), 6000).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Osmium), 6000).buildAndRegister();
 
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(250).EUt(6).input(OrePrefix.dust, Materials.DarkAsh).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Ash), OreDictUnifier.get(OrePrefix.dust, Materials.Carbon)).buildAndRegister();
-        
+       
+        RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(40).EUt(220).fluidInputs(Materials.Lava.getFluid(200)).chancedOutput(OreDictUnifier.get(OrePrefix.nugget,Materials.Tantalum, 1), 1000).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Olivine, 1), 2000).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Topaz, 2), 1500).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Tungstate, 1), 400).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Spessartine, 1), 2000).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Zircon, 2), 500).buildAndRegister();
+
         //Methane from foods
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(60).EUt(5).input("listAllmeat", 1).fluidOutputs(Materials.Methane.getFluid(40)).buildAndRegister();
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(60).EUt(5).input("listAllmeatcooked", 1).fluidOutputs(Materials.Methane.getFluid(50)).buildAndRegister();
@@ -931,7 +928,6 @@ public class MachineRecipeLoader {
 		  	.duration(320)
 		  	.EUt(96)
 		  	.buildAndRegister();
-
     }
     
     private static void initializeExtractingRecipes() {
@@ -943,6 +939,8 @@ public class MachineRecipeLoader {
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(600).EUt(28).input(OrePrefix.dust, Materials.Quartzite, 1).fluidOutputs(Materials.Glass.getFluid(144)).buildAndRegister();
    
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(1000).EUt(24).inputs(MetaBlocks.LOG.getItem(LogVariant.RUBBER_WOOD)).chancedOutput(MetaItems.RUBBER_DROP.getStackForm(), 2500).fluidOutputs(Materials.Glue.getFluid(250)).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(1000).EUt(24).inputs(new ItemStack(Blocks.SANDSTONE, 1, OreDictionary.WILDCARD_VALUE)).chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.SiliconDioxide), 3500).buildAndRegister();
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(1000).EUt(24).inputs(new ItemStack(Blocks.SAND)).chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.SiliconDioxide), 2500).buildAndRegister();
     }
     
     private static void initializeMiscRecipes() {		

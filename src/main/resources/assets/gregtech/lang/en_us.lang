@@ -107,11 +107,11 @@ metaitem.spray.can.dyes.red.tooltip=Can paint things in Red
 metaitem.spray.can.dyes.black.name=Spray Can (Black)
 metaitem.spray.can.dyes.black.tooltip=Can paint things in Black
 
-metaitem.tool.matches.name=Match
-metaitem.tool.matchbox.name=Match Box
-metaitem.tool.lighter.invar.name=Lighter
-metaitem.tool.lighter.platinum.name=Platinum Lighter
-metaitem.tool.lighter.platinum.tooltip=A known Prank Master is engraved on it
+metaitem.matches.name=Match
+metaitem.matchbox.name=Match Box
+metaitem.lighter.invar.name=Lighter
+metaitem.lighter.platinum.name=Platinum Lighter
+metaitem.lighter.platinum.tooltip=A known Prank Master is engraved on it
 
 metaitem.ingot.iridiumalloy.name=Iridium Alloy Ingot
 metaitem.ingot.iridiumalloy.tooltip=Used to make Iridium Plate
@@ -284,10 +284,10 @@ metaitem.circuit.expert.name=Expert LuV Circuit
 metaitem.circuit.ultimate.name=Ultimate UV Circuit
 metaitem.circuit.magic.name=Magical Circuit
 
-metaitem.tool.datastick.name=Data Stick
-metaitem.tool.datastick.tooltip=A Low Capacity Data Storage
-metaitem.tool.dataorb.name=Data Orb
-metaitem.tool.dataorb.tooltip=A High Capacity Data Storage
+metaitem.datastick.name=Data Stick
+metaitem.datastick.tooltip=A Low Capacity Data Storage
+metaitem.dataorb.name=Data Orb
+metaitem.dataorb.tooltip=A High Capacity Data Storage
 
 metaitem.component.sawblade.diamond.name=Diamond Sawblade
 metaitem.component.grinder.diamond.name=Diamond Grinding Head
@@ -341,8 +341,8 @@ metaitem.cover.solar.panel.iv.name=Solar Panel (IV)
 metaitem.cover.solar.panel.luv.name=Solar Panel (LuV)
 metaitem.cover.solar.panel.uv.name=Solar Panel (UV)
 
-metaitem.tool.scanner.name=Portable Scanner
-metaitem.tool.scanner.tooltip=Tricorder
+metaitem.scanner.name=Portable Scanner
+metaitem.scanner.tooltip=Tricorder
 
 metaitem.duct.tape.name=BrainTech Aerospace Advanced Reinforced Duct Tape FAL-84
 metaitem.duct.tape.tooltip=If you can't fix it with this, use more of it!
@@ -408,62 +408,62 @@ metaitem.brick.coke.name=Coke Oven Brick
 metaitem.wooden_form.empty.name=Empty Wooden Form
 metaitem.wooden_form.brick.name=Brick Wooden Form
 
-metaitem.tool.sword.name=%s Sword
-metaitem.tool.pickaxe.name=%s Pickaxe
-metaitem.tool.shovel.name=%s Shovel
-metaitem.tool.axe.name=%s Axe
-metaitem.tool.hoe.name=%s Hoe
-metaitem.tool.saw.name=%s Saw
-metaitem.tool.saw.tooltip=Can also harvest Ice
-metaitem.tool.hard_hammer.name=%s Hammer
-metaitem.tool.hard_hammer.tooltip=Crushes ores instead of harvesting them
-metaitem.tool.soft_hammer.name=%s Soft Hammer
-metaitem.tool.wrench.name=%s Wrench
-metaitem.tool.wrench.tooltip=Hold left click to dismantle machines
-metaitem.tool.file.name=%s File
-metaitem.tool.crowbar.name=%s Crowbar
-metaitem.tool.crowbar.tooltip=Dismounts covers and rotates rails
-metaitem.tool.screwdriver.name=%s Screwdriver
-metaitem.tool.screwdriver.tooltip=/nRight click on a machine side to increment/nit's output tank filter index/nWhen output tank filter is set up,/nonly fluids from specified tank index/nare allowed to be outputted on that side/nClick on cover to configure it
-metaitem.tool.mortar.name=%s Mortar
-metaitem.tool.wire_cutter.name=%s Wire Cutter
-metaitem.tool.scoop.name=%s Scoop
-metaitem.tool.branch_cutter.name=%s Branch Cutter
-metaitem.tool.universal_spade.name=%s Universal Spade
-metaitem.tool.knife.name=%s Knife
-metaitem.tool.butchery_knife.name=%s Butchery Knife
-metaitem.tool.butchery_knife.tooltip=Has a slow Attack Rate
-metaitem.tool.sense.name=%s Sense
-metaitem.tool.sense.tooltip=Because a scythe doesn't make sense
-metaitem.tool.plow.name=%s Plow
-metaitem.tool.plow.tooltip=Used to get rid of snow
-metaitem.tool.plunger.name=%s Plunger
-metaitem.tool.chainsaw.lv.name=%s Chainsaw (LV)
-metaitem.tool.chainsaw.lv.tooltip=Can also harvest Ice
-metaitem.tool.chainsaw.mv.name=%s Chainsaw (MV)
-metaitem.tool.chainsaw.mv.tooltip=Can also harvest Ice
-metaitem.tool.chainsaw.hv.name=%s Chainsaw (HV)
-metaitem.tool.chainsaw.hv.tooltip=Can also harvest Ice
-metaitem.tool.wrench.lv.name=%s Wrench (LV)
-metaitem.tool.wrench.lv.tooltip=Hold Leftclick to dismantle Machines
-metaitem.tool.wrench.mv.name=%s Wrench (MV)
-metaitem.tool.wrench.mv.tooltip=Hold Leftclick to dismantle Machines
-metaitem.tool.wrench.hv.name=%s Wrench (HV)
-metaitem.tool.wrench.hv.tooltip=Hold Leftclick to dismantle Machines
-metaitem.tool.buzzsaw.name=%s Buzzsaw (LV)
-metaitem.tool.buzzsaw.tooltip=Not suitable for harvesting Blocks
-metaitem.tool.screwdriver.lv.name=%s Screwdriver (LV)
-metaitem.tool.screwdriver.lv.tooltip=Adjusts Covers and Machines
+metaitem.sword.name=%s Sword
+metaitem.pickaxe.name=%s Pickaxe
+metaitem.shovel.name=%s Shovel
+metaitem.axe.name=%s Axe
+metaitem.hoe.name=%s Hoe
+metaitem.saw.name=%s Saw
+metaitem.saw.tooltip=Can also harvest Ice
+metaitem.hard_hammer.name=%s Hammer
+metaitem.hard_hammer.tooltip=Crushes ores instead of harvesting them
+metaitem.soft_hammer.name=%s Soft Hammer
+metaitem.wrench.name=%s Wrench
+metaitem.wrench.tooltip=Hold left click to dismantle machines
+metaitem.file.name=%s File
+metaitem.crowbar.name=%s Crowbar
+metaitem.crowbar.tooltip=Dismounts covers and rotates rails
+metaitem.screwdriver.name=%s Screwdriver
+metaitem.screwdriver.tooltip=/nRight click on a machine side to increment/nit's output tank filter index/nWhen output tank filter is set up,/nonly fluids from specified tank index/nare allowed to be outputted on that side/nClick on cover to configure it
+metaitem.mortar.name=%s Mortar
+metaitem.wire_cutter.name=%s Wire Cutter
+metaitem.scoop.name=%s Scoop
+metaitem.branch_cutter.name=%s Branch Cutter
+metaitem.universal_spade.name=%s Universal Spade
+metaitem.knife.name=%s Knife
+metaitem.butchery_knife.name=%s Butchery Knife
+metaitem.butchery_knife.tooltip=Has a slow Attack Rate
+metaitem.sense.name=%s Sense
+metaitem.sense.tooltip=Because a scythe doesn't make sense
+metaitem.plow.name=%s Plow
+metaitem.plow.tooltip=Used to get rid of snow
+metaitem.plunger.name=%s Plunger
+metaitem.chainsaw.lv.name=%s Chainsaw (LV)
+metaitem.chainsaw.lv.tooltip=Can also harvest Ice
+metaitem.chainsaw.mv.name=%s Chainsaw (MV)
+metaitem.chainsaw.mv.tooltip=Can also harvest Ice
+metaitem.chainsaw.hv.name=%s Chainsaw (HV)
+metaitem.chainsaw.hv.tooltip=Can also harvest Ice
+metaitem.wrench.lv.name=%s Wrench (LV)
+metaitem.wrench.lv.tooltip=Hold Leftclick to dismantle Machines
+metaitem.wrench.mv.name=%s Wrench (MV)
+metaitem.wrench.mv.tooltip=Hold Leftclick to dismantle Machines
+metaitem.wrench.hv.name=%s Wrench (HV)
+metaitem.wrench.hv.tooltip=Hold Leftclick to dismantle Machines
+metaitem.buzzsaw.name=%s Buzzsaw (LV)
+metaitem.buzzsaw.tooltip=Not suitable for harvesting Blocks
+metaitem.screwdriver.lv.name=%s Screwdriver (LV)
+metaitem.screwdriver.lv.tooltip=Adjusts Covers and Machines
 metaitem.turbine_rotor.name=%s Turbine Rotor
 metaitem.turbine_rotor.tooltip=Turbine Rotors for your Power Station
-metaitem.tool.magnifying_glass.name=%s Magnifying Glass
+metaitem.magnifying_glass.name=%s Magnifying Glass
 
-metaitem.tool.tooltip.primary_material=Primary material: %s (Level %s)
-metaitem.tool.tooltip.attack_damage=Attack damage: %d
-metaitem.tool.tooltip.mining_speed=Mining speed: %d
-metaitem.tool.tooltip.durability=Durability: %d/%d
-metaitem.tool.tooltip.rotor.efficiency=Rotor Efficiency: %d%%
-metaitem.tool.tooltip.hammer.extra_drop=Has a chance to drop double crushed ores
+metaitem.tooltip.primary_material=Primary material: %s (Level %s)
+metaitem.tooltip.attack_damage=Attack damage: %d
+metaitem.tooltip.mining_speed=Mining speed: %d
+metaitem.tooltip.durability=Durability: %d/%d
+metaitem.tooltip.rotor.efficiency=Rotor Efficiency: %d%%
+metaitem.tooltip.hammer.extra_drop=Has a chance to drop double crushed ores
 
 cover.ore_dictionary_filter.title=Ore Dictionary Filter
 cover.ore_dictionary_filter.title1=Ore Dictionary Name
@@ -815,7 +815,7 @@ material.nitrogen_dioxide=Nitrogen Dioxide
 material.obsidian=Obsidian
 material.phosphate=Phosphate
 material.pig_iron=Pig Iron
-material.plastic=Polyethylene
+material.polyethylene=Polyethylene
 material.epoxid=Epoxid
 material.silicone=Polysiloxane
 material.polycaprolactam=Polycaprolactam
@@ -839,6 +839,7 @@ material.sodalite=Sodalite
 material.sodium_persulfate=Sodium Persulfate
 material.sodium_sulfide=Sodium Sulfide
 material.hydrogen_sulfide=Hydrogen Sulfide
+material.witherite=Witherite
 
 material.oil_heavy=Heavy Oil
 material.oil_medium=Raw Oil
@@ -1069,10 +1070,10 @@ material.steamcracked_ethane=Steam-Cracked Ethane
 material.steamcracked_ethylene=Steam-Cracked Ethylene
 material.steamcracked_propene=Steam-Cracked Propene
 material.steamcracked_propane=Steam-Cracked Propane
-material.cracked_light_fuel=Steam-Cracked Light Fuel
+material.steamcracked_light_fuel=Steam-Cracked Light Fuel
 material.steamcracked_butane=Steam-Cracked Butane
 material.steamcracked_naphtha=Steam-Cracked Naphtha
-material.cracked_heavy_fuel=Steam-Cracked Heavy Fuel
+material.steamcracked_heavy_fuel=Steam-Cracked Heavy Fuel
 material.steamcracked_gas=Steam-Cracked Refinery Gas
 material.steamcracked_butene=Steam-Cracked Butene
 material.steamcracked_butadiene=Steam-Cracked Butadiene
@@ -1630,8 +1631,10 @@ gregtech.machine.electric_furnace.ev.name=Elite Electric Furnace
 gregtech.machine.macerator.lv.name=Basic Macerator
 gregtech.machine.macerator.mv.name=Intermediate Macerator
 gregtech.machine.macerator.hv.name=Advanced Macerator
-gregtech.machine.macerator.ev.name=Elite Pulverizer
-gregtech.machine.macerator.iv.name=Master Pulverizer
+gregtech.machine.macerator.ev.name=Elite Macerator
+gregtech.machine.macerator.iv.name=Master Macerator
+gregtech.machine.macerator.luv.name=Expert Macerator
+gregtech.machine.macerator.uv.name=Ultimate Macerator
 
 gregtech.machine.alloy_smelter.lv.name=Basic Alloy Smelter
 gregtech.machine.alloy_smelter.mv.name=Intermediate Alloy Smelter
@@ -1662,6 +1665,8 @@ gregtech.machine.bender.mv.name=Intermediate Bending Machine
 gregtech.machine.bender.hv.name=Advanced Bending Machine
 gregtech.machine.bender.ev.name=Elite Bending Machine
 gregtech.machine.bender.iv.name=Master Bending Machine
+gregtech.machine.bender.luv.name=Elite Bending Machine
+gregtech.machine.bender.uv.name=Ultimate Bending Machine
 
 gregtech.machine.brewery.lv.name=Basic Brewery
 gregtech.machine.brewery.mv.name=Intermediate Brewery
@@ -1737,81 +1742,120 @@ gregtech.machine.extractor.lv.name=Basic Extractor
 gregtech.machine.extractor.mv.name=Intermediate Extractor
 gregtech.machine.extractor.hv.name=Advanced Extractor
 gregtech.machine.extractor.ev.name=Elite Extractor
+gregtech.machine.extractor.iv.name=Master Extractor
+gregtech.machine.extractor.luv.name=Expert Extractor
+gregtech.machine.extractor.uv.name=Ultimate Extractor
 
+gregtech.machine.extruder.lv.name=Basic Extruder
 gregtech.machine.extruder.mv.name=Intermediate Extruder
 gregtech.machine.extruder.hv.name=Advanced Extruder
 gregtech.machine.extruder.ev.name=Elite Extruder
-
-gregtech.machine.fermenter.tooltip=Fermenting Fluids
-
-gregtech.machine.fermenter.lv.name=Basic Fermenter
-gregtech.machine.fermenter.mv.name=Intermediate Fermenter
-gregtech.machine.fermenter.hv.name=Advanced Fermenter
-gregtech.machine.fermenter.ev.name=Elite Fermenter
+gregtech.machine.extruder.iv.name=Master Extruder
+gregtech.machine.extruder.luv.name=Expert Extruder
+gregtech.machine.extruder.uv.name=Ultimate Extruder
 
 gregtech.machine.fluid_extractor.lv.name=Basic Fluid Extractor
 gregtech.machine.fluid_extractor.mv.name=Intermediate Fluid Extractor
 gregtech.machine.fluid_extractor.hv.name=Advanced Fluid Extractor
 gregtech.machine.fluid_extractor.ev.name=Elite Fluid Extractor
+gregtech.machine.fluid_extractor.iv.name=Master Fluid Extractor
+gregtech.machine.fluid_extractor.luv.name=Expert Fluid Extractor
+gregtech.machine.fluid_extractor.uv.name=Ultimate Fluid Extractor
 
 gregtech.machine.fluid_heater.lv.name=Basic Fluid Heater
 gregtech.machine.fluid_heater.mv.name=Intermediate Fluid Heater
 gregtech.machine.fluid_heater.hv.name=Advanced Fluid Heater
 gregtech.machine.fluid_heater.ev.name=Elite Fluid Heater
+gregtech.machine.fluid_heater.iv.name=Master Fluid Heater
+gregtech.machine.fluid_heater.luv.name=Expert Fluid Heater
+gregtech.machine.fluid_heater.uv.name=Ultimate Fluid Heater
 
 gregtech.machine.fluid_solidifier.lv.name=Basic Fluid Solidifier
 gregtech.machine.fluid_solidifier.mv.name=Intermediate Fluid Solidifier
 gregtech.machine.fluid_solidifier.hv.name=Advanced Fluid Solidifier
 gregtech.machine.fluid_solidifier.ev.name=Elite Fluid Solidifier
+gregtech.machine.fluid_solidifier.iv.name=Master Fluid Solidifier
+gregtech.machine.fluid_solidifier.luv.name=Expert Fluid Solidifier
+gregtech.machine.fluid_solidifier.uv.name=Ultimate Fluid Solidifier
 
 gregtech.machine.forge_hammer.lv.name=Basic Forge Hammer
 gregtech.machine.forge_hammer.mv.name=Intermediate Forge Hammer
 gregtech.machine.forge_hammer.hv.name=Advanced Forge Hammer
+gregtech.machine.forge_hammer.ev.name=Elite Forge Hammer
+gregtech.machine.forge_hammer.iv.name=Master Forge Hammer
+gregtech.machine.forge_hammer.luv.name=Expert Forge Hammer
+gregtech.machine.forge_hammer.huv.name=Ultimate Forge Hammer
 
 gregtech.machine.press.lv.name=Basic Press
 gregtech.machine.press.mv.name=Intermediate Press
 gregtech.machine.press.hv.name=Advanced Press
 gregtech.machine.press.ev.name=Elite Press
+gregtech.machine.press.iv.name=Master Press
+gregtech.machine.press.luv.name=Expert Press
+gregtech.machine.press.uv.name=Ultimate Press
 
 gregtech.machine.lathe.lv.name=Basic Lathe
 gregtech.machine.lathe.mv.name=Intermediate Lathe
 gregtech.machine.lathe.hv.name=Advanced Lathe
 gregtech.machine.lathe.ev.name=Elite Lathe
+gregtech.machine.lathe.iv.name=Master Lathe
+gregtech.machine.lathe.luv.name=Expert Lathe
+gregtech.machine.lathe.uv.name=Ultimate Lathe
 
 gregtech.machine.mixer.lv.name=Basic Mixer
 gregtech.machine.mixer.mv.name=Intermediate Mixer
 gregtech.machine.mixer.hv.name=Advanced Mixer
 gregtech.machine.mixer.ev.name=Elite Mixer
+gregtech.machine.mixer.iv.name=Master Mixer
+gregtech.machine.mixer.luv.name=Expert Mixer
+gregtech.machine.mixer.uv.name=Ultimate Mixer
 
 gregtech.machine.ore_washer.lv.name=Basic Ore Washing Plant
 gregtech.machine.ore_washer.mv.name=Intermediate Ore Washing Plant
 gregtech.machine.ore_washer.hv.name=Advanced Ore Washing Plant
 gregtech.machine.ore_washer.ev.name=Elite Ore Washing Plant
+gregtech.machine.ore_washer.iv.name=Master Ore Washing Plant
+gregtech.machine.ore_washer.luv.name=Expert Ore Washing Plant
+gregtech.machine.ore_washer.uv.name=Ultimate Ore Washing Plant
 
 gregtech.machine.plasma_arc_furnace.hv.name=Advanced Plasma Arc Furnace
 gregtech.machine.plasma_arc_furnace.ev.name=Elite Plasma Arc Furnace
 gregtech.machine.plasma_arc_furnace.iv.name=Master Plasma Arc Furnace
 gregtech.machine.plasma_arc_furnace.luv.name=Expert Plasma Arc Furnace
+gregtech.machine.plasma_arc_furnace.uv.name=Ultimate Plasma Arc Furnace
 
 gregtech.machine.polarizer.lv.name=Basic Polarizer
 gregtech.machine.polarizer.mv.name=Intermediate Polarizer
 gregtech.machine.polarizer.hv.name=Advanced Polarizer
 gregtech.machine.polarizer.ev.name=Elite Polarizer
+gregtech.machine.polarizer.iv.name=Master Polarizer
+gregtech.machine.polarizer.luv.name=Expert Polarizer
+gregtech.machine.polarizer.uv.name=Ultimate Polarizer
 
 gregtech.machine.laser_engraver.lv.name=Basic Precision Laser Engraver
 gregtech.machine.laser_engraver.mv.name=Intermediate Precision Laser Engraver
 gregtech.machine.laser_engraver.hv.name=Advanced Precision Laser Engraver
 gregtech.machine.laser_engraver.ev.name=Elite Precision Laser Engraver
+gregtech.machine.laser_engraver.iv.name=Master Precision Laser Engraver
+gregtech.machine.laser_engraver.luv.name=Expert Precision Laser Engraver
+gregtech.machine.laser_engraver.uv.name=Ultimate Precision Laser Engraver
 
 gregtech.machine.thermal_centrifuge.lv.name=Basic Thermal Centrifuge
 gregtech.machine.thermal_centrifuge.mv.name=Intermediate Thermal Centrifuge
 gregtech.machine.thermal_centrifuge.hv.name=Advanced Thermal Centrifuge
 gregtech.machine.thermal_centrifuge.ev.name=Elite Thermal Centrifuge
+gregtech.machine.thermal_centrifuge.iv.name=Master Thermal Centrifuge
+gregtech.machine.thermal_centrifuge.luv.name=Expert Thermal Centrifuge
+gregtech.machine.thermal_centrifuge.uv.name=Ultimate Thermal Centrifuge
 
 gregtech.machine.wiremill.lv.name=Basic Wiremill
 gregtech.machine.wiremill.mv.name=Intermediate Wiremill
 gregtech.machine.wiremill.hv.name=Advanced Wiremill
 gregtech.machine.wiremill.ev.name=Elite Wiremill
+gregtech.machine.wiremill.iv.name=Master Wiremill
+gregtech.machine.wiremill.luv.name=Expert Wiremill
+gregtech.machine.wiremill.uv.name=Ultimate Wiremill
+
 
 # Machine hulls
 gregtech.machine.hull.ulv.name=ULV Machine Hull
@@ -1903,9 +1947,12 @@ gregtech.machine.pump.tooltip_range=Pumping Area: %dx%d
 gregtech.machine.pump.tooltip_speed=Pumps Fluid every %d ticks
 
 gregtech.machine.pump.lv.name=Basic Pump
-gregtech.machine.pump.mv.name=Advanced Pump
-gregtech.machine.pump.hv.name=Advanced Pump II
-gregtech.machine.pump.ev.name=Advanced Pump III
+gregtech.machine.pump.mv.name=Intermediate Pump
+gregtech.machine.pump.hv.name=Advanced Pump
+gregtech.machine.pump.ev.name=Elite Pump
+gregtech.machine.pump.iv.name=Master Pump
+gregtech.machine.pump.luv.name=Expert Pump
+gregtech.machine.pump.uv.name=Ultimate Pump
 
 #Quantum chests
 gregtech.machine.quantum_chest.capacity=Item Capacity: %d items
@@ -1929,6 +1976,9 @@ gregtech.machine.air_collector.lv.name=Basic Air Collector
 gregtech.machine.air_collector.mv.name=Intermediate Air Collector
 gregtech.machine.air_collector.hv.name=Advanced Air Collector
 gregtech.machine.air_collector.ev.name=Elite Air Collector
+gregtech.machine.air_collector.iv.name=Master Air Collector
+gregtech.machine.air_collector.luv.name=Expert Air Collector
+gregtech.machine.air_collector.uv.name=Ultimate Air Collector
 gregtech.machine.air_collector.description=Collects air from adjacent air blocks
 
 #Tesla Coil

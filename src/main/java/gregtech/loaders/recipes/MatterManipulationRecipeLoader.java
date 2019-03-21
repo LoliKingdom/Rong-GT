@@ -7,28 +7,29 @@ import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.unification.material.type.FluidMaterial;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.util.GTUtility;
+import gregtech.common.items.MetaItems;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 public class MatterManipulationRecipeLoader {
+	
     public static void init() {
-    	for (Material m : FluidMaterial.MATERIAL_REGISTRY) {
-            if (m.getProtons() > 0 && m.getNeutrons() > 0/* && m.getMass() != 98*/ && m instanceof FluidMaterial && OreDictUnifier.get(OrePrefix.dust, m).isEmpty() && m != Materials.Air && m != Materials.LiquidAir) {
-            	RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(32).fluidInputs(((FluidMaterial) m).getFluid(1000)).fluidOutputs(Materials.PositiveMatter.getFluid((int) m.getProtons()), Materials.NeutralMatter.getFluid((int) m.getAverageNeutrons())).buildAndRegister();
-            }
-        }
-        for (Material m : DustMaterial.MATERIAL_REGISTRY) {
-        	if (m.getProtons() >= 1 && m.getNeutrons() >= 0/* && m.getMass() != 98*/ && m instanceof DustMaterial/* && m != Materials.Sphalerite && m != Materials.Ash && m != Materials.DarkAsh*/) {
-        		RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(32).inputs((OreDictUnifier.get(OrePrefix.dust, m))).fluidOutputs(Materials.PositiveMatter.getFluid((int) m.getProtons()), Materials.NeutralMatter.getFluid((int) m.getAverageNeutrons())).buildAndRegister();
-            }
-        }
-       for (Material m : FluidMaterial.MATERIAL_REGISTRY) {
-            if (m.getProtons() > 0 && m.getNeutrons() > 0/* && m.getMass() != 98*/ && m instanceof FluidMaterial && OreDictUnifier.get(OrePrefix.dust, m).isEmpty() && m != Materials.Air && m != Materials.LiquidAir) {
-            	RecipeMaps.REPLICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(1920).fluidOutputs(((FluidMaterial) m).getFluid(1000)).fluidInputs(Materials.PositiveMatter.getFluid((int) m.getProtons()), Materials.NeutralMatter.getFluid((int) m.getAverageNeutrons()), ((FluidMaterial)m).getFluid(1000)).buildAndRegister();
-            }
-        }
-        for (Material m : DustMaterial.MATERIAL_REGISTRY) {
-            if (m.getProtons() >= 1 && m.getNeutrons() >= 0/* && m.getMass() != 98*/ && m instanceof DustMaterial/* && m != Materials.Sphalerite && m != Materials.Ash && m != Materials.DarkAsh*/) {
-            	RecipeMaps.REPLICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(1920).notConsumable(OreDictUnifier.get(OrePrefix.dust, m)).outputs((OreDictUnifier.get(OrePrefix.dust, m))).fluidInputs(Materials.PositiveMatter.getFluid((int) m.getProtons()), Materials.NeutralMatter.getFluid((int) m.getAverageNeutrons())).buildAndRegister();
-            }
-        }
+    	for(Material m : Material.MATERIAL_REGISTRY) {
+    		if(m instanceof FluidMaterial) {
+    			FluidMaterial material = (FluidMaterial)m;
+            	RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(32).inputs(GTUtility.getFilledCell(material.getMaterialFluid(), 1)).fluidOutputs(Materials.PositiveMatter.getFluid((int)m.getProtons()), Materials.NeutralMatter.getFluid((int)m.getAverageNeutrons())).buildAndRegister();
+            	RecipeMaps.REPLICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(1920).inputs(GTUtility.getFilledCell(material.getMaterialFluid(), 1)).fluidInputs(Materials.PositiveMatter.getFluid((int)m.getProtons()), Materials.NeutralMatter.getFluid((int)m.getAverageNeutrons())).outputs(GTUtility.getFilledCell(material.getMaterialFluid(), 2)).buildAndRegister();
+    		}
+    		if(m instanceof DustMaterial) {
+    			DustMaterial material = (DustMaterial)m;
+            	RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(32).input(OrePrefix.dust, m).fluidOutputs(Materials.PositiveMatter.getFluid((int)m.getProtons()), Materials.NeutralMatter.getFluid((int)m.getAverageNeutrons())).buildAndRegister();
+            	RecipeMaps.REPLICATOR_RECIPES.recipeBuilder().duration((int)(m.getAverageMass() * 20)).EUt(1920).input(OrePrefix.dust, m).fluidInputs(Materials.PositiveMatter.getFluid((int)m.getProtons()), Materials.NeutralMatter.getFluid((int)m.getAverageNeutrons())).outputs(OreDictUnifier.get(OrePrefix.dust, m, 2)).buildAndRegister();
+    		}
+    	}
     }
 }

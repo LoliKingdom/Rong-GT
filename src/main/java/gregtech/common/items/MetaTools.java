@@ -64,19 +64,19 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
         SCREWDRIVER = addItem(6, "screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
         MORTAR = addItem(7, "mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
         WIRE_CUTTER = addItem(8, "wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
-        KNIFE = addItem(9, "knife").setToolStats(new ToolKnife()).addOreDict(ToolDictNames.craftingToolKnife);
+        KNIFE = addItem(9, "tool.knife").setToolStats(new ToolKnife()).addOreDict(ToolDictNames.craftingToolKnife);
         
-        WRENCH_LV = addItem(10, "wrench.lv").setToolStats(new ToolWrenchLV())
+        WRENCH_LV = addItem(10, "tool.wrench.lv").setToolStats(new ToolWrenchLV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
-        WRENCH_MV = addItem(11, "wrench.mv").setToolStats(new ToolWrenchMV())
+        WRENCH_MV = addItem(11, "tool.wrench.mv").setToolStats(new ToolWrenchMV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(400000L, 2L));
-        WRENCH_HV = addItem(12, "wrench.hv").setToolStats(new ToolWrenchHV())
+        WRENCH_HV = addItem(12, "tool.wrench.hv").setToolStats(new ToolWrenchHV())
             .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
             .addStats(ElectricStats.createElectricItem(1600000L, 3L));
 
-        SCREWDRIVER_LV = addItem(13, "screwdriver.lv").setToolStats(new ToolScrewdriverLV())
+        SCREWDRIVER_LV = addItem(13, "tool.screwdriver.lv").setToolStats(new ToolScrewdriverLV())
             .addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList)
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 

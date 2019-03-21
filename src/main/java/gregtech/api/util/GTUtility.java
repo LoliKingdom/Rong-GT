@@ -14,6 +14,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.SimpleItemStack;
 import gregtech.common.ConfigHolder;
+import gregtech.common.items.MetaItems;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -45,9 +46,13 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -588,6 +593,20 @@ public class GTUtility {
 
     public static boolean isWearingFullElectroHazmat(EntityLivingBase entity) {
         return isWearingFullSuit(entity, GregTechAPI.electroHazmatList);
+    }
+    
+    public static ItemStack getFilledCell(Fluid fluid, int count) {
+    	ItemStack fluidCell = MetaItems.FLUID_CELL.getStackForm().copy();
+    	IFluidHandlerItem fluidHandlerItem = fluidCell.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    	try {
+    		fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);  		
+    	}
+    	catch(Exception e) {
+    		fluidHandlerItem.fill(new FluidStack(FluidRegistry.WATER, 1000), true); 
+    	}
+    	fluidCell = fluidHandlerItem.getContainer();
+    	fluidCell.setCount(count);
+    	return fluidCell;
     }
 
     public static boolean applyRadioactivity(EntityLivingBase entity, int level, int amountOfItems) {

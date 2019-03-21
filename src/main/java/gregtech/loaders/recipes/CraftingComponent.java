@@ -271,8 +271,10 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.gem, Materials.Peridot);
                 case 2:
                     return new UnificationEntry(OrePrefix.gem, Materials.Emerald);
+                case 3:
+                    return MetaItems.COMPONENT_GRINDER_DIAMOND;
                 default:
-                    return OreDictNames.craftingGrinder;
+                    return MetaItems.COMPONENT_GRINDER_TUNGSTEN;
             }
         }
     },
@@ -425,10 +427,6 @@ public enum CraftingComponent {
         @Override
         Object getIngredient(int tier) {
             switch (tier) {
-                case 0:
-                    return MetaItems.FIELD_GENERATOR_LV;
-                case 1:
-                    return MetaItems.FIELD_GENERATOR_MV;
                 case 2:
                     return MetaItems.FIELD_GENERATOR_HV;
                 case 3:

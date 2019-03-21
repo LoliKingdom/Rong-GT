@@ -65,7 +65,7 @@ public class RecyclingRecipeLoader {
             fluidExtractorRecipeBuilder.buildAndRegister();
         }
         else {
-        	RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+        	RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
                     .outputs(dustMaterials.stream().map(OreDictUnifier::getDust).findFirst().get())
                     .duration((int) Math.max(1L, firstStack.amount * 80 / M))
                     .EUt(4 * voltageMultiplier);

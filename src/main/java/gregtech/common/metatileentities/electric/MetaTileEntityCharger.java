@@ -56,7 +56,7 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
                     importItems.setStackInSlot(i, batteryStack);
                     if(energyUsedUp >= energyContainer.getEnergyStored()) break;
                 }
-                if(batteryStack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)) && energyContainer.getEnergyCanBeInserted() > 10000) {
+                if(batteryStack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)) && energyContainer.getEnergyCanBeInserted() >= 10000) {
                 	energyContainer.removeEnergy(10000);
                 	importItems.extractItem(i, 1, false);
                 	importItems.setStackInSlot(i, OreDictUnifier.get(OrePrefix.crystal, Materials.ChargedCertusQuartz));

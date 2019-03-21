@@ -67,23 +67,22 @@ public class RecipeMaps {
 
 
     @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> ASSEMBLER_RECIPES = new RecipeMap<>("assembler", 1, 6, 1, 1, 0, 2, 0, 0, 1, new AssemblerRecipeBuilder())
-        .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
         .setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, MoveType.HORIZONTAL);
 
 
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PRESS_RECIPES = new RecipeMap<>("press", 2, 3, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 4, 0, 1, 0, 1, 1, new SimpleRecipeBuilder())
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 4, 0, 1, 2, 1, 2, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
     
     @ZenProperty public static final RecipeMap<RecyclerRecipeBuilder> RECYCLING_RECIPES = new RecipeMap<>("recycler", 1, 1, 1, 4, 0, 1, 0, 1, 1, new RecyclerRecipeBuilder())
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
     
-	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MASS_FABRICATOR_RECIPES = (new RecipeMap("mass_fabricator", 0, 1, 0, 0, 0, 1, 1, 2, 5, new SimpleRecipeBuilder()))
+	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MASS_FABRICATOR_RECIPES = new RecipeMap("mass_fabricator", 0, 0, 0, 0, 0, 1, 1, 2, 4, new SimpleRecipeBuilder())
 		.setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, MoveType.HORIZONTAL);
 	
-	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> REPLICATOR_RECIPES = (new RecipeMap("replicator", 0, 1, 0, 1, 1, 3, 0, 1, 5, new SimpleRecipeBuilder()))
+	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> REPLICATOR_RECIPES = new RecipeMap("replicator", 0, 1, 0, 1, 1, 3, 0, 1, 4, new SimpleRecipeBuilder())
 		.setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, MoveType.HORIZONTAL);
 
 
@@ -235,7 +234,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> FLUID_HEATER_RECIPES = new RecipeMap<>("fluid_heater", 1, 1, 0, 0, 1, 1, 1, 1, 1, new IntCircuitRecipeBuilder())
+    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> FLUID_HEATER_RECIPES = new RecipeMap<>("fluid_heater", 0, 1, 0, 0, 1, 2, 1, 2, 1, new IntCircuitRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
 
     /**
@@ -414,7 +413,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> VACUUM_RECIPES = new RecipeMap<>("vacuum_freezer", 0, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder().EUt(120));
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> VACUUM_RECIPES = new RecipeMap<>("vacuum_freezer", 0, 1, 0, 1, 0, 1, 0, 1, 1, new SimpleRecipeBuilder().EUt(220));
 
     /**
      * Example:
@@ -492,7 +491,7 @@ public class RecipeMaps {
      * </pre>
      */
 
-    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> PYROLYSE_RECIPES = new RecipeMap<>("pyrolyse", 2, 2, 0, 1, 0, 1, 1, 1, 1, new IntCircuitRecipeBuilder().notOptimized());
+    @ZenProperty public static final RecipeMap<IntCircuitRecipeBuilder> PYROLYSE_RECIPES = new RecipeMap<>("pyrolyse", 1, 2, 0, 1, 0, 1, 1, 1, 1, new IntCircuitRecipeBuilder().notOptimized());
 
     /**
      * Example:

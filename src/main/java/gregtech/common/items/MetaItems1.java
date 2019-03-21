@@ -30,10 +30,8 @@ public class MetaItems1 extends MaterialMetaItem {
 
 	@Override
     public void registerSubItems() {
-		
-        GELLED_TOLUENE = addItem(300, "gelled_toluene");
 
-        BOTTLE_PURPLE_DRINK = addItem(301, "bottle.purple.drink").addStats(new FoodStats(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90)));
+        BOTTLE_PURPLE_DRINK = addItem(300, "bottle.purple.drink").addStats(new FoodStats(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90)));
 
         SHAPE_EMPTY = addItem(303, "shape.empty");
 
@@ -138,8 +136,8 @@ public class MetaItems1 extends MaterialMetaItem {
         ROBOT_ARM_LuV = addItem(461, "robot.arm.luv");
         ROBOT_ARM_UV = addItem(462, "robot.arm.uv");
 
-        FIELD_GENERATOR_LV = addItem(463, "field.generator.lv");
-        FIELD_GENERATOR_MV = addItem(464, "field.generator.mv");
+        //FIELD_GENERATOR_LV = addItem(463, "field.generator.lv");
+        //FIELD_GENERATOR_MV = addItem(464, "field.generator.mv");
         FIELD_GENERATOR_HV = addItem(465, "field.generator.hv");
         FIELD_GENERATOR_EV = addItem(466, "field.generator.ev");
         FIELD_GENERATOR_IV = addItem(467, "field.generator.iv");
@@ -358,7 +356,7 @@ public class MetaItems1 extends MaterialMetaItem {
 
         // Upgrades recipes
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .input(OrePrefix.plate, Materials.Aluminium).input(OrePrefix.dust, Materials.Plastic, 2)
+            .input(OrePrefix.plate, Materials.Aluminium).input(OrePrefix.dust, Materials.AcrylonitrileButadieneStyrene, 2)
             .outputs(UPGRADE_MUFFLER.getStackForm())
             .duration(1600)
             .EUt(2)
@@ -370,7 +368,7 @@ public class MetaItems1 extends MaterialMetaItem {
             .EUt(2)
             .buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .input(OrePrefix.plate, Materials.Iron).input(OrePrefix.dust, Materials.Plastic, 2)
+            .input(OrePrefix.plate, Materials.Iron).input(OrePrefix.dust, Materials.AcrylonitrileButadieneStyrene, 2)
             .outputs(UPGRADE_MUFFLER.getStackForm())
             .duration(1600)
             .EUt(2)
@@ -382,7 +380,7 @@ public class MetaItems1 extends MaterialMetaItem {
             .EUt(2)
             .buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
-            .input(OrePrefix.plate, Materials.WroughtIron).input(OrePrefix.dust, Materials.Plastic, 2)
+            .input(OrePrefix.plate, Materials.WroughtIron).input(OrePrefix.dust, Materials.AcrylonitrileButadieneStyrene, 2)
             .outputs(UPGRADE_MUFFLER.getStackForm())
             .duration(1600)
             .EUt(2)

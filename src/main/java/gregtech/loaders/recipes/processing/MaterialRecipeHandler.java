@@ -39,10 +39,10 @@ public class MaterialRecipeHandler {
     }
 
     public static void processDust(OrePrefix dustPrefix, DustMaterial material) {
-        if (material instanceof GemMaterial) {
+        if(material instanceof GemMaterial) {
             ItemStack gemStack = OreDictUnifier.get(OrePrefix.gem, material);
             ItemStack tinyDarkAshStack = OreDictUnifier.get(OrePrefix.dustTiny, Materials.DarkAsh);
-            if (material.hasFlag(GemMaterial.MatFlags.CRYSTALLISABLE)) {
+            if(material.hasFlag(GemMaterial.MatFlags.CRYSTALLISABLE)) {
 
                 RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
                     .input(dustPrefix, material)
@@ -59,14 +59,16 @@ public class MaterialRecipeHandler {
                     .duration(1500)
                     .EUt(24)
                     .buildAndRegister();
-            } else if (!material.hasFlag(Material.MatFlags.EXPLOSIVE) && !material.hasFlag(Material.MatFlags.FLAMMABLE)) {
+            } 
+            else if (!material.hasFlag(Material.MatFlags.EXPLOSIVE) && !material.hasFlag(Material.MatFlags.FLAMMABLE)) {
                 RecipeMaps.IMPLOSION_RECIPES.recipeBuilder()
                     .input(dustPrefix, material, 4)
                     .outputs(GTUtility.copyAmount(3, gemStack), GTUtility.copyAmount(2, tinyDarkAshStack))
                     .explosivesAmount(4)
                     .buildAndRegister();
             }
-        } else if (material instanceof IngotMaterial) {
+        } 
+        else if (material instanceof IngotMaterial) {
             IngotMaterial metalMaterial = (IngotMaterial) material;
             if(!material.hasFlag(Material.MatFlags.FLAMMABLE | MatFlags.NO_SMELTING)) {
 
@@ -74,21 +76,20 @@ public class MaterialRecipeHandler {
                 ItemStack ingotStack = OreDictUnifier.get(hasHotIngot ? OrePrefix.ingotHot : OrePrefix.ingot, metalMaterial);
                 ItemStack nuggetStack = OreDictUnifier.get(OrePrefix.nugget, metalMaterial);
 
-                if (metalMaterial.blastFurnaceTemperature <= 0) {
+                if(metalMaterial.blastFurnaceTemperature <= 0) {
                     ModHandler.addSmeltingRecipe(new UnificationEntry(dustPrefix, metalMaterial), ingotStack);
                     ModHandler.addSmeltingRecipe(new UnificationEntry(OrePrefix.dustTiny, metalMaterial), nuggetStack);
-                } else {
+                } 
+                else {
                     int duration = Math.max(1, (int) (material.getAverageMass() * metalMaterial.blastFurnaceTemperature / 50L));
                     ModHandler.removeFurnaceSmelting(new UnificationEntry(OrePrefix.ingot, metalMaterial));
-
                     RecipeMaps.BLAST_RECIPES.recipeBuilder()
                         .input(dustPrefix, material)
                         .outputs(ingotStack)
                         .duration(duration).EUt(120)
                         .blastFurnaceTemp(metalMaterial.blastFurnaceTemperature)
                         .buildAndRegister();
-
-                    if (!hasHotIngot) {
+                    if(!hasHotIngot) {
                         RecipeMaps.BLAST_RECIPES.recipeBuilder()
                             .input(OrePrefix.dustTiny, material)
                             .outputs(nuggetStack)
@@ -96,9 +97,10 @@ public class MaterialRecipeHandler {
                             .blastFurnaceTemp(metalMaterial.blastFurnaceTemperature)
                             .buildAndRegister();
                     }
-
-                    if (hasHotIngot) {
+                    if(hasHotIngot) {
                         RecipeMaps.VACUUM_RECIPES.recipeBuilder()
+                        	.fluidInputs(metalMaterial.blastFurnaceTemperature >= 4000 ? 
+                        			Materials.Chlorotrifluoroethylene.getFluid(20) : Materials.Chlorotrifluoroethylene.getFluid(10))
                             .input(OrePrefix.ingotHot, metalMaterial)
                             .outputs(OreDictUnifier.get(OrePrefix.ingot, metalMaterial))
                             .duration(metalMaterial.blastFurnaceTemperature / 16)
@@ -106,7 +108,8 @@ public class MaterialRecipeHandler {
                     }
                 }
             }
-        } else if (material.hasFlag(MatFlags.GENERATE_PLATE) && !material.hasFlag(EXCLUDE_PLATE_COMPRESSOR_RECIPE)) {
+        } 
+        else if (material.hasFlag(MatFlags.GENERATE_PLATE) && !material.hasFlag(EXCLUDE_PLATE_COMPRESSOR_RECIPE)) {
             RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder()
                 .input(dustPrefix, material)
                 .outputs(OreDictUnifier.get(OrePrefix.plate, material))

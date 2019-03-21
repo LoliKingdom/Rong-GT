@@ -72,6 +72,11 @@ public class OreRecipeHandler {
                 }
             }
             builder.buildAndRegister();
+            
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(1120).duration(60)
+            	.input(orePrefix, material)
+            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 2, ingotStack))
+            	.buildAndRegister();
         }
     }
 

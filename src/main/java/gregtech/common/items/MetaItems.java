@@ -125,8 +125,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem ROBOT_ARM_LuV;
     public static MetaItem<?>.MetaValueItem ROBOT_ARM_UV;
 
-    public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_LV;
-    public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_MV;
     public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_HV;
     public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_EV;
     public static MetaItem<?>.MetaValueItem FIELD_GENERATOR_IV;
@@ -216,8 +214,6 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem INTEGRATED_CIRCUIT;
 
     public static MetaItem<?>.MetaValueItem FLUID_CELL;
-
-    public static MetaItem<?>.MetaValueItem GELLED_TOLUENE;
 
     public static MetaItem<?>.MetaValueItem BOTTLE_PURPLE_DRINK;
     
