@@ -43,7 +43,7 @@ public enum OrePrefix {
     oreEnd("End Ores", -1,null,  MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
     
     oreSandstone("Sandstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
-    oreRedSandstone("Red Sandstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
+    //oreRedSandstone("Red Sandstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
 
     ore("Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)),
     
@@ -276,7 +276,6 @@ public enum OrePrefix {
         oreEnd.addSecondaryMaterial(new MaterialStack(Materials.Endstone, dust.materialAmount));
         
         oreSandstone.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dust.materialAmount));
-        oreRedSandstone.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dust.materialAmount));
 
         ore.addSecondaryMaterial(new MaterialStack(Materials.Stone, dust.materialAmount));
 

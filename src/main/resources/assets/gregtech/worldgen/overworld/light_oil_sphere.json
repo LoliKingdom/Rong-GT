@@ -6,6 +6,7 @@
   "priority": -100,
   "count_as_vein": false,
   "generation_predicate": "any",
+  "surface_stone_material": "oilsands",
 
   "vein_populator": {
     "type": "fluid_spring",

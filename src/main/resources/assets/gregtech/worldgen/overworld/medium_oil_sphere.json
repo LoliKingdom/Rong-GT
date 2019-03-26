@@ -4,6 +4,7 @@
   "max_height": 40,
   "min_height": 10,
   "priority": -100,
+  "surface_stone_material": "oilsands",
   "count_as_vein": false,
   "generation_predicate": "any",
 

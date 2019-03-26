@@ -334,23 +334,5 @@ public class MaterialRecipeHandler {
         				OreDictUnifier.get(OrePrefix.dust, material, 9), blockStack);
         	}
         }
-        //do not allow hand crafting or uncrafting of blacklisted blocks
-        if(!material.hasFlag(EXCLUDE_BLOCK_CRAFTING_RECIPES)) {            
-            if(material instanceof IngotMaterial) {
-                RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                    .input(OrePrefix.ingot, material, (int) (materialAmount / M))
-                    .notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
-                    .outputs(blockStack)
-                    .duration(10).EUt(74)
-                    .buildAndRegister();
-
-                RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
-                    .input(OrePrefix.ingot, material, (int) (materialAmount / M))
-                    .notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
-                    .outputs(blockStack)
-                    .duration(100).EUt(24)
-                    .buildAndRegister();
-            }
-        }
     }
 }

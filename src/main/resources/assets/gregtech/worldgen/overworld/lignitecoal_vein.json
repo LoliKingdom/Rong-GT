@@ -1,12 +1,11 @@
 {
-  "weight": 70,
+  "weight": 120,
   "density": 0.6,
-  "max_height": 150,
-  "min_height": 65,
+  "min_height": 60,
 
   "generator": {
     "type": "ellipsoid",
-    "radius": [19, 20]
+    "radius": [17, 18]
   },
   "filler": {
     "type": "simple",
@@ -14,11 +13,11 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 75,
+          "weight": 70,
           "value": "ore:lignite"
         },
         {
-          "weight": 25,
+          "weight": 30,
           "value": "ore:coal"
         }
       ]

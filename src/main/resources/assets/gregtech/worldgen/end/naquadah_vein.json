@@ -1,5 +1,5 @@
 {
-  "weight": 8,
+  "weight": 11,
   "density": 0.5,
   "max_height": 65,
   "min_height": 30,
@@ -16,12 +16,20 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 90,
+          "weight": 75,
           "value": "ore:naquadah"
         },
         {
-          "weight": 10,
+          "weight": 15,
           "value": "ore:naquadah_enriched"
+        },
+		{
+          "weight": 5,
+          "value": "ore:cooperite"
+        },
+		{
+          "weight": 5,
+          "value": "ore:powellite"
         }
       ]
     }

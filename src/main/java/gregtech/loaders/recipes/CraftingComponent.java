@@ -116,7 +116,7 @@ public enum CraftingComponent {
                 case 5:
                     return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.YttriumBariumCuprate);
                 default:
-                    return new UnificationEntry(OrePrefix.cableGtQuadruple, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.NaquadahEnriched);
             }
         }
     },
@@ -148,7 +148,7 @@ public enum CraftingComponent {
                 case 5:
                     return new UnificationEntry(OrePrefix.pipeMedium, Materials.TungstenSteel);
                 default:
-                    return new UnificationEntry(OrePrefix.pipeMedium, Materials.TungstenSteel);
+                    return new UnificationEntry(OrePrefix.pipeMedium, Materials.Tritanium);
             }
         }
     },
@@ -191,10 +191,8 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel);
                 case 5:
                     return new UnificationEntry(OrePrefix.plate, Materials.HSSG);
-                case 6:
-                    return new UnificationEntry(OrePrefix.plate, Materials.HSSE);
                 default:
-                    return new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel);
+                    return new UnificationEntry(OrePrefix.plate, Materials.HSSE);
             }
         }
     },

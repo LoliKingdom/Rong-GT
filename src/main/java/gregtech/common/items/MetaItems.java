@@ -13,6 +13,8 @@ public class MetaItems {
 	
 	public static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
 	
+	public static MetaItem<?>.MetaValueItem CARBON_FIBRE;
+	
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_LV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_MV;
     public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_HV;

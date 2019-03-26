@@ -1,14 +1,13 @@
 {
   "weight": 80,
   "density": 0.4,
-  "max_height": 30,
-  "min_height": 10,
+  "min_height": 40,
+  "surface_stone_material": "aluminium",
   "dimension_filter": ["is_nether"],
-  "surface_stone_material": "copper",
 
   "generator": {
     "type": "ellipsoid",
-    "radius": [12, 12]
+    "radius": [15, 17]
   },
   "filler": {
     "type": "simple",
@@ -16,20 +15,16 @@
       "type": "weight_random",
       "values": [
         {
+          "weight": 40,
+          "value": "ore:bauxite"
+        },
+        {
           "weight": 30,
-          "value": "ore:chalcopyrite"
+          "value": "ore:aluminium"
         },
 		{
           "weight": 30,
-          "value": "ore:iron"
-        },
-		{
-          "weight": 30,
-          "value": "ore:pyrite"
-        },
-		{
-          "weight": 10,
-          "value": "ore:copper"
+          "value": "ore:ilmenite"
         }
       ]
     }

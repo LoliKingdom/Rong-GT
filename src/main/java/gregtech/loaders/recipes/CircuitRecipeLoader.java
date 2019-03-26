@@ -51,7 +51,7 @@ public class CircuitRecipeLoader {
 			.buildAndRegister();
 		
 		RecipeMaps.PRESS_RECIPES.recipeBuilder().duration(290).EUt(12)
-			.input(OrePrefix.plate, Materials.Polyethylene, 2)
+			.input(OrePrefix.plate, Materials.Polytetrafluoroethylene, 2) //was Polyethylene
 			.input(OrePrefix.ring, Materials.BerylliumCopper, 2)
 			.input(OrePrefix.dustSmall, Materials.Silicon, 5)
 			.outputs(MetaItems.BOARD_ELITE.getStackForm())

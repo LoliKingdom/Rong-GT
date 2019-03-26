@@ -100,8 +100,8 @@ public class MetaBlocks {
     public static BlockTransparent TRANSPARENT;
 
     public static Map<DustMaterial, BlockCompressed> COMPRESSED = new HashMap<>();
-    public static Map<IngotMaterial, BlockSurfaceRock> SURFACE_ROCKS = new HashMap<>();
-    public static Map<IngotMaterial, BlockSurfaceRockFlooded> FLOODED_SURFACE_ROCKS = new HashMap<>();
+    public static Map<DustMaterial, BlockSurfaceRock> SURFACE_ROCKS = new HashMap<>();
+    public static Map<DustMaterial, BlockSurfaceRockFlooded> FLOODED_SURFACE_ROCKS = new HashMap<>();
     public static Map<SolidMaterial, BlockFrame> FRAMES = new HashMap<>();
     public static Collection<BlockOre> ORES = new HashSet<>();
     public static Collection<BlockFluidBase> FLUID_BLOCKS = new HashSet<>();
@@ -153,10 +153,8 @@ public class MetaBlocks {
 
         StoneType.init();
 
-        createGeneratedBlock(material -> material instanceof DustMaterial &&
-            !OrePrefix.block.isIgnored(material), MetaBlocks::createCompressedBlock);
-        createGeneratedBlock(material -> material instanceof IngotMaterial &&
-            material.hasFlag(MatFlags.GENERATE_ORE), MetaBlocks::createSurfaceRockBlock);
+        createGeneratedBlock(material -> material instanceof DustMaterial && !OrePrefix.block.isIgnored(material), MetaBlocks::createCompressedBlock);
+        createGeneratedBlock(material -> material instanceof DustMaterial, MetaBlocks::createSurfaceRockBlock);
 
         for (Material material : Material.MATERIAL_REGISTRY) {
             if (material instanceof DustMaterial &&
@@ -209,10 +207,10 @@ public class MetaBlocks {
         BlockSurfaceRockFlooded floodedBlock = new BlockSurfaceRockFlooded(materials);
         block.setRegistryName("surface_rock_" + index);
         floodedBlock.setRegistryName("surface_rock_flooded_" + index);
-        for (Material material : materials) {
-            if (material instanceof IngotMaterial) {
-                SURFACE_ROCKS.put((IngotMaterial) material, block);
-                FLOODED_SURFACE_ROCKS.put((IngotMaterial) material, floodedBlock);
+        for(Material material : materials) {
+            if(material instanceof DustMaterial) {
+                SURFACE_ROCKS.put((DustMaterial)material, block);
+                FLOODED_SURFACE_ROCKS.put((DustMaterial)material, floodedBlock);
             }
         }
     }

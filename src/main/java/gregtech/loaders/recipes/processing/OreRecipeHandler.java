@@ -25,7 +25,6 @@ public class OreRecipeHandler {
         OrePrefix.oreNetherrack.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSand.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
-        OrePrefix.oreRedSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
 
         OrePrefix.crushed.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedOre);
         OrePrefix.crushedPurified.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedPurified);
@@ -45,9 +44,11 @@ public class OreRecipeHandler {
         }
         if(smeltingMaterial instanceof IngotMaterial) {
             ingotStack = OreDictUnifier.get(OrePrefix.ingot, smeltingMaterial);
-        } else if(smeltingMaterial instanceof GemMaterial) {
+        }
+        else if(smeltingMaterial instanceof GemMaterial) {
             ingotStack = OreDictUnifier.get(OrePrefix.gem, smeltingMaterial);
-        } else {
+        } 
+        else {
             ingotStack = OreDictUnifier.get(OrePrefix.dust, smeltingMaterial);
         }
         ingotStack.setCount(material.smeltingMultiplier);
@@ -73,9 +74,10 @@ public class OreRecipeHandler {
             }
             builder.buildAndRegister();
             
-            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(1120).duration(60)
+            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(80)
+            	.fluidInputs(Materials.Nitrogen.getPlasma(25))
             	.input(orePrefix, material)
-            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 2, ingotStack))
+            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 3, ingotStack))
             	.buildAndRegister();
         }
     }

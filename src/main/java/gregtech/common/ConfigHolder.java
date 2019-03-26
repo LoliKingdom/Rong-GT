@@ -39,15 +39,19 @@ public class ConfigHolder {
     public static boolean insufficientEnergySupplyWipesRecipeProgress = false;
 
     @Config.Comment("Whether to use modPriorities setting in config for prioritizing ore dictionary item registrations. " +
-        "By default, GTCE will sort ore dictionary registrations alphabetically comparing their owner ModIDs.")
+        "By default, GregTech will sort ore dictionary registrations alphabetically comparing their owner Mod IDs.")
     public static boolean useCustomModPriorities = false;
 
-    @Config.Comment("Specifies priorities of mods in ore dictionary item registration. First ModID has highest priority, last - lowest. " +
-        "Unspecified ModIDs follow standard sorting, but always have lower priority than last specified ModID.")
+    @Config.Comment("Specifies priorities of mods in ore dictionary item registration. First Mod ID has highest priority, last - lowest. " +
+        "Unspecified Mod IDs follow standard sorting, but always have lower priority than last specified Mod ID.")
     @Config.RequiresMcRestart
     public static String[] modPriorities = new String[0];
     
-    @Config.Comment("Setting this to true makes GTCE ignore error and invalid recipes that would otherwise cause crash. Default to true.")
+    @Config.Comment("Setting this to true makes GregTech ignore error and invalid recipes that would otherwise cause crash. Default to true.")
     @Config.RequiresMcRestart
     public static boolean ignoreErrorOrInvalidRecipes = true;
+    
+    @Config.Comment("Setting this to true makes GregTech take priority over Tinker's in their tool stats")
+    @Config.RequiresMcRestart
+    public static boolean overrideTiConStats = false;
 }

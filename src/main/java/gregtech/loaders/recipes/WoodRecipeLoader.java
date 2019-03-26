@@ -60,6 +60,15 @@ public class WoodRecipeLoader {
                 .duration(280)
                 .EUt(192)
                 .buildAndRegister();
+            
+            RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+            	.inputs(GTUtility.copyAmount(12, woodStack))
+            	.circuitMeta(3)
+            	.outputs(new ItemStack(Items.COAL, 8 * coalAmount, 1))
+            	.fluidOutputs(Materials.Phenol.getFluid(200 * coalAmount))
+            	.duration(720)
+            	.EUt(44)
+            	.buildAndRegister();
         }
         
         Pair<IRecipe, ItemStack> outputPair = ModHandler.getRecipeOutput(null, woodStack);

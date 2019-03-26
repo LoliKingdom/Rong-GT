@@ -5,6 +5,7 @@
   "min_height": 10,
   "priority": -100,
   "count_as_vein": false,
+  "surface_stone_material": "ash",
   "generation_predicate": "any",
 
   "biome_modifier": {

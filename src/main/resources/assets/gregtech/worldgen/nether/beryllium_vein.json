@@ -1,14 +1,14 @@
 {
-  "weight": 30,
+  "weight": 50,
   "density": 0.3,
-  "max_height": 35,
+  "max_height": 55,
   "min_height": 5,
-  "surface_stone_material": "thorium",
-  "dimension_filter": ["name:the_end"],
+  "surface_stone_material": "emerald",
+  "dimension_filter": ["is_nether"],
 
   "generator": {
     "type": "ellipsoid",
-    "radius": [9, 9]
+    "radius": [13, 13]
   },
   "filler": {
     "type": "simple",
@@ -16,7 +16,7 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 50,
+          "weight": 45,
           "value": "ore:beryllium"
         },
         {
@@ -24,7 +24,7 @@
           "value": "ore:emerald"
         },
 		{
-          "weight": 20,
+          "weight": 25,
           "value": "ore:thorium"
         }
       ]

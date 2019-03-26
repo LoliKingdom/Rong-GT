@@ -3,6 +3,7 @@
   "density": 0.3,
   "max_height": 40,
   "min_height": 10,
+  "surface_stone_material": "sapphire",
 
   "generator": {
     "type": "ellipsoid",
@@ -14,20 +15,20 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 30,
-          "value": "ore:almandine"
+          "weight": 25,
+          "value": "ore:sapphire"
         },
         {
-          "weight": 30,
+          "weight": 25,
           "value": "ore:pyrope"
         },
 		{
-          "weight": 30,
-          "value": "ore:sapphire"
+          "weight": 25,
+          "value": "ore:almandine"
         },
 		{
-          "weight": 10,
-          "value": "ore:green_sapphire"
+          "weight": 25,
+          "value": "ore:topaz"
         }
       ]
     }

@@ -30,6 +30,11 @@ public class GTValues {
      * Fluid per Material Unit (Prime Factors: 3 * 3 * 2 * 2 * 2 * 2)
      */
     public static final int L = 144;
+    
+    /**
+     * For non-ingot/dust fluids, fluid per material unit
+     */
+    public static final int B = 1000;
 
     /**
      * The Item WildCard Tag. Even shorter than the "-1" of the past

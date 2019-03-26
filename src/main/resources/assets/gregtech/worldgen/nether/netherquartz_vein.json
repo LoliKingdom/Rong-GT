@@ -1,13 +1,13 @@
 {
   "weight": 170,
-  "density": 0.2,
+  "density": 0.4,
   "max_height": 110,
   "min_height": 40,
   "dimension_filter": ["is_nether"],
 
   "generator": {
     "type": "ellipsoid",
-    "radius": [18, 18]
+    "radius": [8, 13]
   },
   "filler": {
     "type": "simple",
@@ -15,8 +15,20 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 100,
+          "weight": 70,
           "value": "ore:nether_quartz"
+        },
+		{
+          "weight": 10,
+          "value": "ore:onyx"
+        },
+		{
+          "weight": 10,
+          "value": "ore:alexandrite"
+        },
+		{
+          "weight": 10,
+          "value": "ore:peridot"
         }
       ]
     }

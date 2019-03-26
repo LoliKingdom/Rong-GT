@@ -73,16 +73,16 @@ public class RecipeMaps {
     @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PRESS_RECIPES = new RecipeMap<>("press", 2, 3, 1, 1, 0, 0, 0, 0, 1, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, MoveType.HORIZONTAL);
 
-    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 4, 0, 1, 2, 1, 2, new SimpleRecipeBuilder())
+    @ZenProperty public static final RecipeMap<SimpleRecipeBuilder> PLASMA_ARC_FURNACE_RECIPES = new RecipeMap<>("plasma_arc_furnace", 1, 2, 1, 2, 0, 1, 0, 2, 2, new SimpleRecipeBuilder())
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
     
     @ZenProperty public static final RecipeMap<RecyclerRecipeBuilder> RECYCLING_RECIPES = new RecipeMap<>("recycler", 1, 1, 1, 4, 0, 1, 0, 1, 1, new RecyclerRecipeBuilder())
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
     
-	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MASS_FABRICATOR_RECIPES = new RecipeMap("mass_fabricator", 0, 0, 0, 0, 0, 1, 1, 2, 4, new SimpleRecipeBuilder())
+	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> MASS_FABRICATOR_RECIPES = new RecipeMap("mass_fabricator", 0, 1, 0, 0, 0, 1, 1, 2, 4, new SimpleRecipeBuilder())
 		.setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, MoveType.HORIZONTAL);
 	
-	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> REPLICATOR_RECIPES = new RecipeMap("replicator", 0, 1, 0, 1, 1, 3, 0, 1, 4, new SimpleRecipeBuilder())
+	@ZenProperty public static final RecipeMap<SimpleRecipeBuilder> REPLICATOR_RECIPES = new RecipeMap("replicator", 0, 1, 0, 1, 1, 2, 0, 1, 4, new SimpleRecipeBuilder())
 		.setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, MoveType.HORIZONTAL);
 
 

@@ -2,7 +2,8 @@
   "weight": 50,
   "density": 0.5,
   "max_height": 50,
-  "min_height": 20,
+  "min_height": 15,
+  "surface_stone_material": "lapis",
 
   "generator": {
     "type": "ellipsoid",
@@ -14,16 +15,16 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 30,
+          "weight": 40,
+          "value": "ore:lapis"
+        },
+		{
+          "weight": 25,
           "value": "ore:lazurite"
         },
         {
           "weight": 20,
           "value": "ore:sodalite"
-        },
-		{
-          "weight": 35,
-          "value": "ore:lapis"
         },
 		{
           "weight": 15,

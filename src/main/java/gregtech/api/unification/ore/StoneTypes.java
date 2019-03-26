@@ -46,12 +46,16 @@ public class StoneTypes {
     public static StoneType ENDSTONE = new StoneType(6, "endstone", new ResourceLocation("blocks/end_stone"), SoundType.STONE, OrePrefix.oreEndstone, Materials.Endstone, "pickaxe", 0,
             Blocks.END_STONE::getDefaultState,
             state -> state.getBlock() == Blocks.END_STONE);
+    
+    public static StoneType SAND = new StoneType(7, "sand", new ResourceLocation("blocks/sand"), SoundType.SAND, OrePrefix.oreSand, Materials.SiliconDioxide, "shovel", 0,
+            () -> Blocks.SAND.getDefaultState(),
+            state -> state.getBlock() == Blocks.SAND);
 
-    public static StoneType SANDSTONE = new StoneType(7, "sandstone", new ResourceLocation("blocks/sandstone_normal"), new ResourceLocation("blocks/sandstone_top"), SoundType.STONE, OrePrefix.oreSand, Materials.SiliconDioxide, "pickaxe", 0,
+    public static StoneType SANDSTONE = new StoneType(8, "sandstone", new ResourceLocation("blocks/sandstone_normal"), new ResourceLocation("blocks/sandstone_top"), SoundType.STONE, OrePrefix.oreSandstone, Materials.SiliconDioxide, "pickaxe", 0,
             () -> Blocks.SANDSTONE.getDefaultState().withProperty(BlockSandStone.TYPE, BlockSandStone.EnumType.DEFAULT),
             state -> state.getBlock() instanceof BlockSandStone && state.getValue(BlockSandStone.TYPE) == BlockSandStone.EnumType.DEFAULT);
 
-    public static StoneType RED_SANDSTONE = new StoneType(8, "red_sandstone", new ResourceLocation("blocks/red_sandstone_normal"), new ResourceLocation("blocks/red_sandstone_top"), SoundType.STONE, OrePrefix.oreRedSandstone, Materials.SiliconDioxide, "pickaxe", 0,
+    public static StoneType RED_SANDSTONE = new StoneType(9, "red_sandstone", new ResourceLocation("blocks/red_sandstone_normal"), new ResourceLocation("blocks/red_sandstone_top"), SoundType.STONE, OrePrefix.oreSandstone, Materials.SiliconDioxide, "pickaxe", 0,
             () -> Blocks.RED_SANDSTONE.getDefaultState().withProperty(BlockRedSandstone.TYPE, BlockRedSandstone.EnumType.DEFAULT),
             state -> state.getBlock() instanceof BlockRedSandstone && state.getValue(BlockRedSandstone.TYPE) == BlockRedSandstone.EnumType.DEFAULT);
 }

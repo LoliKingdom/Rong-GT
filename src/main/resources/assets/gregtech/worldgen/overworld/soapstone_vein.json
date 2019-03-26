@@ -3,6 +3,7 @@
   "density": 0.5,
   "max_height": 40,
   "min_height": 10,
+  "surface_stone_material": "pentlandite",
 
   "generator": {
     "type": "ellipsoid",
@@ -23,7 +24,7 @@
         },
 		{
           "weight": 25,
-          "value": "ore:glauconite"
+          "value": "ore:palladium"
         },
 		{
           "weight": 25,

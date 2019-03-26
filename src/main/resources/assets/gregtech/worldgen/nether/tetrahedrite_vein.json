@@ -4,7 +4,7 @@
   "max_height": 120,
   "min_height": 70,
   "dimension_filter": ["is_nether"],
-  "surface_stone_material": "copper",
+  "surface_stone_material": "stibnite",
 
   "generator": {
     "type": "ellipsoid",
@@ -16,7 +16,7 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 60,
+          "weight": 50,
           "value": "ore:tetrahedrite"
         },
         {
@@ -24,7 +24,7 @@
           "value": "ore:copper"
         },
 		{
-          "weight": 20,
+          "weight": 30,
           "value": "ore:stibnite"
         }
       ]

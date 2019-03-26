@@ -22,23 +22,22 @@ import java.util.Random;
 
 public class SurfaceRockPopulator implements VeinChunkPopulator {
 
-    private IngotMaterial material;
+    private DustMaterial material;
 
     public SurfaceRockPopulator() {
     }
 
-    public SurfaceRockPopulator(IngotMaterial material) {
+    public SurfaceRockPopulator(DustMaterial material) {
         this.material = material;
     }
 
     @Override
     public void loadFromConfig(JsonObject object) {
         DustMaterial material = OreConfigUtils.getMaterialByName(object.get("material").getAsString());
-        if(!(material instanceof IngotMaterial))
-            throw new IllegalArgumentException("Only metal materials are supported for surface rocks");
-        if(!material.hasFlag(MatFlags.GENERATE_ORE))
-            throw new IllegalArgumentException("Only materials with ore can have surface rocks");
-        this.material = (IngotMaterial) material;
+        if(!(material instanceof DustMaterial)) {
+        	throw new IllegalArgumentException("Only materials with dust or metals are supported of having surface rocks.");
+        }
+        this.material = (DustMaterial)material;
     }
 
     @Override
@@ -48,7 +47,7 @@ public class SurfaceRockPopulator implements VeinChunkPopulator {
     @Override
     public void populateChunk(World world, int chunkX, int chunkZ, Random random, OreDepositDefinition definition, GridEntryInfo gridEntryInfo) {
         if(world.getWorldType() != WorldType.FLAT) {
-            int stonesCount = random.nextInt(2);
+            int stonesCount = random.nextInt(3);
             for (int i = 0; i < stonesCount; i++) {
                 int randomX = chunkX * 16 + random.nextInt(16);
                 int randomZ = chunkZ * 16 + random.nextInt(16);
@@ -63,10 +62,11 @@ public class SurfaceRockPopulator implements VeinChunkPopulator {
 
                 boolean isFloodedBlock = blockStateReplaced.getMaterial() == Material.WATER;
                 IBlockState stoneBlockState;
-                if (!isFloodedBlock) {
+                if(!isFloodedBlock) {
                     BlockSurfaceRock blockSurfaceRock = MetaBlocks.SURFACE_ROCKS.get(material);
-                    stoneBlockState = blockSurfaceRock.getDefaultState().withProperty(blockSurfaceRock.materialProperty, material);
-                } else {
+                    stoneBlockState = MetaBlocks.SURFACE_ROCKS.get(material).getDefaultState().withProperty(blockSurfaceRock.materialProperty, material);
+                } 
+                else {
                     BlockSurfaceRockFlooded blockSurfaceRock = MetaBlocks.FLOODED_SURFACE_ROCKS.get(material);
                     stoneBlockState = blockSurfaceRock.getDefaultState().withProperty(blockSurfaceRock.materialProperty, material);
                 }

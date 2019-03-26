@@ -99,7 +99,7 @@ public abstract class TileEntityPipeBase<PipeType extends Enum<PipeType> & IPipe
         //noinspection unchecked
         return (BlockPipe<PipeType, NodeDataType, ?>) getBlockState().getBlock();
     }
-
+    
     @Override
     public int getBlockedConnections() {
         return blockedConnections;

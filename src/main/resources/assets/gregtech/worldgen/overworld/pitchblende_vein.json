@@ -15,16 +15,16 @@
       "type": "weight_random",
       "values": [
         {
-          "weight": 50,
+          "weight": 60,
           "value": "ore:pitchblende"
         },
         {
-          "weight": 40,
+          "weight": 35,
           "value": "ore:uraninite"
         },
-		{
-          "weight": 10,
-          "value": "ore:uranium"
+        {
+          "weight": 5,
+          "value": "ore:plutonium239"
         }
       ]
     }

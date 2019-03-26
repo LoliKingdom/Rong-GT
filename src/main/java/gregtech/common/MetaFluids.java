@@ -118,10 +118,10 @@ public class MetaFluids {
         setDefaultTexture(Materials.LightFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.HeavyFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.LPG, FluidType.NORMAL);
-        setDefaultTexture(Materials.HydroCrackedLightFuel, FluidType.NORMAL);
-        setDefaultTexture(Materials.SteamCrackedLightFuel, FluidType.NORMAL);
-        setDefaultTexture(Materials.HydroCrackedHeavyFuel, FluidType.NORMAL);
-        setDefaultTexture(Materials.SteamCrackedHeavyFuel, FluidType.NORMAL);
+        //setDefaultTexture(Materials.HydroCrackedLightFuel, FluidType.NORMAL);
+        //setDefaultTexture(Materials.SteamCrackedLightFuel, FluidType.NORMAL);
+        //setDefaultTexture(Materials.HydroCrackedHeavyFuel, FluidType.NORMAL);
+        //setDefaultTexture(Materials.SteamCrackedHeavyFuel, FluidType.NORMAL);
         //setDefaultTexture(Materials.UUMatter, FluidType.NORMAL);
         //setDefaultTexture(Materials.PositiveMatter, FluidType.NORMAL);
         //setDefaultTexture(Materials.NeutralMatter, FluidType.NORMAL);
@@ -139,6 +139,7 @@ public class MetaFluids {
         setDefaultTexture(Materials.Biomass, FluidType.NORMAL);
         setDefaultTexture(Materials.Ethanol, FluidType.NORMAL);
         setDefaultTexture(Materials.SulfuricAcid, FluidType.NORMAL);
+        setDefaultTexture(Materials.SulfurTrioxide, FluidType.NORMAL);
         setDefaultTexture(Materials.Milk, FluidType.NORMAL);
         setDefaultTexture(Materials.Glue, FluidType.NORMAL);
 

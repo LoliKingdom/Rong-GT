@@ -32,7 +32,9 @@ public class MetaItems1 extends MaterialMetaItem {
     public void registerSubItems() {
 
         BOTTLE_PURPLE_DRINK = addItem(300, "bottle.purple.drink").addStats(new FoodStats(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90)));
-
+        
+        CARBON_FIBRE = addItem(301, "carbon_fibre");	
+        
         SHAPE_EMPTY = addItem(303, "shape.empty");
 
         SHAPE_MOLD_PLATE = addItem(304, "shape.mold.plate");
@@ -58,12 +60,12 @@ public class MetaItems1 extends MaterialMetaItem {
         SHAPE_EXTRUDER_HAMMER = addItem(327, "shape.extruder.hammer");
         SHAPE_EXTRUDER_SAW = addItem(328, "shape.extruder.saw");
 	
-        SPRAY_EMPTY = addItem(326, "spray.empty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Materials.Tin, OrePrefix.plate.materialAmount * 2L), 
+        SPRAY_EMPTY = addItem(329, "spray.empty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Materials.Tin, OrePrefix.plate.materialAmount * 2L), 
         																			   new MaterialStack(Materials.Redstone, OrePrefix.dust.materialAmount)));
 
         for (int i = 0; i < EnumDyeColor.values().length; i++) {
         	EnumDyeColor dyeColor = EnumDyeColor.values()[i];
-            SPRAY_CAN_DYES[i] = addItem(329 + 2 * i, "spray.can.dyes." + dyeColor.getName()).setMaxStackSize(1);
+            SPRAY_CAN_DYES[i] = addItem(330 * i, "spray.can.dyes." + dyeColor.getName()).setMaxStackSize(1);
             ColorSprayBehaviour behaviour = new ColorSprayBehaviour(SPRAY_EMPTY.getStackForm(), 512, i);
             SPRAY_CAN_DYES[i].addStats(behaviour);
         }

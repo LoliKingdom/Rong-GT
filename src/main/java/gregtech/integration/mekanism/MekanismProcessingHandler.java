@@ -41,7 +41,7 @@ public class MekanismProcessingHandler {
 	private static HashMap<Material, OreGas> registeredCleanSlurries = new HashMap<>();
 	
 	@Method(modid = "mekanism")
-	public static void initGas() {
+	public static void preInitGas() {
 		for(Material m : DustMaterial.MATERIAL_REGISTRY) {
 			if(m.hasFlag(DustMaterial.MatFlags.GENERATE_ORE)) {
 				OreGas cleanSlurry = new OreGas("clean_" + m.toString(), "_slurry");
@@ -85,7 +85,6 @@ public class MekanismProcessingHandler {
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreGravel, m), getSlurry(m, false, 1000));
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSand, m), getSlurry(m, false, 1000));
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSandstone, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreRedSandstone, m), getSlurry(m, false, 1000));
 				
 				RecipeHandler.addChemicalWasherRecipe(getSlurry(m, false, 20), getSlurry(m, true, 10));
 				
