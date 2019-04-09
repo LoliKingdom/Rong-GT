@@ -17,7 +17,7 @@ public class EnergyRecipeMapWorkableHandler extends RecipeMapWorkableHandler {
 
     @Override
     protected long getEnergyStored() {
-        return energyContainer.get().getEnergyStored();
+        return energyContainer.get().getCurrentEnergyStored();
     }
 
     @Override

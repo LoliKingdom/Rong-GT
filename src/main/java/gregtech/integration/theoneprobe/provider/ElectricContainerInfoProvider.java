@@ -28,7 +28,7 @@ public class ElectricContainerInfoProvider extends CapabilityInfoProvider<IEnerg
 
     @Override
     protected void addProbeInfo(IEnergyContainer capability, IProbeInfo probeInfo, TileEntity tileEntity, EnumFacing sideHit) {
-        long energyStored = capability.getEnergyStored();
+        long energyStored = capability.getCurrentEnergyStored();
         long maxStorage = capability.getEnergyCapacity();
         if(maxStorage == 0) return; //do not add empty max storage progress bar
         IProbeInfo horizontalPane = probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));

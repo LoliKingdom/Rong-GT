@@ -8,12 +8,14 @@ import gregtech.api.capability.IElectricItem;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.damagesources.DamageSources;
 import gregtech.api.items.IDamagableItem;
+import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.SimpleItemStack;
 import gregtech.common.ConfigHolder;
+import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -36,12 +38,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
@@ -596,7 +600,7 @@ public class GTUtility {
     }
     
     public static ItemStack getFilledCell(Fluid fluid, int count) {
-    	ItemStack fluidCell = MetaItems.FLUID_CELL.getStackForm().copy();
+    	ItemStack fluidCell = new ItemStack(new ItemCell());
     	IFluidHandlerItem fluidHandlerItem = fluidCell.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     	try {
     		fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);  		
@@ -718,6 +722,23 @@ public class GTUtility {
         if(index >= 0 && index < list.size())
             return list.get(index);
         return replacement;
+    }
+    
+    public static void doOvervoltageExplosion(MetaTileEntity metaTileEntity, long voltage) {
+        BlockPos pos = metaTileEntity.getPos();
+        metaTileEntity.getWorld().setBlockToAir(pos);
+        if(!metaTileEntity.getWorld().isRemote) {
+            double posX = pos.getX() + 0.5;
+            double posY = pos.getY() + 0.5;
+            double posZ = pos.getZ() + 0.5;
+            ((WorldServer)metaTileEntity.getWorld()).spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY, posZ,
+                10, 0.2, 0.2, 0.2, 0.0);
+
+            if (ConfigHolder.doExplosions) {
+                metaTileEntity.getWorld().createExplosion(null, posX, posY, posZ,
+                    getTierByVoltage(voltage), true);
+            }
+        }
     }
 
     /**

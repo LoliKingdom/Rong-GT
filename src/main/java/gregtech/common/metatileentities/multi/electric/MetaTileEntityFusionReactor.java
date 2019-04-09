@@ -124,7 +124,7 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 
 	@Override
 	protected void formStructure(PatternMatchContext context) {
-		long energyStored = energyContainer.getEnergyStored();
+		long energyStored = energyContainer.getCurrentEnergyStored();
 		super.formStructure(context);
 		this.initializeAbilities();
 		((EnergyContainerHandler)energyContainer).setEnergyStored(energyStored);
@@ -147,8 +147,8 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 	@Override
 	protected void updateFormedValid() {
 		if(!getWorld().isRemote) {
-			if(inputEnergyContainers.getEnergyStored() > 0) {
-				long energyAdded = energyContainer.addEnergy(inputEnergyContainers.getEnergyStored());
+			if(inputEnergyContainers.getCurrentEnergyStored() > 0) {
+				long energyAdded = energyContainer.addEnergy(inputEnergyContainers.getCurrentEnergyStored());
 				if(energyAdded > 0)  {
 					inputEnergyContainers.addEnergy(-(energyAdded));
 				}
@@ -159,7 +159,7 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 				Recipe currentRecipe = recipeMapWorkable.getPreviousRecipe();
 				if(previousRecipe != null && currentRecipe != null && previousRecipe != currentRecipe) {
 					int euToStart = currentRecipe.getProperty("eu_to_start");
-					if(energyContainer.getEnergyStored() >= euToStart) {
+					if(energyContainer.getCurrentEnergyStored() >= euToStart) {
 						recipeMapWorkable.setActive(true);
 					}
 				}
@@ -207,7 +207,7 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 				textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle((new Style()).setColor(TextFormatting.RED))));
 			}
 		}
-		textList.add(new TextComponentString("EU: " + this.energyContainer.getEnergyStored() + " / " + this.energyContainer.getEnergyCapacity()));
+		textList.add(new TextComponentString("EU: " + this.energyContainer.getCurrentEnergyStored() + " / " + this.energyContainer.getEnergyCapacity()));
 	}
 
 	@Override

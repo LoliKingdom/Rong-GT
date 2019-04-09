@@ -131,7 +131,7 @@ public class CableEnergyContainer implements IEnergyContainer {
     }
 
     @Override
-    public long getEnergyStored() {
+    public long getCurrentEnergyStored() {
         return 0;
     }
 

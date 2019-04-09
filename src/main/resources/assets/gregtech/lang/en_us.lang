@@ -69,10 +69,8 @@ metaitem.fuel.can.plastic.filled.tooltip=Burns well in Diesel Generators
 metaitem.spray.empty.name=Spray Can (Empty)
 metaitem.spray.empty.tooltip=Can be filled with sprays of various colors
 
-metaitem.fluid_cell.empty=Empty
-metaitem.fluid_cell.name=%s Cell
-metaitem.large_fluid_cell.steel.name=%s Steel Cell
-metaitem.large_fluid_cell.tungstensteel.name=%s Tungstensteel Cell
+item.fluid_cell.empty.name=Empty Cell
+item.fluid_cell.name=%s Cell
 
 metaitem.spray.can.dyes.white.name=Spray Can (White)
 metaitem.spray.can.dyes.white.tooltip=Can paint things in White

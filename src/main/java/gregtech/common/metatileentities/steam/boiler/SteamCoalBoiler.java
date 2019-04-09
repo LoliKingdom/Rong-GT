@@ -19,13 +19,13 @@ import javax.annotation.Nonnull;
 
 public class SteamCoalBoiler extends SteamBoiler {
 
-    public SteamCoalBoiler(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, isHighPressure, Textures.COAL_BOILER_OVERLAY, 150);
+    public SteamCoalBoiler(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, Textures.COAL_BOILER_OVERLAY, 150);
 }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new SteamCoalBoiler(metaTileEntityId, isHighPressure);
+        return new SteamCoalBoiler(metaTileEntityId);
     }
 
     @Override

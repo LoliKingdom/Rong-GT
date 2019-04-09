@@ -42,12 +42,13 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
                     slotMap.put(slot, nativeWidget);
                     addSlotToContainer(slot);
                 });
+        modularUI.triggerOpenListeners();
     }
 
     public ModularUI getModularUI() {
         return modularUI;
     }
-    
+
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
@@ -58,8 +59,7 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
         modularUI.guiWidgets.values().forEach(Widget::detectAndSendChanges);
-        modularUI.triggerOpenListeners();
-    }    
+    }
 
     @Override
     public void detectAndSendChanges() {
@@ -89,10 +89,10 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
         }
         ItemStack remainingStack = slot.getStack();
         boolean mergedStack;
-        if(slotMap.get(slot).isPlayerInventorySlot()) {
+        if(slotMap.get(slot).getSlotLocationInfo().isPlayerInventory) {
             //if we clicked on player inventory slot, move to container inventory, inverting indexes
             List<Slot> containerSlots = slotMap.entrySet().stream()
-                .filter(s -> !s.getValue().isPlayerInventorySlot())
+                .filter(s -> !s.getValue().getSlotLocationInfo().isPlayerInventory)
                 .map(Entry::getKey)
                 .sorted(Comparator.comparing(s -> s.slotNumber))
                 .collect(Collectors.toList());
@@ -100,7 +100,7 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
         } else {
             //if we clicked on a container inventory, move to player inventory
             List<Slot> inventorySlots = slotMap.entrySet().stream()
-                .filter(s -> s.getValue().isPlayerInventorySlot())
+                .filter(s -> s.getValue().getSlotLocationInfo().isPlayerInventory)
                 .map(Entry::getKey)
                 .sorted(Collections.reverseOrder(Comparator.comparing(s -> s.slotNumber)))
                 .collect(Collectors.toList());

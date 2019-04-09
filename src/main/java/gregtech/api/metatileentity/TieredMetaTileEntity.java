@@ -45,7 +45,7 @@ public abstract class TieredMetaTileEntity extends MetaTileEntity implements IEn
 
     @Override
     public int getComparatorValue() {
-        long energyStored = energyContainer.getEnergyStored();
+        long energyStored = energyContainer.getCurrentEnergyStored();
         long energyCapacity = energyContainer.getEnergyCapacity();
         float f = energyCapacity == 0L ? 0.0f : energyStored / (energyCapacity * 1.0f);
         return MathHelper.floor(f * 14.0f) + (energyStored > 0 ? 1 : 0);

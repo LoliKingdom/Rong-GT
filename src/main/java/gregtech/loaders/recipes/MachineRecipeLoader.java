@@ -57,6 +57,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneBlock;
 import gregtech.common.blocks.StoneBlock.ChiselingVariant;
 import gregtech.common.blocks.wood.BlockRubberLog.LogVariant;
+import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.init.Blocks;
@@ -252,17 +253,17 @@ public class MachineRecipeLoader {
 
      RecipeMaps.BENDER_RECIPES.recipeBuilder()
          .circuitMeta(12)
-         .input(OrePrefix.plate, Materials.Iron, 2)
-         .outputs(MetaItems.FLUID_CELL.getStackForm())
+         .input(OrePrefix.plate, Materials.Tin, 2)
+         .outputs(new ItemStack(new ItemCell()))
          .duration(200).EUt(30)
          .buildAndRegister();
     }
     
     private static void initializeExtrudingRecipes() {
     	RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-        .input(OrePrefix.plate, Materials.Iron, 2)
+        .input(OrePrefix.plate, Materials.Tin, 2)
         .notConsumable(MetaItems.SHAPE_EXTRUDER_CELL)
-        .outputs(MetaItems.FLUID_CELL.getStackForm())
+        .outputs(new ItemStack(new ItemCell()))
         .duration(200).EUt(30)
         .buildAndRegister();
     }

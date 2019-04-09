@@ -15,7 +15,7 @@ public class FilteredFluidHandler extends FluidTank {
         super(capacity);
     }
 
-    public FilteredFluidHandler(@Nullable FluidStack fluidStack, int capacity) {
+    public FilteredFluidHandler(@Nullable FluidStack fluidStack, int capacity) {   	
         super(fluidStack, capacity);
     }
 

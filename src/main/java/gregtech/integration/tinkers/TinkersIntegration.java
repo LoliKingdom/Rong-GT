@@ -2,6 +2,7 @@ package gregtech.integration.tinkers;
 
 import java.util.ArrayList;
 
+import gregtech.api.GTValues;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.DustMaterial;
@@ -23,16 +24,13 @@ import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 
-@Mod.EventBusSubscriber
 public class TinkersIntegration {
-	
-    @Method(modid = "tconstruct")
+
 	public static void preInit() {
     	registerTinkerMaterials();
     	registerTinkerAlloys();
 	}
-	
-	@Method(modid = "tconstruct")
+
 	public static void init() {
 	}
 	
@@ -45,10 +43,7 @@ public class TinkersIntegration {
                 TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
                 TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
 			}
-			if(!ConfigHolder.overrideTiConStats && m instanceof IngotMaterial &&
-					m != Materials.Iron && m != Materials.Cobalt && m != Materials.Copper && 
-					m != Materials.Bronze && m != Materials.Lead && m != Materials.Electrum && 
-					m != Materials.Silver && m != Materials.Steel && m != Materials.PigIron) {
+			if(!ConfigHolder.overrideTiConStats && m instanceof IngotMaterial && !toGenerate((IngotMaterial)m)) {
 				if(((SolidMaterial)m).toolDurability > 0) {
 					slimeknights.tconstruct.library.materials.Material ticonMaterial = 
 							new slimeknights.tconstruct.library.materials.Material(m.toString(), m.materialRGB)
@@ -60,7 +55,7 @@ public class TinkersIntegration {
 					TinkerRegistry.integrate(((IngotMaterial)m).getMaterialFluid(), upperCase(m));
 				}
 			}
-			else if(ConfigHolder.overrideTiConStats && m instanceof IngotMaterial){
+			else if(ConfigHolder.overrideTiConStats && m instanceof IngotMaterial && !toGenerate((IngotMaterial)m)){
 				if(((SolidMaterial)m).toolDurability > 0) {
 					slimeknights.tconstruct.library.materials.Material ticonMaterial = 
 							new slimeknights.tconstruct.library.materials.Material(m.toString(), m.materialRGB)
@@ -108,21 +103,6 @@ public class TinkersIntegration {
         TinkerRegistry.registerAlloy(Materials.SolderingAlloy.getFluid(10), Materials.Tin.getFluid(9), Materials.Antimony.getFluid(1));
         TinkerRegistry.registerAlloy(Materials.Magnalium.getFluid(3), Materials.Aluminium.getFluid(2), Materials.Magnesium.getFluid(1));
 	}
-	
-	@SubscribeEvent(priority = EventPriority.HIGH)
-    public static void smeltingRemoval(TinkerRegisterEvent.MeltingRegisterEvent event) {
-    	for (Material material : Material.MATERIAL_REGISTRY) {
-    		if (material instanceof IngotMaterial && ((IngotMaterial)material).blastFurnaceTemperature > 0 && OreDictUnifier.get(OrePrefix.ore, material).isEmpty()) {
-    			event.setCanceled(true);
-    		}
-    	}
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void alloyRemoval(TinkerRegisterEvent.AlloyRegisterEvent event) {
-        if (event.getRecipe().getResult() == Materials.Brass.getFluid(3))
-            event.setCanceled(true);
-    }
     
     private static void registerGemMaterialInfo(slimeknights.tconstruct.library.materials.Material ticonMaterial, GemMaterial gtMaterial) {
     	ticonMaterial.addCommonItems(upperCase(gtMaterial));
@@ -147,6 +127,28 @@ public class TinkersIntegration {
                 new HandleMaterialStats((gtMaterial.harvestLevel - 0.5f) / 2, gtMaterial.toolDurability / 3),
                 new ExtraMaterialStats(gtMaterial.toolDurability / 4));
         TinkerRegistry.integrate(ticonMaterial, ticonMaterial.getFluid(), upperCase(gtMaterial));
+    }
+    
+    private static boolean toGenerate(IngotMaterial m) {
+    	boolean plustic = GTValues.isModLoaded("plustic"); 	
+    	if(plustic) {
+			return m != Materials.Nickel || m != Materials.Invar || m != Materials.Iridium;
+    	}
+    	else if(plustic && GTValues.isModLoaded("advancedrocketry")) {
+    		return m != Materials.Titanium;
+    	}
+    	else if((plustic || GTValues.isModLoaded("pewter")) && GTValues.isModLoaded("mekanism")) {
+    		return m != Materials.Osmium || m != Materials.Osmiridium;
+    	}
+    	else if(plustic && GTValues.isModLoaded("thermalfoundation")) {
+    		return m != Materials.Platinum;
+    	}
+    	else if(plustic && GTValues.isModLoaded("landcore")) {
+    		return m != Materials.Tungsten && m != Materials.Thorium;
+    	}
+    	return m != Materials.Iron || m != Materials.Cobalt || m != Materials.Copper ||
+			   m != Materials.Bronze || m != Materials.Lead || m != Materials.Electrum || 
+			   m != Materials.Silver || m != Materials.Steel || m != Materials.PigIron;
     }
     
     private static String upperCase(Material mat) {

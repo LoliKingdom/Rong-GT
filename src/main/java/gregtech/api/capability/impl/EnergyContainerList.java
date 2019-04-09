@@ -34,9 +34,9 @@ public class EnergyContainerList implements IEnergyContainer {
     }
 
     @Override
-    public long getEnergyStored() {
+    public long getCurrentEnergyStored() {
         return energyContainerList.stream()
-            .mapToLong(IEnergyContainer::getEnergyStored)
+            .mapToLong(IEnergyContainer::getCurrentEnergyStored)
             .sum();
     }
 

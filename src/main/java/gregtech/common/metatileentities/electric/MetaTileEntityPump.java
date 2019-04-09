@@ -223,14 +223,14 @@ public class MetaTileEntityPump extends TieredMetaTileEntity {
             return;
         }
         //do not do anything without enough energy supplied
-        if(energyContainer.getEnergyStored() < GTValues.V[getTier()] * 4) {
+        if(energyContainer.getCurrentEnergyStored() < GTValues.V[getTier()] * 4) {
             return;
         }
         pushFluidsIntoNearbyHandlers(getFrontFacing());
         fillContainerFromInternalTank(importItems, exportItems, 0, 0);
         updateQueueState();
         if(getTimer() % getPumpingCycleLength() == 0 && !fluidSourceBlocks.isEmpty() &&
-            energyContainer.getEnergyStored() >= GTValues.V[getTier()]) {
+            energyContainer.getCurrentEnergyStored() >= GTValues.V[getTier()]) {
             tryPumpFirstBlock();
         }
     }

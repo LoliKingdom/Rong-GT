@@ -215,7 +215,7 @@ public class MetaItems {
 
     public static MetaItem<?>.MetaValueItem INTEGRATED_CIRCUIT;
 
-    public static MetaItem<?>.MetaValueItem FLUID_CELL;
+    //public static MetaItem<?>.MetaValueItem FLUID_CELL;
 
     public static MetaItem<?>.MetaValueItem BOTTLE_PURPLE_DRINK;
     

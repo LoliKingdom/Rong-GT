@@ -62,7 +62,7 @@ public class MultiblockRecipeMapWorkable extends RecipeMapWorkableHandler {
 
     @Override
     protected long getEnergyStored() {
-        return getEnergyContainer().getEnergyStored();
+        return getEnergyContainer().getCurrentEnergyStored();
     }
 
     @Override

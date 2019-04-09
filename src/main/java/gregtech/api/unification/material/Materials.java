@@ -666,10 +666,26 @@ public class Materials {
         Molybdenite.setDirectSmelting(Molybdenum);
 
         //TODO: Other gems abide with this rule
-        Salt.setOreMultiplier(2);
-        Salt.setSmeltingMultiplier(2);
-        RockSalt.setOreMultiplier(2);
-        RockSalt.setSmeltingMultiplier(2);
+        Salt.setOreMultiplier(3);
+        RockSalt.setOreMultiplier(3);
+        Lepidolite.setOreMultiplier(5);
+
+        Spodumene.setOreMultiplier(2);
+        Spessartine.setOreMultiplier(2);
+        Soapstone.setOreMultiplier(3);
+
+        Almandine.setOreMultiplier(6);
+        Grossular.setOreMultiplier(6);
+        Bentonite.setOreMultiplier(7);
+        Pyrope.setOreMultiplier(4);
+        
+        Bauxite.setOreMultiplier(3);
+
+        Olivine.setOreMultiplier(2);
+        Topaz.setOreMultiplier(2);
+
+        Tennantite.setOreMultiplier(2);
+        Pitchblende.setOreMultiplier(2);
 
         Scheelite.setOreMultiplier(2);
         Scheelite.setSmeltingMultiplier(2);
@@ -680,17 +696,17 @@ public class Materials {
         NetherQuartz.setOreMultiplier(2);
         NetherQuartz.setSmeltingMultiplier(2);
         CertusQuartz.setOreMultiplier(2);
-        CertusQuartz.setSmeltingMultiplier(2);
+        Quartzite.setSmeltingMultiplier(2);
+        Quartzite.setOreMultiplier(2);
 
         Phosphor.setOreMultiplier(3);
         Phosphor.setSmeltingMultiplier(3);
         Saltpeter.setOreMultiplier(4);
         Saltpeter.setSmeltingMultiplier(4);
-        Apatite.setOreMultiplier(4);
-        Apatite.setSmeltingMultiplier(4);
+        Apatite.setOreMultiplier(5);
         Apatite.setByProductMultiplier(2);
 
-        Redstone.setOreMultiplier(5);
+        Redstone.setOreMultiplier(6);
         Redstone.setSmeltingMultiplier(5);
         Glowstone.setOreMultiplier(5);
         Glowstone.setSmeltingMultiplier(5);
@@ -756,7 +772,7 @@ public class Materials {
         Peridot.addOreByProducts(Aluminium, Magnesium);
         Platinum.addOreByProducts(Nickel, Iridium);
         Emerald.addOreByProducts(Beryllium, Aluminium);
-        Olivine.addOreByProducts(Pyrope, Magnesium);
+        Olivine.addOreByProducts(Pyrope, Magnesium, Manganese);
         Chrome.addOreByProducts(Iron, Magnesium);
         Chromite.addOreByProducts(Iron, Magnesium);
         Tetrahedrite.addOreByProducts(Antimony, Zinc);
@@ -810,8 +826,9 @@ public class Materials {
         Vinteum.addOreByProducts(Vinteum);
         Lithium.addOreByProducts(Lithium);
         Silicon.addOreByProducts(SiliconDioxide);
-        Salt.addOreByProducts(RockSalt);
-        RockSalt.addOreByProducts(Salt);
+        Salt.addOreByProducts(RockSalt, Borax);
+        RockSalt.addOreByProducts(Salt, Borax);
+        Lepidolite.addOreByProducts(Boron);
 
         //LV
         RedAlloy.setCableProperties(GTValues.V[0], 1, 0);

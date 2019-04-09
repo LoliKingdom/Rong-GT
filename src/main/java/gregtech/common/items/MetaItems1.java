@@ -195,7 +195,7 @@ public class MetaItems1 extends MaterialMetaItem {
         COVER_SOLAR_PANEL_LuV = addItem(509, "cover.solar.panel.luv");
         COVER_SOLAR_PANEL_UV = addItem(510, "cover.solar.panel.uv");
         
-        FLUID_CELL = addItem(511, "fluid_cell").addStats(new FluidStats(1000, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
+        //FLUID_CELL = addItem(511, "fluid_cell").addStats(new FluidStats(1000, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
 
         INTEGRATED_CIRCUIT = addItem(512, "circuit.integrated").addStats(new IntCircuitBehaviour());
         

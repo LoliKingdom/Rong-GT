@@ -32,11 +32,13 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.multipart.GTMultipartFactory;
 import gregtech.integration.mekanism.MekanismProcessingHandler;
 import gregtech.integration.theoneprobe.TheOneProbeCompatibility;
+import gregtech.integration.tinkers.TinkersEvents;
 import gregtech.integration.tinkers.TinkersIntegration;
 import gregtech.loaders.dungeon.DungeonLootLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.classloading.FMLForgePlugin;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -100,6 +102,7 @@ public class GregTechMod {
         }
         if(GTValues.isModLoaded("tconstruct")) {
         	TinkersIntegration.preInit();
+        	MinecraftForge.EVENT_BUS.register(new TinkersEvents());
         }
         
         proxy.onPreLoad();
@@ -133,7 +136,7 @@ public class GregTechMod {
             registerForgeMultipartCompat();
         }
 
-        if(GTValues.isModLoaded("forgemultipartcbe")) {
+        if(GTValues.isModLoaded("theoneprobe")) {
             GTLog.logger.info("TheOneProbe found. Enabling integration...");
             TheOneProbeCompatibility.registerCompatibility();
         }

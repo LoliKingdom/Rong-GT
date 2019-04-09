@@ -13,6 +13,7 @@ import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.material.type.SolidMaterial;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
+import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import gregtech.loaders.recipes.processing.OreRecipeHandler;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,7 @@ public class ThaumcraftProcessingHandler {
 	@Method(modid = "thaumcraft")
 	public static void init() {
 		//init aspects
-		ThaumcraftApi.registerObjectTag(MetaItems.FLUID_CELL.getStackForm(), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));
+		ThaumcraftApi.registerObjectTag(new ItemStack(new ItemCell()), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));
 		
 		for(MetaItem item : MetaItem.getMetaItems()) {
 			if(item instanceof ToolMetaItem<?>) {

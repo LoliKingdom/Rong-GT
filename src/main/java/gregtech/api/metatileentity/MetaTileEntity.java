@@ -11,6 +11,7 @@ import codechicken.lib.vec.Matrix4;
 import com.google.common.base.Preconditions;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
+import gregtech.api.capability.impl.FilteredFluidHandler;
 import gregtech.api.capability.impl.FluidHandlerProxy;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerProxy;
@@ -37,13 +38,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.*;
@@ -298,14 +303,13 @@ public abstract class MetaTileEntity implements ICoverable {
      * Called when player clicks on specific side of this meta tile entity
      * @return true if something happened, so animation will be played
      */
-    public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if(!playerIn.isSneaking() && openGUIOnRightClick()) {
-            if(getWorld() != null && !getWorld().isRemote) {
-                MetaTileEntityUIFactory.INSTANCE.openUI(getHolder(), (EntityPlayerMP) playerIn);
-            }
-            return true;
+    public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {    	
+        if(!playerIn.isSneaking()) {
+        	if(getWorld() != null && !getWorld().isRemote) {
+        		MetaTileEntityUIFactory.INSTANCE.openUI(getHolder(), (EntityPlayerMP)playerIn);
+        	}     		
         }
-        return false;
+		return true;       	
     }
 
     /**
@@ -314,9 +318,10 @@ public abstract class MetaTileEntity implements ICoverable {
      */
     public boolean onWrenchClick(EntityPlayer playerIn, EnumHand hand, EnumFacing side, CuboidRayTraceResult hitResult) {
         if(playerIn.isSneaking()) {
-            if(side == getFrontFacing() || !isValidFrontFacing(side) || !hasFrontFacing())
+            if(side == getFrontFacing() || !isValidFrontFacing(side) || !hasFrontFacing()) {
                 return false;
-            if (side != null) {
+            }
+            if(side != null) {
                 setFrontFacing(side);
             }
             return true;

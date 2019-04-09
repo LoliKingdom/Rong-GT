@@ -45,8 +45,8 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
     @Override
     public void update() {
         super.update();
-        if(!getWorld().isRemote && energyContainer.getEnergyStored() > 0) {
-            long inputVoltage = Math.min(energyContainer.getInputVoltage(), energyContainer.getEnergyStored());
+        if(!getWorld().isRemote && energyContainer.getCurrentEnergyStored() > 0) {
+            long inputVoltage = Math.min(energyContainer.getInputVoltage(), energyContainer.getCurrentEnergyStored());
             long energyUsedUp = 0L;
             for(int i = 0; i < importItems.getSlots(); i++) {
                 ItemStack batteryStack = importItems.getStackInSlot(i);
@@ -54,7 +54,7 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
                 if(electricItem != null && electricItem.charge(inputVoltage, getTier(), false, true) > 0) {
                     energyUsedUp += electricItem.charge(inputVoltage, getTier(), false, false);
                     importItems.setStackInSlot(i, batteryStack);
-                    if(energyUsedUp >= energyContainer.getEnergyStored()) break;
+                    if(energyUsedUp >= energyContainer.getCurrentEnergyStored()) break;
                 }
                 if(batteryStack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)) && energyContainer.getEnergyCanBeInserted() >= 10000) {
                 	energyContainer.removeEnergy(10000);

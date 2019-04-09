@@ -69,7 +69,7 @@ public class MetaTileEntityTank extends MetaTileEntity {
 
     @Override
     public int getLightOpacity() {
-        return 1; //let light pass trough us entirely
+        return 1;
     }
 
     @Override

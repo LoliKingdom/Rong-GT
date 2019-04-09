@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
@@ -85,7 +86,7 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
     }
 
     @Override
-    public long getEnergyStored() {
+    public long getCurrentEnergyStored() {
         return this.energyStored;
     }
 
@@ -122,9 +123,9 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
     public void update() {
         if (getMetaTileEntity().getWorld().isRemote)
             return;
-        if(getEnergyStored() >= getOutputVoltage() && getOutputVoltage() > 0 && getOutputAmperage() > 0) {
+        if(getCurrentEnergyStored() >= getOutputVoltage() && getOutputVoltage() > 0 && getOutputAmperage() > 0) {
             long outputVoltage = getOutputVoltage();
-            long outputAmperes = Math.min(getEnergyStored() / outputVoltage, getOutputAmperage());
+            long outputAmperes = Math.min(getCurrentEnergyStored() / outputVoltage, getOutputAmperage());
             if(outputAmperes == 0) return;
             long amperesUsed = 0;
             for(EnumFacing side : EnumFacing.VALUES) {
@@ -139,23 +140,23 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
                 }
             }
             if(amperesUsed > 0) {
-                setEnergyStored(getEnergyStored() - amperesUsed * outputVoltage);
+                setEnergyStored(getCurrentEnergyStored() - amperesUsed * outputVoltage);
             }
         }
     }
 
     @Override
     public long acceptEnergyFromNetwork(EnumFacing side, long voltage, long amperage) {
-        long canAccept = getEnergyCapacity() - getEnergyStored();
+        long canAccept = getEnergyCapacity() - getCurrentEnergyStored();
         if(voltage > 0L && amperage > 0L && (side == null || inputsEnergy(side))) {
             if(voltage > getInputVoltage()) {
-                IEnergyContainer.doOvervoltageExplosion(metaTileEntity, voltage);
+                GTUtility.doOvervoltageExplosion(metaTileEntity, voltage);
                 return Math.min(amperage, getInputAmperage());
             }
             if(canAccept >= voltage) {
                 long amperesAccepted = Math.min(canAccept / voltage, Math.min(amperage, getInputAmperage()));
                 if(amperesAccepted > 0) {
-                    setEnergyStored(getEnergyStored() + voltage * amperesAccepted);
+                    setEnergyStored(getCurrentEnergyStored() + voltage * amperesAccepted);
                     return amperesAccepted;
                 }
             }
@@ -180,7 +181,7 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
 
     @Override
     public long changeEnergy(long energyToAdd) {
-        long oldEnergyStored = getEnergyStored();
+        long oldEnergyStored = getCurrentEnergyStored();
         long newEnergyStored = (maxCapacity - oldEnergyStored < energyToAdd) ? maxCapacity : (oldEnergyStored + energyToAdd);
         if(newEnergyStored < 0)
             newEnergyStored = 0;

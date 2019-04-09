@@ -1,5 +1,7 @@
 package gregtech.common.metatileentities.steam.boiler;
 
+import codechicken.lib.fluid.FluidUtils;
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -11,26 +13,39 @@ import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.gui.widgets.ProgressWidget.MoveType;
 import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.MetaTileEntityUIFactory;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.render.OrientedOverlayRenderer;
 import gregtech.api.render.SimpleSidedCubeRenderer;
 import gregtech.api.render.SimpleSidedCubeRenderer.RenderSide;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidActionResult;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -40,15 +55,13 @@ import java.util.List;
 public abstract class SteamBoiler extends MetaTileEntity {
 
     private static final EnumFacing[] STEAM_PUSH_DIRECTIONS = ArrayUtils.add(EnumFacing.HORIZONTALS, EnumFacing.UP);
-    public static final int BOILING_CYCLE_LENGTH = 25;
-    public static final int HIGH_PRESSURE_BOILING_CYCLE_LENGTH = 10;
+    public static final int BOILING_CYCLE_LENGTH = 18;
 
     public final TextureArea BRONZE_BACKGROUND_TEXTURE;
     public final TextureArea BRONZE_SLOT_BACKGROUND_TEXTURE;
 
     public final TextureArea SLOT_FURNACE_BACKGROUND;
 
-    protected final boolean isHighPressure;
     protected final int baseSteamOutput;
     private final OrientedOverlayRenderer renderer;
 
@@ -60,15 +73,16 @@ public abstract class SteamBoiler extends MetaTileEntity {
     private int currentTemperature;
     private boolean hasNoWater;
     private int timeBeforeCoolingDown;
+    
+    private int maxTemperature = 750;
 
     private boolean isBurning;
     private boolean wasBurningAndNeedsUpdate;
     private ItemStackHandler containerInventory;
 
-    public SteamBoiler(ResourceLocation metaTileEntityId, boolean isHighPressure, OrientedOverlayRenderer renderer, int baseSteamOutput) {
+    public SteamBoiler(ResourceLocation metaTileEntityId, OrientedOverlayRenderer renderer, int baseSteamOutput) {
         super(metaTileEntityId);
         this.renderer = renderer;
-        this.isHighPressure = isHighPressure;
         this.baseSteamOutput = baseSteamOutput;
         BRONZE_BACKGROUND_TEXTURE = getGuiTexture("%s_gui");
         BRONZE_SLOT_BACKGROUND_TEXTURE = getGuiTexture("slot_%s");
@@ -78,11 +92,7 @@ public abstract class SteamBoiler extends MetaTileEntity {
 
     @SideOnly(Side.CLIENT)
     private SimpleSidedCubeRenderer getBaseRenderer() {
-        if(isHighPressure) {
-            return Textures.STEAM_BRICKED_CASING_STEEL;
-        } else {
-            return Textures.STEAM_BRICKED_CASING_BRONZE;
-        }
+        return Textures.STEAM_BRICKED_CASING_BRONZE;
     }
 
     @SideOnly(Side.CLIENT)
@@ -141,6 +151,38 @@ public abstract class SteamBoiler extends MetaTileEntity {
         }
     }
 
+    @Override
+    public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {    	
+    	int containerCapacity = 1000;
+        if(!playerIn.isSneaking()) {
+        	if(getWorld() != null && !getWorld().isRemote) {
+        		ItemStack stack = playerIn.getActiveItemStack();
+        		if(FluidUtil.getFluidHandler(stack) != null && FluidUtil.getFluidContained(stack).getFluid() == FluidRegistry.WATER) {
+        			FluidActionResult result = FluidUtil.tryEmptyContainer(stack, waterFluidTank, Integer.MAX_VALUE, playerIn, false);
+        			if(result.isSuccess()) {
+        				FluidUtil.tryEmptyContainer(stack, waterFluidTank, Integer.MAX_VALUE, null, true);
+        			} 
+        		}
+        		else if(FluidUtil.getFluidHandler(stack) != null && FluidUtil.getFluidContained(stack).getFluid() == null 
+        				&& facing == getFrontFacing().getOpposite()) {        			
+        			//ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(stack, 1);
+        	        IFluidHandlerItem containerFluidHandler = FluidUtil.getFluidHandler(stack);
+        	        for(IFluidTankProperties properties : containerFluidHandler.getTankProperties()) {
+        	        	containerCapacity = properties.getCapacity();
+        	        }
+        	        FluidActionResult result = FluidUtil.tryFillContainer(stack, steamFluidTank, containerCapacity, playerIn, false);
+        			if(result.isSuccess()) {
+        				FluidUtil.tryFillContainer(stack, steamFluidTank, Integer.MAX_VALUE, null, true);
+        			}     			                  
+                }
+        		else {
+        			MetaTileEntityUIFactory.INSTANCE.openUI(getHolder(), (EntityPlayerMP)playerIn);
+        		}
+        	}
+        }
+        return true;
+    }
+    
     public void setFuelMaxBurnTime(int fuelMaxBurnTime) {
         this.fuelMaxBurnTime = fuelMaxBurnTime;
         this.fuelBurnTimeLeft = fuelMaxBurnTime;
@@ -155,21 +197,21 @@ public abstract class SteamBoiler extends MetaTileEntity {
         if(!getWorld().isRemote) {
             updateCurrentTemperature();
             generateSteam();
-
-            if (getTimer() % 5 == 0) {
+            if(getTimer() % 5 == 0) {
                 fillInternalTankFromFluidContainer(containerInventory, containerInventory, 0, 1);
                 pushFluidsIntoNearbyHandlers(STEAM_PUSH_DIRECTIONS);
             }
-
-            if (fuelMaxBurnTime <= 0) {
+            if(fuelMaxBurnTime <= 0) {
                 tryConsumeNewFuel();
                 if(fuelBurnTimeLeft > 0) {
                     if(wasBurningAndNeedsUpdate) {
                         this.wasBurningAndNeedsUpdate = false;
-                    } else setBurning(true);
+                    } 
+                    else {
+                    	setBurning(true);
+                    }
                 }
             }
-
             if(wasBurningAndNeedsUpdate) {
                 this.wasBurningAndNeedsUpdate = false;
                 setBurning(false);
@@ -178,39 +220,48 @@ public abstract class SteamBoiler extends MetaTileEntity {
     }
 
     private void updateCurrentTemperature() {
-        if (fuelMaxBurnTime > 0) {
-            if (getTimer() % 12 == 0) {
-                if (fuelBurnTimeLeft % 2 == 0 && currentTemperature < getMaxTemperate())
+        if(fuelMaxBurnTime > 0) {
+            if(getTimer() % 12 == 0) {
+                if(fuelBurnTimeLeft % 2 == 0 && currentTemperature < getMaxTemperate()) {
                     currentTemperature++;
-                fuelBurnTimeLeft -= isHighPressure ? 2 : 1;
-                if (fuelBurnTimeLeft == 0) {
+                }
+                fuelBurnTimeLeft -= 1;
+                if(fuelBurnTimeLeft == 0) {
                     this.fuelMaxBurnTime = 0;
                     this.timeBeforeCoolingDown = 40;
                     //boiler has no fuel now, so queue burning state update
                     this.wasBurningAndNeedsUpdate = true;
                 }
             }
-        } else if (timeBeforeCoolingDown == 0) {
-            if (currentTemperature > 0)
+        } 
+        else if(timeBeforeCoolingDown == 0) {
+        	if(currentTemperature > 0) {
                 currentTemperature--;
-        } else --timeBeforeCoolingDown;
+            }
+        } 
+        else {
+        	--timeBeforeCoolingDown;
+        }
     }
 
     private void generateSteam() {
-        if (currentTemperature >= 100 && getTimer() % getBoilingCycleLength() == 0) {
-            int fillAmount = (int) (baseSteamOutput * (currentTemperature / (getMaxTemperate() * 1.0)));
+        if(currentTemperature >= 100 && (getTimer() % BOILING_CYCLE_LENGTH == 0)) {
+            int fillAmount = (int)(baseSteamOutput * (currentTemperature / (getMaxTemperate() * 1.0)));
             boolean hasDrainedWater = waterFluidTank.drain(1, true) != null;
             int filledSteam = 0;
-            if (hasDrainedWater) {
+            if(hasDrainedWater) {
                 filledSteam = steamFluidTank.fill(ModHandler.getSteam(fillAmount), true);
             }
-            if (this.hasNoWater && hasDrainedWater) {
+            if(this.hasNoWater && hasDrainedWater) {
                 getWorld().setBlockToAir(getPos());
                 getWorld().createExplosion(null,
                     getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5,
                     2.0f, true);
-            } else this.hasNoWater = !hasDrainedWater;
-            if (filledSteam == 0 && hasDrainedWater) {
+            } 
+            else {
+            	this.hasNoWater = !hasDrainedWater;
+            }
+            if(filledSteam == 0 && hasDrainedWater) {
                 getWorld().playSound(null, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5,
                     SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 steamFluidTank.drain(4000, true);
@@ -233,7 +284,7 @@ public abstract class SteamBoiler extends MetaTileEntity {
     protected abstract void tryConsumeNewFuel();
 
     public int getMaxTemperate() {
-        return isHighPressure ? 1000 : 500;
+        return 750;
     }
 
     public double getTemperaturePercent() {
@@ -257,9 +308,8 @@ public abstract class SteamBoiler extends MetaTileEntity {
     }
 
     protected TextureArea getGuiTexture(String pathTemplate) {
-        String type = isHighPressure ? "steel" : "bronze";
         return TextureArea.fullImage(String.format("textures/gui/steam/%s/%s.png",
-            type, pathTemplate.replace("%s", type)));
+            "bronze", pathTemplate.replace("%s", "bronze")));
     }
 
     public ModularUI.Builder createUITemplate(EntityPlayer player) {
@@ -286,12 +336,8 @@ public abstract class SteamBoiler extends MetaTileEntity {
             .bindPlayerInventory(player.inventory, BRONZE_SLOT_BACKGROUND_TEXTURE);
     }
 
-    private int getBoilingCycleLength() {
-        return isHighPressure ? HIGH_PRESSURE_BOILING_CYCLE_LENGTH : BOILING_CYCLE_LENGTH;
-    }
-
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gregtech.machine.steam_boiler.tooltip_produces", baseSteamOutput, getBoilingCycleLength()));
+        tooltip.add(I18n.format("gregtech.machine.steam_boiler.tooltip_produces", baseSteamOutput, BOILING_CYCLE_LENGTH));
     }
 }
