@@ -307,9 +307,10 @@ public abstract class MetaTileEntity implements ICoverable {
         if(!playerIn.isSneaking()) {
         	if(getWorld() != null && !getWorld().isRemote) {
         		MetaTileEntityUIFactory.INSTANCE.openUI(getHolder(), (EntityPlayerMP)playerIn);
-        	}     		
+        	}    
+        	return true;
         }
-		return true;       	
+		return false;       	
     }
 
     /**

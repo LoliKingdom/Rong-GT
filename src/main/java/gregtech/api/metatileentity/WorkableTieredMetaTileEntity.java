@@ -10,6 +10,7 @@ import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.render.OrientedOverlayRenderer;
+import gregtech.api.util.GTUtility;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -87,6 +88,13 @@ public abstract class WorkableTieredMetaTileEntity extends TieredMetaTileEntity 
         return new FluidTankList(false, fluidExports);
     }
 
+    @Override
+    public void onRemoval() {
+    	if(workable.isActive() || !workable.notEnoughEnergy() || workable.getProgress() > 0) {
+    		GTUtility.doOvervoltageExplosion(this, energyContainer.getInputVoltage());
+    	}
+    }
+    
     protected boolean canInputFluid(FluidStack inputFluid) {
         RecipeMap<?> recipeMap = workable.recipeMap;
         if(recipeMap.canInputFluidForce(inputFluid.getFluid()))

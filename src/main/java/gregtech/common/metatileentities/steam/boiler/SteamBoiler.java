@@ -34,6 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -150,38 +151,88 @@ public abstract class SteamBoiler extends MetaTileEntity {
             getHolder().scheduleChunkForRenderUpdate();
         }
     }
-
+    
     @Override
     public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {    	
-    	int containerCapacity = 1000;
+    	boolean debug = true;
+    	ItemStack stack = playerIn.getHeldItem(hand);
+		ItemStack stackCopy = ItemHandlerHelper.copyStackWithSize(stack, 1);
+		IFluidHandlerItem handlerItem = FluidUtil.getFluidHandler(stackCopy);
+		boolean canStack = stack.isStackable();
+		if(handlerItem != null) {
+			if(FluidUtil.getFluidContained(stackCopy) != null) {
+				FluidActionResult result = FluidUtil.tryEmptyContainer(stackCopy, waterFluidTank, Integer.MAX_VALUE, playerIn, false);
+    			if(result.isSuccess()) {
+    				FluidUtil.tryEmptyContainer(stackCopy, waterFluidTank, Integer.MAX_VALUE, playerIn, true);
+    				handlerItem.drain(Fluid.BUCKET_VOLUME, true);
+    				if(canStack) {
+    					stack.setCount(stack.getCount() - 1);
+    					//playerIn.setHeldItem(hand, stack);
+    					if(playerIn.addItemStackToInventory(handlerItem.getContainer())) {
+    						playerIn.addItemStackToInventory(handlerItem.getContainer());
+    					}
+    					else {
+    						playerIn.dropItem(handlerItem.getContainer(), true);
+    					}
+    				}
+    				else {
+    					playerIn.setHeldItem(hand, handlerItem.getContainer());
+    				}
+    			}
+    			return true;
+			}			
+			else if(facing == getFrontFacing().getOpposite()) {
+    	        FluidActionResult result = FluidUtil.tryFillContainer(stackCopy, steamFluidTank, Fluid.BUCKET_VOLUME, playerIn, false);
+    			if(result.isSuccess()) {
+    				FluidUtil.tryFillContainer(stackCopy, steamFluidTank, Fluid.BUCKET_VOLUME, playerIn, true);
+    				handlerItem.fill(ModHandler.getSteam(Fluid.BUCKET_VOLUME), true);
+    				if(canStack) {
+    					stack.setCount(stack.getCount() - 1);
+    					//playerIn.setHeldItem(hand, stack);
+    					if(playerIn.addItemStackToInventory(handlerItem.getContainer())) {
+    						playerIn.addItemStackToInventory(handlerItem.getContainer());
+    					}
+    					else {
+    						playerIn.dropItem(handlerItem.getContainer(), true);
+    					}
+    				}
+    				else {
+    					playerIn.setHeldItem(hand, handlerItem.getContainer());
+    				}
+    			}
+    			return true;
+			}
+		}
+		return super.onRightClick(playerIn, hand, facing, hitResult);
+    }
+
+    /*@Override
+    public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {    	
         if(!playerIn.isSneaking()) {
         	if(getWorld() != null && !getWorld().isRemote) {
         		ItemStack stack = playerIn.getActiveItemStack();
-        		if(FluidUtil.getFluidHandler(stack) != null && FluidUtil.getFluidContained(stack).getFluid() == FluidRegistry.WATER) {
-        			FluidActionResult result = FluidUtil.tryEmptyContainer(stack, waterFluidTank, Integer.MAX_VALUE, playerIn, false);
-        			if(result.isSuccess()) {
-        				FluidUtil.tryEmptyContainer(stack, waterFluidTank, Integer.MAX_VALUE, null, true);
-        			} 
-        		}
-        		else if(FluidUtil.getFluidHandler(stack) != null && FluidUtil.getFluidContained(stack).getFluid() == null 
-        				&& facing == getFrontFacing().getOpposite()) {        			
-        			//ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(stack, 1);
-        	        IFluidHandlerItem containerFluidHandler = FluidUtil.getFluidHandler(stack);
-        	        for(IFluidTankProperties properties : containerFluidHandler.getTankProperties()) {
-        	        	containerCapacity = properties.getCapacity();
-        	        }
-        	        FluidActionResult result = FluidUtil.tryFillContainer(stack, steamFluidTank, containerCapacity, playerIn, false);
-        			if(result.isSuccess()) {
-        				FluidUtil.tryFillContainer(stack, steamFluidTank, Integer.MAX_VALUE, null, true);
-        			}     			                  
-                }
-        		else {
-        			MetaTileEntityUIFactory.INSTANCE.openUI(getHolder(), (EntityPlayerMP)playerIn);
+        		ItemStack stackCopy = ItemHandlerHelper.copyStackWithSize(stack, 1);
+        		if(FluidUtil.getFluidHandler(stackCopy) != null) {
+        			if(FluidUtil.getFluidContained(stackCopy).getFluid() == FluidRegistry.WATER) {
+        				FluidActionResult result = FluidUtil.tryEmptyContainer(stackCopy, waterFluidTank, Integer.MAX_VALUE, playerIn, false);
+            			if(result.isSuccess()) {
+            				FluidUtil.tryEmptyContainer(stackCopy, waterFluidTank, Integer.MAX_VALUE, playerIn, true);
+            				stack = stackCopy;
+            			}
+        			}
+        			else if(FluidUtil.getFluidContained(stackCopy).getFluid() == null 
+            				&& facing == getFrontFacing().getOpposite()) {
+            	        FluidActionResult result = FluidUtil.tryFillContainer(stackCopy, steamFluidTank, Integer.MAX_VALUE, playerIn, false);
+            			if(result.isSuccess()) {
+            				FluidUtil.tryFillContainer(stackCopy, steamFluidTank, Integer.MAX_VALUE, playerIn, true);
+            				stack = stackCopy;
+            			}
+        			}
         		}
         	}
         }
-        return true;
-    }
+        return super.onRightClick(playerIn, hand, facing, hitResult);
+    }*/
     
     public void setFuelMaxBurnTime(int fuelMaxBurnTime) {
         this.fuelMaxBurnTime = fuelMaxBurnTime;
