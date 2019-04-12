@@ -1,19 +1,17 @@
 package gregtech.api.util;
 
-
 import com.google.common.collect.Lists;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.damagesources.DamageSources;
-import gregtech.api.items.IDamagableItem;
+import gregtech.api.items.IToolItem;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
-import gregtech.api.unification.stack.SimpleItemStack;
 import gregtech.common.ConfigHolder;
 import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
@@ -319,10 +317,10 @@ public class GTUtility {
      */
     public static boolean doDamageItem(ItemStack itemStack, int vanillaDamage, boolean simulate) {
         Item item = itemStack.getItem();
-        if (item instanceof IDamagableItem) {
+        if (item instanceof IToolItem) {
             //if item implements IDamagableItem, it manages it's own durability itself
-            IDamagableItem damagableItem = (IDamagableItem) item;
-            return damagableItem.doDamageToItem(itemStack, vanillaDamage, simulate);
+        	IToolItem damagableItem = (IToolItem) item;
+            return damagableItem.damageItem(itemStack, vanillaDamage, simulate);
 
         } else if (itemStack.hasCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null)) {
             //if we're using electric item, use default energy multiplier for textures
@@ -567,38 +565,6 @@ public class GTUtility {
             }
         };
     }
-
-    public static boolean isWearingFullSuit(EntityLivingBase entity, Set<SimpleItemStack> suitParts) {
-        for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-            if (slot.getSlotType() == EntityEquipmentSlot.Type.ARMOR) {
-                ItemStack equipment = entity.getItemStackFromSlot(slot);
-                if (equipment.isEmpty() || !suitParts.contains(new SimpleItemStack(equipment))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public static boolean isWearingFullFrostHazmat(EntityLivingBase entity) {
-        return isWearingFullSuit(entity, GregTechAPI.frostHazmatList);
-    }
-
-    public static boolean isWearingFullHeatHazmat(EntityLivingBase entity) {
-        return isWearingFullSuit(entity, GregTechAPI.heatHazmatList);
-    }
-
-    public static boolean isWearingFullBioHazmat(EntityLivingBase entity) {
-        return isWearingFullSuit(entity, GregTechAPI.bioHazmatList);
-    }
-
-    public static boolean isWearingFullRadioHazmat(EntityLivingBase entity) {
-        return isWearingFullSuit(entity, GregTechAPI.radioHazmatList);
-    }
-
-    public static boolean isWearingFullElectroHazmat(EntityLivingBase entity) {
-        return isWearingFullSuit(entity, GregTechAPI.electroHazmatList);
-    }
     
     public static ItemStack getFilledCell(Fluid fluid, int count) {
     	ItemStack fluidCell = new ItemStack(new ItemCell());
@@ -612,18 +578,6 @@ public class GTUtility {
     	fluidCell = fluidHandlerItem.getContainer();
     	fluidCell.setCount(count);
     	return fluidCell;
-    }
-
-    public static boolean applyRadioactivity(EntityLivingBase entity, int level, int amountOfItems) {
-        if (level > 0 && entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && entity.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD && !isWearingFullRadioHazmat(entity)) {
-            entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, level * 140 * amountOfItems));
-            entity.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, level * 130 * amountOfItems));
-            entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, level * 150 * amountOfItems));
-            entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, level * 130 * amountOfItems));
-            entity.attackEntityFrom(DamageSources.getRadioactiveDamage(), level * 6 * amountOfItems);
-            return true;
-        }
-        return false;
     }
 
     public static <T> boolean iterableContains(Iterable<T> list, Predicate<T> predicate) {
@@ -740,17 +694,6 @@ public class GTUtility {
                     getTierByVoltage(voltage), true);
             }
         }
-    }
-
-    /**
-     * This checks if the dimension is really a dimension and not another planet or something.
-     * Used for my teleporter.
-     */
-    public static boolean isRealDimension(int dimensionID) {
-        String clazzName = DimensionManager.getProvider(dimensionID).getClass().getName().toLowerCase();
-        if (clazzName.contains("mystcraft") || clazzName.contains("twilightforest") || clazzName.contains("rftools"))
-            return true;
-        return GregTechAPI.dimensionalList.contains(dimensionID);
     }
 
 	public static long createFlag(int id) {

@@ -15,13 +15,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class SteamExtractor extends SteamMetaTileEntity {
 
-    public SteamExtractor(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, RecipeMaps.EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, isHighPressure);
+    public SteamExtractor(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new SteamExtractor(metaTileEntityId, isHighPressure);
+        return new SteamExtractor(metaTileEntityId);
     }
 
     @Override

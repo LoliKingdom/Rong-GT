@@ -48,7 +48,7 @@ public class ToolMetaItemEventHandler {
             }
             SolidMaterial toolMaterial = ToolMetaItem.getToolMaterial(leftStack);
             OrePrefix prefix = getAvailablePrefix(toolMaterial);
-            double toolDamage = toolMetaItem.getInternalDamage(leftStack) / (toolMetaItem.getMaxInternalDamage(leftStack) * 1.0);
+            double toolDamage = toolMetaItem.getItemDamage(leftStack) / (toolMetaItem.getMaxItemDamage(leftStack) * 1.0);
             int materialUnitsRequired = Math.min(rightStack.getCount(), (int)Math.ceil(toolDamage));
             int repairCost = Math.max(2, toolMaterial.harvestLevel) * materialUnitsRequired;
             if(toolDamage > 0.0 && materialUnitsRequired > 0 && unificationEntry != null &&

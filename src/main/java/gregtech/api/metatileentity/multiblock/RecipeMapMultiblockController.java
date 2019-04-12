@@ -10,7 +10,7 @@ import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.capability.impl.MultiblockRecipeMapWorkable;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.multiblock.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -32,7 +32,7 @@ import java.util.Map;
 public abstract class RecipeMapMultiblockController extends MultiblockWithDisplayBase {
 
     public final RecipeMap<?> recipeMap;
-    protected MultiblockRecipeMapWorkable recipeMapWorkable;
+    protected MultiblockRecipeLogic recipeMapWorkable;
 
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
@@ -43,7 +43,7 @@ public abstract class RecipeMapMultiblockController extends MultiblockWithDispla
     public RecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
         super(metaTileEntityId);
         this.recipeMap = recipeMap;
-        this.recipeMapWorkable = new MultiblockRecipeMapWorkable(this);
+        this.recipeMapWorkable = new MultiblockRecipeLogic(this);
         resetTileAbilities();
     }
 

@@ -124,7 +124,7 @@ public class MetaTileEntityRenderer implements ICCBlockRenderer, IItemRenderer {
         renderState.brightness = brightness;
         metaTileEntity.renderMetaTileEntity(renderState, translation.copy(), pipeline);
         renderState.brightness = brightness;
-        metaTileEntity.renderCovers(renderState, translation, pipeline);
+        metaTileEntity.renderCovers(renderState, translation, renderState.lightMatrix, brightness);
         return true;
     }
 

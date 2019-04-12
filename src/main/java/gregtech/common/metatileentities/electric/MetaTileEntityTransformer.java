@@ -6,14 +6,16 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
+import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.impl.EnergyContainerHandler;
+import gregtech.api.capability.tool.ISoftHammerItem;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.render.Textures;
-import gregtech.api.unification.stack.SimpleItemStack;
 import gregtech.api.util.PipelineUtil;
+import gregtech.common.tools.DamageValues;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -122,9 +124,13 @@ public class MetaTileEntityTransformer extends TieredMetaTileEntity {
     @Override
     public boolean onRightClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
         ItemStack itemStack = playerIn.getHeldItem(hand);
-        if(!itemStack.isEmpty() && GregTechAPI.softHammerList.contains(new SimpleItemStack(itemStack))) {
+        if(!itemStack.isEmpty() && itemStack.hasCapability(GregtechCapabilities.CAPABILITY_MALLET, null)) {
+            ISoftHammerItem softHammerItem = itemStack.getCapability(GregtechCapabilities.CAPABILITY_MALLET, null);
             if(getWorld().isRemote)
                 return true;
+            if(!softHammerItem.damageItem(DamageValues.DAMAGE_FOR_SOFT_HAMMER, false)) {
+                return false;
+            }
             if(isTransformUp) {
                 setTransformUp(false);
                 playerIn.sendMessage(new TextComponentTranslation("gregtech.machine.transformer.message_transform_down",

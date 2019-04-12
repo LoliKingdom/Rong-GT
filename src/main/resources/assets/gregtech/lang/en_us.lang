@@ -8,6 +8,24 @@ death.attack.explosion.player=%s exploded with help of %s.
 death.attack.heat.player=%s was boiled alive by %s.
 death.attack.crusher=%s was grinded dead.
 
+cover.machine_controller.name=Machine Controller Settings
+cover.machine_controller.normal=Normal
+cover.machine_controller.inverted=Inverted
+cover.machine_controller.redstone=Min Redstone Strength: %d
+cover.machine_controller.mode.machine=Control Machine
+cover.machine_controller.mode.cover_up=Control Cover (Top)
+cover.machine_controller.mode.cover_down=Control Cover (Bottom)
+cover.machine_controller.mode.cover_south=Control Cover (South)
+cover.machine_controller.mode.cover_north=Control Cover (North)
+cover.machine_controller.mode.cover_east=Control Cover (East)
+cover.machine_controller.mode.cover_west=Control Cover (West)
+
+gregtech.machine.fluid_tank.fluid=Contains %s mb of %s
+
+gregtech.machine.item_controller.tooltip.redstone=Requires Redstone Input To Work
+gregtech.machine.item_controller.tooltip.consumption=While working, constantly consumes %d EU/t
+gregtech.universal.tooltip.max_voltage_in=Max Voltage IN: §a%d §7(§a%s§7)
+
 gregtech.top.energy_stored=Energy:
 gregtech.top.progress=Progress:
 gregtech.top.working_disabled=Working Disabled
@@ -69,8 +87,9 @@ metaitem.fuel.can.plastic.filled.tooltip=Burns well in Diesel Generators
 metaitem.spray.empty.name=Spray Can (Empty)
 metaitem.spray.empty.tooltip=Can be filled with sprays of various colors
 
-item.fluid_cell.empty.name=Empty Cell
-item.fluid_cell.name=%s Cell
+
+item.fluid_cell.name=Empty Cell
+item.fluid_cell.filled.name=%s Cell
 
 metaitem.spray.can.dyes.white.name=Spray Can (White)
 metaitem.spray.can.dyes.white.tooltip=Can paint things in White
@@ -497,6 +516,7 @@ cover.pump.fluid_filter.title=Fluid Filter
 
 # %s is a localized material name
 item.material.oreprefix.oreSand=Sand %s Ore
+item.material.oreprefix.oreSandstone=Sandstone %s Ore
 item.material.oreprefix.oreGravel=Gravel %s Ore
 item.material.oreprefix.oreNetherrack=Nether %s Ore
 item.material.oreprefix.oreNether=Nether %s Ore

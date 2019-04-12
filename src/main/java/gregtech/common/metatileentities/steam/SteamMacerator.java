@@ -1,6 +1,6 @@
 package gregtech.common.metatileentities.steam;
 
-import gregtech.api.capability.impl.SteamRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.RecipeLogicSteam;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.SlotWidget;
@@ -16,15 +16,14 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class SteamMacerator extends SteamMetaTileEntity {
 
-    public SteamMacerator(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, RecipeMaps.MACERATOR_RECIPES, Textures.MACERATOR_OVERLAY, isHighPressure);
-        this.workableHandler = new SteamRecipeMapWorkableHandler(this,
-            workableHandler.recipeMap, isHighPressure, steamFluidTank, 1.0);
+    public SteamMacerator(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.MACERATOR_RECIPES, Textures.MACERATOR_OVERLAY);
+        this.workableHandler = new RecipeLogicSteam(this, workableHandler.recipeMap, steamFluidTank, 1.0);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new SteamMacerator(metaTileEntityId, isHighPressure);
+        return new SteamMacerator(metaTileEntityId);
     }
 
     @Override

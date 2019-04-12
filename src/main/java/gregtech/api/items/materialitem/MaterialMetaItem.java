@@ -132,14 +132,12 @@ public class MaterialMetaItem extends StandardMetaItem {
             OrePrefix prefix = orePrefixes[itemStack.getItemDamage() / 1000];
             if(worldIn.getTotalWorldTime() % 20 == 0) {
                 if(prefix.heatDamage != 0.0) {
-                    if(prefix.heatDamage > 0.0 && !GTUtility.isWearingFullHeatHazmat(entity)) {
+                    if(prefix.heatDamage > 0.0) {
                         entity.attackEntityFrom(DamageSources.getHeatDamage(), prefix.heatDamage);
-                    } else if(prefix.heatDamage < 0.0 && !GTUtility.isWearingFullFrostHazmat(entity)) {
+                    } 
+                    else if(prefix.heatDamage < 0.0) {
                         entity.attackEntityFrom(DamageSources.getFrostDamage(), -prefix.heatDamage);
                     }
-                }
-                if(material != null && material.isRadioactive() && GTUtility.isWearingFullRadioHazmat(entity)) {
-                    GTUtility.applyRadioactivity(entity, 1, itemStack.getCount());
                 }
             }
         }

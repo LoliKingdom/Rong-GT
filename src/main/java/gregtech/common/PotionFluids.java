@@ -25,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -36,6 +37,8 @@ import static gregtech.common.MetaFluids.AUTO_GENERATED_FLUID_TEXTURE;
 public class PotionFluids {
 
     private static final BiMap<ResourceLocation, Fluid> potionFluidMap = HashBiMap.create();
+    
+    public static final int POTION_ITEM_FLUID_AMOUNT = 100;
 
     public static Fluid getFluidForPotion(PotionType potion) {
         return potionFluidMap.get(potion.getRegistryName());
@@ -84,7 +87,7 @@ public class PotionFluids {
      * and transform into empty glass bottles
      * Also allows filing glass bottles with liquid potion to get potion item
      */
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onCapabilityAttach(AttachCapabilitiesEvent<ItemStack> event) {
         ItemStack itemStack = event.getObject();
         if(itemStack.getItem() instanceof ItemPotion) {
@@ -101,7 +104,7 @@ public class PotionFluids {
     private static class PotionItemFluidHandler extends FluidHandlerItemStackSimple {
 
         public PotionItemFluidHandler(@Nonnull ItemStack container) {
-            super(container, GTValues.L);
+            super(container, POTION_ITEM_FLUID_AMOUNT);
         }
 
         @Override
@@ -136,7 +139,7 @@ public class PotionFluids {
     private static class GlassBottleFluidHandler extends FluidHandlerItemStackSimple {
 
         public GlassBottleFluidHandler(@Nonnull ItemStack container) {
-            super(container, GTValues.L);
+            super(container, POTION_ITEM_FLUID_AMOUNT);
         }
 
         @Nullable

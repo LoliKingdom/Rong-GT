@@ -7,7 +7,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.FilteredFluidHandler;
 import gregtech.api.capability.impl.FluidTankList;
-import gregtech.api.capability.impl.SteamRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.RecipeLogicSteam;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ImageWidget;
@@ -34,16 +34,13 @@ public abstract class SteamMetaTileEntity extends MetaTileEntity {
     public final TextureArea BRONZE_BACKGROUND_TEXTURE;
     public final TextureArea BRONZE_SLOT_BACKGROUND_TEXTURE;
 
-    protected final boolean isHighPressure;
     protected final OrientedOverlayRenderer renderer;
-    protected SteamRecipeMapWorkableHandler workableHandler;
+    protected RecipeLogicSteam workableHandler;
     protected FluidTank steamFluidTank;
 
-    public SteamMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, OrientedOverlayRenderer renderer, boolean isHighPressure) {
+    public SteamMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, OrientedOverlayRenderer renderer) {
         super(metaTileEntityId);
-        this.workableHandler = new SteamRecipeMapWorkableHandler(this,
-            recipeMap, isHighPressure, steamFluidTank, 1.0);
-        this.isHighPressure = isHighPressure;
+        this.workableHandler = new RecipeLogicSteam(this, recipeMap, steamFluidTank, 1.0);
         this.renderer = renderer;
         BRONZE_BACKGROUND_TEXTURE = getFullGuiTexture("%s_gui");
         BRONZE_SLOT_BACKGROUND_TEXTURE = getFullGuiTexture("slot_%s");
@@ -51,18 +48,11 @@ public abstract class SteamMetaTileEntity extends MetaTileEntity {
 
     @SideOnly(Side.CLIENT)
     private SimpleSidedCubeRenderer getBaseRenderer() {
-        if(isHighPressure) {
-            if(isBrickedCasing()) {
-                return Textures.STEAM_BRICKED_CASING_STEEL;
-            } else {
-                return Textures.STEAM_CASING_STEEL;
-            }
-        } else {
-            if(isBrickedCasing()) {
-                return Textures.STEAM_BRICKED_CASING_BRONZE;
-            } else {
-                return Textures.STEAM_CASING_BRONZE;
-            }
+    	if(isBrickedCasing()) {
+            return Textures.STEAM_BRICKED_CASING_BRONZE;
+        } 
+    	else {
+            return Textures.STEAM_CASING_BRONZE;
         }
     }
 
@@ -108,9 +98,8 @@ public abstract class SteamMetaTileEntity extends MetaTileEntity {
     }
     
     protected TextureArea getFullGuiTexture(String pathTemplate) {
-        String type = isHighPressure ? "steel" : "bronze";
         return TextureArea.fullImage(String.format("textures/gui/steam/%s/%s.png",
-            type, pathTemplate.replace("%s", type)));
+            "bronze", pathTemplate.replace("%s", "bronze")));
     }
 
     public ModularUI.Builder createUITemplate(EntityPlayer player) {

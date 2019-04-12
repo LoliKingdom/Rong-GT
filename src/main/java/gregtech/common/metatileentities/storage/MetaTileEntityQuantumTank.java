@@ -72,17 +72,17 @@ public class MetaTileEntityQuantumTank extends MetaTileEntity implements ITiered
         this.fluidTank = new WatchedFluidTank(maxFluidCapacity) {
             @Override
             protected void onFluidChanged(FluidStack newFluidStack, FluidStack oldFluidStack) {
-                updateComparatorValue(true);
+                updateComparatorValue();
             }
         };
         this.fluidInventory = fluidTank;
         this.importFluids = new FluidTankList(false, fluidTank);
         this.exportFluids = new FluidTankList(false, fluidTank);
-        updateComparatorValue(true);
+        updateComparatorValue();
     }
 
     @Override
-    public int getComparatorValue() {
+    public int getActualComparatorValue() {
         FluidTank fluidTank = this.fluidTank;
         int fluidAmount = fluidTank.getFluidAmount();
         int maxCapacity = fluidTank.getCapacity();

@@ -221,7 +221,7 @@ public class CommonProxy {
         itemBlock.setRegistryName(block.getRegistryName());
         return itemBlock;
     }
-
+    
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
         ItemBlock itemBlock = producer.apply(block);
         itemBlock.setRegistryName(block.getRegistryName());
@@ -232,9 +232,8 @@ public class CommonProxy {
     }
 
     public void onLoad() {
-
     }
-
+    
     public void onPostLoad() {
     }
 }

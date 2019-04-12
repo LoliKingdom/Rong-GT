@@ -77,7 +77,7 @@ public class MetaTileEntityQuantumChest extends MetaTileEntity implements ITiere
     }
 
     @Override
-    public int getComparatorValue() {
+    public int getActualComparatorValue() {
         float f = itemsStoredInside / (maxStoredItems * 1.0f);
         return MathHelper.floor(f * 14.0f) + (itemsStoredInside > 0 ? 1 : 0);
     }
@@ -96,7 +96,7 @@ public class MetaTileEntityQuantumChest extends MetaTileEntity implements ITiere
                     inputStack.shrink(amountOfItemsToInsert);
                     importItems.setStackInSlot(0, inputStack);
                     this.itemsStoredInside += amountOfItemsToInsert;
-                    updateComparatorValue(true);
+                    updateComparatorValue();
                     markDirty();
                 }
             }
@@ -113,7 +113,7 @@ public class MetaTileEntityQuantumChest extends MetaTileEntity implements ITiere
                     if(this.itemsStoredInside == 0) {
                         this.itemStack = ItemStack.EMPTY;
                     }
-                    updateComparatorValue(true);
+                    updateComparatorValue();
                     markDirty();
                 }
             }

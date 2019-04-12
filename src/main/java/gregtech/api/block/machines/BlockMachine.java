@@ -10,10 +10,13 @@ import codechicken.lib.vec.Cuboid6;
 import com.google.common.collect.Lists;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.BlockCustomParticle;
+import gregtech.api.capability.GregtechCapabilities;
+import gregtech.api.capability.tool.IScrewdriverItem;
+import gregtech.api.capability.tool.IWrenchItem;
+import gregtech.api.cover.ICoverable;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.render.MetaTileEntityRenderer;
-import gregtech.api.unification.stack.SimpleItemStack;
 import gregtech.api.util.GTUtility;
 import gregtech.common.tools.DamageValues;
 import net.minecraft.block.Block;
@@ -246,27 +249,28 @@ public class BlockMachine extends BlockCustomParticle implements ITileEntityProv
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         MetaTileEntity metaTileEntity = getMetaTileEntity(worldIn, pos);
-        if(metaTileEntity == null) return false;
-        ItemStack itemInHand = playerIn.getHeldItem(hand);
         CuboidRayTraceResult rayTraceResult = (CuboidRayTraceResult) RayTracer.retraceBlock(worldIn, playerIn, pos);
-        if(rayTraceResult == null) {
+        ItemStack stack = playerIn.getHeldItem(hand);
+        if(metaTileEntity == null || rayTraceResult == null) {
             return false;
         }
-        if(!itemInHand.isEmpty()) {
-            SimpleItemStack simpleItemStack = new SimpleItemStack(itemInHand);
-            if(GregTechAPI.screwdriverList.contains(simpleItemStack)) {
-                if(GTUtility.doDamageItem(itemInHand, DamageValues.DAMAGE_FOR_SCREWDRIVER, true) &&
-                    metaTileEntity.onCoverScrewdriverClick(playerIn, hand, rayTraceResult)) {
-                    GTUtility.doDamageItem(itemInHand, DamageValues.DAMAGE_FOR_SCREWDRIVER, false);
-                    return true;
-                } else return false;
-            } else if(GregTechAPI.wrenchList.contains(simpleItemStack)) {
-                if(GTUtility.doDamageItem(itemInHand, DamageValues.DAMAGE_FOR_WRENCH, true) &&
-                    metaTileEntity.onWrenchClick(playerIn, hand, GTUtility.determineWrenchingSide(facing, hitX, hitY, hitZ), rayTraceResult)) {
-                    GTUtility.doDamageItem(itemInHand, DamageValues.DAMAGE_FOR_WRENCH, false);
-                    return true;
-                } else return false;
+        if(stack.hasCapability(GregtechCapabilities.CAPABILITY_SCREWDRIVER, null)) {
+            IScrewdriverItem screwdriver = stack.getCapability(GregtechCapabilities.CAPABILITY_SCREWDRIVER, null);
+            if(screwdriver.damageItem(DamageValues.DAMAGE_FOR_SCREWDRIVER, true) &&
+                metaTileEntity.onCoverScrewdriverClick(playerIn, hand, rayTraceResult)) {
+                screwdriver.damageItem(DamageValues.DAMAGE_FOR_SCREWDRIVER, false);
+                return true;
             }
+        }
+        if(stack.hasCapability(GregtechCapabilities.CAPABILITY_WRENCH, null)) {
+            IWrenchItem wrenchItem = stack.getCapability(GregtechCapabilities.CAPABILITY_WRENCH, null);
+            EnumFacing wrenchDirection = ICoverable.determineGridSideHit(rayTraceResult);
+            if(wrenchItem.damageItem(DamageValues.DAMAGE_FOR_WRENCH, true) &&
+                metaTileEntity.onWrenchClick(playerIn, hand, wrenchDirection, rayTraceResult)) {
+                wrenchItem.damageItem(DamageValues.DAMAGE_FOR_SCREWDRIVER, false);
+                return true;
+            }
+            return false;
         }
         return metaTileEntity.onCoverRightClick(playerIn, hand, rayTraceResult);
     }
@@ -280,6 +284,11 @@ public class BlockMachine extends BlockCustomParticle implements ITileEntityProv
             metaTileEntity.onCoverLeftClick(playerIn, rayTraceResult);
         }
     }
+    
+    @Override
+    public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return true;
+    }
 
     @Override
     public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
@@ -290,13 +299,21 @@ public class BlockMachine extends BlockCustomParticle implements ITileEntityProv
     @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         MetaTileEntity metaTileEntity = getMetaTileEntity(blockAccess, pos);
-        return metaTileEntity == null ? 0 : metaTileEntity.getOutputRedstoneSignal(side);
+        return metaTileEntity == null ? 0 : metaTileEntity.getOutputRedstoneSignal(side.getOpposite());
+    }
+    
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        MetaTileEntity metaTileEntity = getMetaTileEntity(worldIn, pos);
+        if(metaTileEntity != null) {
+            metaTileEntity.updateInputRedstoneSignals();
+        }
     }
 
     @Override
     public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
         MetaTileEntity metaTileEntity = getMetaTileEntity(worldIn, pos);
-        return metaTileEntity == null ? 0 : metaTileEntity.getCachedComparatorValue();
+        return metaTileEntity == null ? 0 : metaTileEntity.getComparatorValue();
     }
 
     protected ThreadLocal<MetaTileEntity> tileEntities = new ThreadLocal<>();

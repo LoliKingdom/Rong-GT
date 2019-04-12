@@ -260,12 +260,6 @@ public enum OrePrefix {
         block.setIgnored(Materials.Brick);
         block.setIgnored(Materials.NetherQuartz);
 
-        cableGtHex.addSecondaryMaterial(new MaterialStack(Materials.Rubber, dustSmall.materialAmount * 4));
-        cableGtOctal.addSecondaryMaterial(new MaterialStack(Materials.Rubber, dustSmall.materialAmount * 3));
-        cableGtQuadruple.addSecondaryMaterial(new MaterialStack(Materials.Rubber, dustSmall.materialAmount * 2));
-        cableGtDouble.addSecondaryMaterial(new MaterialStack(Materials.Rubber, dustSmall.materialAmount));
-        cableGtSingle.addSecondaryMaterial(new MaterialStack(Materials.Rubber, dustSmall.materialAmount));
-
         oreSand.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dustTiny.materialAmount));
         oreGravel.addSecondaryMaterial(new MaterialStack(Materials.Flint, dustTiny.materialAmount));
 

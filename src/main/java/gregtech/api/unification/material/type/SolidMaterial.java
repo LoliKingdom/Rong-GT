@@ -29,7 +29,6 @@ public abstract class SolidMaterial extends DustMaterial {
 
         public static final long GENERATE_ROD = createFlag(20);
         public static final long GENERATE_GEAR = createFlag(21);
-        //public static final long GENERATE_LONG_ROD = createFlag(22);
         public static final long MORTAR_GRINDABLE = createFlag(24);
         public static final long GENERATE_FRAME = createFlag(45);
 

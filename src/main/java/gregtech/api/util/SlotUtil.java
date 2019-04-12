@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class SlotUtil {
 
-    public static ItemStack slotClickPhantom(Slot slot, int mouseButton, ClickType clickTypeIn, EntityPlayer player) {
+    public static ItemStack slotClickPhantom(Slot slot, int mouseButton, ClickType clickTypeIn, ItemStack stackHeld) {
         ItemStack stack = ItemStack.EMPTY;
 
         ItemStack stackSlot = slot.getStack();
@@ -18,9 +18,8 @@ public class SlotUtil {
 
         if (mouseButton == 2) {
             fillPhantomSlot(slot, ItemStack.EMPTY, mouseButton);
-        } else if (mouseButton == 0 || mouseButton == 1) {
-            InventoryPlayer playerInv = player.inventory;
-            ItemStack stackHeld = playerInv.getItemStack();
+        } 
+        else if (mouseButton == 0 || mouseButton == 1) {
 
             if (stackSlot.isEmpty()) {
                 if (!stackHeld.isEmpty() && slot.isItemValid(stackHeld)) {
@@ -36,8 +35,6 @@ public class SlotUtil {
                 }
             }
         } else if (mouseButton == 5) {
-            InventoryPlayer playerInv = player.inventory;
-            ItemStack stackHeld = playerInv.getItemStack();
             if (!slot.getHasStack()) {
                 fillPhantomSlot(slot, stackHeld, mouseButton);
             }

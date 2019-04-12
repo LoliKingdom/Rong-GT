@@ -23,7 +23,7 @@ import java.util.function.Supplier;
  * To open and create ModularUI, see {@link UIFactory}
  *
  */
-public final class ModularUI implements SizeProvider {
+public final class ModularUI implements ISizeProvider {
 
     public final ImmutableBiMap<Integer, Widget> guiWidgets;
 

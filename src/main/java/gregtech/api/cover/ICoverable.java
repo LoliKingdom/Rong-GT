@@ -1,5 +1,6 @@
 package gregtech.api.cover;
 
+import codechicken.lib.lighting.LightMatrix;
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.raytracer.RayTracer;
@@ -51,46 +52,54 @@ public interface ICoverable {
     CoverBehavior getCoverAtSide(EnumFacing side);
 
     void writeCoverData(CoverBehavior behavior, int id, Consumer<PacketBuffer> writer);
+    
+    int getInputRedstoneSignal(EnumFacing side, boolean ignoreCover);
+
+    ItemStack getStackForm();
 
     double getCoverPlateThickness();
 
     int getPaintingColor();
 
     boolean shouldRenderBackSide();
+    
+    void notifyBlockUpdate();
+
+    void scheduleRenderUpdate();
 
     @SideOnly(Side.CLIENT)
-    default void renderCovers(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+    default void renderCovers(CCRenderState renderState, Matrix4 translation, LightMatrix lightMatrix, int brightness) {
         double coverPlateThickness = getCoverPlateThickness();
         for(EnumFacing sideFacing : EnumFacing.values()) {
+        	IVertexOperation[] platePipeline = new IVertexOperation[] {new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(getPaintingColor()))};
+            IVertexOperation[] coverPipeline = new IVertexOperation[] {lightMatrix};    
             CoverBehavior coverBehavior = getCoverAtSide(sideFacing);
             if(coverBehavior == null) continue;
             Cuboid6 plateBox = getCoverPlateBox(sideFacing, coverPlateThickness, false);
             double coverOffset = getCoverOffset(sideFacing);
             if(coverPlateThickness > 0) {
-                //render cover plate for cover
-                //to prevent Z-fighting between cover plates
-                IVertexOperation[] coloredPipeline = ArrayUtils.add(pipeline,
-                    new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(getPaintingColor())));
+                renderState.brightness = brightness;
+                renderState.colour = 0xFFFFFFFF;
                 plateBox.expand(coverOffset);
                 TextureAtlasSprite casingSide = coverBehavior.getPlateSprite();
                 for(EnumFacing coverPlateSide : EnumFacing.VALUES) {
-                    Textures.renderFace(renderState, translation, coloredPipeline, coverPlateSide, plateBox, casingSide);
+                    Textures.renderFace(renderState, translation, platePipeline, coverPlateSide, plateBox, casingSide);
                 }
                 plateBox.expand(-coverOffset);
             }
             plateBox.expand(coverOffset * 10.0);
-            coverBehavior.renderCover(renderState, translation.copy(), pipeline, plateBox);
+            coverBehavior.renderCover(renderState, translation.copy(), coverPipeline, plateBox);
             if(coverPlateThickness == 0.0 && shouldRenderBackSide()) {
-                //machine is full block, but still not opaque - render cover on the back side too
                 plateBox.expand(-coverOffset * -20.0);
                 Matrix4 backTranslation = translation.copy();
                 if(sideFacing.getAxis().isVertical()) {
                     REVERSE_VERTICAL_ROTATION.apply(backTranslation);
-                } else {
+                } 
+                else {
                     REVERSE_HORIZONTAL_ROTATION.apply(backTranslation);
                 }
                 backTranslation.translate(-sideFacing.getFrontOffsetX(), -sideFacing.getFrontOffsetY(), -sideFacing.getFrontOffsetZ());
-                coverBehavior.renderCover(renderState, backTranslation, pipeline, plateBox);
+                coverBehavior.renderCover(renderState, backTranslation, coverPipeline, plateBox);
             }
         }
     }
@@ -129,29 +138,27 @@ public interface ICoverable {
         if(result == null || result.typeOfHit != Type.BLOCK) {
             return null;
         }
-        if(result instanceof CuboidRayTraceResult) {
-            CuboidRayTraceResult rayTraceResult = (CuboidRayTraceResult) result;
-            if(rayTraceResult.cuboid6.data == null) {
-                return rayTraceResult.sideHit;
-            } else if(rayTraceResult.cuboid6.data instanceof EnumFacing) {
-                return (EnumFacing) rayTraceResult.cuboid6.data;
-            } else return null; //unknown hit type, return null
-        }
-        //normal collision ray trace, return side hit
-        return result.sideHit;
+        return traceCoverSide(result);
     }
 
     static EnumFacing traceCoverSide(RayTraceResult result) {
         if(result instanceof CuboidRayTraceResult) {
             CuboidRayTraceResult rayTraceResult = (CuboidRayTraceResult) result;
             if(rayTraceResult.cuboid6.data == null) {
-                return rayTraceResult.sideHit;
+            	return determineGridSideHit(result);
             } else if(rayTraceResult.cuboid6.data instanceof EnumFacing) {
                 return (EnumFacing) rayTraceResult.cuboid6.data;
             } else return null; //unknown hit type, return null
         }
         //normal collision ray trace, return side hit
-        return result.sideHit;
+        return determineGridSideHit(result);
+    }
+
+    static EnumFacing determineGridSideHit(RayTraceResult result) {
+        return GTUtility.determineWrenchingSide(result.sideHit,
+            (float) (result.hitVec.x - result.getBlockPos().getX()),
+            (float) (result.hitVec.y - result.getBlockPos().getY()),
+            (float) (result.hitVec.z - result.getBlockPos().getZ()));
     }
 
     static Cuboid6 getCoverPlateBox(EnumFacing side, double plateThickness, boolean offsetSide) {

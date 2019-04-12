@@ -16,13 +16,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class SteamCompressor extends SteamMetaTileEntity {
 
-    public SteamCompressor(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, RecipeMaps.COMPRESSOR_RECIPES, Textures.COMPRESSOR_OVERLAY, isHighPressure);
+    public SteamCompressor(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.COMPRESSOR_RECIPES, Textures.COMPRESSOR_OVERLAY);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new SteamCompressor(metaTileEntityId, isHighPressure);
+        return new SteamCompressor(metaTileEntityId);
     }
 
     @Override

@@ -64,21 +64,13 @@ public class MetaTileEntities {
 
     //BRONZE MACHINES SECTION
     public static SteamCoalBoiler STEAM_BOILER_COAL_BRONZE;
-    public static SteamCoalBoiler STEAM_BOILER_COAL_STEEL;
     public static SteamLavaBoiler STEAM_BOILER_LAVA_BRONZE;
-    public static SteamLavaBoiler STEAM_BOILER_LAVA_STEEL;
     public static SteamExtractor STEAM_EXTRACTOR_BRONZE;
-    public static SteamExtractor STEAM_EXTRACTOR_STEEL;
     public static SteamMacerator STEAM_MACERATOR_BRONZE;
-    public static SteamMacerator STEAM_MACERATOR_STEEL;
     public static SteamCompressor STEAM_COMPRESSOR_BRONZE;
-    public static SteamCompressor STEAM_COMPRESSOR_STEEL;
     public static SteamHammer STEAM_HAMMER_BRONZE;
-    public static SteamHammer STEAM_HAMMER_STEEL;
     public static SteamFurnace STEAM_FURNACE_BRONZE;
-    public static SteamFurnace STEAM_FURNACE_STEEL;
     public static SteamAlloySmelter STEAM_ALLOY_SMELTER_BRONZE;
-    public static SteamAlloySmelter STEAM_ALLOY_SMELTER_STEEL;
 
     //SIMPLE MACHINES SECTION
     public static SimpleMachineMetaTileEntity[] ELECTRIC_FURNACE = new SimpleMachineMetaTileEntity[4];
@@ -182,26 +174,13 @@ public class MetaTileEntities {
         GTLog.logger.info("Registering MetaTileEntities");
 
         STEAM_BOILER_COAL_BRONZE = GregTechAPI.registerMetaTileEntity(1, new SteamCoalBoiler(gregtechId("steam_boiler_coal_bronze")));
-
-        STEAM_BOILER_LAVA_BRONZE = GregTechAPI.registerMetaTileEntity(5, new SteamLavaBoiler(gregtechId("steam_boiler_lava_bronze")));
-
-        STEAM_EXTRACTOR_BRONZE = GregTechAPI.registerMetaTileEntity(7, new SteamExtractor(gregtechId("steam_extractor_bronze"), false));
-        STEAM_EXTRACTOR_STEEL = GregTechAPI.registerMetaTileEntity(8, new SteamExtractor(gregtechId("steam_extractor_steel"), true));
-
-        STEAM_MACERATOR_BRONZE = GregTechAPI.registerMetaTileEntity(9, new SteamMacerator(gregtechId("steam_macerator_bronze"), false));
-        STEAM_MACERATOR_STEEL = GregTechAPI.registerMetaTileEntity(10, new SteamMacerator(gregtechId("steam_macerator_steel"), true));
-
-        STEAM_COMPRESSOR_BRONZE = GregTechAPI.registerMetaTileEntity(11, new SteamCompressor(gregtechId("steam_compressor_bronze"), false));
-        STEAM_COMPRESSOR_STEEL = GregTechAPI.registerMetaTileEntity(12, new SteamCompressor(gregtechId("steam_compressor_steel"), true));
-
-        STEAM_HAMMER_BRONZE = GregTechAPI.registerMetaTileEntity(13, new SteamHammer(gregtechId("steam_hammer_bronze"), false));
-        STEAM_HAMMER_STEEL = GregTechAPI.registerMetaTileEntity(14, new SteamHammer(gregtechId("steam_hammer_steel"), true));
-
-        STEAM_FURNACE_BRONZE = GregTechAPI.registerMetaTileEntity(15, new SteamFurnace(gregtechId("steam_furnace_bronze"), false));
-        STEAM_FURNACE_STEEL = GregTechAPI.registerMetaTileEntity(16, new SteamFurnace(gregtechId("steam_furnace_steel"), true));
-
-        STEAM_ALLOY_SMELTER_BRONZE = GregTechAPI.registerMetaTileEntity(17, new SteamAlloySmelter(gregtechId("steam_alloy_smelter_bronze"), false));
-        STEAM_ALLOY_SMELTER_STEEL = GregTechAPI.registerMetaTileEntity(18, new SteamAlloySmelter(gregtechId("steam_alloy_smelter_steel"), true));
+        STEAM_BOILER_LAVA_BRONZE = GregTechAPI.registerMetaTileEntity(2, new SteamLavaBoiler(gregtechId("steam_boiler_lava_bronze")));
+        STEAM_EXTRACTOR_BRONZE = GregTechAPI.registerMetaTileEntity(3, new SteamExtractor(gregtechId("steam_extractor_bronze")));
+        STEAM_MACERATOR_BRONZE = GregTechAPI.registerMetaTileEntity(4, new SteamMacerator(gregtechId("steam_macerator_bronze")));
+        STEAM_COMPRESSOR_BRONZE = GregTechAPI.registerMetaTileEntity(5, new SteamCompressor(gregtechId("steam_compressor_bronze")));
+        STEAM_HAMMER_BRONZE = GregTechAPI.registerMetaTileEntity(6, new SteamHammer(gregtechId("steam_hammer_bronze")));
+        STEAM_FURNACE_BRONZE = GregTechAPI.registerMetaTileEntity(7, new SteamFurnace(gregtechId("steam_furnace_bronze")));
+        STEAM_ALLOY_SMELTER_BRONZE = GregTechAPI.registerMetaTileEntity(8, new SteamAlloySmelter(gregtechId("steam_alloy_smelter_bronze")));
 
         ELECTRIC_FURNACE[0] = GregTechAPI.registerMetaTileEntity(50, new SimpleMachineMetaTileEntity(gregtechId("electric_furnace.lv"), RecipeMaps.FURNACE_RECIPES, Textures.ELECTRIC_FURNACE_OVERLAY, 0));
         ELECTRIC_FURNACE[1] = GregTechAPI.registerMetaTileEntity(51, new SimpleMachineMetaTileEntity(gregtechId("electric_furnace.mv"), RecipeMaps.FURNACE_RECIPES, Textures.ELECTRIC_FURNACE_OVERLAY, 1));

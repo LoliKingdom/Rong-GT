@@ -20,21 +20,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class SteamRecipeMapWorkableHandler extends RecipeMapWorkableHandler {
+public class RecipeLogicSteam extends AbstractRecipeLogic {
 
     private final IFluidTank steamFluidTank;
-    private final boolean isHighPressure;
     private final double conversionRate; //energy units per millibucket
 
     private boolean needsVenting;
     private boolean ventingStuck;
     private EnumFacing ventingSide;
 
-    public SteamRecipeMapWorkableHandler(MetaTileEntity tileEntity, RecipeMap<?> recipeMap, boolean isHighPressure, IFluidTank steamFluidTank, double conversionRate) {
+    public RecipeLogicSteam(MetaTileEntity tileEntity, RecipeMap<?> recipeMap, IFluidTank steamFluidTank, double conversionRate) {
         super(tileEntity, recipeMap);
         this.steamFluidTank = steamFluidTank;
         this.conversionRate = conversionRate;
-        this.isHighPressure = isHighPressure;
     }
 
     public boolean isVentingStuck() {
@@ -160,10 +158,6 @@ public class SteamRecipeMapWorkableHandler extends RecipeMapWorkableHandler {
 
     @Override
     protected int[] calculateOverclock(int EUt, long voltage, long amperage, int duration, boolean consumeInputs) {
-        if(!isHighPressure) {
-            //disallow overclocking for low pressure bronze machines
-            return new int[] {EUt, duration};
-        }
         return super.calculateOverclock(EUt, voltage, amperage, duration, consumeInputs);
     }
 

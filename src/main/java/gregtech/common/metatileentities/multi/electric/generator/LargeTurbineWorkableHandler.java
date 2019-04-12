@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.FuelRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.FuelRecipeLogic;
 import gregtech.api.recipes.machines.FuelRecipeMap;
 import gregtech.api.recipes.recipes.FuelRecipe;
 import gregtech.api.unification.material.Materials;
@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 
-public class LargeTurbineWorkableHandler extends FuelRecipeMapWorkableHandler {
+public class LargeTurbineWorkableHandler extends FuelRecipeLogic {
 
 	private static final int CYCLE_LENGTH = 80;
     private static final int BASE_ROTOR_DAMAGE = 11;

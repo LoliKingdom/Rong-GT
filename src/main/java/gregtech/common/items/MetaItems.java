@@ -201,8 +201,7 @@ public class MetaItems {
     
     public static MetaItem<?>.MetaValueItem ITEM_FILTER;
     public static MetaItem<?>.MetaValueItem ORE_DICTIONARY_FILTER;
-    
-    public static MetaItem<?>.MetaValueItem COVER_CONTROLLER;
+  
     public static MetaItem<?>.MetaValueItem COVER_ACTIVITY_DETECTOR;
     public static MetaItem<?>.MetaValueItem COVER_FLUID_DETECTOR;
     public static MetaItem<?>.MetaValueItem COVER_ITEM_DETECTOR;
@@ -212,6 +211,7 @@ public class MetaItems {
     public static MetaItem<?>.MetaValueItem COVER_CRAFTING;
     public static MetaItem<?>.MetaValueItem COVER_DRAIN;
     public static MetaItem<?>.MetaValueItem COVER_SHUTTER;
+    public static MetaItem<?>.MetaValueItem COVER_MACHINE_CONTROLLER;
 
     public static MetaItem<?>.MetaValueItem INTEGRATED_CIRCUIT;
 

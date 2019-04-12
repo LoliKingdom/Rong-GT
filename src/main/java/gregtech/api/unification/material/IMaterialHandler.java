@@ -11,6 +11,6 @@ public interface IMaterialHandler {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
-    public @interface RegisterMaterialHandler {}
+    @interface RegisterMaterialHandler {}
     
 }

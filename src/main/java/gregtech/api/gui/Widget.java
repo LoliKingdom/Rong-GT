@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public abstract class Widget {
 
     protected ModularUI gui;
-    protected SizeProvider sizes;
+    protected ISizeProvider sizes;
     protected WidgetUIAccess uiAccess;
 
     public Widget() {
@@ -32,7 +32,7 @@ public abstract class Widget {
         this.gui = gui;
     }
 
-    public void setSizes(SizeProvider sizes) {
+    public void setSizes(ISizeProvider sizes) {
         this.sizes = sizes;
     }
 
@@ -147,7 +147,7 @@ public abstract class Widget {
     @SideOnly(Side.CLIENT)
     protected void drawHoveringText(ItemStack itemStack, List<String> tooltip, int maxTextWidth, int mouseX, int mouseY) {
         Minecraft mc = Minecraft.getMinecraft();
-        GuiUtils.drawHoveringText(itemStack, tooltip,  mouseX, mouseY,
+        GuiUtils.drawHoveringText(itemStack, tooltip, mouseX, mouseY,
             sizes.getScreenWidth() - sizes.getGuiLeft(),
             sizes.getScreenHeight() - sizes.getGuiTop(), maxTextWidth, mc.fontRenderer);
     }

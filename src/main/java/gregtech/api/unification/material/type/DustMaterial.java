@@ -162,8 +162,11 @@ public class DustMaterial extends FluidMaterial {
     @Override
     protected void initializeMaterial() {
         super.initializeMaterial();
+        if(isRadioactive()) {
+        	setRadioactivity(2);
+        }
         if(shouldGenerateFluid()) {
-            setFluidTemperature(1200); //default value for dusts
+            setFluidTemperature(1200);
         }
     }
     

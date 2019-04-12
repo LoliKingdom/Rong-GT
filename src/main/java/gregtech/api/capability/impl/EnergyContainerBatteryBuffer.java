@@ -15,8 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nullable;
-
 public class EnergyContainerBatteryBuffer extends MTETrait implements IEnergyContainer {
 
     private final int tier;
@@ -182,10 +180,12 @@ public class EnergyContainerBatteryBuffer extends MTETrait implements IEnergyCon
         return TraitNetworkIds.TRAIT_ID_ENERGY_CONTAINER;
     }
 
-    @Nullable
     @Override
-    public Capability<?> getImplementingCapability() {
-        return GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER;
+    public <T> T getCapability(Capability<T> capability) {
+        if(capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+            return GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER.cast(this);
+        }
+        return null;
     }
 
     protected IItemHandlerModifiable getInventory() {

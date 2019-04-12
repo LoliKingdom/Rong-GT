@@ -213,11 +213,18 @@ public class MaterialRecipeHandler {
     public static void processGem(OrePrefix gemPrefix, GemMaterial material) {
         long materialAmount = gemPrefix.materialAmount;
         ItemStack crushedStack = OreDictUnifier.getDust(material, materialAmount);
-
-        if (material.hasFlag(MORTAR_GRINDABLE)) {
+        RecipeMaps.FLUID_HEATER_RECIPES.recipeBuilder()
+        	.input(gemPrefix, material)
+        	.fluidInputs(Materials.Lava.getFluid(100))
+        	.fluidOutputs(material.getFluid(L))
+        	.duration(700)
+        	.EUt(74)
+        	.buildAndRegister();
+        if(material.hasFlag(MORTAR_GRINDABLE)) {
             ModHandler.addShapedRecipe(String.format("gem_to_dust_%s_%s", material, gemPrefix), crushedStack,
                 "X", "m", 'X', new UnificationEntry(gemPrefix, material));
-        } else if (materialAmount >= M && material.hasFlag(SolidMaterial.MatFlags.GENERATE_ROD)) {
+        } 
+        else if (materialAmount >= M && material.hasFlag(SolidMaterial.MatFlags.GENERATE_ROD)) {
             ItemStack gemStick = OreDictUnifier.get(OrePrefix.stick, material, (int) (materialAmount / M));
             ItemStack gemDust = OreDictUnifier.getDust(material, materialAmount % M);
             if (!gemStick.isEmpty() && !gemDust.isEmpty()) {

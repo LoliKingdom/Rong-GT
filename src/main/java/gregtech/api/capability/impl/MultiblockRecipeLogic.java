@@ -4,12 +4,12 @@ import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.Recipe;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-public class MultiblockRecipeMapWorkable extends RecipeMapWorkableHandler {
+public class MultiblockRecipeLogic extends AbstractRecipeLogic {
 
-
-    public MultiblockRecipeMapWorkable(RecipeMapMultiblockController tileEntity) {
+    public MultiblockRecipeLogic(RecipeMapMultiblockController tileEntity) {
         super(tileEntity, tileEntity.recipeMap);
     }
 

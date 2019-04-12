@@ -14,7 +14,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public class EnergyContainerHandler extends MTETrait implements IEnergyContainer {
@@ -66,10 +65,12 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
         return TraitNetworkIds.TRAIT_ID_ENERGY_CONTAINER;
     }
 
-    @Nullable
     @Override
-    public Capability<?> getImplementingCapability() {
-        return GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER;
+    public <T> T getCapability(Capability<T> capability) {
+        if(capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
+            return GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER.cast(this);
+        }
+        return null;
     }
 
     @Override
@@ -104,19 +105,31 @@ public class EnergyContainerHandler extends MTETrait implements IEnergyContainer
         }
     }
 
-    public void dischargeEnergyContainers(IItemHandlerModifiable itemHandler, int slotIndex) {
+    public boolean dischargeOrRechargeEnergyContainers(IItemHandlerModifiable itemHandler, int slotIndex) {
         ItemStack stackInSlot = itemHandler.getStackInSlot(slotIndex);
-        if(stackInSlot.isEmpty()) return;
-        stackInSlot = stackInSlot.copy();
+        if(stackInSlot.isEmpty()) {
+            return false;
+        }
         IElectricItem electricItem = stackInSlot.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-        if(electricItem == null || !electricItem.canProvideChargeExternally()) return;
+        if(electricItem == null || !electricItem.canProvideChargeExternally()) {
+            return false;
+        }
         int machineTier = GTUtility.getTierByVoltage(Math.max(getInputVoltage(), getOutputVoltage()));
         if(getEnergyCanBeInserted() > 0) {
-            long dischargedBy = electricItem.discharge(getEnergyCanBeInserted(), machineTier, false, true, false);
-            if(dischargedBy == 0L) return;
-            itemHandler.setStackInSlot(slotIndex, stackInSlot);
-            changeEnergy(dischargedBy);
+            double chargePercent = getCurrentEnergyStored() / (getEnergyCapacity() * 1.0);
+            if(chargePercent <= 0.5) {
+                long dischargedBy = electricItem.discharge(getEnergyCanBeInserted(), machineTier, false, true, false);
+                addEnergy(dischargedBy);
+                return dischargedBy > 0L;
+
+            } 
+            else if (chargePercent >= 0.9) {
+                long chargedBy = electricItem.charge(getCurrentEnergyStored(), machineTier, false, false);
+                removeEnergy(chargedBy);
+                return chargedBy > 0L;
+            }
         }
+        return false;
     }
 
     @Override

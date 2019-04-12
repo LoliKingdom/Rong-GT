@@ -177,8 +177,7 @@ public class MetaItems1 extends MaterialMetaItem {
 
         ITEM_FILTER = addItem(491, "item_filter");
         ORE_DICTIONARY_FILTER = addItem(492, "ore_dictionary_filter");
-        
-        COVER_CONTROLLER = addItem(493, "cover.controller").setInvisible();
+
         COVER_ACTIVITY_DETECTOR = addItem(494, "cover.activity.detector").setInvisible();
         COVER_FLUID_DETECTOR = addItem(495, "cover.fluid.detector").setInvisible();
         COVER_ITEM_DETECTOR = addItem(496, "cover.item.detector").setInvisible();
@@ -186,6 +185,7 @@ public class MetaItems1 extends MaterialMetaItem {
         COVER_PLAYER_DETECTOR = addItem(498, "cover.player.detector").setInvisible();
 
         COVER_SHUTTER = addItem(502, "cover.shutter");
+        COVER_MACHINE_CONTROLLER = addItem(503, "cover.controller");
 
         COVER_SOLAR_PANEL_LV = addItem(504, "cover.solar.panel.lv");
         COVER_SOLAR_PANEL_MV = addItem(505, "cover.solar.panel.mv");

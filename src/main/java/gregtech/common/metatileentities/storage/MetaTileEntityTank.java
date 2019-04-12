@@ -92,7 +92,7 @@ public class MetaTileEntityTank extends MetaTileEntity {
         super.initializeInventory();
         this.fluidTank = new SyncFluidTank(tankSize);
         this.fluidInventory = fluidTank;
-        updateComparatorValue(true);
+        updateComparatorValue();
     }
 
     @Override
@@ -118,7 +118,12 @@ public class MetaTileEntityTank extends MetaTileEntity {
 
     @Override
     public ICapabilityProvider initItemStackCapabilities(ItemStack itemStack) {
-        return new FluidHandlerItemStack(itemStack, tankSize);
+    	return new FluidHandlerItemStack(itemStack, tankSize) {
+            @Override
+            public boolean canFillFluidType(FluidStack fluid) {
+                return MetaTileEntityTank.this.canFillFluidType(fluid);
+            }
+        };
     }
 
     @Override
@@ -182,7 +187,7 @@ public class MetaTileEntityTank extends MetaTileEntity {
     }
 
     @Override
-    public int getComparatorValue() {
+    public int getActualComparatorValue() {
         FluidTank fluidTank = this.fluidTank;
         int fluidAmount = fluidTank.getFluidAmount();
         int maxCapacity = fluidTank.getCapacity();
@@ -260,6 +265,12 @@ public class MetaTileEntityTank extends MetaTileEntity {
         super.readFromNBT(data);
         ((FluidTank) this.fluidInventory).readFromNBT(data.getCompoundTag("FluidInventory"));
     }
+    
+    protected boolean canFillFluidType(FluidStack fluid) {
+        return !ModHandler.isMaterialWood(material) &&
+            !material.hasFlag(MatFlags.FLAMMABLE) ||
+            fluid.getFluid().getTemperature(fluid) <= 325;
+    }
 
     @Override
     protected boolean shouldSerializeInventories() {
@@ -275,14 +286,12 @@ public class MetaTileEntityTank extends MetaTileEntity {
 
         @Override
         public boolean canFillFluidType(FluidStack fluid) {
-        	return !ModHandler.isMaterialWood(material) &&
-                !material.hasFlag(MatFlags.FLAMMABLE) ||
-                fluid.getFluid().getTemperature() <= 325;
+        	return MetaTileEntityTank.this.canFillFluidType(fluid);
         }
 
         @Override
         protected void onFluidChanged(FluidStack newFluidStack, FluidStack oldFluidStack) {
-            updateComparatorValue(true);
+            updateComparatorValue();
             if(getWorld() != null && !getWorld().isRemote) {
                 onContentsChangedOnServer(newFluidStack, oldFluidStack);
             }

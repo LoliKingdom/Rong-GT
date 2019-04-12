@@ -19,7 +19,11 @@ import static gregtech.common.items.MetaItems.KNIFE;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.ToolDictNames;
 import gregtech.api.items.metaitem.ElectricStats;
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.toolitem.ScrewdriverItemStat;
+import gregtech.api.items.toolitem.SoftHammerItemStat;
 import gregtech.api.items.toolitem.ToolMetaItem;
+import gregtech.api.items.toolitem.WrenchItemStat;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -57,27 +61,27 @@ public class MetaTools extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
     @Override
     public void registerSubItems() {
         SAW = addItem(1, "saw").setToolStats(new ToolSaw()).addOreDict(ToolDictNames.craftingToolSaw);
-        HARD_HAMMER = addItem(2, "hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer).addToList(GregTechAPI.hardHammerList);
-        SOFT_HAMMER = addItem(3, "soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addToList(GregTechAPI.softHammerList);
-        WRENCH = addItem(4, "wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList);
+        HARD_HAMMER = addItem(2, "hard_hammer").setToolStats(new ToolHardHammer()).addOreDict(ToolDictNames.craftingToolHardHammer);
+        SOFT_HAMMER = addItem(3, "soft_hammer").setToolStats(new ToolSoftHammer()).addOreDict(ToolDictNames.craftingToolSoftHammer).addStats(new SoftHammerItemStat());
+        WRENCH = addItem(4, "wrench").setToolStats(new ToolWrench()).addOreDict(ToolDictNames.craftingToolWrench).addStats(new WrenchItemStat());
         FILE = addItem(5, "file").setToolStats(new ToolFile()).addOreDict(ToolDictNames.craftingToolFile);
-        SCREWDRIVER = addItem(6, "screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList);
+        SCREWDRIVER = addItem(6, "screwdriver").setToolStats(new ToolScrewdriver()).addOreDict(ToolDictNames.craftingToolScrewdriver).addStats(new ScrewdriverItemStat());
         MORTAR = addItem(7, "mortar").setToolStats(new ToolMortar()).addOreDict(ToolDictNames.craftingToolMortar);
         WIRE_CUTTER = addItem(8, "wire_cutter").setToolStats(new ToolWireCutter()).addOreDict(ToolDictNames.craftingToolWireCutter);
         KNIFE = addItem(9, "tool.knife").setToolStats(new ToolKnife()).addOreDict(ToolDictNames.craftingToolKnife);
         
         WRENCH_LV = addItem(10, "tool.wrench.lv").setToolStats(new ToolWrenchLV())
-            .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
+            .addOreDict(ToolDictNames.craftingToolWrench).addStats(new WrenchItemStat())
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
         WRENCH_MV = addItem(11, "tool.wrench.mv").setToolStats(new ToolWrenchMV())
-            .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
+            .addOreDict(ToolDictNames.craftingToolWrench).addStats(new WrenchItemStat())
             .addStats(ElectricStats.createElectricItem(400000L, 2L));
         WRENCH_HV = addItem(12, "tool.wrench.hv").setToolStats(new ToolWrenchHV())
-            .addOreDict(ToolDictNames.craftingToolWrench).addToList(GregTechAPI.wrenchList)
+            .addOreDict(ToolDictNames.craftingToolWrench).addStats(new WrenchItemStat())
             .addStats(ElectricStats.createElectricItem(1600000L, 3L));
 
         SCREWDRIVER_LV = addItem(13, "tool.screwdriver.lv").setToolStats(new ToolScrewdriverLV())
-            .addOreDict(ToolDictNames.craftingToolScrewdriver).addToList(GregTechAPI.screwdriverList)
+            .addOreDict(ToolDictNames.craftingToolScrewdriver).addStats(new ScrewdriverItemStat())
             .addStats(ElectricStats.createElectricItem(100000L, 1L));
 
         BUZZSAW = addItem(14, "buzzsaw").setToolStats(new ToolBuzzSaw())

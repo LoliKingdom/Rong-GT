@@ -121,17 +121,12 @@ public class BlockFluidPipe extends BlockPipe<FluidPipeType, FluidPipeProperties
                 }
                 int fluidTemperature = fluidStack.getFluid().getTemperature(fluidStack);
                 if (fluidTemperature >= 373) {
-                    //100C, temperature of boiling water
-                    if (!GTUtility.isWearingFullHeatHazmat(entityLiving)) {
-                        float damageAmount = (fluidTemperature - 363) / 2.0f;
-                        entityLiving.attackEntityFrom(DamageSources.getHeatDamage(), damageAmount);
-                    }
-                } else if (fluidTemperature <= 183) {
-                    //-90C, temperature of freezing of many gases
-                    if (!GTUtility.isWearingFullFrostHazmat(entityLiving)) {
-                        float damageAmount = fluidTemperature / 2.0f;
-                        entityLiving.attackEntityFrom(DamageSources.getFrostDamage(), damageAmount);
-                    }
+                	float damageAmount = (fluidTemperature - 363) / 2.0f;
+                    entityLiving.attackEntityFrom(DamageSources.getHeatDamage(), damageAmount);
+                } 
+                else if (fluidTemperature <= 183) {
+                	float damageAmount = fluidTemperature / 2.0f;
+                    entityLiving.attackEntityFrom(DamageSources.getFrostDamage(), damageAmount);
                 }
             }
         }

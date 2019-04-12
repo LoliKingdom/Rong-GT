@@ -82,6 +82,7 @@ public abstract class MetaTileEntity implements ICoverable {
     protected int paintingColor = 0xFFFFFF;
 
     private int[] sidedRedstoneOutput = new int[6];
+    private int[] sidedRedstoneInput = new int[6];
     private int cachedComparatorValue;
 
     private CoverBehavior[] coverBehaviors = new CoverBehavior[6];
@@ -229,10 +230,6 @@ public abstract class MetaTileEntity implements ICoverable {
             if(trait.getName().equals(otherTrait.getName())) {
                 return true;
             }
-            if(otherTrait.getImplementingCapability() == trait.getImplementingCapability()) {
-                String message = "Trait %s is incompatible with trait %s, as they both provide the same capability";
-                throw new IllegalArgumentException(String.format(message, trait, otherTrait));
-            }
             if(otherTrait.getNetworkID() == trait.getNetworkID()) {
                 String message = "Trait %s is incompatible with trait %s, as they both use same network id %d";
                 throw new IllegalArgumentException(String.format(message, trait, otherTrait, trait.getNetworkID()));
@@ -317,15 +314,19 @@ public abstract class MetaTileEntity implements ICoverable {
      * Called when player clicks wrench on specific side of this meta tile entity
      * @return true if something happened, so wrench will get damaged and animation will be played
      */
-    public boolean onWrenchClick(EntityPlayer playerIn, EnumHand hand, EnumFacing side, CuboidRayTraceResult hitResult) {
+    public boolean onWrenchClick(EntityPlayer playerIn, EnumHand hand, EnumFacing wrenchSide, CuboidRayTraceResult hitResult) {
         if(playerIn.isSneaking()) {
-            if(side == getFrontFacing() || !isValidFrontFacing(side) || !hasFrontFacing()) {
+            if(wrenchSide == getFrontFacing() || !isValidFrontFacing(wrenchSide) || !hasFrontFacing()) {
                 return false;
             }
-            if(side != null) {
-                setFrontFacing(side);
+            if(wrenchSide != null) {
+                setFrontFacing(wrenchSide);
+            }
+            if (wrenchSide != null) {
+                setFrontFacing(wrenchSide);
             }
             return true;
+            
         }
         return false;
     }
@@ -432,32 +433,70 @@ public abstract class MetaTileEntity implements ICoverable {
         return !isOpaqueCube();
     }
 
+    public void onLoad() {
+        this.cachedComparatorValue = getActualComparatorValue();
+        for (EnumFacing side : EnumFacing.VALUES) {
+            this.sidedRedstoneInput[side.getIndex()] = getRedstonePower(this, side);
+        }
+    }
+
+    public void onUnload() {
+    }
+
     public boolean canConnectRedstone(@Nullable EnumFacing side) {
+        CoverBehavior coverBehavior = getCoverAtSide(side);
+        return coverBehavior != null && coverBehavior.canConnectRedstone();
+    }
+
+    @Override
+    public final int getInputRedstoneSignal(EnumFacing side, boolean ignoreCover) {
+        if(!ignoreCover && getCoverAtSide(side) != null) {
+            return 0; //covers block input redstone signal for machine
+        }
+        return sidedRedstoneInput[side.getIndex()];
+    }
+
+    public final boolean isBlockRedstonePowered() {
+        for(EnumFacing side : EnumFacing.VALUES) {
+            if(getInputRedstoneSignal(side, false) > 0) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public final int getInputRedstoneSignal(EnumFacing side) {
-        return getWorld().getStrongPower(getPos().offset(side));
+    public void updateInputRedstoneSignals() {
+        for (EnumFacing side : EnumFacing.VALUES) {
+            int redstoneValue = getRedstonePower(this, side);
+            int currentValue = sidedRedstoneInput[side.getIndex()];
+            if(redstoneValue != currentValue) {
+                this.sidedRedstoneInput[side.getIndex()] = redstoneValue;
+                CoverBehavior coverBehavior = getCoverAtSide(side);
+                if(coverBehavior != null) {
+                    coverBehavior.onRedstoneInputSignalChange(redstoneValue);
+                }
+            }
+        }
     }
 
-    public int getComparatorValue() {
+    private static int getRedstonePower(MetaTileEntity metaTileEntity, EnumFacing side) {
+        return metaTileEntity.getWorld().getRedstonePower(metaTileEntity.getPos().offset(side), side);
+    }
+
+    public int getActualComparatorValue() {
         return 0;
     }
-
-    public final int getCachedComparatorValue() {
+    
+    public final int getComparatorValue() {
         return cachedComparatorValue;
     }
 
-    public void onPostNBTLoad() {
-        updateComparatorValue(false);
-    }
-
-    public void updateComparatorValue(boolean update) {
-        int newComparatorValue = getComparatorValue();
+    public void updateComparatorValue() {
+        int newComparatorValue = getActualComparatorValue();
         if(cachedComparatorValue != newComparatorValue) {
             this.cachedComparatorValue = newComparatorValue;
-            if(update && getWorld() != null && !getWorld().isRemote) {
-                holder.notifyBlockUpdate();
+            if(getWorld() != null && !getWorld().isRemote) {
+                notifyBlockUpdate();
             }
         }
     }
@@ -699,9 +738,11 @@ public abstract class MetaTileEntity implements ICoverable {
             getItemInventory().getSlots() > 0) {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getItemInventory());
         }
-        for(MTETrait mteTrait : this.mteTraits) {
-            if(mteTrait.getImplementingCapability() == capability)
-                return (T) mteTrait;
+        for (MTETrait mteTrait : this.mteTraits) {
+            T capabilityResult = mteTrait.getCapability(capability);
+            if(capabilityResult != null) {
+                return capabilityResult;
+            }
         }
         return null;
     }
@@ -849,17 +890,42 @@ public abstract class MetaTileEntity implements ICoverable {
     }
 
     public final int getOutputRedstoneSignal(@Nullable EnumFacing side) {
-        return side == null ? Arrays.stream(sidedRedstoneOutput)
-            .max().orElse(0) : sidedRedstoneOutput[side.getIndex()];
+    	if(side == null) {
+            return getHighestOutputRedstoneSignal();
+        }
+        CoverBehavior behavior = getCoverAtSide(side);
+        int sidedOutput = sidedRedstoneOutput[side.getIndex()];
+        return behavior == null ? sidedOutput : behavior.getRedstoneSignalOutput();
     }
 
+    public final int getHighestOutputRedstoneSignal() {
+        int highestSignal = 0;
+        for(EnumFacing side : EnumFacing.VALUES) {
+            CoverBehavior behavior = getCoverAtSide(side);
+            int sidedOutput = sidedRedstoneOutput[side.getIndex()];
+            int sideResult = behavior == null ? sidedOutput : behavior.getRedstoneSignalOutput();
+            highestSignal = Math.max(highestSignal, sideResult);
+        }
+        return highestSignal;
+    }
+    
     public final void setOutputRedstoneSignal(EnumFacing side, int strength) {
         Preconditions.checkNotNull(side, "side");
         this.sidedRedstoneOutput[side.getIndex()] = strength;
-        if (getWorld() != null && !getWorld().isRemote) {
-            getHolder().notifyBlockUpdate();
+        if(getWorld() != null && !getWorld().isRemote && getCoverAtSide(side) == null) {
+            notifyBlockUpdate();
             markDirty();
         }
+    }
+    
+    @Override
+    public void notifyBlockUpdate() {
+        getHolder().notifyBlockUpdate();
+    }
+
+    @Override
+    public void scheduleRenderUpdate() {
+        getHolder().scheduleChunkForRenderUpdate();
     }
 
     public void setFrontFacing(EnumFacing frontFacing) {

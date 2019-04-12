@@ -32,12 +32,8 @@ public interface IPipeTile<PipeType extends Enum<PipeType> & IPipeType<NodeDataT
     void setInsulationColor(int newInsulationColor);
 
     int getBlockedConnections();
-
-    void setPipeType(PipeType pipeType);
-
+    
     PipeType getPipeType();
-
-    void setPipeMaterial(Material pipeMaterial);
 
     Material getPipeMaterial();
 

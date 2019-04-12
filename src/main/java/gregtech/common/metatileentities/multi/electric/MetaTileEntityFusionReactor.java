@@ -40,7 +40,7 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 
 	public MetaTileEntityFusionReactor(ResourceLocation metaTileEntityId, int tier) {
 		super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
-		this.recipeMapWorkable = new MultiblockRecipeMapWorkable(this) {
+		this.recipeMapWorkable = new MultiblockRecipeLogic(this) {
 			@Override
 			protected int getOverclockingTier(long voltage) {
 				return 0;

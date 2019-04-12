@@ -107,7 +107,7 @@ public class BlockCable extends BlockPipe<Insulation, WireProperties, WorldENet>
         if(!worldIn.isRemote && insulation.insulationLevel == -1 && entityIn instanceof EntityLivingBase) {
             EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
             EnergyNet energyNet = getWorldPipeNet(worldIn).getNetFromPos(pos);
-            if(energyNet != null && !GTUtility.isWearingFullElectroHazmat(entityLiving)) {
+            if(energyNet != null) {
                 long voltage = energyNet.getLastMaxVoltage();
                 long amperage = energyNet.getLastAmperage();
                 if(voltage > 0L && amperage > 0L) {

@@ -107,7 +107,7 @@ public class Materials {
     public static IngotMaterial Tin = new IngotMaterial(71, "tin", 0xDCDCDC, MaterialIconSet.METALLIC, 1, of(), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_ROTOR | GENERATE_ORE, Element.Sn);
     public static IngotMaterial Titanium = new IngotMaterial(72, "titanium", 0xDCA0F0, MaterialIconSet.METALLIC, 3, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, Element.Ti, 10.0F, 4.0F, 1600, 1941);
     public static FluidMaterial Tritium = new FluidMaterial(73, "tritium", 0xFF0000, MaterialIconSet.METALLIC, of(), STATE_GAS, Element.T);
-    public static IngotMaterial Tungsten = new IngotMaterial(74, "tungsten", 0x323232, MaterialIconSet.METALLIC, 3, of(), EXT2_METAL, Element.W, 7.0F, 2560, 3000);
+    public static IngotMaterial Tungsten = new IngotMaterial(74, "tungsten", 0x323232, MaterialIconSet.METALLIC, 3, of(), EXT2_METAL, Element.W, 7.0F, 4.0F, 1300);
     public static IngotMaterial Uranium = new IngotMaterial(75, "uranium", 0x32F032, MaterialIconSet.METALLIC, 3, of(), 0, Element.U, 8.0F, 4.0F, 1024);
     public static IngotMaterial Uranium235 = new IngotMaterial(76, "uranium235", 0x46FA46, MaterialIconSet.SHINY, 3, of(), 0, Element.U_235, 8.0F, 4.0F, 1024);
     public static IngotMaterial Vanadium = new IngotMaterial(77, "vanadium", 0x323232, MaterialIconSet.METALLIC, 2, of(), STD_METAL, Element.V, 2183);
@@ -137,7 +137,7 @@ public class Materials {
     public static DustMaterial Silicone = new DustMaterial(118, "silicone", 0xDCDCDC, MaterialIconSet.DULL, 1, of(new MaterialStack(Carbon, 1), new MaterialStack(Hydrogen, 1), new MaterialStack(Silicon, 2), new MaterialStack(Oxygen, 1)), GENERATE_PLATE | FLAMMABLE | NO_SMASHING | SMELT_INTO_FLUID);
     public static IngotMaterial Polycaprolactam = new IngotMaterial(119, "polycaprolactam", 0x323232, MaterialIconSet.DULL, 1, of(new MaterialStack(Carbon, 6), new MaterialStack(Hydrogen, 11), new MaterialStack(Nitrogen, 1), new MaterialStack(Oxygen, 1)), GENERATE_PLATE);
     public static IngotMaterial Polytetrafluoroethylene = new IngotMaterial(120, "polytetrafluoroethylene", 0x646464, MaterialIconSet.DULL, 1, of(new MaterialStack(Carbon, 2), new MaterialStack(Fluorine, 4)), GENERATE_PLATE | SMELT_INTO_FLUID | NO_WORKING, 5.0F, 2.0F, 512);
-    public static IngotMaterial Rubber = new IngotMaterial(121, "rubber", 0x151515, MaterialIconSet.DULL, 0, of(new MaterialStack(Carbon, 5), new MaterialStack(Hydrogen, 8)), GENERATE_PLATE | GENERATE_GEAR | GENERATE_RING | GENERATE_SCREW | FLAMMABLE | NO_SMASHING | GENERATE_RING | NO_WORKING, 4.0F, 1.0F, 256);
+    public static IngotMaterial Rubber = new IngotMaterial(121, "rubber", 0x151515, MaterialIconSet.DULL, 0, of(new MaterialStack(Carbon, 5), new MaterialStack(Hydrogen, 8)), GENERATE_PLATE | GENERATE_GEAR | GENERATE_RING | GENERATE_SCREW | FLAMMABLE | NO_SMASHING | GENERATE_RING | NO_WORKING, 4.0F, 2.0F, 256);
     public static DustMaterial RawRubber = new DustMaterial(122, "raw_rubber", 0xCCC789, MaterialIconSet.SAND, 0, of(new MaterialStack(Carbon, 5), new MaterialStack(Hydrogen, 8)), 0);
     public static FluidMaterial SodiumPersulfate = new FluidMaterial(123, "sodium_persulfate", 0xFFFFFF, MaterialIconSet.FLUID, of(new MaterialStack(Sodium, 1), new MaterialStack(Sulfur, 1), new MaterialStack(Oxygen, 4)), 0);
     public static DustMaterial SodiumSulfide = new DustMaterial(124, "sodium_sulfide", 0xAAAA00, MaterialIconSet.SAND, 1, of(new MaterialStack(Sodium, 2), new MaterialStack(Sulfur, 1)), DECOMPOSITION_BY_ELECTROLYZING);
@@ -160,7 +160,7 @@ public class Materials {
     public static DustMaterial Endstone = new DustMaterial(159, "endstone", 0xFFFFFF, MaterialIconSet.DULL, 1, of(), NO_SMASHING | EXCLUDE_BLOCK_CRAFTING_RECIPES);
     public static DustMaterial Netherrack = new DustMaterial(160, "netherrack", 0xC80000, MaterialIconSet.ROUGH, 1, of(), NO_SMASHING | FLAMMABLE | EXCLUDE_BLOCK_CRAFTING_RECIPES);
     public static RoughSolidMaterial Wood = new RoughSolidMaterial(161, "wood", 0x896727, MaterialIconSet.WOOD, 0, of(), GENERATE_PLATE | GENERATE_ROD | FLAMMABLE | NO_SMELTING | GENERATE_GEAR, () -> OrePrefix.plank);
-    public static DustMaterial Redstone = new DustMaterial(162, "redstone", 0xC80000, MaterialIconSet.ROUGH, 2, of(new MaterialStack(Boron, 1), new MaterialStack(Phosphorus, 1)), GENERATE_PLATE | GENERATE_ORE | NO_SMASHING | SMELT_INTO_FLUID);
+    public static DustMaterial Redstone = new DustMaterial(162, "redstone", 0xC80000, MaterialIconSet.ROUGH, 2, of(new MaterialStack(Boron, 8), new MaterialStack(Phosphorus, 11)), GENERATE_PLATE | GENERATE_ORE | NO_SMASHING | SMELT_INTO_FLUID);
     public static DustMaterial Blaze = new DustMaterial(163, "blaze", 0xFFC800, MaterialIconSet.POWDER, 1, of(new MaterialStack(DarkAsh, 1), new MaterialStack(Sulfur, 1)), NO_SMELTING | MORTAR_GRINDABLE | SMELT_INTO_FLUID | BURNING);
     public static GemMaterial EnderPearl = new GemMaterial(164, "ender_pearl", 0x6CDCC8, MaterialIconSet.GEM_VERTICAL, 1, of(new MaterialStack(Beryllium, 1), new MaterialStack(Potassium, 4), new MaterialStack(Nitrogen, 5)), GENERATE_PLATE | GENERATE_LENSE | NO_SMASHING | NO_SMELTING | EXCLUDE_BLOCK_CRAFTING_RECIPES, 6.0F, 3.0F, 120);
     public static GemMaterial EnderEye = new GemMaterial(165, "ender_eye", 0x66FF66, MaterialIconSet.GEM_VERTICAL, 1, of(new MaterialStack(EnderPearl, 1), new MaterialStack(Blaze, 1)), GENERATE_PLATE | GENERATE_LENSE | NO_SMASHING | NO_SMELTING | EXCLUDE_BLOCK_CRAFTING_RECIPES);
@@ -429,7 +429,7 @@ public class Materials {
     public static GemMaterial Vinteum = new GemMaterial(621, "vinteum", 0x64C8FF, MaterialIconSet.EMERALD, 2, of(), STD_GEM | NO_SMASHING | NO_SMELTING);
     //Astral Sorcery
     //public static FluidMaterial Starlight = new DustMaterial(344, "starlight", 0xDCDCDC, MaterialIconSet.FLUID, 0, of(), 0);
-    public static IngotMaterial Starmetal = new IngotMaterial(606, "starmetal", 0x0000B3, MaterialIconSet.SHINY, 0, of(), 0);
+    //public static IngotMaterial Starmetal = new IngotMaterial(606, "starmetal", 0x0000B3, MaterialIconSet.SHINY, 0, of(), 0);
     
     //Botania
     public static RoughSolidMaterial Livingwood = new RoughSolidMaterial(607, "livingwood", 0x896727, MaterialIconSet.WOOD, 1, of(), FLAMMABLE | NO_SMELTING, null);
@@ -894,29 +894,5 @@ public class Materials {
         OrePrefix.cluster.setIgnored(Tin);
         OrePrefix.cluster.setIgnored(Silver);
         OrePrefix.cluster.setIgnored(Lead);
-        
-        /*OrePrefix.clump.setIgnored(Iron);
-        OrePrefix.clump.setIgnored(Gold);
-        OrePrefix.clump.setIgnored(Copper);
-        OrePrefix.clump.setIgnored(Tin);
-        OrePrefix.clump.setIgnored(Silver);
-        OrePrefix.clump.setIgnored(Lead);
-        OrePrefix.clump.setIgnored(Osmium);
-        
-        OrePrefix.shard.setIgnored(Iron);
-        OrePrefix.shard.setIgnored(Gold);
-        OrePrefix.shard.setIgnored(Copper);
-        OrePrefix.shard.setIgnored(Tin);
-        OrePrefix.shard.setIgnored(Silver);
-        OrePrefix.shard.setIgnored(Lead);
-        OrePrefix.shard.setIgnored(Osmium);   
-        
-        OrePrefix.crystal.setIgnored(Iron);
-        OrePrefix.crystal.setIgnored(Gold);
-        OrePrefix.crystal.setIgnored(Copper);
-        OrePrefix.crystal.setIgnored(Tin);
-        OrePrefix.crystal.setIgnored(Silver);
-        OrePrefix.crystal.setIgnored(Lead);
-        OrePrefix.crystal.setIgnored(Osmium);*/     
     }
 }

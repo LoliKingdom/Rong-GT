@@ -31,7 +31,7 @@ public abstract class MTETrait {
      * if you return any capability here, you should implement it's interface
      * @return implemented capability
      */
-    public abstract @Nullable Capability<?> getImplementingCapability();
+    public abstract <T> T getCapability(Capability<T> capability);
 
     public void onFrontFacingSet(EnumFacing newFrontFacing) {
     }

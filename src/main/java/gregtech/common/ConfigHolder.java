@@ -51,7 +51,7 @@ public class ConfigHolder {
     @Config.RequiresMcRestart
     public static boolean ignoreErrorOrInvalidRecipes = true;
     
-    @Config.Comment("Setting this to true makes GregTech take priority over Tinker's in their tool stats")
+    /*@Config.Comment("Setting this to true makes GregTech take priority over Tinker's in their tool stats")
     @Config.RequiresMcRestart
-    public static boolean overrideTiConStats = false;
+    public static boolean overrideTiConStats = false;*/
 }

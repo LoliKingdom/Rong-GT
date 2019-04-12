@@ -10,7 +10,6 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,6 +26,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -53,9 +53,10 @@ public class ItemCell extends Item {
 	
 	public ItemCell() {
         setCreativeTab(GregTechAPI.TAB_GREGTECH);
-        setMaxStackSize(1);
+        setMaxStackSize(64);
         setUnlocalizedName("fluid_cell");
         setRegistryName("fluid_cell");
+        setMaxDamage(0);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
 	}
 	
@@ -70,26 +71,29 @@ public class ItemCell extends Item {
             return;
         }
         subItems.add(EMPTY_STACK);
-        FluidStack fluidStack = new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME);
-        ItemStack stack = new ItemStack(this);
-        IFluidHandlerItem fluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if(fluidHandler != null) {
-        	int fluidFillAmount = fluidHandler.fill(fluidStack, true);
-            if(fluidFillAmount == fluidStack.amount) {
-                ItemStack filledStack = fluidHandler.getContainer();
-                subItems.add(filledStack);
+        for(final Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+        	FluidStack fs = new FluidStack(fluid, Fluid.BUCKET_VOLUME);
+            ItemStack stack = new ItemStack(this);
+            IFluidHandlerItem fluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            if (fluidHandler != null && fluidHandler.fill(fs, true) == fs.amount) {
+                ItemStack filled = fluidHandler.getContainer();
+                subItems.add(filled);
             }
         }
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
-		String unlocalizedName = getUnlocalizedNameInefficiently(stack);
-	    IFluidHandlerItem fluidHandler = FluidUtil.getFluidHandler(stack);
-	    FluidStack fluidStack = fluidHandler.getTankProperties()[0].getContents();
-	    FluidStack fluidInside = fluidHandler.drain(Integer.MAX_VALUE, false);
-		String name = fluidStack == null || fluidStack.amount <= 0 ? "fluid_cell.empty" : fluidInside.getUnlocalizedName();
-		return I18n.format(unlocalizedName, I18n.format(name));
+	public String getItemStackDisplayName(final ItemStack stack) {
+		final FluidStack fluidStack = FluidUtil.getFluidContained(stack);
+		final String unlocalizedName = this.getUnlocalizedNameInefficiently(stack);
+		if(fluidStack == null) {
+			return I18n.translateToLocal(unlocalizedName + ".name").trim();
+		}
+		final String fluidUnlocalizedName = unlocalizedName + ".filled." + fluidStack.getFluid().getName() + ".name";
+		if(I18n.canTranslate(fluidUnlocalizedName)) {
+			return I18n.translateToLocal(fluidUnlocalizedName);
+		}
+		return I18n.translateToLocalFormatted(unlocalizedName + ".filled.name", fluidStack.getLocalizedName());
 	}
 	
 	public static ItemStack empty(ItemStack stack) {

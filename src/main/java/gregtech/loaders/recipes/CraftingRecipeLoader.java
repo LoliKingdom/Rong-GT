@@ -4,13 +4,16 @@ import static gregtech.common.items.MetaItems.MORTAR;
 
 import com.google.common.base.CaseFormat;
 
+import java.util.function.Function;
 import gregtech.api.GTValues;
+import gregtech.api.items.toolitem.ToolMetaItem;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.IngotMaterial;
+import gregtech.api.unification.material.type.SolidMaterial;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
@@ -43,11 +46,32 @@ public class CraftingRecipeLoader {
 
     private static void loadCraftingRecipes() {
     	
+    	SolidMaterial[] softHammerMaterials = new SolidMaterial[] {
+                Materials.Wood, Materials.Rubber, Materials.Polyethylene, Materials.Polytetrafluoroethylene
+            };
+            for(int i = 0; i < softHammerMaterials.length; i++) {
+                SolidMaterial solidMaterial = softHammerMaterials[i];
+                ItemStack itemStack = MetaItems.SOFT_HAMMER.getStackForm();
+                MetaItems.SOFT_HAMMER.setToolData(itemStack, solidMaterial, 128 * (1 << i), 1, 4.0f, 1.0f);
+                ModHandler.addShapedRecipe(String.format("soft_hammer_%s", solidMaterial.toString()), itemStack,
+                    "XX ", "XXS", "XX ",
+                    'X', new UnificationEntry(OrePrefix.ingot, solidMaterial),
+                    'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
+            }
+
+            Function<ToolMetaItem.MetaToolValueItem, ItemStack> woodenToolDataApplier = item ->
+                item.setToolData(item.getStackForm(), Materials.Wood, 55, 1, 4.0f, 1.0f);
+
+            ModHandler.addShapedRecipe("soft_hammer_wooden", woodenToolDataApplier.apply(MetaItems.SOFT_HAMMER),
+                "XX ", "XXS", "XX ",
+                'X', new UnificationEntry(OrePrefix.plank, Materials.Wood),
+                'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
+    	
     	//Mortar
     	ModHandler.addShapedRecipe("mortar_flint", MORTAR.getStackForm(Materials.Flint), 
     			" I ", "SIS", "SSS", 'I', new ItemStack(Items.FLINT, 1), 'S', OrePrefix.stone);
 
-    	IngotMaterial[] mortarMaterials = new IngotMaterial[] {Materials.BismuthBronze, Materials.WroughtIron, Materials.Manasteel};
+    	IngotMaterial[] mortarMaterials = new IngotMaterial[] {Materials.Bronze, Materials.BismuthBronze, Materials.Iron};
     	for (IngotMaterial material : mortarMaterials) {
     		ModHandler.addShapedRecipe("mortar_" + material.toString(), MORTAR.getStackForm(material),
     				" I ", "SIS", "SSS", 'I', new UnificationEntry(OrePrefix.ingot, material),'S', OrePrefix.stone);

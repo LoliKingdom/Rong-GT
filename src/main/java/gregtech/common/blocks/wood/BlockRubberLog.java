@@ -53,22 +53,9 @@ public class BlockRubberLog extends BlockLog {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
-            .withProperty(LOG_AXIS, getAxis(meta))
-            .withProperty(VARIANT, LogVariant.values()[meta % 4 % 2 % LogVariant.values().length])
-            .withProperty(NATURAL, meta % 4 / 2 == 1);
-    }
-
-    private static EnumAxis getAxis(int meta) {
-        switch (meta & 12) {
-            case 0:
-                return EnumAxis.X;
-            case 4:
-                return EnumAxis.Y;
-            case 8:
-                return EnumAxis.Z;
-            default:
-                return EnumAxis.NONE;
-        }
+        		.withProperty(LOG_AXIS, EnumAxis.values()[meta / 4 % 4])
+                .withProperty(VARIANT, LogVariant.values()[meta % 4 / 2 % LogVariant.values().length])
+                .withProperty(NATURAL, meta % 4 % 2 == 1);
     }
 
     @Override

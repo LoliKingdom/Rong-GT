@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public abstract class RecipeMapWorkableHandler extends MTETrait implements IWorkable {
+public abstract class AbstractRecipeLogic extends MTETrait implements IWorkable {
 
     public final RecipeMap<?> recipeMap;
 
@@ -44,10 +44,10 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
 
     private boolean isActive;
     private boolean workingEnabled = true;
-    private boolean hasNotEnoughEnergy;
+    private boolean notEnoughEnergy;
     private boolean wasActiveAndNeedsUpdate;
 
-    public RecipeMapWorkableHandler(MetaTileEntity tileEntity, RecipeMap<?> recipeMap) {
+    public AbstractRecipeLogic(MetaTileEntity tileEntity, RecipeMap<?> recipeMap) {
         super(tileEntity);
         this.recipeMap = recipeMap;
     }
@@ -87,8 +87,14 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
     }
 
     @Override
-    public Capability<?> getImplementingCapability() {
-        return GregtechCapabilities.CAPABILITY_WORKABLE;
+    public <T> T getCapability(Capability<T> capability) {
+        if(capability == GregtechCapabilities.CAPABILITY_WORKABLE) {
+        	return GregtechCapabilities.CAPABILITY_WORKABLE.cast(this);
+        } 
+        else if(capability == GregtechCapabilities.CAPABILITY_CONTROLLABLE) {
+        	return GregtechCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        }
+        return null;
     }
 
     @Override
@@ -121,7 +127,7 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
         } else if (recipeEUt > 0) {
             //only set hasNotEnoughEnergy if this recipe is consuming recipe
             //generators always have enough energy
-            this.hasNotEnoughEnergy = true;
+            this.notEnoughEnergy = true;
             //if current progress value is greater than 2, decrement it by 2
             if (progressTime >= 2) {
                 if (ConfigHolder.insufficientEnergySupplyWipesRecipeProgress) {
@@ -285,7 +291,7 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
         this.recipeEUt = 0;
         this.fluidOutputs = null;
         this.itemOutputs = null;
-        this.hasNotEnoughEnergy = false;
+        this.notEnoughEnergy = false;
         this.wasActiveAndNeedsUpdate = true;
         //force recipe recheck because inputs could have changed since last time
         //we checked them before starting our recipe, especially if recipe took long time
@@ -321,26 +327,12 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
         }
     }
 
-    @Override
     public void setActive(boolean active) {
         this.isActive = active;
         if (!metaTileEntity.getWorld().isRemote) {
             metaTileEntity.markDirty();
             writeCustomData(1, buf -> buf.writeBoolean(active));
         }
-    }
-
-    @Override
-    public void increaseProgress(int progress) {
-        if (!metaTileEntity.getWorld().isRemote) {
-            this.progressTime = Math.min(progressTime + progress, maxProgressTime);
-            metaTileEntity.markDirty();
-        }
-    }
-
-    @Override
-    public boolean hasWorkToDo() {
-        return progressTime > 0;
     }
 
     @Override
@@ -352,7 +344,7 @@ public abstract class RecipeMapWorkableHandler extends MTETrait implements IWork
     }
 
     public boolean notEnoughEnergy() {
-        return hasNotEnoughEnergy;
+        return notEnoughEnergy;
     }
 
     @Override

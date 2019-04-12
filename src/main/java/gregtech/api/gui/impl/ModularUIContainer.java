@@ -36,12 +36,12 @@ public class ModularUIContainer extends Container implements WidgetUIAccess {
         this.modularUI = modularUI;
         modularUI.guiWidgets.values().forEach(widget -> widget.setUiAccess(this));
         modularUI.guiWidgets.values().stream()
-                .flatMap(widget -> widget.getNativeWidgets().stream())
-                .forEach(nativeWidget -> {
-                    Slot slot = nativeWidget.allocateSlotHandle();
-                    slotMap.put(slot, nativeWidget);
-                    addSlotToContainer(slot);
-                });
+        	.flatMap(widget -> widget.getNativeWidgets().stream())
+            .forEach(nativeWidget -> {
+            	Slot slot = nativeWidget.getHandle();
+                slotMap.put(slot, nativeWidget);
+                addSlotToContainer(slot);
+            });
         modularUI.triggerOpenListeners();
     }
 

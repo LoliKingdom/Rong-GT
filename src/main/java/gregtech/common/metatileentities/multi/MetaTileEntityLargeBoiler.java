@@ -5,7 +5,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.FluidTankList;
-import gregtech.api.capability.impl.FuelRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.FuelRecipeLogic;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
@@ -239,7 +239,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
                 int fuelAmountToConsume = (int) (dieselRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
                 if(fuelStack.amount >= fuelAmountToConsume) {
                     fluidTank.drain(fuelAmountToConsume, true);
-                    long recipeVoltage = FuelRecipeMapWorkableHandler.getTieredVoltage(dieselRecipe.getMinVoltage());
+                    long recipeVoltage = FuelRecipeLogic.getTieredVoltage(dieselRecipe.getMinVoltage());
                     int voltageMultiplier = (int) Math.max(1L, recipeVoltage / GTValues.V[GTValues.LV]);
                     return (int) Math.ceil(dieselRecipe.getDuration() * CONSUMPTION_MULTIPLIER / 2.0 * voltageMultiplier);
                 } else continue;
@@ -249,7 +249,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
                 int fuelAmountToConsume = (int) (denseFuelRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
                 if(fuelStack.amount >= fuelAmountToConsume) {
                     fluidTank.drain(fuelAmountToConsume, true);
-                    long recipeVoltage = FuelRecipeMapWorkableHandler.getTieredVoltage(denseFuelRecipe.getMinVoltage());
+                    long recipeVoltage = FuelRecipeLogic.getTieredVoltage(denseFuelRecipe.getMinVoltage());
                     int voltageMultiplier = (int) Math.max(1L, recipeVoltage / GTValues.V[GTValues.LV]);
                     return (int) Math.ceil(denseFuelRecipe.getDuration() * CONSUMPTION_MULTIPLIER * 2.0 * voltageMultiplier);
                 }

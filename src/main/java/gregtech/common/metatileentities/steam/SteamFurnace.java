@@ -16,13 +16,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class SteamFurnace extends SteamMetaTileEntity {
 
-    public SteamFurnace(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, RecipeMaps.FURNACE_RECIPES, Textures.FURNACE_OVERLAY, isHighPressure);
+    public SteamFurnace(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMaps.FURNACE_RECIPES, Textures.FURNACE_OVERLAY);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new SteamFurnace(metaTileEntityId, isHighPressure);
+        return new SteamFurnace(metaTileEntityId);
     }
 
     @Override

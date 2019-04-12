@@ -31,9 +31,11 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.multipart.GTMultipartFactory;
 import gregtech.integration.mekanism.MekanismProcessingHandler;
+import gregtech.integration.nuclearcraft.GTRadSources;
 import gregtech.integration.theoneprobe.TheOneProbeCompatibility;
 import gregtech.integration.tinkers.TinkersEvents;
 import gregtech.integration.tinkers.TinkersIntegration;
+import gregtech.loaders.OreDictionaryLoader;
 import gregtech.loaders.dungeon.DungeonLootLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
@@ -49,7 +51,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = GTValues.MODID,
      name = "GregTech",
      acceptedMinecraftVersions = "[1.12,1.13)",
-     dependencies = "required:forge@[14.23.5.2806,);" + CodeChickenLib.MOD_VERSION_DEP + "after:forestry;after:tconstruct;after:forgemultipartcbe;after:jei@[4.8.6,);after:crafttweaker;")
+     dependencies = "required:forge@[14.23.5.2806,);" + CodeChickenLib.MOD_VERSION_DEP + "after:forestry;after:nuclearcraft;after:tconstruct;after:forgemultipartcbe;after:jei@[4.8.6,);after:crafttweaker;")
 public class GregTechMod {
 
     static {
@@ -100,6 +102,7 @@ public class GregTechMod {
         if(GTValues.isModLoaded("mekanism")) {
         	MekanismProcessingHandler.preInitGas();
         }
+        
         if(GTValues.isModLoaded("tconstruct")) {
         	TinkersIntegration.preInit();
         	MinecraftForge.EVENT_BUS.register(new TinkersEvents());
@@ -160,6 +163,10 @@ public class GregTechMod {
     @Mod.EventHandler
     public void onPostInit(FMLPostInitializationEvent event) {
         proxy.onPostLoad();
+        if(GTValues.isModLoaded("nuclearcraft")) {
+        	GTRadSources.init();
+        }
+        //OreDictionaryLoader.postInit();
     }
 
     @Mod.EventHandler

@@ -118,8 +118,9 @@ public class ModularUIGui extends GuiContainer {
 
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-        boolean result = modularUI.guiWidgets.values().stream().anyMatch(widget -> widget.mouseDragged(mouseX - guiLeft, mouseY - guiTop, clickedMouseButton, timeSinceLastClick));
-        if(!result) {
+        boolean result = modularUI.guiWidgets.values().stream().anyMatch(widget ->
+        widget.mouseDragged(mouseX - guiLeft, mouseY - guiTop, clickedMouseButton, timeSinceLastClick));
+        if (!result) {
             super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
         }
     }

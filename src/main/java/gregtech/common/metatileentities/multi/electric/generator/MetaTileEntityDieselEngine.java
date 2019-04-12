@@ -1,7 +1,7 @@
 package gregtech.common.metatileentities.multi.electric.generator;
 
 import gregtech.api.GTValues;
-import gregtech.api.capability.impl.FuelRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.FuelRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -33,7 +33,7 @@ public class MetaTileEntityDieselEngine extends FueledMultiblockController {
     }
 
     @Override
-    protected FuelRecipeMapWorkableHandler createWorkable(long maxVoltage) {
+    protected FuelRecipeLogic createWorkable(long maxVoltage) {
         return new DieselEngineWorkableHandler(this, recipeMap, () -> energyContainer, () -> importFluidHandler, maxVoltage);
     }
 

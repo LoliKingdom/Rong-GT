@@ -1,7 +1,7 @@
 package gregtech.common.metatileentities.electric;
 
 import gregtech.api.GTValues;
-import gregtech.api.capability.impl.EnergyRecipeMapWorkableHandler;
+import gregtech.api.capability.impl.RecipeLogicEnergy;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
@@ -24,8 +24,8 @@ public class MetaTileEntityMacerator extends SimpleMachineMetaTileEntity {
     }
 
     @Override
-    protected EnergyRecipeMapWorkableHandler createWorkable(RecipeMap<?> recipeMap) {
-        return new EnergyRecipeMapWorkableHandler(this, recipeMap, () -> energyContainer) {
+    protected RecipeLogicEnergy createWorkable(RecipeMap<?> recipeMap) {
+        return new RecipeLogicEnergy(this, recipeMap, () -> energyContainer) {
             @Override
             protected int getByproductChanceMultiplier(Recipe recipe) {
                 int byproductChanceMultiplier = 1;

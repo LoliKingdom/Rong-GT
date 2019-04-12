@@ -1,7 +1,7 @@
 package gregtech.common.metatileentities.multi.electric;
 
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.MultiblockRecipeMapWorkable;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -96,7 +96,7 @@ public class MetaTileEntityMultiFurnace extends RecipeMapMultiblockController {
         return Textures.HEAT_PROOF_CASING;
     }
 
-    protected class MultiFurnaceWorkable extends MultiblockRecipeMapWorkable {
+    protected class MultiFurnaceWorkable extends MultiblockRecipeLogic {
 
         public MultiFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
