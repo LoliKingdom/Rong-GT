@@ -185,7 +185,7 @@ public class DustMaterial extends FluidMaterial {
     
     @ZenGetter("hasSlurry")
     public boolean shouldGenerateSlurries() {
-        return hasFlag(GENERATE_ORE) && GTValues.isModLoaded("mekanism");
+        return hasFlag(GENERATE_ORE);
     }
 
     public void addOreByProducts(FluidMaterial... byProducts) {

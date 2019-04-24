@@ -15,7 +15,7 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTLog;
 import gregtech.common.MetaFluids;
-import gregtech.common.items.ItemCell;
+import gregtech.common.items.MetaItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -28,7 +28,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictionaryLoader {
 	
 	public static void postInit() {
-        ItemStack cellStack = new ItemStack(new ItemCell());
+        ItemStack cellStack = MetaItems.FLUID_CELL.getStackForm();
 
         for(Material m : Material.MATERIAL_REGISTRY) {   
         	if(!(m instanceof FluidMaterial)) return;
@@ -115,10 +115,10 @@ public class OreDictionaryLoader {
         OreDictUnifier.registerOre(new ItemStack(Blocks.OBSIDIAN), OrePrefix.block, Materials.Obsidian);
         OreDictUnifier.registerOre(new ItemStack(Blocks.GLASS), OrePrefix.block, Materials.Glass);
 
-        OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 5), OrePrefix.stone, Materials.Andesite);
-        OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 6), OrePrefix.stone, Materials.Andesite);
-        OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 3), OrePrefix.stone, Materials.Diorite);
-        OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 4), OrePrefix.stone, Materials.Diorite);
+        //OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 5), OrePrefix.stone, Materials.Andesite);
+        //OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 6), OrePrefix.stone, Materials.Andesite);
+        //OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 3), OrePrefix.stone, Materials.Diorite);
+        //OreDictUnifier.registerOre(new ItemStack(Blocks.STONE, 1, 4), OrePrefix.stone, Materials.Diorite);
 
         OreDictUnifier.registerOre(new ItemStack(Blocks.ANVIL), "craftingAnvil");
         OreDictUnifier.registerOre(new ItemStack(Blocks.OBSIDIAN, 1, W), OrePrefix.stone, Materials.Obsidian);

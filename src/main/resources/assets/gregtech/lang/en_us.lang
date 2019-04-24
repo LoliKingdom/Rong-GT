@@ -181,12 +181,12 @@ metaitem.battery.re.hv.sodium.tooltip=Reusable
 
 metaitem.energy_crystal.name=Energy Crystal
 metaitem.lapotron_crystal.name=Lapotron Crystal
-metaitem.energy.lapotronicorb.name=Lapotronic Energy Orb
-metaitem.energy.lapotronicorb2.name=Advanced Lapotronic Energy Orb
-metaitem.zpm.name=Zero Point Module
-metaitem.zpm2.name=Master Module
-metaitem.zpm2.tooltip=Fill this to win minecraft
-metaitem.zpm2.name=Ultimate Module
+metaitem.energy.lapotronicorb.name=Master Energy Orb
+metaitem.energy.lapotronicorb2.name=Expert Lapotronic Energy Orb
+metaitem.energy.lapotronicorb3.name=Ultimate Lapotronic Energy Orb
+
+metaitem.circuit.integrated.name=Integrated Circuit
+metaitem.carbon_fibre.name=Carbon Fibre
 
 metaitem.electric.motor.lv.name=Electric Motor (LV)
 metaitem.electric.motor.mv.name=Electric Motor (MV)

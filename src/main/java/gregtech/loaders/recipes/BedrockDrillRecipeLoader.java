@@ -40,7 +40,7 @@ public class BedrockDrillRecipeLoader {
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Cobaltite), 2000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Xenotime), 3500)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Platinum), 4000)	  
-				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
+				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Bedrock), 5000)
 				  .EUt(1048)
 				  .buildAndRegister();
 		
@@ -49,7 +49,6 @@ public class BedrockDrillRecipeLoader {
 		  		  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Lutetium), 200)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.RareEarth), 1000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Adamantine), 3500)
-				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Bedrock), 5000)
 				  .EUt(6074)
 				  .buildAndRegister();
 		
@@ -57,7 +56,6 @@ public class BedrockDrillRecipeLoader {
 		RecipeMaps.BEDROCK_DRILL_RECIPES.recipeBuilder()
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Lutetium), 2000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.RareEarth, 2), 3500)
-				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Iridium), 4000)
 				  .chancedOutput(OreDictUnifier.get(OrePrefix.dustImpure, Materials.Iridium), 4000)
 				  .EUt(12105)
 				  .buildAndRegister();			  

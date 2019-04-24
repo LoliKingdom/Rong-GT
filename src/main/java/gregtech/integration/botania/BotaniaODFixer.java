@@ -9,10 +9,10 @@ import net.minecraftforge.oredict.OreDictionary;
 public class BotaniaODFixer {
 	
 	public static void init() {
-		OreDictUnifier.registerOre(OreDictionary.getOres("livingwood").get(0), OrePrefix.block, Materials.Livingwood);
-		OreDictUnifier.registerOre(OreDictionary.getOres("livingrock").get(0), OrePrefix.block, Materials.Livingrock);
-		OreDictUnifier.registerOre(OreDictionary.getOres("manaPearl").get(0), OrePrefix.gem, Materials.ManaPearl);
-		OreDictUnifier.registerOre(OreDictionary.getOres("manaDiamond").get(0), OrePrefix.gem, Materials.ManaDiamond);
-		OreDictUnifier.registerOre(OreDictionary.getOres("gaiaIngot").get(0), OrePrefix.ingot, Materials.Gaia);
+		OreDictionary.registerOre("blockLivingwood", OreDictionary.getOres("livingwood").get(0));
+		OreDictionary.registerOre("blockLivingrock", OreDictionary.getOres("livingrock").get(0));
+		OreDictionary.registerOre("gemManaPearl", OreDictionary.getOres("manaPearl").get(0));
+		OreDictionary.registerOre("gemManaDiamond", OreDictionary.getOres("manaDiamond").get(0));
+		OreDictionary.registerOre("ingotGaia", OreDictionary.getOres("gaiaIngot").get(0));
 	}
 }

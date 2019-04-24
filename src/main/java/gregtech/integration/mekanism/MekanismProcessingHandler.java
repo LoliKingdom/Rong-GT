@@ -80,10 +80,10 @@ public class MekanismProcessingHandler {
 				DustMaterial m = (DustMaterial)material;	
 				//TIL: Can input Fluid as a GasStack
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.ore, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreEndstone, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreNetherrack, m), getSlurry(m, false, 1000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreEndstone, m), getSlurry(m, false, 3000));
+				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreNetherrack, m), getSlurry(m, false, 2000));
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreGravel, m), getSlurry(m, false, 1000));
-				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSand, m), getSlurry(m, false, 1000));
+				//RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSand, m), getSlurry(m, false, 1000));
 				RecipeHandler.addChemicalDissolutionChamberRecipe(OreDictUnifier.get(OrePrefix.oreSandstone, m), getSlurry(m, false, 1000));
 				
 				RecipeHandler.addChemicalWasherRecipe(getSlurry(m, false, 20), getSlurry(m, true, 10));

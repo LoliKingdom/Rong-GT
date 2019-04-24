@@ -20,7 +20,7 @@ public class BlockDrillHead extends VariantBlock<BlockDrillHead.DrillHeadType> {
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
         setHarvestLevel("wrench", 2);
-        setDefaultState(getState(DrillHeadType.DIAMOND));
+        setDefaultState(getState(DrillHeadType.INVAR));
     }
 
     @Override

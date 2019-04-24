@@ -33,14 +33,16 @@ import static gregtech.api.unification.ore.OrePrefix.Flags.*;
 
 public enum OrePrefix {
 
-    oreSand("Sand Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat.hasFlag(GENERATE_ORE)), // In case of an Sand-Ores Mod. Ore -> Material is a Oneway Operation!
+    //oreSand("Sand Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat.hasFlag(GENERATE_ORE)), // In case of an Sand-Ores Mod. Ore -> Material is a Oneway Operation!
     oreGravel("Gravel Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat.hasFlag(GENERATE_ORE)), // In case of an Gravel-Ores Mod. Ore -> Material is a Oneway Operation!
+    
+    oreStone("Stone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, mat -> mat.hasFlag(GENERATE_ORE)), // In case of an Gravel-Ores Mod. Ore -> Material is a Oneway Operation!
 
     oreNetherrack("Netherrack Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat instanceof DustMaterial && mat.hasFlag(GENERATE_ORE)), // Prefix of the Nether-Ores Mod. Causes Ores to double. Ore -> Material is a Oneway Operation!
-    oreNether("Nether Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // Prefix of the Nether-Ores Mod. Causes Ores to double. Ore -> Material is a Oneway Operation!
+    //oreNether("Nether Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // Prefix of the Nether-Ores Mod. Causes Ores to double. Ore -> Material is a Oneway Operation!
 
     oreEndstone("Endstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
-    oreEnd("End Ores", -1,null,  MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
+    //oreEnd("End Ores", -1,null,  MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
     
     oreSandstone("Sandstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
     //oreRedSandstone("Red Sandstone Ores", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION | DISALLOW_RECYCLING, (mat) -> mat.hasFlag(GENERATE_ORE)), // In case of an End-Ores Mod. Ore -> Material is a Oneway Operation!
@@ -245,10 +247,7 @@ public enum OrePrefix {
         block.setIgnored(Materials.Endstone);
         block.setIgnored(Materials.Wheat);
         block.setIgnored(Materials.Oilsands);
-        block.setIgnored(Materials.Wood);
-        block.setIgnored(Materials.Greatwood);
-        block.setIgnored(Materials.Livingwood);
-        block.setIgnored(Materials.Silverwood);
+        block.setIgnored(Materials.Wood);;
         block.setIgnored(Materials.RawRubber);
         block.setIgnored(Materials.Clay);
         block.setIgnored(Materials.Bone);
@@ -260,18 +259,18 @@ public enum OrePrefix {
         block.setIgnored(Materials.Brick);
         block.setIgnored(Materials.NetherQuartz);
 
-        oreSand.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dustTiny.materialAmount));
-        oreGravel.addSecondaryMaterial(new MaterialStack(Materials.Flint, dustTiny.materialAmount));
+        //oreSand.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dustTiny.materialAmount));
+        oreGravel.addSecondaryMaterial(new MaterialStack(Materials.Flint, gem.materialAmount));
 
         oreNetherrack.addSecondaryMaterial(new MaterialStack(Materials.Netherrack, dust.materialAmount));
-        oreNether.addSecondaryMaterial(new MaterialStack(Materials.Netherrack, dust.materialAmount));
+        //oreNether.addSecondaryMaterial(new MaterialStack(Materials.Netherrack, dust.materialAmount));
 
         oreEndstone.addSecondaryMaterial(new MaterialStack(Materials.Endstone, dust.materialAmount));
-        oreEnd.addSecondaryMaterial(new MaterialStack(Materials.Endstone, dust.materialAmount));
+        //oreEnd.addSecondaryMaterial(new MaterialStack(Materials.Endstone, dust.materialAmount));
         
-        oreSandstone.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dust.materialAmount));
+        //oreSandstone.addSecondaryMaterial(new MaterialStack(Materials.SiliconDioxide, dust.materialAmount));
 
-        ore.addSecondaryMaterial(new MaterialStack(Materials.Stone, dust.materialAmount));
+        oreStone.addSecondaryMaterial(new MaterialStack(Materials.Stone, dust.materialAmount));
 
         crushed.addSecondaryMaterial(new MaterialStack(Materials.Stone, dust.materialAmount));
 

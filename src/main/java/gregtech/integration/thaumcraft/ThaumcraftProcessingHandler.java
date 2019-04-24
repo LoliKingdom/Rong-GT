@@ -13,7 +13,6 @@ import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.material.type.SolidMaterial;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
-import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import gregtech.loaders.recipes.processing.OreRecipeHandler;
 import net.minecraft.item.ItemStack;
@@ -30,7 +29,7 @@ public class ThaumcraftProcessingHandler {
 	@Method(modid = "thaumcraft")
 	public static void init() {
 		//init aspects
-		ThaumcraftApi.registerObjectTag(new ItemStack(new ItemCell()), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));
+		ThaumcraftApi.registerObjectTag(MetaItems.FLUID_CELL.getStackForm(), new AspectList().add(Aspect.VOID, 5).add(Aspect.METAL, 24));
 		
 		for(MetaItem item : MetaItem.getMetaItems()) {
 			if(item instanceof ToolMetaItem<?>) {
@@ -54,14 +53,14 @@ public class ThaumcraftProcessingHandler {
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreEndstone + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.DARKNESS, 5).add(Aspect.ENTROPY, 2)/*.add(SPACE, 2)*/);
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreNetherrack + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.FIRE, 2).add(Aspect.ENTROPY, 2));
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreGravel + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3));
-				ThaumcraftApi.registerObjectTag(OrePrefix.oreSand + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3));		
+				//ThaumcraftApi.registerObjectTag(OrePrefix.oreSand + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3));		
 				ThaumcraftApi.registerObjectTag(OrePrefix.oreSandstone + StringUtils.capitalize(m.getUnlocalizedName()), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 3).add(Aspect.EARTH, 2));		
 
 				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "ore" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
-				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "end_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreGravel" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
-				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "gravel_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m, 3), "oreEndstone" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5).merge(Aspect.VOID, 2)));
-				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "sand_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreSand" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
-				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "sandstone_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreSandstone" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
+				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "end_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m, 3), "oreGravel" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
+				//ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "gravel_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m, 3), "oreEndstone" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5).merge(Aspect.VOID, 2)));
+				//ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "sand_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreSand" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
+				//ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "sandstone_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m), "oreSandstone" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5)));
 				ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(GTValues.MODID, "nether_metal_purification" + m.getLocalizedName().toLowerCase()), new CrucibleRecipe("METALPURIFICATION", OreDictUnifier.get(OrePrefix.cluster, m, 2), "oreNetherrack" + m.toCamelCaseString(), new AspectList().merge(Aspect.METAL, 5).merge(Aspect.ORDER, 5).merge(Aspect.FIRE, 2)));
 			
 				Utils.addSpecialMiningResult(OreDictUnifier.get(OrePrefix.ore, m), OreDictUnifier.get(OrePrefix.cluster, m), 1.0F);	

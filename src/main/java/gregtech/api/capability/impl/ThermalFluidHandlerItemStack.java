@@ -26,4 +26,40 @@ public class ThermalFluidHandlerItemStack extends FluidHandlerItemStack {
         int liquidTemperature = fluid.getFluid().getTemperature();
         return liquidTemperature >= minFluidTemperature && liquidTemperature <= maxFluidTemperature;
     }
+    
+    @Override
+    public FluidStack drain(int maxDrain, boolean doDrain)
+    {
+        if (container.getCount() != 1 || maxDrain <= 0)
+        {
+            return null;
+        }
+
+        FluidStack contained = getFluid();
+        if (contained == null || contained.amount <= 0 || !canDrainFluidType(contained))
+        {
+            return null;
+        }
+
+        final int drainAmount = Math.min(contained.amount, maxDrain);
+
+        FluidStack drained = contained.copy();
+        drained.amount = drainAmount;
+
+        if (doDrain)
+        {
+            contained.amount -= drainAmount;
+            if (contained.amount == 0)
+            {
+            	System.out.println("I'm curious, do you ever run?");
+                setContainerToEmpty();
+            }
+            else
+            {
+                setFluid(contained);
+            }
+        }
+
+        return drained;
+    }
 }

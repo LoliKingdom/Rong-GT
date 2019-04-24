@@ -11,7 +11,6 @@ import gregtech.common.blocks.*;
 import gregtech.common.blocks.wood.BlockRubberLeaves;
 import gregtech.common.blocks.wood.BlockRubberLog;
 import gregtech.common.blocks.wood.BlockRubberSapling;
-import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import gregtech.common.pipelike.cable.ItemBlockCable;
 import gregtech.common.pipelike.fluidpipe.ItemBlockFluidPipe;
@@ -99,8 +98,6 @@ public class CommonProxy {
             registry.register(item);
             item.registerSubItems();
         }
-        
-        registry.register(new ItemCell());
         
         ToolRecipeHandler.initializeMetaItems();
 

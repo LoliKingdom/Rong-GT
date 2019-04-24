@@ -13,7 +13,6 @@ import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.ConfigHolder;
-import gregtech.common.items.ItemCell;
 import gregtech.common.items.MetaItems;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -567,7 +566,7 @@ public class GTUtility {
     }
     
     public static ItemStack getFilledCell(Fluid fluid, int count) {
-    	ItemStack fluidCell = new ItemStack(new ItemCell());
+    	ItemStack fluidCell = MetaItems.FLUID_CELL.getStackForm();
     	IFluidHandlerItem fluidHandlerItem = fluidCell.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     	try {
     		fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);  		

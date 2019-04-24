@@ -45,16 +45,8 @@ public class TinkersIntegration {
 	
 	public static void preInit() {
     	GTLog.logger.info("Registering Tinker's Construct Support");
-        try {
-        	registerTinkerMaterials();
-        	registerTinkerAlloys();
-        } catch(NoSuchMethodError ex) {
-        	GTLog.logger.warn("Failed to load TConstruct module. Are Tinkers tools disabled?");
-            ex.printStackTrace();
-        } catch(Exception ex) {
-        	GTLog.logger.error("Unknown error while loading TConstruct module.");
-            ex.printStackTrace();
-        }
+    	registerTinkerMaterials();
+        registerTinkerAlloys();
     }
 
 	private static void registerTinkerMaterials() {
@@ -65,10 +57,10 @@ public class TinkersIntegration {
 			SolidMaterial material = (SolidMaterial)m;
 			if(m instanceof IngotMaterial && ((IngotMaterial)m).blastFurnaceTemperature <= 0) {
                 TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.ore, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
 			}
 			if((m instanceof IngotMaterial || m instanceof GemMaterial) && toGenerate(material)) {
 				if(material.toolDurability > 0) {
@@ -84,10 +76,10 @@ public class TinkersIntegration {
 				DustMaterial dust = (DustMaterial)m;
                 if(dust.hasFlag(DustMaterial.MatFlags.GENERATE_ORE) && dust.directSmelting != null) {
                     TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.ore, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
+                    //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
+                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (288 * dust.smeltingMultiplier * Config.oreToIngotRatio));
+                    //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
+                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (288 * dust.smeltingMultiplier * Config.oreToIngotRatio));
                 } 
                 else if(dust.hasFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID) && m != Materials.Glass && m != Materials.Ice) {
                     TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.dust, m).toString(), dust.getMaterialFluid(), 144);
@@ -153,6 +145,7 @@ public class TinkersIntegration {
     }
     
     private static boolean toGenerate(SolidMaterial m) {
+    	boolean plustic = GTValues.isModLoaded("plustic"); 	
     	for(MaterialIntegration integration : TinkerRegistry.getMaterialIntegrations()) {
 			if(integration != null && integration.material != null) {
 				if(integration.material.getIdentifier() == m.toString()) { 
@@ -162,35 +155,31 @@ public class TinkersIntegration {
 		}
     	if(TinkerRegistry.getMaterial(m.toString()) != slimeknights.tconstruct.library.materials.Material.UNKNOWN) {
     		return false;
-    	}
-    	else if(m == Materials.Emerald || m == Materials.Diamond || m == Materials.PigIron) {
-    		return false;
-    	}
-    	else {
-    		return true;
-    	}
-    	/*boolean plustic = GTValues.isModLoaded("plustic"); 	
-    	if(plustic) {
-			return m == Materials.Nickel || m == Materials.Invar || m == Materials.Iridium;
-    	}
-    	else if(plustic && GTValues.isModLoaded("advancedrocketry")) {
-    		return m == Materials.Titanium;
-    	}
-    	else if((plustic || GTValues.isModLoaded("pewter")) && GTValues.isModLoaded("mekanism")) {
-    		return m == Materials.Osmium || m == Materials.Osmiridium;
-    	}
-    	else if(plustic && GTValues.isModLoaded("thermalfoundation")) {
-    		return m == Materials.Platinum;
-    	}
-    	else if(plustic && GTValues.isModLoaded("landcore")) {
-    		return m == Materials.Tungsten && m == Materials.Thorium;
-    	}
+    	}    
     	else if(GTValues.isModLoaded("nuclearcraft")) {
     		return m == Materials.Uranium && m == Materials.Uranium235 && m == Materials.Thorium;
     	}
+    	else if(plustic) {
+    		if(GTValues.isModLoaded("advancedrcoketry")) {
+    			return m == Materials.Titanium;
+    		}
+    		else if(GTValues.isModLoaded("pewter") && GTValues.isModLoaded("mekanism")) {
+    			return m == Materials.Osmium || m == Materials.Osmiridium;
+    		}
+    		else if(GTValues.isModLoaded("thermalfoundation")) {
+        		return m == Materials.Platinum;
+        	}
+    		else if(GTValues.isModLoaded("landcore")) {
+        		return m == Materials.Tungsten && m == Materials.Thorium;
+        	}
+    		else {
+    			return m == Materials.Nickel || m == Materials.Invar || m == Materials.Iridium;	
+    		}		
+    	}
     	return m == Materials.Iron || m == Materials.Cobalt || m == Materials.Copper ||
 			   m == Materials.Bronze || m == Materials.Lead || m == Materials.Electrum || 
-			   m == Materials.Silver || m == Materials.Steel || m == Materials.PigIron;*/
+			   m == Materials.Silver || m == Materials.Steel || m == Materials.PigIron ||
+			   m == Materials.Diamond || m == Materials.Emerald;
     }
     
     private static String upperCase(Material mat) {

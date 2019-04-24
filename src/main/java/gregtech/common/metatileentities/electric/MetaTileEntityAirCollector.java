@@ -38,11 +38,11 @@ public class MetaTileEntityAirCollector extends TieredMetaTileEntity {
         if(!getWorld().isRemote) {
             long energyToConsume = GTValues.V[getTier()];
             if (checkOpenSides() && getTimer() % 20 == 0L && energyContainer.getCurrentEnergyStored() >= energyToConsume) {
-                int fluidAmount = 500 * (1 << getTier());
+                int fluidAmount = 200 * (1 << getTier());
                 exportFluids.fill(Materials.Air.getFluid(fluidAmount), true);
                 energyContainer.removeEnergy(energyToConsume);
             }
-            if (getTimer() % 5 == 0) {
+            if (getTimer() % 10 == 0) {
                 pushFluidsIntoNearbyHandlers(getFrontFacing());
             }
         }

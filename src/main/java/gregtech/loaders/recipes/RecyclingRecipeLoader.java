@@ -57,12 +57,23 @@ public class RecyclingRecipeLoader {
             ignoreArcSmelting = true;
         }
         if(dustMaterial.shouldGenerateFluid()) {
-            RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-                .fluidOutputs(dustMaterial.getFluid((int) (firstStack.amount * L / M)))
-                .duration((int) Math.max(1L, firstStack.amount * 80 / M))
-                .EUt(4 * voltageMultiplier);
-            inputSupplier.accept(fluidExtractorRecipeBuilder);
-            fluidExtractorRecipeBuilder.buildAndRegister();
+        	if(dustMaterial instanceof GemMaterial) {
+        		RecipeBuilder<?> fluidHeaterRecipeBuilder = RecipeMaps.FLUID_HEATER_RECIPES.recipeBuilder()
+        				.fluidInputs(Materials.Lava.getFluid(20))
+                        .fluidOutputs(dustMaterial.getFluid((int) (firstStack.amount * L / M)))
+                        .duration((int) Math.max(1L, firstStack.amount * 80 / M))
+                        .EUt(4 * voltageMultiplier);
+                    inputSupplier.accept(fluidHeaterRecipeBuilder);
+                    fluidHeaterRecipeBuilder.buildAndRegister();
+        	}
+        	else {
+        		RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+                        .fluidOutputs(dustMaterial.getFluid((int) (firstStack.amount * L / M)))
+                        .duration((int) Math.max(1L, firstStack.amount * 80 / M))
+                        .EUt(4 * voltageMultiplier);
+                    inputSupplier.accept(fluidExtractorRecipeBuilder);
+                    fluidExtractorRecipeBuilder.buildAndRegister();
+        	}
         }
         else {
         	RecipeBuilder<?> fluidExtractorRecipeBuilder = RecipeMaps.MACERATOR_RECIPES.recipeBuilder()

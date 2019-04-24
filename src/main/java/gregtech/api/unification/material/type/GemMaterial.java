@@ -3,6 +3,7 @@ package gregtech.api.unification.material.type;
 import com.google.common.collect.ImmutableList;
 import gregtech.api.unification.Element;
 import gregtech.api.unification.material.MaterialIconSet;
+import gregtech.api.unification.material.type.DustMaterial.MatFlags;
 import gregtech.api.unification.stack.MaterialStack;
 
 import static gregtech.api.util.GTUtility.createFlag;
@@ -41,5 +42,10 @@ public class GemMaterial extends SolidMaterial {
             generationBits |= DustMaterial.MatFlags.GENERATE_PLATE;
         }
         return super.verifyMaterialBits(generationBits);
+    }
+    
+    @Override
+    public boolean shouldGenerateFluid() {
+        return true;
     }
 }

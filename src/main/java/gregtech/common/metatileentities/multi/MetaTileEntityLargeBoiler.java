@@ -77,7 +77,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
             MetaBlocks.BOILER_CASING.getState(BoilerCasingType.TUNGSTENSTEEL_PIPE),
             Textures.ROBUST_TUNGSTENSTEEL_CASING,
             Textures.TUNGSTENSTEEL_FIREBOX, Textures.TUNGSTENSTEEL_FIREBOX_ACTIVE);
-
+    	
         public final int baseSteamOutput;
         public final float fuelConsumptionMultiplier;
         public final int maxTemperature;
@@ -196,7 +196,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
             }
             if(drainedWater != null && drainedWater.amount > 0) {
                 if(currentTemperature > 100 && hasNoWater) {
-                    float explosionPower = currentTemperature / 100.0F * 2.0F;
+                    float explosionPower = currentTemperature / 100.0f * 2.0f;
                     getWorld().setBlockToAir(getPos());
                     getWorld().createExplosion(null, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5,
                         explosionPower, true);
@@ -236,7 +236,7 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
                 continue; //ignore empty tanks and water
             FuelRecipe dieselRecipe = RecipeMaps.DIESEL_GENERATOR_FUELS.findRecipe(GTValues.V[9], fuelStack);
             if(dieselRecipe != null) {
-                int fuelAmountToConsume = (int) (dieselRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
+                int fuelAmountToConsume = (int) Math.ceil(dieselRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
                 if(fuelStack.amount >= fuelAmountToConsume) {
                     fluidTank.drain(fuelAmountToConsume, true);
                     long recipeVoltage = FuelRecipeLogic.getTieredVoltage(dieselRecipe.getMinVoltage());
@@ -246,12 +246,12 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
             }
             FuelRecipe denseFuelRecipe = RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.findRecipe(GTValues.V[9], fuelStack);
             if(denseFuelRecipe != null) {
-                int fuelAmountToConsume = (int) (denseFuelRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
+                int fuelAmountToConsume = (int) Math.ceil(denseFuelRecipe.getRecipeFluid().amount * CONSUMPTION_MULTIPLIER * boilerType.fuelConsumptionMultiplier);
                 if(fuelStack.amount >= fuelAmountToConsume) {
                     fluidTank.drain(fuelAmountToConsume, true);
                     long recipeVoltage = FuelRecipeLogic.getTieredVoltage(denseFuelRecipe.getMinVoltage());
                     int voltageMultiplier = (int) Math.max(1L, recipeVoltage / GTValues.V[GTValues.LV]);
-                    return (int) Math.ceil(denseFuelRecipe.getDuration() * CONSUMPTION_MULTIPLIER * 2.0 * voltageMultiplier);
+                    return (int) Math.ceil(denseFuelRecipe.getDuration() * CONSUMPTION_MULTIPLIER * 2 * voltageMultiplier);
                 }
             }
         }
@@ -259,14 +259,13 @@ public class MetaTileEntityLargeBoiler extends MultiblockWithDisplayBase {
             ItemStack itemStack = itemImportInventory.getStackInSlot(slotIndex);
             int fuelBurnValue = (int) Math.ceil(TileEntityFurnace.getItemBurnTime(itemStack) / (50.0 * boilerType.fuelConsumptionMultiplier));
             if(fuelBurnValue > 0) {
-            	if(itemStack.getCount() == 1) {
+                if(itemStack.getCount() == 1) {
                     ItemStack containerItem = itemStack.getItem().getContainerItem(itemStack);
                     itemImportInventory.setStackInSlot(slotIndex, containerItem);
-                } 
-            	else {
+                } else {
                     itemStack.shrink(1);
+                    itemImportInventory.setStackInSlot(slotIndex, itemStack);
                 }
-                itemImportInventory.setStackInSlot(slotIndex, itemStack);
                 return fuelBurnValue;
             }
         }

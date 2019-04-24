@@ -1,5 +1,9 @@
 package gregtech.api.pipenet.tile;
 
+import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
+
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.cover.CoverBehavior;
 import gregtech.api.metatileentity.SyncedTileEntityBase;
@@ -17,9 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants.NBT;
-
-import javax.annotation.Nullable;
-import java.util.function.Consumer;
 
 public abstract class TileEntityPipeBase<PipeType extends Enum<PipeType> & IPipeType<NodeDataType>, NodeDataType> extends SyncedTileEntityBase implements IPipeTile<PipeType, NodeDataType> {
 

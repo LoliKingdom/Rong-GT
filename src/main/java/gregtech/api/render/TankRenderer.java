@@ -42,30 +42,29 @@ public class TankRenderer implements IIconRegister {
     }
 
     public void render(CCRenderState renderState, Matrix4 translation, int baseColor, IVertexOperation[] pipeline, int capacity, FluidStack fluidStack) {
-
         IVertexOperation[] basePipeline = ArrayUtils.add(pipeline, new ColourMultiplier(baseColor));
         Cuboid6 fluidCuboid = null;
         IVertexOperation[] fluidPipeline = null;
         TextureAtlasSprite fluidSprite = null;
 
-        if(fluidStack != null) {
+        if (fluidStack != null) {
             double fluidLevel = fluidStack.amount / (capacity * 1.0) * 0.98;
-            if(fluidStack.getFluid().isGaseous(fluidStack)) {
+            if (fluidStack.getFluid().isGaseous(fluidStack)) {
                 fluidCuboid = new Cuboid6(0.01, 0.99 - fluidLevel, 0.01, 0.99, 0.99, 0.99);
             } else {
                 fluidCuboid = new Cuboid6(0.01, 0.01, 0.01, 0.99, 0.01 + fluidLevel, 0.99);
             }
             ColourMultiplier multiplier = new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(fluidStack.getFluid().getColor(fluidStack)));
-            fluidPipeline = new IVertexOperation[] {multiplier};
+            fluidPipeline = new IVertexOperation[]{multiplier};
             fluidSprite = TextureUtils.getTexture(fluidStack.getFluid().getStill(fluidStack));
         }
 
-        for(EnumFacing renderSide : EnumFacing.VALUES) {
+        for (EnumFacing renderSide : EnumFacing.VALUES) {
             Textures.renderFace(renderState, translation, basePipeline, renderSide, Cuboid6.full, sideSprite);
             Textures.renderFace(renderState, translation.copy()
-                .translate(renderSide.getFrontOffsetX(), renderSide.getFrontOffsetY(), renderSide.getFrontOffsetZ()),
+                    .translate(renderSide.getFrontOffsetX(), renderSide.getFrontOffsetY(), renderSide.getFrontOffsetZ()),
                 basePipeline, renderSide.getOpposite(), Cuboid6.full, sideSprite); //for rendering sides from inside too
-            if(fluidStack != null) {
+            if (fluidStack != null) {
                 Textures.renderFace(renderState, translation, fluidPipeline, renderSide, fluidCuboid, fluidSprite);
             }
         }

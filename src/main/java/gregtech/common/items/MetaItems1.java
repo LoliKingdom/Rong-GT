@@ -88,15 +88,12 @@ public class MetaItems1 extends MaterialMetaItem {
         BATTERY_RE_MV_LITHIUM = addItem(411, "battery.re.mv.lithium").addStats(ElectricStats.createRechargeableBattery(400000, 2)).setModelAmount(8);
         BATTERY_RE_MV_SODIUM = addItem(412, "battery.re.mv.sodium").addStats(ElectricStats.createRechargeableBattery(200000, 2)).setModelAmount(8);
 
-        BATTERY_SU_HV_SULFURIC_ACID = addItem(413, "battery.su.hv.sulfuricacid").addStats(ElectricStats.createBattery(288000, 3, false)).setModelAmount(8);
-        BATTERY_SU_HV_MERCURY = addItem(414, "battery.su.hv.mercury").addStats(ElectricStats.createBattery(512000, 3, false)).setModelAmount(8);
+        //BATTERY_SU_HV_SULFURIC_ACID = addItem(413, "battery.su.hv.sulfuricacid").addStats(ElectricStats.createBattery(288000, 3, false)).setModelAmount(8);
+        //BATTERY_SU_HV_MERCURY = addItem(414, "battery.su.hv.mercury").addStats(ElectricStats.createBattery(512000, 3, false)).setModelAmount(8);
 
-        BATTERY_RE_HV_CADMIUM = addItem(415, "battery.re.hv.cadmium").addStats(ElectricStats.createRechargeableBattery(1200000, 3)).setModelAmount(8);
-        BATTERY_RE_HV_LITHIUM = addItem(416, "battery.re.hv.lithium").addStats(ElectricStats.createRechargeableBattery(1600000, 3)).setModelAmount(8);
-        BATTERY_RE_HV_SODIUM = addItem(417, "battery.re.hv.sodium").addStats(ElectricStats.createRechargeableBattery(800000, 3)).setModelAmount(8);
-
-        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, GTValues.IV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Master).setModelAmount(8);
-        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.LuV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Expert).setModelAmount(8);
+        //BATTERY_RE_HV_CADMIUM = addItem(415, "battery.re.hv.cadmium").addStats(ElectricStats.createRechargeableBattery(1200000, 3)).setModelAmount(8);
+        //BATTERY_RE_HV_LITHIUM = addItem(416, "battery.re.hv.lithium").addStats(ElectricStats.createRechargeableBattery(1600000, 3)).setModelAmount(8);
+        //BATTERY_RE_HV_SODIUM = addItem(417, "battery.re.hv.sodium").addStats(ElectricStats.createRechargeableBattery(800000, 3)).setModelAmount(8);
 	
         ELECTRIC_MOTOR_LV = addItem(420, "electric.motor.lv");
         ELECTRIC_MOTOR_MV = addItem(421, "electric.motor.mv");
@@ -161,9 +158,7 @@ public class MetaItems1 extends MaterialMetaItem {
         SENSOR_IV = addItem(481, "sensor.iv");
         SENSOR_LuV = addItem(482, "sensor.luv");
         SENSOR_UV = addItem(483, "sensor.uv");
-        
-        ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.infused_lapotronicorb").addStats(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8);
-        
+                
         FLUID_FILTER = addItem(485, "fluid_filter");
 
         DYNAMITE = addItem(486, "dynamite").addStats(new DynamiteBehaviour()).setMaxStackSize(16);
@@ -195,14 +190,17 @@ public class MetaItems1 extends MaterialMetaItem {
         COVER_SOLAR_PANEL_LuV = addItem(509, "cover.solar.panel.luv");
         COVER_SOLAR_PANEL_UV = addItem(510, "cover.solar.panel.uv");
         
-        //FLUID_CELL = addItem(511, "fluid_cell").addStats(new FluidStats(1000, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
+        FLUID_CELL = addItem(511, "fluid_cell").addStats(new FluidStats(1000, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
 
         INTEGRATED_CIRCUIT = addItem(512, "circuit.integrated").addStats(new IntCircuitBehaviour());
         
         FOAM_SPRAYER = addItem(513, "foam_sprayer").addStats(new FoamSprayerBehaviour());
         
-        ENERGY_CRYSTAL = addItem(514, "energy_crystal").addStats(ElectricStats.createRechargeableBattery(1000000L, GTValues.HV)).setModelAmount(8).setMaxStackSize(1);
-        LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(4000000L, GTValues.EV)).setModelAmount(8).setMaxStackSize(1);
+        ENERGY_CRYSTAL = addItem(514, "energy_crystal").addStats(ElectricStats.createRechargeableBattery(1000000, GTValues.HV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Advanced).setModelAmount(8).setMaxStackSize(1);
+        LAPOTRON_CRYSTAL = addItem(515, "lapotron_crystal").addStats(ElectricStats.createRechargeableBattery(10000000, GTValues.EV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Elite).setModelAmount(8).setMaxStackSize(1);
+        ENERGY_LAPOTRONIC_ORB = addItem(418, "energy.lapotronicorb").addStats(ElectricStats.createRechargeableBattery(100000000, GTValues.IV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Master).setModelAmount(8).setMaxStackSize(1);
+        ENERGY_LAPOTRONIC_ORB2 = addItem(419, "energy.lapotronicorb2").addStats(ElectricStats.createRechargeableBattery(Integer.MAX_VALUE, GTValues.LuV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Expert).setModelAmount(8).setMaxStackSize(1); 
+        ENERGY_LAPOTRONIC_ORB3 = addItem(484, "energy.lapotronicorb3").addStats(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UV)).setUnificationData(OrePrefix.battery, MarkerMaterials.Tier.Ultimate).setModelAmount(8).setMaxStackSize(1);
         ENERGIUM_DUST = addItem(516, "energium_dust");
 
         COMPRESSED_CLAY = addItem(519, "compressed.clay");
@@ -301,7 +299,7 @@ public class MetaItems1 extends MaterialMetaItem {
             .outputs(BATTERY_HULL_MV.getStackForm())
             .buildAndRegister();
 
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+        /*RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_SU_HV_SULFURIC_ACID.getStackForm())
             .outputs(BATTERY_HULL_HV.getStackForm())
             .buildAndRegister();
@@ -314,7 +312,7 @@ public class MetaItems1 extends MaterialMetaItem {
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_RE_LV_CADMIUM.getStackForm())
             .outputs(BATTERY_HULL_LV.getStackForm())
-            .buildAndRegister();
+            .buildAndRegister();/
 
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_RE_LV_LITHIUM.getStackForm())
@@ -341,7 +339,7 @@ public class MetaItems1 extends MaterialMetaItem {
             .outputs(BATTERY_HULL_MV.getStackForm())
             .buildAndRegister();
 
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+        /*RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_RE_HV_CADMIUM.getStackForm())
             .outputs(BATTERY_HULL_HV.getStackForm())
             .buildAndRegister();
@@ -354,7 +352,7 @@ public class MetaItems1 extends MaterialMetaItem {
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
             .inputs(BATTERY_RE_HV_SODIUM.getStackForm())
             .outputs(BATTERY_HULL_HV.getStackForm())
-            .buildAndRegister();
+            .buildAndRegister();*/
 
         // Upgrades recipes
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()

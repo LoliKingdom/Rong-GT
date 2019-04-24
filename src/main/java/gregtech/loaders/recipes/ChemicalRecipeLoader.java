@@ -50,7 +50,9 @@ public class ChemicalRecipeLoader {
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(160).EUt(30).fluidInputs(Materials.Isoprene.getFluid(B), Materials.Oxygen.getFluid(B * 2)).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber, 3)).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(160).EUt(240).fluidInputs(Materials.Butadiene.getFluid(800), Materials.Styrene.getFluid(200), Materials.Air.getFluid(B * 3)).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawStyreneButadieneRubber)).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(160).EUt(240).fluidInputs(Materials.Butadiene.getFluid(800), Materials.Styrene.getFluid(200), Materials.Oxygen.getFluid(B * 2)).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.RawStyreneButadieneRubber, 3)).buildAndRegister();
-
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.dust, Materials.Polydimethylsiloxane, 9).input(OrePrefix.dust, Materials.Sulfur).fluidOutputs(Materials.SiliconeRubber.getFluid(1296)).buildAndRegister();
+RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(240).EUt(96).input(OrePrefix.dust, Materials.Silicon).fluidInputs(Materials.Epichlorhydrin.getFluid(144)).fluidOutputs(Materials.SiliconeRubber.getFluid(144)).buildAndRegister();
+        
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(120).EUt(30).notConsumable(new IntCircuitIngredient(2)).fluidInputs(Materials.Propene.getFluid(B * 2)).fluidOutputs(Materials.Methane.getFluid(B), Materials.Isoprene.getFluid(B)).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(3500).EUt(30).input(OrePrefix.dust, Materials.Carbon).notConsumable(new IntCircuitIngredient(0)).fluidInputs(Materials.Hydrogen.getFluid(B * 4)).fluidOutputs(Materials.Methane.getFluid(B * 5)).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(120).EUt(30).fluidInputs(Materials.Ethylene.getFluid(B), Materials.Propene.getFluid(B)).fluidOutputs(Materials.Hydrogen.getFluid(B * 2), Materials.Isoprene.getFluid(B)).buildAndRegister();

@@ -6,28 +6,18 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.unification.material.type.FluidMaterial;
 import gregtech.api.unification.material.type.FluidMaterial.MatFlags;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.material.type.GemMaterial;
 import gregtech.api.unification.material.type.IngotMaterial;
 import gregtech.api.unification.material.type.Material;
-import gregtech.api.unification.material.type.SolidMaterial;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.items.ItemCell;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ItemLayerModel.Loader;
 import net.minecraftforge.fluids.*;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-import slimeknights.tconstruct.library.MaterialIntegration;
-import slimeknights.tconstruct.library.TinkerRegistry;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -76,11 +66,11 @@ public class MetaFluids {
             return stateFunction.apply(fluidMaterial);
         }
     }
-    
+
     public enum FluidState {
         LIQUID(null), 
         GAS(null), 
-        PLASMA("gregtech.fluid.plasma"), 
+        PLASMA("gregtech.fluid.plasma"),
         DIRTYSLURRY("gregtech.fluid.dirtyslurry"), 
         CLEANSLURRY("gregtech.fluid.cleanslurry");
 
@@ -90,9 +80,9 @@ public class MetaFluids {
             this.prefixLocale = prefixLocale;
         }
     }
-    
+
     public static void registerSprites(TextureMap textureMap) {
-        for(ResourceLocation spriteLocation : fluidSprites) {
+        for (ResourceLocation spriteLocation : fluidSprites) {
             textureMap.registerSprite(spriteLocation);
         }
     }
@@ -106,8 +96,7 @@ public class MetaFluids {
         fluidSprites.add(AUTO_GENERATED_FLUID_TEXTURE);
         fluidSprites.add(AUTO_GENERATED_MOLTEN_FLUID_TEXTURE);
 
-        //TODO: Mekanism alternative names
-        //Alternative names for forestry fluids
+        //alternative names for forestry fluids
         setAlternativeFluidName(Materials.Ethanol, FluidType.NORMAL, "bio.ethanol");
         setAlternativeFluidName(Materials.Honey, FluidType.NORMAL, "for.honey");
         setAlternativeFluidName(Materials.SeedOil, FluidType.NORMAL, "seed.oil");
@@ -140,13 +129,7 @@ public class MetaFluids {
         setDefaultTexture(Materials.LightFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.HeavyFuel, FluidType.NORMAL);
         setDefaultTexture(Materials.LPG, FluidType.NORMAL);
-        //setDefaultTexture(Materials.HydroCrackedLightFuel, FluidType.NORMAL);
-        //setDefaultTexture(Materials.SteamCrackedLightFuel, FluidType.NORMAL);
-        //setDefaultTexture(Materials.HydroCrackedHeavyFuel, FluidType.NORMAL);
-        //setDefaultTexture(Materials.SteamCrackedHeavyFuel, FluidType.NORMAL);
-        //setDefaultTexture(Materials.UUMatter, FluidType.NORMAL);
-        //setDefaultTexture(Materials.PositiveMatter, FluidType.NORMAL);
-        //setDefaultTexture(Materials.NeutralMatter, FluidType.NORMAL);
+        setDefaultTexture(Materials.UUAmplifier, FluidType.NORMAL);
         setDefaultTexture(Materials.Chlorine, FluidType.NORMAL);
         setDefaultTexture(Materials.Mercury, FluidType.NORMAL);
         setDefaultTexture(Materials.NitroFuel, FluidType.NORMAL);
@@ -161,55 +144,40 @@ public class MetaFluids {
         setDefaultTexture(Materials.Biomass, FluidType.NORMAL);
         setDefaultTexture(Materials.Ethanol, FluidType.NORMAL);
         setDefaultTexture(Materials.SulfuricAcid, FluidType.NORMAL);
-        setDefaultTexture(Materials.SulfurTrioxide, FluidType.NORMAL);
         setDefaultTexture(Materials.Milk, FluidType.NORMAL);
         setDefaultTexture(Materials.Glue, FluidType.NORMAL);
-        Fluid carbonMonoxide = registerFluid(Materials.CarbonMonoxide, FluidType.NORMAL, Materials.CarbonMonoxide.getFluidTemperature());
-        Materials.CarbonMonoxide.setMaterialFluid(carbonMonoxide);
 
-        for(Material material : Material.MATERIAL_REGISTRY) {   
-        	if(material instanceof DustMaterial && GTValues.isModLoaded("mekanism")) {
-            	DustMaterial slurryMaterial = (DustMaterial)material;
-            	if(slurryMaterial.shouldGenerateSlurries()) {
-            		Fluid dirtySlurry = registerFluid(slurryMaterial, FluidType.DIRTYSLURRY, 1200);
-            		Fluid cleanSlurry = registerFluid(slurryMaterial, FluidType.CLEANSLURRY, 1200);
-            		slurryMaterial.setMaterialDirtySlurry(dirtySlurry);
-            		slurryMaterial.setMaterialCleanSlurry(cleanSlurry);
-            	}
-            }
-        	if(material instanceof FluidMaterial && ((FluidMaterial)material).shouldGeneratePlasma() && ((FluidMaterial)material).getMaterialPlasma() == null) {
-                Fluid fluid = registerFluid((FluidMaterial)material, FluidType.PLASMA, 30000);
-                ((FluidMaterial)material).setMaterialPlasma(fluid);
-            } 
-            if(material instanceof GemMaterial) {
-            	int temperature = ((FluidMaterial)material).getFluidTemperature();
-            	Fluid fluid = registerMoltenFluid((SolidMaterial)material, FluidType.NORMAL, temperature);
-            	((FluidMaterial)material).setMaterialFluid(fluid);
-            }
-            else if(material instanceof IngotMaterial) {
-        		int temperature = ((FluidMaterial)material).getFluidTemperature() < ((IngotMaterial)material).blastFurnaceTemperature ?
-        				((IngotMaterial)material).blastFurnaceTemperature : ((FluidMaterial)material).getFluidTemperature();
-        		Fluid fluid = registerMoltenFluid((SolidMaterial)material, FluidType.NORMAL, temperature);
-        		((FluidMaterial)material).setMaterialFluid(fluid);
-        	}          
-            else if(material instanceof DustMaterial && ((FluidMaterial)material).shouldGenerateFluid() && ((FluidMaterial)material).getMaterialFluid() == null) {
-            	int temperature = ((FluidMaterial)material).getFluidTemperature();
-                Fluid fluid = registerFluid((FluidMaterial)material, FluidType.NORMAL, temperature);
-                ((FluidMaterial)material).setMaterialFluid(fluid);
-            }
-            else if(material instanceof FluidMaterial && ((FluidMaterial)material).getMaterialFluid() == null) {
-            	int temperature = ((FluidMaterial)material).getFluidTemperature();
-                Fluid fluid = registerFluid((FluidMaterial)material, FluidType.NORMAL, temperature);
-                ((FluidMaterial)material).setMaterialFluid(fluid);
-            }
+        for(Material material : Material.MATERIAL_REGISTRY) {
+        	if(material instanceof FluidMaterial) {
+        		FluidMaterial fluidMaterial = (FluidMaterial)material;
+        		if(fluidMaterial.shouldGenerateFluid() && fluidMaterial.getMaterialFluid() == null) {
+        			int temperature = fluidMaterial.getFluidTemperature();
+                    Fluid fluid = registerFluid(fluidMaterial, FluidType.NORMAL, temperature);
+                    fluidMaterial.setMaterialFluid(fluid);
+        		}
+        		if(fluidMaterial.shouldGeneratePlasma() && fluidMaterial.getMaterialPlasma() == null) {
+        			int temperature = fluidMaterial.getFluidTemperature();
+                    Fluid fluid = registerFluid(fluidMaterial, FluidType.NORMAL, 30000);
+                    fluidMaterial.setMaterialPlasma(fluid);
+        		}
+        		if(material instanceof DustMaterial && (GTValues.isModLoaded("mekanism") || GTValues.isModLoaded("mekanica"))) {
+        			DustMaterial slurryMaterial = (DustMaterial)material;
+        			if(slurryMaterial.shouldGenerateSlurries()) {
+                		Fluid dirtySlurry = registerFluid(slurryMaterial, FluidType.DIRTYSLURRY, 1200);
+                		Fluid cleanSlurry = registerFluid(slurryMaterial, FluidType.CLEANSLURRY, 1200);
+                		slurryMaterial.setMaterialDirtySlurry(dirtySlurry);
+                		slurryMaterial.setMaterialCleanSlurry(cleanSlurry);
+    				}
+        		}
+        	}
         }
     }
-    
+
     private static void setDefaultTexture(FluidMaterial material, FluidType fluidType) {
         ResourceLocation resourceLocation = new ResourceLocation(GTValues.MODID, "blocks/fluids/fluid." + material.toString());
         setMaterialFluidTexture(material, fluidType, resourceLocation);
     }
-    
+
     private static void setMaterialFluidTexture(FluidMaterial material, FluidType fluidType, ResourceLocation textureLocation) {
         fluidTextureMap.put(Pair.of(material, fluidType), textureLocation);
         fluidSprites.add(textureLocation);
@@ -218,61 +186,50 @@ public class MetaFluids {
     private static void setAlternativeFluidName(FluidMaterial material, FluidType fluidType, String alternativeName) {
         alternativeFluidNames.put(fluidType.getFluidName(material), alternativeName);
     }
-    
-    private static Fluid registerMoltenFluid(SolidMaterial material, FluidType fluidType, int temperature) {
-    	 String materialName = material.toString();
-         String fluidName = fluidType.getFluidName(material);
-         Fluid fluid = FluidRegistry.getFluid(fluidName);
-         if(fluid == null && alternativeFluidNames.containsKey(fluidName)) {
-             String altName = alternativeFluidNames.get(fluidName);
-             fluid = FluidRegistry.getFluid(altName);
-         }
-         if(fluid == null) {
-             FluidState fluidState = fluidType.getFluidState(material);
-             ResourceLocation textureLocation = fluidTextureMap.getOrDefault(Pair.of(material, fluidType), AUTO_GENERATED_MOLTEN_FLUID_TEXTURE);
-             fluid = new MaterialFluid(fluidName, material, fluidState, textureLocation);
-             fluid.setTemperature(temperature);
-             if(textureLocation == AUTO_GENERATED_MOLTEN_FLUID_TEXTURE) {
-                 fluid.setColor(GTUtility.convertRGBtoOpaqueRGBA_MC(material.materialRGB));
-             }  
-             setStateProperties(fluid, fluidState);
-             FluidRegistry.registerFluid(fluid);
-         }
-         FluidRegistry.addBucketForFluid(fluid);
-         if(material.hasFlag(MatFlags.GENERATE_FLUID_BLOCK) && fluid.getBlock() == null) {
-             BlockFluidBase fluidBlock = new BlockFluidClassic(fluid, net.minecraft.block.material.Material.LAVA);
-             fluidBlock.setRegistryName("fluid." + materialName);
-             MetaBlocks.FLUID_BLOCKS.add(fluidBlock);
-         }
-         fluidToMaterialMappings.put(fluid.getName(), material);
-         return fluid;
-    }
 
-    private static Fluid registerFluid(FluidMaterial material, FluidType fluidType, int temperature) {
+    public static Fluid registerFluid(FluidMaterial material, FluidType fluidType, int temperature) {
         String materialName = material.toString();
         String fluidName = fluidType.getFluidName(material);
         Fluid fluid = FluidRegistry.getFluid(fluidName);
-        if(fluid == null && alternativeFluidNames.containsKey(fluidName)) {
+        if (fluid == null && alternativeFluidNames.containsKey(fluidName)) {
             String altName = alternativeFluidNames.get(fluidName);
             fluid = FluidRegistry.getFluid(altName);
-        }       
-        if(fluid == null) {
-        	FluidState fluidState = fluidType.getFluidState(material);
-            ResourceLocation textureLocation = fluidTextureMap.getOrDefault(Pair.of(material, fluidType), AUTO_GENERATED_FLUID_TEXTURE);
-            fluid = new MaterialFluid(fluidName, material, fluidState, textureLocation);
-            fluid.setTemperature(temperature);
-            if(textureLocation == AUTO_GENERATED_FLUID_TEXTURE) {
-                fluid.setColor(GTUtility.convertRGBtoOpaqueRGBA_MC(material.materialRGB));
-            }
-            setStateProperties(fluid, fluidState);
-            FluidRegistry.registerFluid(fluid);
         }
+
+        if (fluid == null) {
+        	if (OreDictUnifier.get(OrePrefix.gem, material) != null || OreDictUnifier.get(OrePrefix.ingot, material) != null ||
+        			(material instanceof DustMaterial && ((DustMaterial)material).shouldGenerateSlurries())) {
+        		FluidState fluidState = fluidType.getFluidState(material);
+                ResourceLocation textureLocation = fluidTextureMap.getOrDefault(Pair.of(material, fluidType), AUTO_GENERATED_MOLTEN_FLUID_TEXTURE);
+                fluid = new MaterialFluid(fluidName, material, fluidState, textureLocation);
+                fluid.setTemperature(temperature);
+                if (textureLocation == AUTO_GENERATED_MOLTEN_FLUID_TEXTURE) {
+                    fluid.setColor(GTUtility.convertRGBtoOpaqueRGBA_MC(material.materialRGB));
+                }
+                setStateProperties(fluid, fluidState);
+                FluidRegistry.registerFluid(fluid);       		
+        	}
+        	else {
+        		FluidState fluidState = fluidType.getFluidState(material);
+        		ResourceLocation textureLocation = fluidTextureMap.getOrDefault(Pair.of(material, fluidType), AUTO_GENERATED_FLUID_TEXTURE);
+        		fluid = new MaterialFluid(fluidName, material, fluidState, textureLocation);
+        		fluid.setTemperature(temperature);
+        		if (textureLocation == AUTO_GENERATED_FLUID_TEXTURE) {
+        			fluid.setColor(GTUtility.convertRGBtoOpaqueRGBA_MC(material.materialRGB));
+        		}
+        		setStateProperties(fluid, fluidState);
+        		FluidRegistry.registerFluid(fluid);
+        	}
+        }
+
         FluidRegistry.addBucketForFluid(fluid);
-        if(material.hasFlag(MatFlags.GENERATE_FLUID_BLOCK) && fluid.getBlock() == null) {
+
+        if (material.hasFlag(MatFlags.GENERATE_FLUID_BLOCK) && fluid.getBlock() == null) {
             BlockFluidBase fluidBlock = new BlockFluidClassic(fluid, net.minecraft.block.material.Material.WATER);
             fluidBlock.setRegistryName("fluid." + materialName);
             MetaBlocks.FLUID_BLOCKS.add(fluidBlock);
         }
+
         fluidToMaterialMappings.put(fluid.getName(), material);
         return fluid;
     }
@@ -282,7 +239,7 @@ public class MetaFluids {
     }
 
     private static void setStateProperties(Fluid fluid, FluidState fluidState) {
-        switch(fluidState) {
+        switch (fluidState) {
             case LIQUID:
                 fluid.setGaseous(false);
                 fluid.setViscosity(1000);
@@ -335,4 +292,5 @@ public class MetaFluids {
             return localizedName;
         }
     }
+
 }

@@ -266,24 +266,26 @@ public class PartsRecipeHandler {
     public static void processTurbine(OrePrefix toolPrefix, IngotMaterial material) {
         ItemStack rotorStack = MetaItems.TURBINE_ROTOR.getStackForm();
         TurbineRotorBehaviour.getInstanceFor(rotorStack).setPartMaterial(rotorStack, material);
+
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
             .input(OrePrefix.turbineBlade, material, 8)
             .input(OrePrefix.stick, Materials.Titanium, 4)
             .outputs(rotorStack)
-            .duration(320)
-            .EUt(400)
+            .duration(200).EUt(400)
+            .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+            .input(OrePrefix.plate, material, 5)
+            .input(OrePrefix.screw, material, 2)
+            .outputs(OreDictUnifier.get(toolPrefix, material))
+            .duration(20).EUt(256)
+            .circuitMeta(10)
             .buildAndRegister();
 
         ModHandler.addShapedRecipe(String.format("turbine_blade_%s", material),
             OreDictUnifier.get(toolPrefix, material),
-            "fPd", "SPS", " P ",
+            "PPP", "SPS", "fPd",
             'P', new UnificationEntry(OrePrefix.plate, material),
             'S', new UnificationEntry(OrePrefix.screw, material));
-    }
-
-
-    private static boolean doesMaterialUseNormalFurnace(Material material) {
-        return !(material instanceof IngotMaterial) ||
-            ((IngotMaterial) material).blastFurnaceTemperature <= 0;
     }
 }

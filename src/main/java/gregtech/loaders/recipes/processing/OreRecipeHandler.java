@@ -8,10 +8,16 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.*;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.ore.StoneType;
+import gregtech.api.unification.ore.StoneTypes;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
+import gregtech.common.blocks.BlockOre;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -19,11 +25,11 @@ import net.minecraftforge.fml.common.Loader;
 public class OreRecipeHandler {
 
     public static void register() {
-        OrePrefix.ore.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
+        OrePrefix.oreStone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreEndstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreGravel.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreNetherrack.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
-        OrePrefix.oreSand.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
+        //OrePrefix.oreSand.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
 
         OrePrefix.crushed.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedOre);
@@ -63,7 +69,7 @@ public class OreRecipeHandler {
 
             RecipeBuilder<?> builder = RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
                 .input(orePrefix, material)
-                .outputs(GTUtility.copyAmount(crushedStack.getCount() * 2, crushedStack))
+                .outputs(GTUtility.copyAmount(crushedStack.getCount() + 1, crushedStack))
                 .chancedOutput(byproductStack, 1500)
                 .duration(280).EUt(18);
             for(MaterialStack secondaryMaterial : orePrefix.secondaryMaterials) {
@@ -77,7 +83,7 @@ public class OreRecipeHandler {
             RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(80)
             	.fluidInputs(Materials.Nitrogen.getPlasma(25))
             	.input(orePrefix, material)
-            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 3, ingotStack))
+            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 5, ingotStack))
             	.buildAndRegister();
         }
     }

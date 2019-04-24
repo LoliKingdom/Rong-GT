@@ -146,8 +146,7 @@ public class MetaBlocks {
         PETRIFIED_FOAM = new BlockPetrifiedFoam(false);
         PETRIFIED_FOAM.setRegistryName("petrified_foam");
         REINFORCED_PETRIFIED_FOAM = new BlockPetrifiedFoam(true);
-        REINFORCED_PETRIFIED_FOAM.setRegistryName("reinforced_petrified_foam");
-        
+        REINFORCED_PETRIFIED_FOAM.setRegistryName("reinforced_petrified_foam");      
         DRILL_HEAD = new BlockDrillHead();
         DRILL_HEAD.setRegistryName("drill_head");
 
@@ -419,6 +418,7 @@ public class MetaBlocks {
                 if(stoneType == null) continue;
                 ItemStack normalStack = blockOre.getItem(blockOre.getDefaultState()
                     .withProperty(blockOre.STONE_TYPE, stoneType));
+                OreDictUnifier.registerOre(normalStack, OrePrefix.ore, material);
                 OreDictUnifier.registerOre(normalStack, stoneType.processingPrefix, material);
             }
         }

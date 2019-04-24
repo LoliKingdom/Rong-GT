@@ -28,6 +28,7 @@ public class DungeonLootLoader {
             ChestGenHooks.addRolls(LootTableList.CHESTS_STRONGHOLD_LIBRARY, 4, 8);
             ChestGenHooks.addRolls(LootTableList.CHESTS_NETHER_BRIDGE, 2, 5);
             ChestGenHooks.addRolls(LootTableList.CHESTS_END_CITY_TREASURE, 5, 7);
+            ChestGenHooks.addRolls(LootTableList.CHESTS_WOODLAND_MANSION, 4, 6);
         }
 
         ChestGenHooks.addItem(LootTableList.CHESTS_SPAWN_BONUS_CHEST, MetaItems.BOTTLE_PURPLE_DRINK.getStackForm(), 8, 16, 2);

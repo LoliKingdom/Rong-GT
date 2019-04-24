@@ -215,7 +215,7 @@ public class MetaItems {
 
     public static MetaItem<?>.MetaValueItem INTEGRATED_CIRCUIT;
 
-    //public static MetaItem<?>.MetaValueItem FLUID_CELL;
+    public static MetaItem<?>.MetaValueItem FLUID_CELL;
 
     public static MetaItem<?>.MetaValueItem BOTTLE_PURPLE_DRINK;
     
@@ -281,7 +281,7 @@ public class MetaItems {
     public static void registerRecipes() {
         for (MetaItem<?> item : ITEMS) {
             if (item instanceof MetaItems1)
-                ((MetaItems1) item).registerRecipes();
+                ((MetaItems1)item).registerRecipes();
         }
     }
     
