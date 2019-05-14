@@ -46,6 +46,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -94,9 +95,7 @@ public class MetaBlocks {
     public static BlockRubberLog LOG;
     public static BlockRubberLeaves LEAVES;
     public static BlockRubberSapling SAPLING;
-    
-    public static BlockDrillHead DRILL_HEAD;
-    
+
     public static BlockTransparent TRANSPARENT;
 
     public static Map<DustMaterial, BlockCompressed> COMPRESSED = new HashMap<>();
@@ -147,8 +146,6 @@ public class MetaBlocks {
         PETRIFIED_FOAM.setRegistryName("petrified_foam");
         REINFORCED_PETRIFIED_FOAM = new BlockPetrifiedFoam(true);
         REINFORCED_PETRIFIED_FOAM.setRegistryName("reinforced_petrified_foam");      
-        DRILL_HEAD = new BlockDrillHead();
-        DRILL_HEAD.setRegistryName("drill_head");
 
         StoneType.init();
 
@@ -179,6 +176,8 @@ public class MetaBlocks {
         //TODO: Figure out what to do. Going to make superconductors operate at UV right now
         CABLE.addCableMaterial(MarkerMaterials.Tier.Superconductor, new WireProperties(((int)GTValues.V[6]), 4, 0));
         registerTileEntity();
+        Blocks.FIRE.setFireInfo(LOG, 5, 5);
+        Blocks.FIRE.setFireInfo(LEAVES, 30, 60);
     }
 
     private static int createGeneratedBlock(Predicate<Material> materialPredicate, BiConsumer<Material[], Integer> blockGenerator) {
@@ -274,7 +273,6 @@ public class MetaBlocks {
         registerItemModel(MULTIBLOCK_CASING);
         registerItemModel(WIRE_COIL);
         registerItemModel(CONCRETE);
-        registerItemModel(DRILL_HEAD);
         registerItemModelWithOverride(LOG, ImmutableMap.of(BlockRubberLog.LOG_AXIS, EnumAxis.Y));
         registerItemModel(LEAVES);
         registerItemModel(SAPLING);

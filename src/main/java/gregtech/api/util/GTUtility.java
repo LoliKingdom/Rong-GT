@@ -1,50 +1,66 @@
 package gregtech.api.util;
 
+import static gregtech.api.GTValues.V;
+
+import java.awt.Color;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.math.BigInteger;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Lists;
-import gregtech.api.GregTechAPI;
+
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.damagesources.DamageSources;
 import gregtech.api.items.IToolItem;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.type.Material;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.ConfigHolder;
 import gregtech.common.items.MetaItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.play.client.CPacketPlayerDigging;
+import net.minecraft.network.play.client.CPacketPlayerDigging.Action;
+import net.minecraft.network.play.server.SPacketBlockChange;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.Fluid;
@@ -60,28 +76,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.awt.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.math.BigInteger;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
-import static gregtech.api.GTValues.V;
-
 public class GTUtility {
 
     public static BigInteger LONG_MAX = BigInteger.valueOf(Long.MAX_VALUE);
     public static BigInteger LONG_MIN = BigInteger.valueOf(Long.MIN_VALUE);
 
-    public static  <T> String[] mapToString(T[] array, Function<T, String> mapper) {
+    public static <T> String[] mapToString(T[] array, Function<T, String> mapper) {
         String[] result = new String[array.length];
         for(int i = 0; i < array.length; i++) {
             result[i] = mapper.apply(array[i]);
@@ -218,84 +218,51 @@ public class GTUtility {
         }
         return merged;
     }
-
-    public static boolean isBlockOrePrefixed(IBlockAccess world, BlockPos pos, IBlockState blockState, OrePrefix targetPrefix, List<ItemStack> drops) {
-        for(ItemStack itemStack : drops) {
-            OrePrefix orePrefix = OreDictUnifier.getPrefix(itemStack);
-            if(orePrefix == targetPrefix)
-                return true;
+    
+    public static boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+        IBlockState blockState = world.getBlockState(pos);
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if(blockState.getBlock().isAir(blockState, world, pos)) {
+            return false;
         }
-        return false;
-    }
-
-    public static long getBlockMaterialAmount(IBlockAccess world, BlockPos pos, IBlockState blockState, Material targetMaterial, List<ItemStack> drops) {
-        for(ItemStack itemStack : drops) {
-            MaterialStack materialStack = OreDictUnifier.getMaterial(itemStack);
-            if(materialStack != null && materialStack.material == targetMaterial)
-                return materialStack.amount;
+        if(!blockState.getBlock().canHarvestBlock(world, pos, player)) {
+            return false;
         }
-        return 0L;
-    }
+        int expToDrop = 0;
+        if(!world.isRemote) {
+            EntityPlayerMP playerMP = (EntityPlayerMP) player;
+            expToDrop = ForgeHooks.onBlockBreakEvent(world, playerMP.interactionManager.getGameType(), playerMP, pos);
+            if(expToDrop == -1) {
+                //notify client if block can't be removed because of BreakEvent cancelled on server side
+                playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+                return false;
+            }
+        }
+        world.playEvent(player, 2001, pos, Block.getStateId(blockState));
+        boolean wasRemovedByPlayer = blockState.getBlock().removedByPlayer(blockState, world, pos, player, !player.capabilities.isCreativeMode);
+        if(wasRemovedByPlayer) {
+            blockState.getBlock().onBlockDestroyedByPlayer(world, pos, blockState);
 
-    /**
-     * Adds potion tooltip into given lines list
-     *
-     * @param potions potion effects to add to tooltip
-     * @param lines   description lines
-     */
-    @SideOnly(Side.CLIENT)
-    public static void addPotionTooltip(Iterable<PotionEffect> potions, List<String> lines) {
-        ArrayList<Tuple<String, AttributeModifier>> attributeLines = new ArrayList<>();
-
-        for (PotionEffect potionEffect : potions) {
-            String line = I18n.format(potionEffect.getEffectName());
-            Potion potion = potionEffect.getPotion();
-            Map<IAttribute, AttributeModifier> attributes = potionEffect.getPotion().getAttributeModifierMap();
-            if (!attributes.isEmpty()) {
-                for (Map.Entry<IAttribute, AttributeModifier> entry : attributes.entrySet()) {
-                    AttributeModifier modifier = entry.getValue();
-                    attributeLines.add(new Tuple<>(entry.getKey().getName(),
-                            new AttributeModifier(modifier.getName(),
-                                    potion.getAttributeModifierAmount(potionEffect.getAmplifier(), modifier),
-                                    modifier.getOperation())));
+            if(!world.isRemote && !player.capabilities.isCreativeMode) {
+                ItemStack stackInHand = player.getHeldItemMainhand();
+                blockState.getBlock().harvestBlock(world, player, pos, blockState, tileEntity, stackInHand);
+                if(expToDrop > 0) {
+                    blockState.getBlock().dropXpOnBlockBreak(world, pos, expToDrop);
                 }
             }
-            if (potionEffect.getAmplifier() > 0) {
-                line = line + " " + I18n.format("potion.potency." + potionEffect.getAmplifier());
-            }
-            if (potionEffect.getDuration() > 20) {
-                line = line + " (" + Potion.getPotionDurationString(potionEffect, 1.0f) + ")";
-            }
-            if (potion.isBadEffect()) {
-                lines.add(TextFormatting.RED + line);
-            } else {
-                lines.add(TextFormatting.BLUE + line);
-            }
         }
-        if (!attributeLines.isEmpty()) {
-            lines.add("");
-            lines.add(TextFormatting.DARK_PURPLE + I18n.format("potion.whenDrank"));
-
-            for (Tuple<String, AttributeModifier> tuple : attributeLines) {
-                AttributeModifier modifier = tuple.getSecond();
-                double d0 = modifier.getAmount();
-                double d1;
-                if (modifier.getOperation() != 1 && modifier.getOperation() != 2) {
-                    d1 = modifier.getAmount();
-                } else {
-                    d1 = modifier.getAmount() * 100.0D;
-                }
-                if (d0 > 0.0D) {
-                    lines.add(TextFormatting.BLUE + I18n.format("attribute.modifier.plus." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.format("attribute.name." + tuple.getFirst())));
-                } else if (d0 < 0.0D) {
-                    d1 = d1 * -1.0D;
-                    lines.add(TextFormatting.RED + I18n.format("attribute.modifier.take." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.format("attribute.name." + tuple.getFirst())));
-                }
-            }
-
+        if(!world.isRemote) {
+            EntityPlayerMP playerMP = (EntityPlayerMP) player;
+            playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+        } else {
+            Minecraft mc = Minecraft.getMinecraft();
+            mc.getConnection().sendPacket(new CPacketPlayerDigging(Action.START_DESTROY_BLOCK, pos, mc.objectMouseOver.sideHit));
         }
+        return wasRemovedByPlayer;
     }
 
+
+    
     @SideOnly(Side.CLIENT)
     public static void drawCenteredSizedText(int x, int y, String string, int color, double sizeMultiplier) {
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
@@ -368,14 +335,6 @@ public class GTUtility {
         }
     }
 
-    public static boolean isStringValid(String aString) {
-        return aString != null && !aString.isEmpty();
-    }
-
-    public static boolean isBetweenExclusive(long start, long end, long value) {
-        return start < value && value < end;
-    }
-
     public static boolean isBetweenInclusive(long start, long end, long value) {
         return start <= value && value <= end;
     }
@@ -409,6 +368,21 @@ public class GTUtility {
             }
         }
         return tier;
+    }
+    
+    public static int getRedstonePower(World world, BlockPos blockPos, EnumFacing side) {
+        BlockPos offsetPos = blockPos.offset(side);
+        int worldPower = world.getRedstonePower(offsetPos, side);
+        if (worldPower >= 15) {
+            return worldPower;
+        } else {
+            IBlockState offsetState = world.getBlockState(offsetPos);
+            if(offsetState.getBlock() instanceof BlockRedstoneWire) {
+                int wirePower = offsetState.getValue(BlockRedstoneWire.POWER);
+                return Math.max(worldPower, wirePower);
+            }
+            return worldPower;
+        }
     }
     
     public static BiomeDictionary.Type getBiomeTypeTagByName(String name) {

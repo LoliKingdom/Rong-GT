@@ -106,7 +106,7 @@ public abstract class SteamMetaTileEntity extends MetaTileEntity {
         return ModularUI.builder(BRONZE_BACKGROUND_TEXTURE, 176, 166)
             .widget(new LabelWidget(6, 6, getMetaFullName()))
             .widget(new ImageWidget(79, 42, 18, 18, getFullGuiTexture("not_enough_steam_%s"))
-                .setPredicate(() -> workableHandler.notEnoughEnergy()))
+                .setPredicate(() -> workableHandler.isHasNotEnoughEnergy()))
             .bindPlayerInventory(player.inventory, BRONZE_SLOT_BACKGROUND_TEXTURE);
     }
 }

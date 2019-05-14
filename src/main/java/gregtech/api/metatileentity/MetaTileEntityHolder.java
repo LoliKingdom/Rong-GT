@@ -1,6 +1,12 @@
 package gregtech.api.metatileentity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Preconditions;
+
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.machines.BlockMachine;
@@ -12,14 +18,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants.NBT;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MetaTileEntityHolder extends TickableTileEntityBase implements IUIHolder {
 
@@ -230,17 +233,32 @@ public class MetaTileEntityHolder extends TickableTileEntityBase implements IUIH
 
     @Override
     public boolean shouldRenderInPass(int pass) {
-        return metaTileEntity != null && metaTileEntity.requiresDynamicRendering() &&
-            metaTileEntity.shouldRenderInPass(pass);
-    }
-
-    @Override
-    public boolean canRenderBreaking() {
+    	if(metaTileEntity instanceof IRenderMetaTileEntity) {
+            return ((IRenderMetaTileEntity) metaTileEntity).shouldRenderInPass(pass);
+        } else if(metaTileEntity instanceof IFastRenderMetaTileEntity) {
+            return ((IFastRenderMetaTileEntity) metaTileEntity).shouldRenderInPass(pass);
+        }
         return false;
     }
 
     @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        if(metaTileEntity instanceof IRenderMetaTileEntity) {
+            return ((IRenderMetaTileEntity) metaTileEntity).getRenderBoundingBox();
+        } else if(metaTileEntity instanceof IFastRenderMetaTileEntity) {
+            return ((IFastRenderMetaTileEntity) metaTileEntity).getRenderBoundingBox();
+        }
+        return new AxisAlignedBB(getPos(), getPos().add(1, 1, 1));
+    }
+
+    @Override
     public boolean hasFastRenderer() {
-        return true;
+    	return metaTileEntity instanceof IFastRenderMetaTileEntity &&
+                !(metaTileEntity instanceof IRenderMetaTileEntity);
+    }
+
+    @Override
+    public boolean canRenderBreaking() {
+    	return false;
     }
 }

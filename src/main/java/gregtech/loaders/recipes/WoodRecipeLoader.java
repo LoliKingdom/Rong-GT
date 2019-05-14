@@ -26,7 +26,7 @@ public class WoodRecipeLoader {
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
             .input(OrePrefix.log, Materials.Wood)
             .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Wood, 5))
-            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Wood), 8000)
+            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Wood), 8000, 50)
             .buildAndRegister();
         
         ItemStack woodStack = OreDictUnifier.get(OrePrefix.log, Materials.Wood);

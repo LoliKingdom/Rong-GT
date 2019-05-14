@@ -39,10 +39,6 @@ public class RecyclerRecipeBuilder extends RecipeBuilder<RecyclerRecipeBuilder> 
                     .EUt(this.EUt / 3)
                     .fluidInputs(Materials.Nitrogen.getPlasma(plasmaAmount))
                     .fluidOutputs(Materials.Nitrogen.getFluid(plasmaAmount));
-            this.getChancedOutputs().forEachEntry((key, val) -> {
-                builder.chancedOutput(key, val);
-                return true;
-             });
              builder.buildAndRegister();
         }
         super.buildAndRegister();
@@ -51,6 +47,6 @@ public class RecyclerRecipeBuilder extends RecipeBuilder<RecyclerRecipeBuilder> 
     public ValidationResult<Recipe> build() {
         return ValidationResult.newResult(finalizeAndValidate(),
             new Recipe(inputs, outputs, chancedOutputs, fluidInputs, fluidOutputs,
-                ImmutableMap.of(), duration, EUt, hidden, canBeBuffered, needsEmptyOutput));
+                ImmutableMap.of(), duration, EUt, hidden, needsEmptyOutput));
     }
 }

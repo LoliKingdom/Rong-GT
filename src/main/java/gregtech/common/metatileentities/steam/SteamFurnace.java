@@ -1,5 +1,6 @@
 package gregtech.common.metatileentities.steam;
 
+import gregtech.api.capability.impl.RecipeLogicSteam;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.ProgressWidget.MoveType;
@@ -18,6 +19,7 @@ public class SteamFurnace extends SteamMetaTileEntity {
 
     public SteamFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.FURNACE_RECIPES, Textures.FURNACE_OVERLAY);
+        this.workableHandler = new RecipeLogicSteam(this, workableHandler.recipeMap, steamFluidTank, 1.0);
     }
 
     @Override

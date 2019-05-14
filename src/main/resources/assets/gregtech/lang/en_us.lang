@@ -20,6 +20,11 @@ cover.machine_controller.mode.cover_north=Control Cover (North)
 cover.machine_controller.mode.cover_east=Control Cover (East)
 cover.machine_controller.mode.cover_west=Control Cover (West)
 
+cover.item_filter.ignore_damage.enabled=Ignore Damage
+cover.item_filter.ignore_damage.disabled=Respect Damage
+cover.item_filter.ignore_nbt.enabled=Ignore NBT
+cover.item_filter.ignore_nbt.disabled=Respect NBT
+
 gregtech.machine.fluid_tank.fluid=Contains %s mb of %s
 
 gregtech.machine.item_controller.tooltip.redstone=Requires Redstone Input To Work
@@ -441,7 +446,7 @@ metaitem.file.name=%s File
 metaitem.crowbar.name=%s Crowbar
 metaitem.crowbar.tooltip=Dismounts covers and rotates rails
 metaitem.screwdriver.name=%s Screwdriver
-metaitem.screwdriver.tooltip=/nRight click on a machine side to increment/nit's output tank filter index/nWhen output tank filter is set up,/nonly fluids from specified tank index/nare allowed to be outputted on that side/nClick on cover to configure it
+metaitem.screwdriver.tooltip=Click on a cover to configure it
 metaitem.mortar.name=%s Mortar
 metaitem.wire_cutter.name=%s Wire Cutter
 metaitem.scoop.name=%s Scoop
@@ -475,12 +480,12 @@ metaitem.turbine_rotor.name=%s Turbine Rotor
 metaitem.turbine_rotor.tooltip=Turbine Rotors for your Power Station
 metaitem.magnifying_glass.name=%s Magnifying Glass
 
-metaitem.tooltip.primary_material=Primary material: %s (Level %s)
-metaitem.tooltip.attack_damage=Attack damage: %d
-metaitem.tooltip.mining_speed=Mining speed: %d
-metaitem.tooltip.durability=Durability: %d/%d
-metaitem.tooltip.rotor.efficiency=Rotor Efficiency: %d%%
-metaitem.tooltip.hammer.extra_drop=Has a chance to drop double crushed ores
+metaitem.tool.tooltip.primary_material=Primary material: %s (Level %s)
+metaitem.tool.tooltip.attack_damage=Attack damage: %d
+metaitem.tool.tooltip.mining_speed=Mining speed: %d
+metaitem.tool.tooltip.durability=Durability: %d/%d
+metaitem.tool.tooltip.rotor.efficiency=Rotor Efficiency: %d%%
+metaitem.tool.tooltip.hammer.extra_drop=Has a chance to drop double crushed ores
 
 cover.ore_dictionary_filter.title=Ore Dictionary Filter
 cover.ore_dictionary_filter.title1=Ore Dictionary Name
@@ -1789,6 +1794,7 @@ gregtech.machine.steel_tank.name=Steel Tank
 gregtech.machine.stainless_steel_tank.name=Stainless Steel Tank
 gregtech.machine.titanium_tank.name=Titanium Tank
 gregtech.machine.tungstensteel_tank.name=Tungstensteel Tank
+gregtech.machine.adamantine_tank.name=Adamantine Tank
 
 # Concrete blocks
 tile.concrete.light_concrete.normal.name=Light Concrete
@@ -2232,8 +2238,8 @@ gregtech.machine.bedrock_drill.name=Bedrock Drill
 gregtech.multiblock.assembly_line.description=The Assembly Line is a large multiblock structure consisting of 5 to 16 "slices"./nIn theory, it's a large Assembler, used for creating advanced crafting components.
 
 #General machinery
-gregtech.machine.basic.output_override.reset=Output filter: all tanks.
-gregtech.machine.basic.output_override.set=Output filter: tank #%s.
+gregtech.machine.basic.input_from_output_side.allow=Allow Input from Output Side
+gregtech.machine.basic.input_from_output_side.disallow=Disallow Input from Output Side
 
 #Creative Tabs
 itemGroup.gregtech.main=Main
@@ -2452,6 +2458,11 @@ gregtech.fluid.state_gas=§7State: Gaseous
 gregtech.fluid.state_liquid=§7State: Liquid
 gregtech.gui.fuel_amount=Fuel Amount:
 gregtech.gui.fluid_amount=Fluid Amount:
+
+gregtech.gui.toggle_view.disabled=Toggle View (Fluids)
+gregtech.gui.toggle_view.enabled=Toggle View (Items)
+gregtech.gui.overclock.enabled=Allow Overclocking
+gregtech.gui.overclock.disabled=Disable Overclocking
 
 gregtech.item_filter.empty_item=Empty (No Item)
 gregtech.item_filter.footer=§eClick with item to override

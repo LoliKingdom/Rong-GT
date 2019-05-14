@@ -147,7 +147,7 @@ public class PartsRecipeHandler {
 
         RecipeMaps.LATHE_RECIPES.recipeBuilder()
             .input(OrePrefix.plate, material)
-            .outputs(stack, OreDictUnifier.get(OrePrefix.dustSmall, material))
+            .outputs(stack, OreDictUnifier.get(OrePrefix.dustTiny, material, 4))
             .duration((int) (material.getAverageMass() / 2L))
             .EUt(16)
             .buildAndRegister();
@@ -234,8 +234,8 @@ public class PartsRecipeHandler {
             RecipeMaps.LATHE_RECIPES.recipeBuilder()
                 .inputs(material instanceof GemMaterial ? CountableIngredient.from(OrePrefix.gem, material) :
                     CountableIngredient.from(OrePrefix.ingot, material))
-                .outputs(OreDictUnifier.get(stickPrefix, material), OreDictUnifier.get(OrePrefix.dustSmall,
-                    ((SolidMaterial) material).macerateInto, 2))
+                .outputs(OreDictUnifier.get(stickPrefix, material), OreDictUnifier.get(OrePrefix.dustTiny,
+                    ((SolidMaterial) material).macerateInto, 8))
                 .duration((int) Math.max(material.getAverageMass() * 5L, 1L))
                 .EUt(16)
                 .buildAndRegister();

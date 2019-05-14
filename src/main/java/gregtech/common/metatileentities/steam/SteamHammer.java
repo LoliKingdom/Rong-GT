@@ -1,5 +1,6 @@
 package gregtech.common.metatileentities.steam;
 
+import gregtech.api.capability.impl.RecipeLogicSteam;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.ProgressWidget;
@@ -18,6 +19,7 @@ public class SteamHammer extends SteamMetaTileEntity {
 
     public SteamHammer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.FORGE_HAMMER_RECIPES, Textures.HAMMER_OVERLAY);
+        this.workableHandler = new RecipeLogicSteam(this, workableHandler.recipeMap, steamFluidTank, 1.0);
     }
 
     @Override

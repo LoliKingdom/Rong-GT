@@ -120,7 +120,7 @@ public class CraftingRecipeLoader {
         ModHandler.addShapedRecipe("large_wooden_pipe", GTUtility.copyAmount(2, MetaBlocks.FLUID_PIPE.getItem(FluidPipeType.LARGE_OPAQUE, Materials.Wood)), "XXX", "r s", "XXX", 'X', new UnificationEntry(OrePrefix.log, Materials.Wood));
 
         for(Material material : new Material[] {Materials.Lapis, Materials.Lazurite, Materials.Sodalite}) {
-            ModHandler.addShapedEnergyTransferRecipe("lapotron_crystal_" + material.toString(), MetaItems.LAPOTRON_CRYSTAL.getStackForm(), "XCX", "XEX", "XCX", 'X', new UnificationEntry(OrePrefix.plateDense, material), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Advanced), 'E', MetaItems.ENERGY_CRYSTAL.getStackForm());
+            ModHandler.addShapedEnergyTransferRecipe("lapotron_crystal_" + material.toString(), MetaItems.LAPOTRON_CRYSTAL.getStackForm(), "XCX", "XEX", "XCX", 'X', new UnificationEntry(OrePrefix.plate, material), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Advanced), 'E', MetaItems.ENERGY_CRYSTAL.getStackForm());
         }
         
         ModHandler.addShapedRecipe("piston_bronze", new ItemStack(Blocks.PISTON, 1), "WWW", "CBC", "CRC", 'W', new UnificationEntry(OrePrefix.plank, Materials.Wood), 'C', OrePrefix.stoneCobble, 'R', new UnificationEntry(OrePrefix.dust, Materials.Redstone), 'B', new UnificationEntry(OrePrefix.ingot, Materials.Bronze));

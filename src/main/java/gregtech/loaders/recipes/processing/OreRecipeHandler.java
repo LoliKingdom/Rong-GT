@@ -29,7 +29,6 @@ public class OreRecipeHandler {
         OrePrefix.oreEndstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreGravel.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreNetherrack.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
-        //OrePrefix.oreSand.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
         OrePrefix.oreSandstone.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processOre);
 
         OrePrefix.crushed.addProcessingHandler(DustMaterial.class, OreRecipeHandler::processCrushedOre);
@@ -70,21 +69,37 @@ public class OreRecipeHandler {
             RecipeBuilder<?> builder = RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
                 .input(orePrefix, material)
                 .outputs(GTUtility.copyAmount(crushedStack.getCount() + 1, crushedStack))
-                .chancedOutput(byproductStack, 1500)
+                .chancedOutput(byproductStack, 1500, 1000)
                 .duration(280).EUt(18);
             for(MaterialStack secondaryMaterial : orePrefix.secondaryMaterials) {
                 if(secondaryMaterial.material instanceof DustMaterial) {
                     ItemStack dustStack = OreDictUnifier.getDust(secondaryMaterial);
-                    builder.chancedOutput(dustStack, 5000);
+                    builder.chancedOutput(dustStack, 5000, 100);
                 }
             }
             builder.buildAndRegister();
             
-            RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(80)
-            	.fluidInputs(Materials.Nitrogen.getPlasma(25))
-            	.input(orePrefix, material)
-            	.outputs(GTUtility.copyAmount(ingotStack.getCount() * 5, ingotStack))
-            	.buildAndRegister();
+            if(orePrefix == OrePrefix.oreStone || orePrefix == OrePrefix.oreSandstone || orePrefix == OrePrefix.oreGravel) {
+            	RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(80)
+            		.fluidInputs(Materials.Nitrogen.getPlasma(20))
+            		.input(orePrefix, material)
+            		.outputs(GTUtility.copyAmount(ingotStack.getCount() * 5, ingotStack))
+            		.buildAndRegister();
+            }
+            else if(orePrefix == OrePrefix.oreNetherrack) {
+            	RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(120)
+            		.fluidInputs(Materials.Nitrogen.getPlasma(25))
+            		.input(orePrefix, material)
+            		.outputs(GTUtility.copyAmount(ingotStack.getCount() * 6, ingotStack))
+            		.buildAndRegister();
+            }
+            else {
+            	RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder().EUt(600).duration(200)
+            		.fluidInputs(Materials.Nitrogen.getPlasma(25))
+            		.input(orePrefix, material)
+            		.outputs(GTUtility.copyAmount(ingotStack.getCount() * 7, ingotStack))
+            		.buildAndRegister();
+            }
         }
     }
 
@@ -104,7 +119,7 @@ public class OreRecipeHandler {
             .outputs(impureDustStack)
             .duration(100)
             .EUt(12)
-            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, byproductMaterial, material.byProductMultiplier), 1000)
+            .chancedOutput(OreDictUnifier.get(OrePrefix.dust, byproductMaterial, material.byProductMultiplier), 1000, 1000)
             .buildAndRegister();
 
         ItemStack crushedPurifiedOre = GTUtility.copy(
@@ -143,8 +158,8 @@ public class OreRecipeHandler {
                 .input(crushedPrefix, material)
                 .fluidInputs(material.washedIn.getFluid(1000))
                 .outputs(crushedPurifiedOre)
-                .chancedOutput(OreDictUnifier.get(OrePrefix.dust, washingByproduct, material.byProductMultiplier), 7000)
-                .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Stone), 4000)
+                .chancedOutput(OreDictUnifier.get(OrePrefix.dust, washingByproduct, material.byProductMultiplier), 7000, 200)
+                .chancedOutput(OreDictUnifier.get(OrePrefix.dust, Materials.Stone), 4000, 1000)
                 .duration(800)
                 .EUt(8)
                 .buildAndRegister();
@@ -170,7 +185,7 @@ public class OreRecipeHandler {
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
             .input(centrifugedPrefix, material)
             .outputs(dustStack)
-            .chancedOutput(byproductStack, 1000)
+            .chancedOutput(byproductStack, 1000, 1000)
             .duration(40).EUt(18)
             .buildAndRegister();
 
@@ -195,7 +210,7 @@ public class OreRecipeHandler {
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder()
             .input(purifiedPrefix, material)
             .outputs(dustStack)
-            .chancedOutput(byproductStack, 1000)
+            .chancedOutput(byproductStack, 1000, 1000)
             .duration(120)
             .EUt(8)
             .buildAndRegister();

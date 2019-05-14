@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.capability.GregtechCapabilities;
+import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.capability.impl.FuelRecipeLogic;
@@ -94,7 +95,7 @@ public class GTJeiPlugin implements IModPlugin {
             MetaTileEntity metaTileEntity = GregTechAPI.META_TILE_ENTITY_REGISTRY.getObject(metaTileEntityId);
             //noinspection ConstantConditions
             if(metaTileEntity.getCapability(GregtechCapabilities.CAPABILITY_WORKABLE, null) != null) {
-                IWorkable workableCapability = metaTileEntity.getCapability(GregtechCapabilities.CAPABILITY_WORKABLE, null);
+                IControllable workableCapability = metaTileEntity.getCapability(GregtechCapabilities.CAPABILITY_CONTROLLABLE, null);
 
                 if (workableCapability instanceof AbstractRecipeLogic) {
                     RecipeMap<?> recipeMap = ((AbstractRecipeLogic) workableCapability).recipeMap;

@@ -1,14 +1,17 @@
 package gregtech.api.gui.widgets;
 
-import gregtech.api.gui.INativeWidget;
-import gregtech.api.gui.Widget;
-import net.minecraft.network.PacketBuffer;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class AbstractWidgetGroup extends Widget {
+import gregtech.api.gui.INativeWidget;
+import gregtech.api.gui.Widget;
+import gregtech.api.gui.ingredient.IGhostIngredientTarget;
+import gregtech.api.gui.ingredient.IIngredientSlot;
+import mezz.jei.api.gui.IGhostIngredientHandler.Target;
+import net.minecraft.network.PacketBuffer;
+
+public class AbstractWidgetGroup extends Widget implements IGhostIngredientTarget, IIngredientSlot {
 
     private List<Widget> widgets = new ArrayList<>();
     private WidgetGroupUIAccess groupUIAccess = new WidgetGroupUIAccess();
@@ -57,6 +60,29 @@ public class AbstractWidgetGroup extends Widget {
             widget.setSizes(sizes);
             widget.initWidget();
         }
+    }
+    
+    @Override
+    public List<Target<?>> getPhantomTargets(Object ingredient) {
+        ArrayList<Target<?>> targets = new ArrayList<>();
+        for(Widget widget : widgets) {
+            if(widget instanceof IGhostIngredientTarget) {
+                targets.addAll(((IGhostIngredientTarget) widget).getPhantomTargets(ingredient));
+            }
+        }
+        return targets;
+    }
+
+    @Override
+    public Object getIngredientOverMouse(int mouseX, int mouseY) {
+        for(Widget widget : widgets) {
+            if(widget instanceof IIngredientSlot) {
+                IIngredientSlot ingredientSlot = (IIngredientSlot) widget;
+                Object result = ingredientSlot.getIngredientOverMouse(mouseX, mouseY);
+                if(result != null) return result;
+            }
+        }
+        return null;
     }
 
     @Override

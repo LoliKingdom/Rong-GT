@@ -61,7 +61,7 @@ public class BlastRecipeBuilder extends RecipeBuilder<BlastRecipeBuilder> {
         return ValidationResult.newResult(finalizeAndValidate(),
             new Recipe(inputs, outputs, chancedOutputs, fluidInputs, fluidOutputs,
                 ImmutableMap.of("blast_furnace_temperature", blastFurnaceTemp),
-                duration, EUt, hidden, canBeBuffered, needsEmptyOutput));
+                duration, EUt, hidden, needsEmptyOutput));
     }
 
     @Override
@@ -87,14 +87,10 @@ public class BlastRecipeBuilder extends RecipeBuilder<BlastRecipeBuilder> {
                         .EUt(this.EUt)
                         .fluidInputs(material.getPlasma(plasmaAmount))
                         .fluidOutputs(material.getFluid(plasmaAmount));
-        		this.getChancedOutputs().forEachEntry((key, val) -> {
-                    arcBuilder.chancedOutput(key, val);
-                    return true;
-                });
     		}
-    		else if(this.inputs.contains(CountableIngredient.from(OrePrefix.dustSmall, Materials.Quicklime, 3))) {
+    		else if(this.inputs.contains(CountableIngredient.from(OrePrefix.dustTiny, Materials.Quicklime, 5))) {
     			List<CountableIngredient> currentIngredient = this.inputs;
-    			currentIngredient.remove(CountableIngredient.from(OrePrefix.dustSmall, Materials.Quicklime, 3));
+    			currentIngredient.remove(CountableIngredient.from(OrePrefix.dustTiny, Materials.Quicklime, 5));
     			SimpleRecipeBuilder arcBuilder = RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder()
         				.inputsIngredients(currentIngredient)
                         .outputs(this.outputs)
@@ -102,10 +98,6 @@ public class BlastRecipeBuilder extends RecipeBuilder<BlastRecipeBuilder> {
                         .EUt(this.EUt)
                         .fluidInputs(material.getPlasma(plasmaAmount))
                         .fluidOutputs(material.getFluid(plasmaAmount));
-        		this.getChancedOutputs().forEachEntry((key, val) -> {
-                    arcBuilder.chancedOutput(key, val);
-                    return true;
-                });
     		}
     		else {
     			SimpleRecipeBuilder arcBuilder = RecipeMaps.PLASMA_ARC_FURNACE_RECIPES.recipeBuilder()
@@ -115,10 +107,6 @@ public class BlastRecipeBuilder extends RecipeBuilder<BlastRecipeBuilder> {
                         .EUt(this.EUt)
                         .fluidInputs(material.getPlasma(plasmaAmount))
                         .fluidOutputs(material.getFluid(plasmaAmount));
-        		this.getChancedOutputs().forEachEntry((key, val) -> {
-                    arcBuilder.chancedOutput(key, val);
-                    return true;
-                });
     		}  		
     	}
     	super.buildAndRegister();

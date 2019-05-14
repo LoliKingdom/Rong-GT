@@ -1,5 +1,6 @@
 package gregtech.loaders.recipes.processing;
 
+import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -15,6 +16,8 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import cofh.thermalexpansion.util.managers.device.FactorizerManager;
 
 import static gregtech.api.GTValues.L;
 import static gregtech.api.GTValues.M;
@@ -32,7 +35,6 @@ public class MaterialRecipeHandler {
         OrePrefix.frameGt.addProcessingHandler(SolidMaterial.class, MaterialRecipeHandler::processFrame);
 
         OrePrefix.dust.addProcessingHandler(DustMaterial.class, MaterialRecipeHandler::processDust);
-        OrePrefix.dustSmall.addProcessingHandler(DustMaterial.class, MaterialRecipeHandler::processSmallDust);
         OrePrefix.dustTiny.addProcessingHandler(DustMaterial.class, MaterialRecipeHandler::processTinyDust);
         
         OrePrefix.gem.addProcessingHandler(GemMaterial.class, MaterialRecipeHandler::processGem);
@@ -47,7 +49,7 @@ public class MaterialRecipeHandler {
                 RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
                     .input(dustPrefix, material)
                     .fluidInputs(Materials.Water.getFluid(200))
-                    .chancedOutput(gemStack, 7000)
+                    .chancedOutput(gemStack, 7000, 400)
                     .duration(2000)
                     .EUt(24)
                     .buildAndRegister();
@@ -55,7 +57,7 @@ public class MaterialRecipeHandler {
                 RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
                     .input(dustPrefix, material)
                     .fluidInputs(Materials.DistilledWater.getFluid(200))
-                    .chancedOutput(gemStack, 9000)
+                    .chancedOutput(gemStack, 9000, 50)
                     .duration(1500)
                     .EUt(24)
                     .buildAndRegister();
@@ -117,24 +119,21 @@ public class MaterialRecipeHandler {
         }
     }
 
-    public static void processSmallDust(OrePrefix orePrefix,DustMaterial material) {
-        ItemStack smallDustStack = OreDictUnifier.get(orePrefix, material);
-        ItemStack dustStack = OreDictUnifier.get(OrePrefix.dust, material);
-
-        ModHandler.addShapedRecipe(String.format("small_dust_disassembling_%s", material.toString()),
-            GTUtility.copyAmount(4, smallDustStack), "  ", " X", 'X', new UnificationEntry(OrePrefix.dust, material));
-        ModHandler.addShapedRecipe(String.format("small_dust_assembling_%s", material.toString()),
-            dustStack, "XX", "XX", 'X', new UnificationEntry(orePrefix, material));
-    }
-
     public static void processTinyDust(OrePrefix orePrefix, DustMaterial material) {
         ItemStack tinyDustStack = OreDictUnifier.get(orePrefix, material);
         ItemStack dustStack = OreDictUnifier.get(OrePrefix.dust, material);
+        
+        if(GTValues.isModLoaded("thermalexpansion")) {
+			FactorizerManager.addDefaultRecipe(tinyDustStack, dustStack);
+		}
+        
+        if(GTValues.isModLoaded("tgi")) return;
 
         ModHandler.addShapedRecipe(String.format("tiny_dust_disassembling_%s", material.toString()),
             GTUtility.copyAmount(9, tinyDustStack), "X ", "  ", 'X', new UnificationEntry(OrePrefix.dust, material));
         ModHandler.addShapedRecipe(String.format("tiny_dust_assembling_%s", material.toString()),
             dustStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(orePrefix, material));
+        
     }
 
     public static void processIngot(OrePrefix ingotPrefix, IngotMaterial material) {
@@ -232,15 +231,15 @@ public class MaterialRecipeHandler {
     }
 
     public static void processNugget(OrePrefix orePrefix, SolidMaterial material) {
+    	OrePrefix blockPrefix = OrePrefix.block;
         ItemStack nuggetStack = OreDictUnifier.get(orePrefix, material);
         if (material instanceof IngotMaterial) {
             ItemStack ingotStack = OreDictUnifier.get(OrePrefix.ingot, material);
-
-            ModHandler.addShapelessRecipe(String.format("nugget_disassembling_%s", material.toString()),
-                GTUtility.copyAmount(9, nuggetStack), new UnificationEntry(OrePrefix.ingot, material));
-            ModHandler.addShapedRecipe(String.format("nugget_assembling_%s", material.toString()),
-                ingotStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(orePrefix, material));
-
+            
+            if(GTValues.isModLoaded("thermalexpansion") && blockPrefix.isIgnored(material)) {
+    			FactorizerManager.addDefaultRecipe(nuggetStack, ingotStack);
+    		}
+            
             if(material.shouldGenerateFluid()) {
                 RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder()
                     .notConsumable(MetaItems.SHAPE_MOLD_NUGGET)
@@ -250,15 +249,28 @@ public class MaterialRecipeHandler {
                     .EUt(8)
                     .buildAndRegister();
             }
+            
+            if(GTValues.isModLoaded("tgi")) return;
 
+            ModHandler.addShapelessRecipe(String.format("nugget_disassembling_%s", material.toString()),
+                GTUtility.copyAmount(9, nuggetStack), new UnificationEntry(OrePrefix.ingot, material));
+            ModHandler.addShapedRecipe(String.format("nugget_assembling_%s", material.toString()),
+                ingotStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(orePrefix, material));
 
         } else if (material instanceof GemMaterial) {
             ItemStack gemStack = OreDictUnifier.get(OrePrefix.gem, material);
+            
+            if(GTValues.isModLoaded("thermalexpansion")) {
+    			FactorizerManager.addDefaultRecipe(nuggetStack, gemStack);
+    		}
+            
+            if(GTValues.isModLoaded("tgi")) return;
 
             ModHandler.addShapelessRecipe(String.format("nugget_disassembling_%s", material.toString()),
                 GTUtility.copyAmount(9, nuggetStack), new UnificationEntry(OrePrefix.gem, material));
             ModHandler.addShapedRecipe(String.format("nugget_assembling_%s", material.toString()),
                 gemStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(orePrefix, material));
+                       
         }
     }
 
@@ -300,38 +312,60 @@ public class MaterialRecipeHandler {
                 .duration((int) (material.getAverageMass() * 8L)).EUt(24)
                 .buildAndRegister();
         }
-        if(!material.hasFlag(EXCLUDE_BLOCK_CRAFTING_RECIPES)) {
+        if(!material.hasFlag(EXCLUDE_BLOCK_CRAFTING_RECIPES) && !blockPrefix.isIgnored(material)) {
         	if(material instanceof GemMaterial) {
+        		
+        		if(GTValues.isModLoaded("thermalexpansion")) {
+        			FactorizerManager.addDefaultRecipe(OreDictUnifier.get(OrePrefix.gem, material), blockStack);
+        		}
+        		
+        		if(GTValues.isModLoaded("tgi")) return;
+
         		ModHandler.addShapedRecipe(String.format("block_compress_%s", material.toString()), 
         				blockStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(OrePrefix.gem, material));
         		ModHandler.addShapelessRecipe(String.format("block_decompress_%s", material.toString()), 
         				OreDictUnifier.get(OrePrefix.gem, material, 9), blockStack);
+        	       		
         	}
         	else if(material instanceof IngotMaterial) {
+        		
+        		if(GTValues.isModLoaded("thermalexpansion")) {
+        			FactorizerManager.addDefaultRecipe(OreDictUnifier.get(OrePrefix.ingot, material), blockStack);
+        		}
+        		
+        		RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
+            	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
+            	.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
+            	.outputs(blockStack)
+            	.duration(10).EUt(74)
+            	.buildAndRegister();
+    		
+        		RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
+            	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
+            	.notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
+            	.outputs(blockStack)
+            	.duration(100).EUt(24)
+            	.buildAndRegister();   
+        		
+        		if(GTValues.isModLoaded("tgi")) return;
+        		
         		ModHandler.addShapedRecipe(String.format("block_compress_%s", material.toString()), 
         				blockStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(OrePrefix.ingot, material));
         		ModHandler.addShapelessRecipe(String.format("block_decompress_%s", material.toString()), 
-        				OreDictUnifier.get(OrePrefix.ingot, material, 9), blockStack);
-        		
-        		RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
-                	.notConsumable(MetaItems.SHAPE_EXTRUDER_BLOCK)
-                	.outputs(blockStack)
-                	.duration(10).EUt(74)
-                	.buildAndRegister();
-        		
-        		RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder()
-                	.input(OrePrefix.ingot, material, (int) (materialAmount / M))
-                	.notConsumable(MetaItems.SHAPE_MOLD_BLOCK)
-                	.outputs(blockStack)
-                	.duration(100).EUt(24)
-                	.buildAndRegister();
+        				OreDictUnifier.get(OrePrefix.ingot, material, 9), blockStack);        		
+        				
         	}
         	else {
+        		if(GTValues.isModLoaded("thermalexpansion")) {
+        			FactorizerManager.addDefaultRecipe(OreDictUnifier.get(OrePrefix.dust, material), blockStack);
+        		}
+        		if(GTValues.isModLoaded("tgi")) return;
+        		
         		ModHandler.addShapedRecipe(String.format("block_compress_%s", material.toString()), 
         				blockStack, "XXX", "XXX", "XXX", 'X', new UnificationEntry(OrePrefix.dust, material));
         		ModHandler.addShapelessRecipe(String.format("block_decompress_%s", material.toString()), 
         				OreDictUnifier.get(OrePrefix.dust, material, 9), blockStack);
+        		        		
         	}
         }
     }

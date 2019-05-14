@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 public abstract class ToolBase implements IToolStats {
 
     @Override
-    public boolean isMinableBlock(IBlockState block, ItemStack stack) {
+    public boolean canMineBlock(IBlockState block, ItemStack stack) {
         return false;
     }
 
@@ -36,10 +36,5 @@ public abstract class ToolBase implements IToolStats {
     @Override
     public int getToolDamagePerEntityAttack(ItemStack stack) {
         return 2;
-    }
-
-    @Override
-    public ResourceLocation getUseSound(ItemStack stack) {
-        return null;
     }
 }

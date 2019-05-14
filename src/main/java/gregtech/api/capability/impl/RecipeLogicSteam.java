@@ -157,8 +157,8 @@ public class RecipeLogicSteam extends AbstractRecipeLogic {
     }
 
     @Override
-    protected int[] calculateOverclock(int EUt, long voltage, long amperage, int duration, boolean consumeInputs) {
-        return super.calculateOverclock(EUt, voltage, amperage, duration, consumeInputs);
+    protected int[] calculateOverclock(int EUt, long voltage, int duration) {
+        return super.calculateOverclock(EUt, voltage, duration);
     }
 
     @Override

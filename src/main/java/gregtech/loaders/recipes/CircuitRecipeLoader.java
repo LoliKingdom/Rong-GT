@@ -53,28 +53,28 @@ public class CircuitRecipeLoader {
 		RecipeMaps.PRESS_RECIPES.recipeBuilder().duration(290).EUt(12)
 			.input(OrePrefix.plate, Materials.Polytetrafluoroethylene, 2) //was Polyethylene
 			.input(OrePrefix.ring, Materials.BerylliumCopper, 2)
-			.input(OrePrefix.dustSmall, Materials.Silicon, 5)
+			.input(OrePrefix.dustTiny, Materials.Silicon, 12)
 			.outputs(MetaItems.BOARD_ELITE.getStackForm())
 			.buildAndRegister();
 		
 		RecipeMaps.PRESS_RECIPES.recipeBuilder().duration(310).EUt(12)
 			.input(OrePrefix.plate, Materials.Epoxid, 2)
 			.input(OrePrefix.ring, Materials.RoseGold, 2)
-			.input(OrePrefix.dustSmall, Materials.Silicon, 6)
+			.input(OrePrefix.dustTiny, Materials.Silicon, 14)
 			.outputs(MetaItems.BOARD_MASTER.getStackForm())
 			.buildAndRegister();
 		
 		RecipeMaps.PRESS_RECIPES.recipeBuilder().duration(330).EUt(12)
 			.input(OrePrefix.plate, Materials.Fiberglass, 4)
 			.input(OrePrefix.ring, Materials.AluminiumCopper, 2)
-			.input(OrePrefix.dustSmall, Materials.Silicon, 6)
+			.input(OrePrefix.dust, Materials.Silicon, 2)
 			.outputs(MetaItems.BOARD_EXPERT.getStackForm())
 			.buildAndRegister();
 		
 		RecipeMaps.PRESS_RECIPES.recipeBuilder().duration(350).EUt(12)
 			.input(OrePrefix.plate, Materials.DuraniumFusedAcrylic, 2)
 			.input(OrePrefix.ring, Materials.Dymalloy, 2)
-			.input(OrePrefix.dustSmall, Materials.Silicon, 6)
+			.input(OrePrefix.dust, Materials.Silicon, 3)
 			.outputs(MetaItems.BOARD_ULTIMATE.getStackForm())
 			.buildAndRegister();
 		

@@ -216,7 +216,7 @@ public class MetaItems1 extends MaterialMetaItem {
         SUPER_FUEL_BINDER = addItem(527, "super_fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
         MAGIC_FUEL_BINDER = addItem(528, "magic_fuel_binder").setBurnValue(Materials.Coke.burnTime + Materials.Coal.burnTime);
 
-        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(200);     
+        THERMITE_DUST = addItem(529, "thermite_dust").addOreDict("dustThermite").setBurnValue(2000);     
         
         CIRCUIT_BASIC_LV = addItem(530, "circuit.basic").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
         CIRCUIT_INTERMEDIATE_MV = addItem(531, "circuit.intermediate").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.Intermediate);

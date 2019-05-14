@@ -142,7 +142,7 @@ public class Materials {
     public static FluidMaterial SodiumPersulfate = new FluidMaterial(123, "sodium_persulfate", 0xFFFFFF, MaterialIconSet.FLUID, of(new MaterialStack(Sodium, 1), new MaterialStack(Sulfur, 1), new MaterialStack(Oxygen, 4)), 0);
     public static DustMaterial SodiumSulfide = new DustMaterial(124, "sodium_sulfide", 0xAAAA00, MaterialIconSet.SAND, 1, of(new MaterialStack(Sodium, 2), new MaterialStack(Sulfur, 1)), DECOMPOSITION_BY_ELECTROLYZING);
     public static FluidMaterial HydrogenSulfide = new FluidMaterial(125, "hydrogen_sulfide", 0xFFFFFF, MaterialIconSet.FLUID, of(new MaterialStack(Hydrogen, 2), new MaterialStack(Sulfur, 1)), 0);
-    public static FluidMaterial Steam = new FluidMaterial(126, "steam", 0xFFFFFF, MaterialIconSet.GAS, of(new MaterialStack(Hydrogen, 2), new MaterialStack(Oxygen, 1)), NO_RECYCLING | GENERATE_FLUID_BLOCK);
+    public static FluidMaterial Steam = new FluidMaterial(126, "steam", 0xFFFFFF, MaterialIconSet.GAS, of(new MaterialStack(Hydrogen, 2), new MaterialStack(Oxygen, 1)), NO_RECYCLING | GENERATE_FLUID_BLOCK | DISABLE_DECOMPOSITION);
     public static FluidMaterial Epichlorhydrin = new FluidMaterial(127, "epichlorhydrin", 0xFFFFFF, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 3), new MaterialStack(Hydrogen, 5), new MaterialStack(Chlorine, 1), new MaterialStack(Oxygen, 1)), 0);
     
     /**
@@ -304,13 +304,13 @@ public class Materials {
     public static GemMaterial Apatite = new GemMaterial(401, "apatite", 0xC8C8FF, MaterialIconSet.EMERALD, 1, of(new MaterialStack(Calcium, 5), new MaterialStack(Phosphate, 3), new MaterialStack(Chlorine, 1)), STD_GEM | NO_SMASHING | NO_SMELTING | CRYSTALLISABLE, 6.0F, 1.5F, 240);
     public static GemMaterial Almandine = new GemMaterial(402, "almandine", 0xFF0000, MaterialIconSet.GEM_VERTICAL, 2, of(new MaterialStack(Aluminium, 2), new MaterialStack(Iron, 3), new MaterialStack(Silicon, 3), new MaterialStack(Oxygen, 12)), STD_GEM, 8.0F, 3.4F, 844);
     public static GemMaterial Aquamarine = new GemMaterial(403, "aquamarine", 0x7FFFD4, MaterialIconSet.GEM_HORIZONTAL, 1, of(new MaterialStack(Aluminium, 2), new MaterialStack(Silicon, 6), new MaterialStack(Beryllium, 2), new MaterialStack(Oxygen, 18)), STD_GEM | NO_SMASHING | NO_SMELTING, 7.0F, 2.0F, 256);    
-    public static GemMaterial Diamond = new GemMaterial(406, "diamond", 0xC8FFFF, MaterialIconSet.DIAMOND, 3, of(new MaterialStack(Carbon, 1)), STD_GEM | GENERATE_GEAR | NO_SMASHING | NO_SMELTING | FLAMMABLE | GENERATE_ORE, 8.0F, 4.0F, 1280);
+    public static GemMaterial Diamond = new GemMaterial(406, "diamond", 0xC8FFFF, MaterialIconSet.DIAMOND, 3, of(new MaterialStack(Carbon, 1)), STD_GEM | GENERATE_GEAR | NO_SMASHING | NO_SMELTING | FLAMMABLE | GENERATE_ORE | DISABLE_DECOMPOSITION, 8.0F, 4.0F, 1280);
     public static GemMaterial Emerald = new GemMaterial(407, "emerald", 0x50FF50, MaterialIconSet.EMERALD, 3, of(new MaterialStack(Beryllium, 3), new MaterialStack(Aluminium, 2), new MaterialStack(Silicon, 6), new MaterialStack(Oxygen, 18)), STD_GEM | NO_SMASHING | NO_SMELTING, 9.0F, 4.5F, 2048);
     public static GemMaterial Peridot = new GemMaterial(408, "peridot", 0x64C882, MaterialIconSet.GEM_HORIZONTAL, 2, of(new MaterialStack(Magnesium, 2), new MaterialStack(Iron, 2), new MaterialStack(Silicon, 1), new MaterialStack(Oxygen, 4)), STD_GEM | NO_SMASHING | NO_SMELTING, 8.0F, 3.0F, 876); //Old form: Green Sapphire
-    public static GemMaterial Lazurite = new GemMaterial(409, "lazurite", 0x6478FF, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Aluminium, 6), new MaterialStack(Silicon, 6), new MaterialStack(Calcium, 8), new MaterialStack(Sodium, 8)), STD_GEM | GENERATE_DENSE | NO_SMELTING | CRYSTALLISABLE | DECOMPOSITION_BY_ELECTROLYZING);   
+    public static GemMaterial Lazurite = new GemMaterial(409, "lazurite", 0x6478FF, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Aluminium, 6), new MaterialStack(Silicon, 6), new MaterialStack(Calcium, 8), new MaterialStack(Sodium, 8)), STD_GEM | NO_SMELTING | CRYSTALLISABLE | DECOMPOSITION_BY_ELECTROLYZING);   
     public static GemMaterial Ruby = new GemMaterial(410, "ruby", 0xBD4949, MaterialIconSet.RUBY, 2, of(new MaterialStack(Chrome, 1), new MaterialStack(Aluminium, 2), new MaterialStack(Oxygen, 3)), STD_GEM | NO_SMASHING | NO_SMELTING, 8.0F, 3.0F, 876);
     public static GemMaterial Sapphire = new GemMaterial(411, "sapphire", 0x6464C8, MaterialIconSet.GEM_VERTICAL, 2, of(new MaterialStack(Aluminium, 2), new MaterialStack(Oxygen, 3)), STD_GEM | NO_SMASHING | NO_SMELTING, 8.0F, 3.0F, 876);
-    public static GemMaterial Sodalite = new GemMaterial(412, "sodalite", 0x1414FF, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Aluminium, 3), new MaterialStack(Silicon, 3), new MaterialStack(Sodium, 4), new MaterialStack(Chlorine, 1)), STD_GEM | GENERATE_DENSE | NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | DECOMPOSITION_BY_ELECTROLYZING);
+    public static GemMaterial Sodalite = new GemMaterial(412, "sodalite", 0x1414FF, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Aluminium, 3), new MaterialStack(Silicon, 3), new MaterialStack(Sodium, 4), new MaterialStack(Chlorine, 1)), STD_GEM | NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | DECOMPOSITION_BY_ELECTROLYZING);
     public static GemMaterial Topaz = new GemMaterial(414, "topaz", 0xFF8000, MaterialIconSet.GEM_HORIZONTAL, 1, of(new MaterialStack(Aluminium, 2), new MaterialStack(Silicon, 1), new MaterialStack(Fluorine, 2), new MaterialStack(Hydrogen, 2), new MaterialStack(Oxygen, 6)), STD_GEM | NO_SMASHING | NO_SMELTING, 7.0F, 2.5F, 1024);
     public static GemMaterial NetherQuartz = new GemMaterial(415, "nether_quartz", 0xE6D2D2, MaterialIconSet.QUARTZ, 1, of(), NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | STD_GEM);
     public static GemMaterial CertusQuartz = new GemMaterial(416, "certus_quartz", 0xD2D2E6, MaterialIconSet.QUARTZ, 1, of(), NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | STD_GEM, 8.0F, 2.0F, 340);
@@ -318,7 +318,7 @@ public class Materials {
     public static GemMaterial Quartzite = new GemMaterial(418, "quartzite", 0xD2E6D2, MaterialIconSet.QUARTZ, 2, of(), NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | STD_GEM);
     public static GemMaterial Olivine = new GemMaterial(420, "olivine", 0x66FF66, MaterialIconSet.RUBY, 2, of(new MaterialStack(Magnesium, 2), new MaterialStack(Iron, 1), new MaterialStack(SiliconDioxide, 2)), STD_GEM | NO_SMASHING | NO_SMELTING, 8.5F, 3.0F, 1024);
     public static GemMaterial Opal = new GemMaterial(421, "opal", 0x0000FF, MaterialIconSet.OPAL, 2, of(new MaterialStack(SiliconDioxide, 1)), STD_GEM | NO_SMASHING | NO_SMELTING, 8.5F, 3.0F, 1024);
-    public static GemMaterial Lapis = new GemMaterial(423, "lapis", 0x4646DC, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Lazurite, 12), new MaterialStack(Sodalite, 2), new MaterialStack(Pyrite, 1), new MaterialStack(Calcite, 1)), STD_GEM | GENERATE_DENSE |NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | NO_WORKING | DECOMPOSITION_BY_ELECTROLYZING);
+    public static GemMaterial Lapis = new GemMaterial(423, "lapis", 0x4646DC, MaterialIconSet.LAPIS, 1, of(new MaterialStack(Lazurite, 12), new MaterialStack(Sodalite, 2), new MaterialStack(Pyrite, 1), new MaterialStack(Calcite, 1)), STD_GEM | NO_SMASHING | NO_SMELTING | CRYSTALLISABLE | NO_WORKING | DECOMPOSITION_BY_ELECTROLYZING);
     public static GemMaterial Xenotime = new GemMaterial(424, "xenotime", 0xC62B0B, MaterialIconSet.GEM_HORIZONTAL, 3, of(new MaterialStack(Yttrium, 1), new MaterialStack(Arsenic, 1), new MaterialStack(Oxygen, 4)), GENERATE_ORE);
     public static GemMaterial Citrine = new GemMaterial(426, "citrine", 0xFFEE02, MaterialIconSet.OPAL, 2, of(new MaterialStack(SiliconDioxide, 1)), STD_GEM | NO_SMASHING | NO_SMELTING | CRYSTALLISABLE, 7.5F, 3.0F, 480);
     public static GemMaterial Alexandrite = new GemMaterial(428, "alexandrite", 0x0A0A0A, MaterialIconSet.EMERALD, 3, of(new MaterialStack(Beryllium, 1), new MaterialStack(Aluminium, 2), new MaterialStack(Oxygen, 4)), STD_GEM | NO_SMASHING | NO_SMELTING, 9.5F, 5.0F, 512);
@@ -361,9 +361,9 @@ public class Materials {
     public static FluidMaterial Trichlorotrifluoroethane = new FluidMaterial(480, "trichlorotrifluoroethane", 0x505050, MaterialIconSet.FLUID, of(), 0);
     public static FluidMaterial Chlorotrifluoroethylene = new FluidMaterial(481, "chlorotrifluoroethylene", 0xCDCEF6, MaterialIconSet.FLUID, of(), 0);
     public static IngotMaterial Polychlorotrifluoroethylene = new IngotMaterial(482, "polychlorotrifluoroethylene", 0xCDCEF6, MaterialIconSet.SHINY, 1, of(new MaterialStack(Carbon, 1), new MaterialStack(Fluorine, 2), new MaterialStack(Carbon, 1), new MaterialStack(Chlorine, 1), new MaterialStack(Fluorine, 1)), GENERATE_PLATE | SMELT_INTO_FLUID);
-    public static DustMaterial BariumSulfide = new DustMaterial(483, "barium_sulfide", 11885072, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Sulfur, 3)), 0);
-    public static DustMaterial BariumNitrate = new DustMaterial(484, "barium_nitrate", 0x647E7D, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Nitrogen, 2), new MaterialStack(Oxygen, 6)), 0);
-    public static DustMaterial BariumOxide = new DustMaterial(485, "barium_oxide", 0x647E7D, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Oxygen, 1)), 0);
+    public static DustMaterial BariumSulfide = new DustMaterial(483, "barium_sulfide", 11885072, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Sulfur, 3)), SMELT_INTO_FLUID);
+    public static DustMaterial BariumNitrate = new DustMaterial(484, "barium_nitrate", 0x647E7D, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Nitrogen, 2), new MaterialStack(Oxygen, 6)), SMELT_INTO_FLUID);
+    public static DustMaterial BariumOxide = new DustMaterial(485, "barium_oxide", 0x647E7D, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Oxygen, 1)), SMELT_INTO_FLUID);
     public static DustMaterial BariumPeroxide = new DustMaterial(486, "barium_peroxide", 0x647E7D, MaterialIconSet.SAND, 1, of(new MaterialStack(Barium, 1), new MaterialStack(Oxygen, 2)), SMELT_INTO_FLUID);
     public static IngotMaterial CarbonFibreReinforcedPolymer = new IngotMaterial(487, "carbon_fibre_reinforced_polymer", 0xC0C0C0, MaterialIconSet.METALLIC, 1, of(), GENERATE_PLATE | SMELT_INTO_FLUID);
     public static IngotMaterial Polyacrylonitrile = new IngotMaterial(488, "polyacrylonitrile", 0xC8C8DC, MaterialIconSet.DULL, 1, of(), GENERATE_PLATE | SMELT_INTO_FLUID);
@@ -472,8 +472,7 @@ public class Materials {
     public static FluidMaterial Honey = new FluidMaterial(683, "honey", 0xD2C800, MaterialIconSet.FLUID, of(), 0);
     public static FluidMaterial Juice = new FluidMaterial(684, "juice", 0xA8C972, MaterialIconSet.FLUID, of(), 0);
     public static DustMaterial Cocoa = new DustMaterial(685, "cocoa", 0xBE5F00, MaterialIconSet.ROUGH, 0, of(), 0);
-    public static DustMaterial Sugar = new DustMaterial(686, "sugar", 0xFAFAFA, MaterialIconSet.SAND, 0, of(new MaterialStack(Carbon, 2), new MaterialStack(Water, 5), new MaterialStack(Oxygen, 25)), EXCLUDE_BLOCK_CRAFTING_RECIPES);
-    
+    public static DustMaterial Sugar = new DustMaterial(686, "sugar", 0xFAFAFA, MaterialIconSet.SAND, 0, of(new MaterialStack(Carbon, 2), new MaterialStack(Water, 5), new MaterialStack(Oxygen, 25)), EXCLUDE_BLOCK_CRAFTING_RECIPES);   
 
     /**
      * Acids 701-750ID

@@ -65,6 +65,8 @@ public class FuelRecipeLogic extends MTETrait implements IControllable {
     @Override
     public void update() {
         if (getMetaTileEntity().getWorld().isRemote) return;
+        IEnergyContainer container = energyContainer.get();
+        if (!shouldVoidExcessiveEnergy() && container.getCurrentEnergyStored() == container.getEnergyCapacity()) return;
         if (workingEnabled) {
             if (recipeDurationLeft > 0) {
                 if (energyContainer.get().getEnergyCanBeInserted() >=

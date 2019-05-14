@@ -53,15 +53,8 @@ public class TinkersIntegration {
 		for(Material m : Material.MATERIAL_REGISTRY) {
 			if(!(m instanceof SolidMaterial)) {
 				continue;
-			}			
+			}	
 			SolidMaterial material = (SolidMaterial)m;
-			if(m instanceof IngotMaterial && ((IngotMaterial)m).blastFurnaceTemperature <= 0) {
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.ore, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
-			}
 			if((m instanceof IngotMaterial || m instanceof GemMaterial) && toGenerate(material)) {
 				if(material.toolDurability > 0) {
 					slimeknights.tconstruct.library.materials.Material ticonMaterial = 
@@ -71,11 +64,18 @@ public class TinkersIntegration {
 				else {
 					//TinkerRegistry.integrate(((FluidMaterial)m).getMaterialFluid(), upperCase(m));
 				}
+			}		
+			if(m instanceof IngotMaterial && ((IngotMaterial)m).blastFurnaceTemperature <= 0) {
+                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreStone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(144 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
+                TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreEndstone, m).toString(), ((IngotMaterial)m).getMaterialFluid(), (int)(288 * ((IngotMaterial)m).smeltingMultiplier * Config.oreToIngotRatio));
 			}
 			else if(material instanceof DustMaterial) {
 				DustMaterial dust = (DustMaterial)m;
                 if(dust.hasFlag(DustMaterial.MatFlags.GENERATE_ORE) && dust.directSmelting != null) {
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.ore, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
+                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreStone, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
                     //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreSand, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
                     TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreNetherrack, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (288 * dust.smeltingMultiplier * Config.oreToIngotRatio));
                     //TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.oreGravel, m).toString(), dust.directSmelting.getMaterialFluid(), (int) (144 * dust.smeltingMultiplier * Config.oreToIngotRatio));
@@ -83,7 +83,6 @@ public class TinkersIntegration {
                 } 
                 else if(dust.hasFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID) && m != Materials.Glass && m != Materials.Ice) {
                     TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.dust, m).toString(), dust.getMaterialFluid(), 144);
-                    TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.dustSmall, m).toString(), dust.getMaterialFluid(), 36);
                     TinkerRegistry.registerMelting(new UnificationEntry(OrePrefix.dustTiny, m).toString(), dust.getMaterialFluid(), 16);
                 }
 			}

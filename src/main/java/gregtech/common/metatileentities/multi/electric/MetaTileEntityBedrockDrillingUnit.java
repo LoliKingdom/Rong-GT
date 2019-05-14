@@ -25,8 +25,6 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.common.blocks.BlockDrillHead;
-import gregtech.common.blocks.BlockDrillHead.DrillHeadType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityMultiFurnace.MultiFurnaceWorkable;
@@ -75,24 +73,12 @@ public class MetaTileEntityBedrockDrillingUnit extends RecipeMapMultiblockContro
             .aisle("BBB", "XXX", "CSC", "#Z#", "#Z#")
             .setAmountAtLeast('B', 3)
             .where('S', selfPredicate())
-            .where('X', drillHeadPredicate())
+            .where('X', blockPredicate(Block.getBlockFromItem(OreDictUnifier.get(OrePrefix.block, Materials.Steel).getItem())))
             .where('C', statePredicate(MetaBlocks.METAL_CASING.getState(MetalCasingType.INVAR_HEATPROOF)).or(abilityPartPredicate(ALLOWED_ABILITIES)))
             .where('#', isAirPredicate())
             .where('Z', blockPredicate(MetaBlocks.FRAMES.get(Materials.Steel)))
             .where('B', blockPredicate(Blocks.BEDROCK))           
             .build();
-    }
-    
-    public static Predicate<BlockWorldState> drillHeadPredicate() {
-        return blockWorldState -> {
-            IBlockState blockState = blockWorldState.getBlockState();
-            if(!(blockState.getBlock() instanceof BlockDrillHead))
-                return false;
-            BlockDrillHead blockDrillHead = (BlockDrillHead)blockState.getBlock();
-            DrillHeadType drillType = blockDrillHead.getState(blockState);
-            DrillHeadType currentDrillType = blockWorldState.getMatchContext().getOrPut("DrillHeadType", drillType);
-            return currentDrillType.getName().equals(drillType.getName());
-        };
     }
     
     @Override

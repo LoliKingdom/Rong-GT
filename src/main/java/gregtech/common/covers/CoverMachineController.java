@@ -76,7 +76,9 @@ public class CoverMachineController extends CoverBehavior implements CoverWithUI
     private void cycleNextControllerMode() {
         List<ControllerMode> allowedModes = getAllowedModes();
         int nextIndex = allowedModes.indexOf(controllerMode) + 1;
-        setControllerMode(allowedModes.get(nextIndex % allowedModes.size()));
+        if(!allowedModes.isEmpty()) {
+            setControllerMode(allowedModes.get(nextIndex % allowedModes.size()));
+        }
     }
 
     public List<ControllerMode> getAllowedModes() {

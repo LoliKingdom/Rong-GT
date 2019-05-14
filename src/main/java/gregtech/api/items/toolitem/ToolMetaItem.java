@@ -183,16 +183,18 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         T metaToolValueItem = getItem(stack);
         if (metaToolValueItem != null) {
             IToolStats toolStats = metaToolValueItem.getToolStats();
-            if (toolStats.isMinableBlock(state, stack)) {
-                damageItem(stack, toolStats.getToolDamagePerBlockBreak(stack), false);
-                ResourceLocation mineSound = toolStats.getUseSound(stack);
-                if (mineSound != null) {
-                    SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(mineSound);
-                    world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, soundEvent, SoundCategory.PLAYERS, 0.27f, 1.0f, false);
-                }
-            }
+            toolStats.onBlockDestroyed(stack, world, state, pos, entity);
+            damageItem(stack, toolStats.getToolDamagePerBlockBreak(stack), false);
         }
         return true;
+    }
+    
+    public void onBlockDropsHarvested(ItemStack itemStack, World world, BlockPos pos, IBlockState blockState, EntityPlayer player, List<ItemStack> dropList) {
+        T metaToolValueItem = getItem(itemStack);
+        if (metaToolValueItem != null) {
+            IToolStats toolStats = metaToolValueItem.getToolStats();
+            toolStats.convertBlockDrops(world, pos, blockState, player, dropList, itemStack);
+        }
     }
 
     @Override
@@ -200,7 +202,7 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         T metaToolValueItem = getItem(stack);
         if (metaToolValueItem != null) {
             IToolStats toolStats = metaToolValueItem.getToolStats();
-            if (isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.isMinableBlock(state, stack)) {
+            if (isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.canMineBlock(state, stack)) {
                 return getToolDigSpeed(stack);
             }
         }
@@ -212,7 +214,7 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
         T metaToolValueItem = getItem(stack);
         if (metaToolValueItem != null) {
             IToolStats toolStats = metaToolValueItem.getToolStats();
-            return isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.isMinableBlock(state, stack);
+            return isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.canMineBlock(state, stack);
         }
         return false;
     }
@@ -224,7 +226,7 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
             return -1;
         }
         IToolStats toolStats = metaToolValueItem.getToolStats();
-        if(isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.isMinableBlock(blockState, stack)) {
+        if(isUsable(stack, toolStats.getToolDamagePerBlockBreak(stack)) && toolStats.canMineBlock(blockState, stack)) {
             return getHarvestLevel(stack);
         }
         return -1;
@@ -269,11 +271,6 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
             IToolStats toolStats = metaValueItem.getToolStats();
             if (!damageItem(stack, toolStats.getToolDamagePerEntityAttack(stack), false)) {
                 return true;
-            }
-            ResourceLocation hitSound = toolStats.getUseSound(stack);
-            if (hitSound != null) {
-                SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(hitSound);
-                target.getEntityWorld().playSound(target.posX, target.posY, target.posZ, soundEvent, SoundCategory.PLAYERS, 0.27f, 1.0f, false);
             }
             float additionalDamage = toolStats.getNormalDamageBonus(target, stack, attacker);
             float additionalMagicDamage = toolStats.getMagicDamageBonus(target, stack, attacker);
@@ -343,7 +340,8 @@ public class ToolMetaItem<T extends ToolMetaItem<?>.MetaToolValueItem> extends M
 
     public boolean isUsable(ItemStack stack, int damage) {
         IElectricItem capability = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-        return capability == null || capability.canUse(damage);
+        int energyAmount = ConfigHolder.energyUsageMultiplier * damage;
+        return capability == null || capability.canUse(energyAmount);
     }
 
     @Override

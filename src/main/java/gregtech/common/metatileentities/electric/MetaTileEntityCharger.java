@@ -10,11 +10,6 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
-import gregtech.api.recipes.CountableIngredient;
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.UnificationEntry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -45,25 +40,18 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
     @Override
     public void update() {
         super.update();
-        if(!getWorld().isRemote && energyContainer.getCurrentEnergyStored() > 0) {
-            long inputVoltage = Math.min(energyContainer.getInputVoltage(), energyContainer.getCurrentEnergyStored());
-            long energyUsedUp = 0L;
-            for(int i = 0; i < importItems.getSlots(); i++) {
+        if (!getWorld().isRemote && energyContainer.getCurrentEnergyStored() > 0) {
+            for (int i = 0; i < importItems.getSlots(); i++) {
                 ItemStack batteryStack = importItems.getStackInSlot(i);
                 IElectricItem electricItem = batteryStack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-                if(electricItem != null && electricItem.charge(inputVoltage, getTier(), false, true) > 0) {
-                    energyUsedUp += electricItem.charge(inputVoltage, getTier(), false, false);
-                    importItems.setStackInSlot(i, batteryStack);
-                    if(energyUsedUp >= energyContainer.getCurrentEnergyStored()) break;
+                if (electricItem != null) {
+                    long inputVoltage = Math.min(energyContainer.getInputVoltage(), energyContainer.getCurrentEnergyStored());
+                    long energyUsed = electricItem.charge(inputVoltage, getTier(), false, false);
+                    if(energyUsed > 0L) {
+                        energyContainer.removeEnergy(energyUsed);
+                        importItems.setStackInSlot(i, batteryStack);
+                    }
                 }
-                if(batteryStack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)) && energyContainer.getEnergyCanBeInserted() >= 10000) {
-                	energyContainer.removeEnergy(10000);
-                	importItems.extractItem(i, 1, false);
-                	importItems.setStackInSlot(i, OreDictUnifier.get(OrePrefix.crystal, Materials.ChargedCertusQuartz));
-                }
-            }
-            if(energyUsedUp > 0) {
-                energyContainer.addEnergy(-energyUsedUp);
             }
         }
     }
@@ -75,13 +63,10 @@ public class MetaTileEntityCharger extends TieredMetaTileEntity {
             @Override
             public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
                 IElectricItem electricItem = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-                if(electricItem == null || electricItem.getTier() != getTier() ||
-                    electricItem.charge(Long.MAX_VALUE, getTier(), false, true) == 0)
-                    return stack;
-                if(stack.isItemEqual(OreDictUnifier.get(OrePrefix.crystal, Materials.CertusQuartz)))
-                	return stack;
-                
-                return super.insertItem(slot, stack, simulate);
+                if(electricItem != null && getTier() >= electricItem.getTier()) {
+                    return super.insertItem(slot, stack, simulate);
+                }
+                return stack;
             }
 
             @Override

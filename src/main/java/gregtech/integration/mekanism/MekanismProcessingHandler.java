@@ -103,7 +103,7 @@ public class MekanismProcessingHandler {
 				RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().input(OrePrefix.shard, m).fluidInputs(Materials.Oxygen.getFluid(400)).outputs(OreDictUnifier.get(OrePrefix.clump, m)).duration(350).EUt(320).buildAndRegister();
 				
 				RecipeHandler.addCrusherRecipe(OreDictUnifier.get(OrePrefix.clump, m), OreDictUnifier.get(OrePrefix.dustDirty, m));
-				RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.clump, m).outputs(OreDictUnifier.get(OrePrefix.dustDirty, m)).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, m), 2500).duration(140).EUt(18).buildAndRegister();
+				RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.clump, m).outputs(OreDictUnifier.get(OrePrefix.dustDirty, m)).chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, m), 2500, 500).duration(140).EUt(18).buildAndRegister();
 				RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder().input(OrePrefix.clump, m).outputs(OreDictUnifier.get(OrePrefix.dustDirty, m)).duration(20).EUt(12).buildAndRegister();
 
 				RecipeHandler.addEnrichmentChamberRecipe(OreDictUnifier.get(OrePrefix.dustDirty, m), OreDictUnifier.get(OrePrefix.dust, m));

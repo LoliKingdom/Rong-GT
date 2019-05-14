@@ -23,7 +23,6 @@ import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
@@ -83,17 +82,16 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 				.where('S', selfPredicate())
 				.where('C', statePredicate(getCasingState()))
 				.where('c', statePredicate(getCoilState()))
-				.where('O', statePredicate(getCasingState()).or(abilityPartPredicate(MultiblockAbility.EXPORT_FLUIDS)))
-				.where('I', statePredicate(getCasingState()).or(abilityPartPredicate(MultiblockAbility.IMPORT_FLUIDS)))
-				.where('E', statePredicate(getCasingState()).or(tilePredicate((state, tile) -> {
+				.where('O', statePredicate(getCasingState())
+				.or(abilityPartPredicate(MultiblockAbility.EXPORT_FLUIDS)))
+				.where('E', statePredicate(getCasingState())
+				.or(tilePredicate((state, tile) -> {
 					for (int i = tier; i < GTValues.V.length; i++) {
 						if (tile.metaTileEntityId.equals(MetaTileEntities.ENERGY_INPUT_HATCH[i].metaTileEntityId)) return true;
 					}
 					return false;
-				})))
-				.where('#', (tile) -> true)
-				.build();
-		}
+			}))).where('I', statePredicate(getCasingState()).or(abilityPartPredicate(MultiblockAbility.IMPORT_FLUIDS))).where('#', (tile) -> true).build();
+	}
 
 	@Override
 	public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
@@ -101,33 +99,39 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 	}
 
 	private IBlockState getCasingState() {
-		switch(tier) {
+		switch (tier) {
 		case 5:
+			return MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV);
+		case 6:
 			return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING);
+		case 7:
 		default:
 			return MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING_MK2);
 		}
 	}
 
 	private IBlockState getCoilState() {
-		switch(tier) {
-		case 5:
-			return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.FUSION_COIL);
-		default:
+		switch (tier) {
+		case 6:
 			return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.SUPERCONDUCTOR);
+		case 7:
+		case 8:
+		default:
+			return MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.FUSION_COIL);
 		}
 	}
 
 	private long getMaxEU() {
-		return this.inputEnergyContainers.getContainerList().size() * 100000L * (tier - 4);
+		List<IEnergyContainer> eConts = this.inputEnergyContainers.getContainerList();
+		return eConts.size() * 100000L * (tier - 5);
 	}
 
 	@Override
 	protected void formStructure(PatternMatchContext context) {
-		long energyStored = energyContainer.getCurrentEnergyStored();
+		long energyStored = this.energyContainer.getCurrentEnergyStored();
 		super.formStructure(context);
 		this.initializeAbilities();
-		((EnergyContainerHandler)energyContainer).setEnergyStored(energyStored);
+		((EnergyContainerHandler) this.energyContainer).setEnergyStored(energyStored);
 	}
 
 	private void initializeAbilities() {
@@ -146,67 +150,84 @@ public class MetaTileEntityFusionReactor extends RecipeMapMultiblockController {
 
 	@Override
 	protected void updateFormedValid() {
-		if(!getWorld().isRemote) {
-			if(inputEnergyContainers.getCurrentEnergyStored() > 0) {
-				long energyAdded = energyContainer.addEnergy(inputEnergyContainers.getCurrentEnergyStored());
-				if(energyAdded > 0)  {
-					inputEnergyContainers.addEnergy(-(energyAdded));
-				}
+		if (!getWorld().isRemote) {
+			if (this.inputEnergyContainers.getCurrentEnergyStored() > 0) {
+				long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getCurrentEnergyStored());
+				if (energyAdded > 0) this.inputEnergyContainers.addEnergy(-energyAdded);
 			}
-			if(recipeMapWorkable.isWorkingEnabled()) {
-				Recipe previousRecipe = recipeMapWorkable.getPreviousRecipe();
-				recipeMapWorkable.updateWorkable();
-				Recipe currentRecipe = recipeMapWorkable.getPreviousRecipe();
-				if(previousRecipe != null && currentRecipe != null && previousRecipe != currentRecipe) {
-					int euToStart = currentRecipe.getProperty("eu_to_start");
-					if(energyContainer.getCurrentEnergyStored() >= euToStart) {
-						recipeMapWorkable.setActive(true);
+
+			if (this.recipeMapWorkable.isWorkingEnabled()) {
+				if (this.recipeMapWorkable.isHasNotEnoughEnergy()) {
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
+					recipeMapWorkable.setMaxProgress(0);
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
+					ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
+					return;
+				}
+				Recipe previousRecipe = ObfuscationReflectionHelper.getPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, "previousRecipe");
+				this.recipeMapWorkable.updateWorkable();
+				Recipe recipe = ObfuscationReflectionHelper.getPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, "previousRecipe");
+				if (previousRecipe != recipe) {
+					if (recipe != null) {
+						long euToStart = ((Integer) recipe.getProperty("eu_to_start")).intValue();
+						if (this.energyContainer.getCurrentEnergyStored() < euToStart) {
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
+							recipeMapWorkable.setMaxProgress(0);
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
+							ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
+						} else {
+							this.energyContainer.addEnergy(-euToStart);
+						}
+					} else {
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
+						recipeMapWorkable.setMaxProgress(0);
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
+						ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
 					}
 				}
-				/*if(recipeMapWorkable.notEnoughEnergy()) {
-					recipeMapWorkable.setActive(false);
-					recipeMapWorkable.setMaxProgress(0);
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, 0, "progressTime");
-					recipeMapWorkable.setMaxProgress(0);
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, 0, "recipeEUt");
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, null, "fluidOutputs");
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, null, "itemOutputs");
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-					ObfuscationReflectionHelper.setPrivateValue(RecipeMapWorkableHandler.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
-					return;
-				}*/
 			}
+
 		}
 	}
 
 	@Override
 	protected void addDisplayText(List<ITextComponent> textList) {
-		if(!isStructureFormed()) {
-			textList.add((new TextComponentTranslation("gregtech.multiblock.invalid_structure").setStyle((new Style()).setColor(TextFormatting.RED))));
+		if (!this.isStructureFormed()) {
+			textList.add((new TextComponentTranslation("gregtech.multiblock.invalid_structure", new Object[0])).setStyle((new Style()).setColor(TextFormatting.RED)));
 		}
-		if(this.isStructureFormed()) {
-			if(!recipeMapWorkable.isWorkingEnabled()) {
-				textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
-			} 
-			else if(recipeMapWorkable.isActive()) {
-				textList.add(new TextComponentTranslation("gregtech.multiblock.running"));
+		if (this.isStructureFormed()) {
+			if (!this.recipeMapWorkable.isWorkingEnabled()) {
+				textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused", new Object[0]));
+			} else if (this.recipeMapWorkable.isActive()) {
+				textList.add(new TextComponentTranslation("gregtech.multiblock.running", new Object[0]));
 				int currentProgress;
-				if(energyContainer.getEnergyCapacity() > 0) {
+				if (energyContainer.getEnergyCapacity() > 0) {
 					currentProgress = (int) (this.recipeMapWorkable.getProgressPercent() * 100.0D);
-					textList.add(new TextComponentTranslation("gregtech.multiblock.progress", currentProgress));
-				} 
-				else {
-					currentProgress = -recipeMapWorkable.getRecipeEUt();
-					textList.add(new TextComponentTranslation("gregtech.multiblock.generation_eu", currentProgress));
+					textList.add(new TextComponentTranslation("gregtech.multiblock.progress", new Object[] { currentProgress }));
+				} else {
+					currentProgress = -this.recipeMapWorkable.getRecipeEUt();
+					textList.add(new TextComponentTranslation("gregtech.multiblock.generation_eu", new Object[] { currentProgress }));
 				}
-			} 
-			else {
-				textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
+			} else {
+				textList.add(new TextComponentTranslation("gregtech.multiblock.idling", new Object[0]));
 			}
-			if(this.recipeMapWorkable.notEnoughEnergy()) {
-				textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle((new Style()).setColor(TextFormatting.RED))));
+
+			if (this.recipeMapWorkable.isHasNotEnoughEnergy()) {
+				textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy", new Object[0])).setStyle((new Style()).setColor(TextFormatting.RED)));
 			}
 		}
+
 		textList.add(new TextComponentString("EU: " + this.energyContainer.getCurrentEnergyStored() + " / " + this.energyContainer.getEnergyCapacity()));
 	}
 

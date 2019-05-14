@@ -50,7 +50,7 @@ public class ConfigHolder {
     @Config.Comment("Setting this to true makes GregTech ignore error and invalid recipes that would otherwise cause crash. Default to true.")
     @Config.RequiresMcRestart
     public static boolean ignoreErrorOrInvalidRecipes = true;
-    
+  
     /*@Config.Comment("Setting this to true makes GregTech take priority over Tinker's in their tool stats")
     @Config.RequiresMcRestart
     public static boolean overrideTiConStats = false;*/

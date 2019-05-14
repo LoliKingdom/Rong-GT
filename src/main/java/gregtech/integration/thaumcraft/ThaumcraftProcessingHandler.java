@@ -70,7 +70,7 @@ public class ThaumcraftProcessingHandler {
       	      		.fluidInputs(Materials.UUMatter.getFluid(2))
       	      		.outputs(OreDictUnifier.get(OrePrefix.crushedPurified, m, 2), 
       	      				GTValues.isModLoaded("mekanism") ? OreDictUnifier.get(OrePrefix.dustPure, m) : OreDictUnifier.get(OrePrefix.shard, m))
-      	      		.chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, GTUtility.selectItemInList(1, m, m.oreByProducts, DustMaterial.class)), 1000)
+      	      		.chancedOutput(OreDictUnifier.get(OrePrefix.dustTiny, GTUtility.selectItemInList(1, m, m.oreByProducts, DustMaterial.class)), 1000, 100)
       	      		.EUt(340)
       	      		.duration((int)m.getAverageMass() * 2)
       	      		.buildAndRegister();

@@ -5,6 +5,7 @@ import static gregtech.api.GTValues.W;
 
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.MarkerMaterials.Color;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.unification.material.type.FluidMaterial;
@@ -26,44 +27,14 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictionaryLoader {
-	
-	public static void postInit() {
-        ItemStack cellStack = MetaItems.FLUID_CELL.getStackForm();
-
-        for(Material m : Material.MATERIAL_REGISTRY) {   
-        	if(!(m instanceof FluidMaterial)) return;
-        	FluidMaterial material = (FluidMaterial)m;
-        	if(material instanceof DustMaterial && ((DustMaterial)material).shouldGenerateSlurries()) {
-        		if(FluidUtil.getFluidHandler(cellStack) != null) {
-        			DustMaterial slurryMaterial = (DustMaterial)m;
-        			IFluidHandlerItem fluidHandlerCleanSlurry = cellStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        			IFluidHandlerItem fluidHandlerDirtySlurry = cellStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        			fluidHandlerCleanSlurry.fill(new FluidStack(slurryMaterial.getMaterialCleanSlurry(), 1000), true);
-        			fluidHandlerDirtySlurry.fill(new FluidStack(slurryMaterial.getMaterialDirtySlurry(), 1000), true);
-        			ItemStack stackDirty = fluidHandlerDirtySlurry.getContainer();
-        			ItemStack stackClean = fluidHandlerCleanSlurry.getContainer();
-        			OreDictionary.registerOre("cellDirtySlurry" + slurryMaterial.toCamelCaseString(), stackDirty);
-        			OreDictionary.registerOre("cellCleanSlurry" + slurryMaterial.toCamelCaseString(), stackClean);
-        		}
-        	}       
-        	if(material.shouldGenerateFluid()) {
-        		if(FluidUtil.getFluidHandler(cellStack) != null) {
-                	IFluidHandlerItem fluidHandler = cellStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                	fluidHandler.fill(material.getFluid(1000), true);
-                	ItemStack stack = fluidHandler.getContainer();
-                	OreDictionary.registerOre("cell" + material.toCamelCaseString(), stack);
-                	IFluidHandlerItem plasmaHandler = cellStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                	plasmaHandler.fill(material.getPlasma(1000), true);
-                	ItemStack plasmaStack = plasmaHandler.getContainer();
-                	OreDictionary.registerOre("cellPlasma" + material.toCamelCaseString(), stack);
-                	
-                }
-        	}
-        }
-	}
 
     public static void init() {
         GTLog.logger.info("Registering OreDict entries.");
+        
+        for(Material material : new Material[] {Materials.Lapis, Materials.Lazurite, Materials.Sodalite}) {
+            OreDictUnifier.registerOre(OreDictUnifier.get(OrePrefix.gem, material), OrePrefix.dye, Color.Blue);
+            OreDictUnifier.registerOre(OreDictUnifier.get(OrePrefix.dust, material), OrePrefix.dye, Color.Blue);
+        }
         
         OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL, 1), OrePrefix.ingot, Materials.Clay);
         OreDictUnifier.registerOre(new ItemStack(Items.FLINT, 1), OrePrefix.gem, Materials.Flint);

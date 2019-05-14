@@ -28,12 +28,6 @@ public class ToolKnife implements IToolStats {
     public float getBaseDamage(ItemStack stack) {
         return 4.5F;
     }
-	
-	@Override
-	public ResourceLocation getUseSound(ItemStack stack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean canApplyEnchantment(ItemStack stack, Enchantment enchantment) {
@@ -41,7 +35,7 @@ public class ToolKnife implements IToolStats {
 	}
 
 	@Override
-	public boolean isMinableBlock(IBlockState block, ItemStack stack) {
+	public boolean canMineBlock(IBlockState block, ItemStack stack) {
 		return false;
 	}
 }
