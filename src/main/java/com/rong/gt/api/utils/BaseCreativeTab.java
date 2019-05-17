@@ -1,0 +1,54 @@
+package com.rong.gt.api.utils;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+
+import java.util.function.Supplier;
+
+import com.rong.gt.RTLog;
+
+public class BaseCreativeTab extends CreativeTabs {
+
+    private final boolean hasSearchBar;
+    private final Supplier<ItemStack> iconSupplier;
+
+    public BaseCreativeTab(String tabName, Supplier<ItemStack> iconSupplier) {
+        this(tabName, iconSupplier, false);
+    }
+
+    public BaseCreativeTab(String TabName, Supplier<ItemStack> iconSupplier, boolean hasSearchBar) {
+        super(TabName);
+        this.iconSupplier = iconSupplier;
+        this.hasSearchBar = hasSearchBar;
+
+        if (hasSearchBar)
+            setBackgroundImageName("item_search.png");
+    }
+
+    @Override
+    public ItemStack getTabIconItem() {
+        if (iconSupplier == null) {
+            RTLog.logger.error("Icon supplier was null for CreativeTab " + getTabLabel());
+            return new ItemStack(Blocks.STONE);
+        }
+
+        ItemStack stack = iconSupplier.get();
+        if (stack == null) {
+        	RTLog.logger.error("Icon supplier return null for CreativeTab " + getTabLabel());
+            return new ItemStack(Blocks.STONE);
+        }
+
+        if (stack == ItemStack.EMPTY) {
+        	RTLog.logger.error("Icon built from iconSupplied is EMPTY for CreativeTab " + getTabLabel());
+            return new ItemStack(Blocks.STONE);
+        }
+
+        return stack;
+    }
+
+    @Override
+    public boolean hasSearchBar() {
+        return hasSearchBar;
+    }
+}
