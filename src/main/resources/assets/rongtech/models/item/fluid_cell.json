@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "inventory": {
+      "model": "forge:forgebucket",
+      "textures": {
+        "base": "rongtech:items/fluid_cell/base",
+        "fluid": "rongtech:items/fluid_cell/overlay",
+        "cover": "rongtech:items/fluid_cell/base"
+      },
+      "transform": "forge:default-item"
+    }
+  }
+}

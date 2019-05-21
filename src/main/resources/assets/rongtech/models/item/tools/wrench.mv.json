@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "rongtech:items/tools/power_unit_mv",
+  	"layer1": "rongtech:items/tools/wrench_electric"
+  }
+}

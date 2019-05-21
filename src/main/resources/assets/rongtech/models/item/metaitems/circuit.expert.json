@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rongtech:items/metaitems/circuits/circuit.expert",
+	"layer1": "rongtech:items/metaitems/circuits/wiring.expert"
+  }
+}

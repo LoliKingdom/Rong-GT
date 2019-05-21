@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "rongtech:items/material_sets/magnetic/screw",
+        "layer1": "rongtech:items/material_sets/magnetic/screw_overlay"
+    }
+}

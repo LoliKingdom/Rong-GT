@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "rongtech:items/tools/handle_screwdriver",
+  	"layer1": "rongtech:items/tools/screwdriver"
+  }
+}

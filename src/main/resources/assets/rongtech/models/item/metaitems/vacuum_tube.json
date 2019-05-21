@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rongtech:items/metaitems/glass_tube",
+	"layer1": "rongtech:items/metaitems/vacuum_tube"
+  }
+}
