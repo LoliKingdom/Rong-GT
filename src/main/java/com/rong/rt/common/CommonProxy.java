@@ -45,6 +45,9 @@ public class CommonProxy {
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		RTLog.logger.info("Registering Blocks...");
 		IForgeRegistry<Block> registry = event.getRegistry();
+		
+		registry.register(RTBlocks.blockAutoclave);
+		registry.register(RTBlocks.blockBender);
 
 		COMPRESSED.values().stream().distinct().forEach(registry::register);
 		SURFACE_ROCKS.values().stream().distinct().forEach(registry::register);
@@ -63,7 +66,10 @@ public class CommonProxy {
 			registry.register(item);
 			item.registerSubItems();
 		}
-
+		
+		registry.register(new ItemBlock(RTBlocks.blockAutoclave).setRegistryName(RTBlocks.blockAutoclave.getRegistryName()));
+		registry.register(new ItemBlock(RTBlocks.blockBender).setRegistryName(RTBlocks.blockBender.getRegistryName()));
+		
 		COMPRESSED.values().stream().distinct().map(block -> createItemBlock(block, CompressedItemBlock::new))
 				.forEach(registry::register);
 		FRAMES.values().stream().distinct().map(block -> createItemBlock(block, FrameItemBlock::new))

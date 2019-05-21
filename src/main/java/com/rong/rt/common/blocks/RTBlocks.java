@@ -66,12 +66,11 @@ public class RTBlocks {
 
 	static final List<Block> toRegister = new ArrayList<>();
 
-	public static final BlockMachine
-		blockBender = registerBlock(new BlockMachine("bender")),
-		blockAutoclave = registerBlock(new BlockMachine("autoclave"));
+	public static final BlockMachineBase
+		blockBender = new BlockMachineBase("bender"),
+		blockAutoclave = new BlockMachineBase("autoclave");
 
 	public static void init() {
-		registerBlocks();
 		StoneType.init();
 		registerTileEntity();
 		createGeneratedBlock(material -> material instanceof DustMaterial && !EnumOrePrefix.block.isIgnored(material),
@@ -88,18 +87,7 @@ public class RTBlocks {
 			}
 		}
 	}
-
-	public static void registerBlocks() {
-		for(Block block : toRegister) {
-			IC2.getInstance().createBlock(block, MachineItemBlock.class);
-		}
-	}
-
-	private static <T extends Block> T registerBlock(T block) {
-		toRegister.add(block);
-		return block;
-	}
-
+	
 	public static void registerTileEntity() {
 		GameRegistry.registerTileEntity(TileEntityAutoclave.class,
 				new ResourceLocation(Values.MOD_ID + "tile_autoclave"));

@@ -83,7 +83,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 
 	protected IFluidHandler fluidInventory;
 
-	protected RecipeMap<?> recipeMap;
+	public final RecipeMap<?> recipeMap;
 
 	protected boolean forceRecipeRecheck;
 	protected ItemStack[] lastItemInputs;
@@ -131,6 +131,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 		this.maxEnergy = 0;
 		this.tier = tier;
 		this.renderer = renderer;
+		this.recipeMap = recipeMap;
 		// this.baseTier = this.tier;
 		addNetworkFields(new String[] { "soundLevel", "redstoneInverted", "redstoneSensitive" });
 		addGuiFields(new String[] { "energy", "maxEnergy", "tier" });
@@ -497,6 +498,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 		return nbt;
 	}
 
+	@Override
 	public void onLoaded() {
 		super.onLoaded();
 		if(isSimulating()) {
@@ -515,24 +517,26 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 		}
 	}
 
+	@Override
 	public void onUnloaded() {
 		if((isRendering()) && (this.audioSource != null)) {
 			IC2.audioManager.removeSources(this);
 			this.audioSource.remove();
 			this.audioSource = null;
 		}
-		if((this.addedToEnergyNet) && (isSimulating())) {
+		if(this.addedToEnergyNet && isSimulating()) {
 			MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 			this.addedToEnergyNet = false;
 		}
 		super.onUnloaded();
 	}
 
+	@Override
 	public void onNetworkEvent(int event) {
-		if((this.audioSource != null) && (this.audioSource.isRemoved())) {
+		if(this.audioSource != null && this.audioSource.isRemoved()) {
 			this.audioSource = null;
 		}
-		if((this.audioSource == null) && (getStartSoundFile() != null)) {
+		if(this.audioSource == null && getStartSoundFile() != null) {
 			this.audioSource = IC2.audioManager.createSource(this, PositionSpec.Center, getStartSoundFile(), true,
 					false, IC2.audioManager.defaultVolume * this.soundLevel);
 		}
@@ -557,6 +561,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 		}
 	}
 
+	@Override
 	public void onNetworkUpdate(String field) {
 		if(field.equals("isActive")) {
 			if(getActive()) {
@@ -571,6 +576,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 		}
 	}
 
+	@Override
 	public double injectEnergy(EnumFacing directionFrom, double amount, double voltage) {
 		if((amount > EnergyNet.instance.getPowerFromTier(tier)) || (amount <= 0.0D)) {
 			return 0.0D;
@@ -620,6 +626,7 @@ public abstract class TileEntityBaseMachine extends TileEntityBlock implements I
 
 	public void setOverclockable(boolean overclockable) {
 		this.overclockable = overclockable;
+		markDirty();
 	}
 
 	@Override

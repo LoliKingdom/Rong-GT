@@ -45,7 +45,7 @@ public class PlayerInventoryHolder implements IUIHolder {
     }
 
     public void openUI() {
-        UIFactories.PlayerInventoryUIFactory.INSTANCE.openUI(this, (EntityPlayerMP) player);
+        UIFactories.PlayerInventoryUIFactory.INSTANCE.openUI(this, (EntityPlayerMP)player);
     }
 
     @Override

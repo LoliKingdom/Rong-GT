@@ -8,6 +8,7 @@ import com.rong.rt.api.unification.materials.AnnotatedMaterialHandlerLoader;
 import com.rong.rt.api.unification.materials.Materials;
 import com.rong.rt.api.unification.materials.types.Material;
 import com.rong.rt.common.CommonProxy;
+import com.rong.rt.common.RTSprites;
 import com.rong.rt.common.blocks.MetaFluids;
 import com.rong.rt.common.blocks.RTBlocks;
 import com.rong.rt.common.blocks.modelfactories.BlockCompressedFactory;
@@ -73,6 +74,7 @@ public class RongTech {
         //freeze material registry before processing items, blocks and fluids
         Material.freezeRegistry();
 
+        RTSprites.loadSprites();
         RTBlocks.init();
         MetaItems.init();
         MetaFluids.init();

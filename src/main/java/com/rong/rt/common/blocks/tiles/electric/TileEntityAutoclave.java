@@ -22,7 +22,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityAutoclave extends TileEntityBaseMachine {
 
 	public TileEntityAutoclave() {
-		super(0, RecipeMaps.AUTOCLAVE_RECIPES, Textures.AUTOCLAVE_OVERLAY);
+		super(1, RecipeMaps.AUTOCLAVE_RECIPES, Textures.AUTOCLAVE_OVERLAY);
 	}
 	
 	protected ModularUI.Builder createGuiTemplate(EntityPlayer player) {

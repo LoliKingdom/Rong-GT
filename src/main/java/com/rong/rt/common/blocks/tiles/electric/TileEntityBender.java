@@ -25,7 +25,7 @@ public class TileEntityBender extends TileEntityBaseMachine {
 	protected IFluidHandler outputFluidInventory;
 
 	public TileEntityBender() {
-		super(0, RecipeMaps.BENDER_RECIPES, Textures.BENDER_OVERLAY);
+		super(1, RecipeMaps.BENDER_RECIPES, Textures.BENDER_OVERLAY);
 	}
 
 	protected ModularUI.Builder createGuiTemplate(EntityPlayer player) {
