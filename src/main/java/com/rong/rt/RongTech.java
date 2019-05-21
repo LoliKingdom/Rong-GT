@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = Values.MOD_ID, name = Values.MOD_NAME, acceptedMinecraftVersions = "[1.12]",
-dependencies = "after:forestry;after:nuclearcraft;after:tconstruct;after:forgemultipartcbe;after:jei@[4.8.6,);after:crafttweaker;")
+dependencies = "required-after:ic2;required-after:ic2-classic-spmod;after:forestry;after:jei@[4.8.6,);after:crafttweaker;")
 public class RongTech {
 	
 	static {

@@ -37,9 +37,8 @@ public class BlockMachine extends ExtendedBlockMultiID {
 	// TODO: Redstone integrations!
 	// TODO: Right click for ModularUI!
 
-	String name;
-	String texture;
-	int size = 0;
+	public static String name;
+	int size;
 
 	public BlockMachine(String name) {
 		super(Material.IRON);
@@ -110,7 +109,7 @@ public class BlockMachine extends ExtendedBlockMultiID {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public TextureAtlasSprite[] getIconSheet(int meta) {
-		return Ic2Icons.getTextures(this.name);
+		return Ic2Icons.getTextures(name);
 	}
 
 	@Override

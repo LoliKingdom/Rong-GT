@@ -6,6 +6,7 @@ import com.rong.rt.api.unification.OreDictUnifier;
 import com.rong.rt.api.unification.materials.types.Material;
 import com.rong.rt.api.unification.stack.UnificationEntry;
 import com.rong.rt.common.CommonProxy;
+import com.rong.rt.common.RTSprites;
 import com.rong.rt.common.blocks.BlockCompressed;
 import com.rong.rt.common.blocks.BlockFrame;
 import com.rong.rt.common.blocks.BlockOre;
@@ -19,6 +20,7 @@ import com.rong.rt.common.items.MetaItems;
 
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.util.ResourceUtils;
+import ic2.core.platform.textures.Ic2Icons.SpriteReloadEvent;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -33,6 +35,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,6 +43,33 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onIconLoad(SpriteReloadEvent event) {
+		RTSprites.loadSprites();
+	}
+
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		RTBlocks.registerStateMappers();
+		RTBlocks.registerItemModels();
+		MetaItems.registerModels();
+	}
+
+	@SubscribeEvent
+	public static void addMaterialFormulaHandler(ItemTooltipEvent event) {
+		ItemStack itemStack = event.getItemStack();
+		if(!(itemStack.getItem() instanceof ItemBlock)) {
+			UnificationEntry unificationEntry = OreDictUnifier.getUnificationEntry(itemStack);
+			if(unificationEntry != null && unificationEntry.material != null) {
+				String formula = unificationEntry.material.chemicalFormula;
+				if(formula != null && !formula.isEmpty() && !formula.equals("?")) {
+					event.getToolTip().add(1,
+							ChatFormatting.GRAY.toString() + unificationEntry.material.chemicalFormula);
+				}
+			}
+		}
+	}
 
 	public static final IBlockColor COMPRESSED_BLOCK_COLOR = (IBlockState state, IBlockAccess worldIn, BlockPos pos,
 			int tintIndex) -> state.getValue(((BlockCompressed) state.getBlock()).variantProperty).materialRGB;
@@ -96,7 +126,7 @@ public class ClientProxy extends CommonProxy {
 	public void onPreLoad() {
 		super.onPreLoad();
 		StoneRenderer.preInit();
-		//MetaEntities.initRenderers();
+		// MetaEntities.initRenderers();
 		TextureUtils.addIconRegister(MetaFluids::registerSprites);
 		MinecraftForge.EVENT_BUS.register(ToolRenderHandler.INSTANCE);
 	}
@@ -118,25 +148,4 @@ public class ClientProxy extends CommonProxy {
 		MetaItems.registerColors();
 	}
 
-	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event) {
-		RTBlocks.registerStateMappers();
-		RTBlocks.registerItemModels();
-		MetaItems.registerModels();
-	}
-
-	@SubscribeEvent
-	public static void addMaterialFormulaHandler(ItemTooltipEvent event) {
-		ItemStack itemStack = event.getItemStack();
-		if(!(itemStack.getItem() instanceof ItemBlock)) {
-			UnificationEntry unificationEntry = OreDictUnifier.getUnificationEntry(itemStack);
-			if(unificationEntry != null && unificationEntry.material != null) {
-				String formula = unificationEntry.material.chemicalFormula;
-				if(formula != null && !formula.isEmpty() && !formula.equals("?")) {
-					event.getToolTip().add(1,
-							ChatFormatting.GRAY.toString() + unificationEntry.material.chemicalFormula);
-				}
-			}
-		}
-	}
 }
