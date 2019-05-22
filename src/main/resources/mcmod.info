@@ -1,13 +1,12 @@
 [{
-  "modid": "gregtech",
-  "name": "GregTech: Chill Edition",
-  "description": "GregTech, chill, in 1.12.2.",
+  "modid": "rongtech",
+  "name": "RongTech",
+  "description": "RongTech, very chill, in 1.12.2.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "logoFile": "/assets/gregtech/textures/gt_logo_long.png",
   "url": "https://minecraft.curseforge.com/projects/gregtech-chill-edition/",
   "authorList": [
-      "Archengius",
       "Rongmario"
   ],
   "credits": "GregoriusT for making GregTech in the first place.",

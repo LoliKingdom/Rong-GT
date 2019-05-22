@@ -1,0 +1,111 @@
+package com.rong.rt.api.metatileentity;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.rong.rt.Values;
+import com.rong.rt.api.capability.IEnergyContainer;
+import com.rong.rt.api.capability.impl.EnergyContainerHandler;
+import com.rong.rt.api.capability.impl.EnergyContainerHandler.IEnergyChangeListener;
+import com.rong.rt.api.render.SimpleSidedCubeRenderer;
+import com.rong.rt.api.render.SimpleSidedCubeRenderer.RenderSide;
+import com.rong.rt.api.render.Textures;
+import com.rong.rt.api.utils.Utility;
+
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.ColourMultiplier;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public abstract class TieredMetaTileEntity extends MetaTileEntity
+		implements IEnergyChangeListener, ITieredMetaTileEntity {
+
+	private final int tier;
+	protected IEnergyContainer energyContainer;
+
+	public TieredMetaTileEntity(ResourceLocation metaTileEntityId, int tier) {
+		super(metaTileEntityId);
+		this.tier = tier;
+		reinitializeEnergyContainer();
+	}
+
+	protected void reinitializeEnergyContainer() {
+		long tierVoltage = Values.V[tier];
+		if(isEnergyEmitter()) {
+			this.energyContainer = EnergyContainerHandler.emitterContainer(this, tierVoltage * 32L, tierVoltage,
+					getMaxInputOutputAmperage());
+		}
+		else this.energyContainer = EnergyContainerHandler.receiverContainer(this, tierVoltage * 32L, tierVoltage,
+				getMaxInputOutputAmperage());
+		updateComparatorValue();
+	}
+
+	@Override
+	public int getActualComparatorValue() {
+		long energyStored = energyContainer.getCurrentEnergyStored();
+		long energyCapacity = energyContainer.getEnergyCapacity();
+		float f = energyCapacity == 0L ? 0.0f : energyStored / (energyCapacity * 1.0f);
+		return MathHelper.floor(f * 14.0f) + (energyStored > 0 ? 1 : 0);
+	}
+
+	@Override
+	public void onEnergyChanged(IEnergyContainer container, boolean isInitialChange) {
+		if(!isInitialChange) {
+			updateComparatorValue();
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private SimpleSidedCubeRenderer getBaseRenderer() {
+		return Textures.VOLTAGE_CASINGS[tier];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public TextureAtlasSprite getParticleTexture() {
+		return getBaseRenderer().getSpriteOnSide(RenderSide.TOP);
+	}
+
+	@Override
+	public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+		IVertexOperation[] colouredPipeline = ArrayUtils.add(pipeline,
+				new ColourMultiplier(Utility.convertRGBtoOpaqueRGBA_CL(getPaintingColorForRendering())));
+		getBaseRenderer().render(renderState, translation, colouredPipeline);
+	}
+
+	/**
+	 * Tier of machine determines it's input voltage, storage and generation rate
+	 *
+	 * @return tier of this machine
+	 */
+	@Override
+	public int getTier() {
+		return tier;
+	}
+
+	/**
+	 * Determines max input or output amperage used by this meta tile entity if
+	 * emitter, it determines size of energy packets it will emit at once if
+	 * receiver, it determines max input energy per request
+	 *
+	 * @return max amperage received or emitted by this machine
+	 */
+	protected long getMaxInputOutputAmperage() {
+		return 1L;
+	}
+
+	/**
+	 * Determines if this meta tile entity is in energy receiver or emitter mode
+	 *
+	 * @return true if machine emits energy to network, false it it accepts energy
+	 *         from network
+	 */
+	protected boolean isEnergyEmitter() {
+		return false;
+	}
+
+}

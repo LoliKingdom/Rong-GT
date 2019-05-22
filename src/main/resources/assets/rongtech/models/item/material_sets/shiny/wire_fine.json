@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "rongtech:items/material_sets/shiny/wire_fine",
+        "layer1": "rongtech:items/material_sets/shiny/wire_fine_overlay"
+    }
+}
