@@ -6,17 +6,17 @@ import com.rong.rt.api.unification.OreDictUnifier;
 import com.rong.rt.api.unification.materials.types.Material;
 import com.rong.rt.api.unification.stack.UnificationEntry;
 import com.rong.rt.common.CommonProxy;
-import com.rong.rt.common.RTSprites;
 import com.rong.rt.common.blocks.BlockCompressed;
 import com.rong.rt.common.blocks.BlockFrame;
 import com.rong.rt.common.blocks.BlockOre;
 import com.rong.rt.common.blocks.FrameItemBlock;
 import com.rong.rt.common.blocks.MetaFluids;
 import com.rong.rt.common.blocks.RTBlocks;
-import com.rong.rt.common.blocks.renders.StoneRenderer;
 import com.rong.rt.common.blocks.surfacerock.BlockSurfaceRock;
 import com.rong.rt.common.blocks.surfacerock.BlockSurfaceRockFlooded;
+import com.rong.rt.common.entities.RTEntities;
 import com.rong.rt.common.items.MetaItems;
+import com.rong.rt.common.renders.StoneRenderer;
 
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.util.ResourceUtils;
@@ -46,7 +46,6 @@ public class ClientProxy extends CommonProxy {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onIconLoad(SpriteReloadEvent event) {
-		RTSprites.loadSprites();
 	}
 
 	@SubscribeEvent
@@ -126,7 +125,7 @@ public class ClientProxy extends CommonProxy {
 	public void onPreLoad() {
 		super.onPreLoad();
 		StoneRenderer.preInit();
-		// MetaEntities.initRenderers();
+		RTEntities.initRenderers();
 		TextureUtils.addIconRegister(MetaFluids::registerSprites);
 		MinecraftForge.EVENT_BUS.register(ToolRenderHandler.INSTANCE);
 	}

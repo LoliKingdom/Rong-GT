@@ -1,8 +1,9 @@
 package com.rong.rt.api.utils;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import codechicken.lib.render.pipeline.ColourMultiplier;
 import codechicken.lib.render.pipeline.IVertexOperation;
-import org.apache.commons.lang3.ArrayUtils;
 
 public class PipelineUtil {
 

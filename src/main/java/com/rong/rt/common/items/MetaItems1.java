@@ -7,7 +7,6 @@ import com.rong.rt.api.metaitems.MaterialMetaItem;
 import com.rong.rt.api.unification.EnumOrePrefix;
 import com.rong.rt.api.unification.materials.MarkerMaterials;
 import com.rong.rt.api.unification.materials.Materials;
-import com.rong.rt.common.items.behaviour.IntCircuitBehaviour;
 import com.rong.rt.common.items.behaviour.TurbineRotorBehaviour;
 
 public class MetaItems1 extends MaterialMetaItem {
@@ -15,9 +14,11 @@ public class MetaItems1 extends MaterialMetaItem {
 	@Override
     public void registerSubItems() {
 		
-		INTEGRATED_CIRCUIT = addItem(300, "circuit.integrated").addStats(new IntCircuitBehaviour());
+		INTEGRATED_CIRCUIT = addItem(300, "circuit.integrated").addOreDict("circuitIntegrated");
        
-        CARBON_FIBRE = addItem(301, "carbon_fibre");	
+        CARBON_FIBRE = addItem(301, "carbon_fibre").addOreDict("fibreCarbon");	
+        
+        DYNAMITE = addItem(302, "dynamite");
         
         SHAPE_EMPTY = addItem(303, "shape.empty");
 
@@ -113,20 +114,6 @@ public class MetaItems1 extends MaterialMetaItem {
         COMPONENT_GRINDER_DIAMOND = addItem(488, "component.grinder.diamond").addOreDict(OreDictNames.craftingGrinder);
         COMPONENT_GRINDER_TUNGSTEN = addItem(489, "component.grinder.tungsten").addOreDict(OreDictNames.craftingGrinder);
         
-        //TODO: Sound stuff
-        UPGRADE_MUFFLER = addItem(490, "upgrade.muffler").setInvisible();
-
-        ITEM_FILTER = addItem(491, "item_filter");
-        ORE_DICTIONARY_FILTER = addItem(492, "ore_dictionary_filter");
-
-        COVER_SOLAR_PANEL_LV = addItem(504, "cover.solar.panel.lv");
-        COVER_SOLAR_PANEL_MV = addItem(505, "cover.solar.panel.mv");
-        COVER_SOLAR_PANEL_HV = addItem(506, "cover.solar.panel.hv");
-        COVER_SOLAR_PANEL_EV = addItem(507, "cover.solar.panel.ev");
-        COVER_SOLAR_PANEL_IV = addItem(508, "cover.solar.panel.iv");
-        COVER_SOLAR_PANEL_LuV = addItem(509, "cover.solar.panel.luv");
-        COVER_SOLAR_PANEL_UV = addItem(510, "cover.solar.panel.uv");
-        
         //FLUID_CELL = addItem(511, "fluid_cell").addStats(new FluidStats(1000, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
 
         COMPRESSED_CLAY = addItem(519, "compressed.clay");
@@ -134,9 +121,9 @@ public class MetaItems1 extends MaterialMetaItem {
         FIRECLAY_BRICK = addItem(521, "brick.fireclay");
         COKE_OVEN_BRICK = addItem(522, "brick.coke");
         
-        QUANTUM_EYE = addItem(523, "quantumeye");
-        QUANTUM_STAR = addItem(524, "quantumstar");
-        GRAVI_STAR = addItem(525, "gravistar");
+        QUANTUM_EYE = addItem(523, "quantum.eye");
+        QUANTUM_STAR = addItem(524, "quantum.star");
+        GRAVI_STAR = addItem(525, "gravi.star");
         
         FUEL_BINDER = addItem(526, "fuel_binder").setBurnValue(Materials.Coke.burnTime);
         SUPER_FUEL_BINDER = addItem(527, "super_fuel_binder").setBurnValue(Materials.Coke.burnTime * 3);
@@ -180,7 +167,7 @@ public class MetaItems1 extends MaterialMetaItem {
         SOC_ULTIMATE = addItem(564, "soc.ultimate").addOreDict("socUltimate");
         SOC_MAGIC = addItem(565, "soc.magic").addOreDict("socMagic");
 
-        PHENOLIC_BOARD = addItem(566, "phenolic_board");
+        PHENOLIC_BOARD = addItem(566, "phenolic_board").addOreDict("boardPhenolic");
         
         //TURBINE_ROTOR = addItem(540, "turbine_rotor").addStats(new TurbineRotorBehaviour());
         

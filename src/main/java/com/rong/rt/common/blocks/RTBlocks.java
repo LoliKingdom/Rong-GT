@@ -8,7 +8,6 @@ import static com.rong.rt.client.ClientProxy.ORE_BLOCK_COLOR;
 import static com.rong.rt.client.ClientProxy.ORE_ITEM_COLOR;
 import static com.rong.rt.client.ClientProxy.SURFACE_ROCK_COLOR;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -23,8 +22,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.rong.rt.Values;
 import com.rong.rt.api.RongTechAPI;
+import com.rong.rt.api.block.BlockMachine;
 import com.rong.rt.api.unification.EnumOrePrefix;
 import com.rong.rt.api.unification.OreDictUnifier;
 import com.rong.rt.api.unification.materials.Materials;
@@ -35,23 +34,20 @@ import com.rong.rt.api.unification.stonetypes.StoneType;
 import com.rong.rt.common.blocks.modelfactories.BakedModelHandler;
 import com.rong.rt.common.blocks.surfacerock.BlockSurfaceRock;
 import com.rong.rt.common.blocks.surfacerock.BlockSurfaceRockFlooded;
-import com.rong.rt.common.blocks.BlockMachine;
-import com.rong.rt.common.blocks.tiles.electric.TileEntityAutoclave;
-import com.rong.rt.common.blocks.tiles.electric.TileEntityBender;
+import com.rong.rt.common.tiles.chemical_reactor.TileChemicalReactor;
 
-import ic2.core.IC2;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -63,16 +59,14 @@ public class RTBlocks {
 	public static Map<DustMaterial, BlockSurfaceRockFlooded> FLOODED_SURFACE_ROCKS = new HashMap<>();
 	public static Map<SolidMaterial, BlockFrame> FRAMES = new HashMap<>();
 	public static Collection<BlockOre> ORES = new HashSet<>();
-
-	static final List<Block> toRegister = new ArrayList<>();
-
-	public static final BlockMachineBase
-		blockBender = new BlockMachineBase("bender"),
-		blockAutoclave = new BlockMachineBase("autoclave");
+	
+	public static Block CHEMICAL_REACTOR = new BlockMachine(TileChemicalReactor.class);
 
 	public static void init() {
 		StoneType.init();
-		registerTileEntity();
+		
+		registerTileEntities();
+
 		createGeneratedBlock(material -> material instanceof DustMaterial && !EnumOrePrefix.block.isIgnored(material),
 				RTBlocks::createCompressedBlock);
 		createGeneratedBlock(material -> material instanceof DustMaterial, RTBlocks::createSurfaceRockBlock);
@@ -87,15 +81,22 @@ public class RTBlocks {
 			}
 		}
 	}
-	
-	public static void registerTileEntity() {
-		GameRegistry.registerTileEntity(TileEntityAutoclave.class,
-				new ResourceLocation(Values.MOD_ID + "tile_autoclave"));
-		GameRegistry.registerTileEntity(TileEntityBender.class, new ResourceLocation(Values.MOD_ID + "tile_bender"));
+
+	public static void registerTileEntities() {
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void registerStateMappers() {
+		IStateMapper normalStateMapper = new StateMapperBase() {
+
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return new ModelResourceLocation(Block.REGISTRY.getNameForObject(state.getBlock()), "normal");
+			}
+		};
+
+		FRAMES.values().forEach(it -> ModelLoader.setCustomStateMapper(it, normalStateMapper));
+
 		BakedModelHandler modelHandler = new BakedModelHandler();
 		MinecraftForge.EVENT_BUS.register(modelHandler);
 		FLUID_BLOCKS.forEach(modelHandler::addFluidBlock);
@@ -113,12 +114,6 @@ public class RTBlocks {
 
 	@SideOnly(Side.CLIENT)
 	public static void registerColors() {
-		/*
-		 * Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(
-		 * FOAM_BLOCK_COLOR, FOAM, REINFORCED_FOAM, PETRIFIED_FOAM,
-		 * REINFORCED_PETRIFIED_FOAM);
-		 */
-
 		COMPRESSED.values().stream().distinct().forEach(block -> {
 			Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(COMPRESSED_BLOCK_COLOR, block);
 			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(COMPRESSED_ITEM_COLOR, block);
@@ -171,11 +166,11 @@ public class RTBlocks {
 	}
 
 	public static void registerOreDict() {
-		// OreDictUnifier.registerOre(new ItemStack(LOG, 1, GTValues.W), OrePrefix.log,
+		// OreDictUnifier.registerOre(new ItemStack(LOG, 1, Values.W), OrePrefix.log,
 		// Materials.Wood);
-		// OreDictUnifier.registerOre(new ItemStack(LEAVES, 1, GTValues.W),
+		// OreDictUnifier.registerOre(new ItemStack(LEAVES, 1, Values.W),
 		// "treeLeaves");
-		// OreDictUnifier.registerOre(new ItemStack(SAPLING, 1, GTValues.W),
+		// OreDictUnifier.registerOre(new ItemStack(SAPLING, 1, Values.W),
 		// "treeSapling");
 		for(Entry<DustMaterial, BlockCompressed> entry : COMPRESSED.entrySet()) {
 			DustMaterial material = entry.getKey();
@@ -305,5 +300,5 @@ public class RTBlocks {
 	private static <T extends Comparable<T>> String getPropertyName(IProperty<T> property, Comparable<?> value) {
 		return property.getName((T) value);
 	}
-	
+
 }

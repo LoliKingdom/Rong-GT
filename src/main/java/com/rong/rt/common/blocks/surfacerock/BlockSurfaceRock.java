@@ -9,7 +9,7 @@ import com.rong.rt.api.unification.materials.types.IngotMaterial;
 import com.rong.rt.api.unification.materials.types.Material;
 import com.rong.rt.api.utils.XSTR;
 import com.rong.rt.common.blocks.properties.PropertyMaterial;
-import com.rong.rt.common.blocks.renders.StoneRenderer;
+import com.rong.rt.common.renders.StoneRenderer;
 
 import codechicken.lib.vec.Cuboid6;
 import net.minecraft.block.Block;

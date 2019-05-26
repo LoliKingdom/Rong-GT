@@ -15,14 +15,6 @@ public class MetaItems {
 public static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
 	
 	public static MetaItem<?>.MetaValueItem CARBON_FIBRE;
-	
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_LV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_MV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_HV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_EV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_IV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_LuV;
-    public static MetaItem<?>.MetaValueItem COVER_SOLAR_PANEL_UV;
     
     public static MetaItem<?>.MetaValueItem QUANTUM_EYE;
     public static MetaItem<?>.MetaValueItem QUANTUM_STAR;
@@ -171,11 +163,6 @@ public static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
     public static MetaItem<?>.MetaValueItem COMPONENT_GRINDER_DIAMOND;
     public static MetaItem<?>.MetaValueItem COMPONENT_GRINDER_TUNGSTEN;
     
-    public static MetaItem<?>.MetaValueItem UPGRADE_MUFFLER;
-    
-    public static MetaItem<?>.MetaValueItem ITEM_FILTER;
-    public static MetaItem<?>.MetaValueItem ORE_DICTIONARY_FILTER;
-
     public static MetaItem<?>.MetaValueItem INTEGRATED_CIRCUIT;
 
     public static MetaItem<?>.MetaValueItem FLUID_CELL;
@@ -194,14 +181,12 @@ public static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
     
     public static ToolMetaItem<?>.MetaToolValueItem SAW;
     public static ToolMetaItem<?>.MetaToolValueItem HARD_HAMMER;
-    public static ToolMetaItem<?>.MetaToolValueItem SOFT_HAMMER;
     public static ToolMetaItem<?>.MetaToolValueItem WRENCH;
     public static ToolMetaItem<?>.MetaToolValueItem FILE;
     public static ToolMetaItem<?>.MetaToolValueItem SCREWDRIVER;
     public static ToolMetaItem<?>.MetaToolValueItem MORTAR;
     public static ToolMetaItem<?>.MetaToolValueItem WIRE_CUTTER;
     public static ToolMetaItem<?>.MetaToolValueItem PLUNGER;
-    public static ToolMetaItem<?>.MetaToolValueItem KNIFE;
 
     public static void init() {
     	MetaItems1 first = new MetaItems1();

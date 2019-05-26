@@ -22,13 +22,6 @@ public class ConfigHolder {
 
     @Config.Comment("Whether machines should explode when overloaded with power. Default: true")
     public static boolean doExplosions = true;
-
-    @Config.Comment("Energy use multiplier for electric items. Default: 10")
-    public static int energyUsageMultiplier = 10;
-
-    @Config.RangeInt(min = 0, max = 100)
-    @Config.Comment("Chance with which flint and steel will create fire. Default: 75")
-    public static int flintChanceToCreateFire = 75;
     
     @Config.Comment("Generate rubber trees or not?")
     public static boolean disableRubberTreeGeneration = false;
@@ -48,9 +41,5 @@ public class ConfigHolder {
     
     @Config.Comment("Setting this to true makes RongTech ignore error and invalid recipes that would otherwise cause crash. Default to true.")
     @Config.RequiresMcRestart
-    public static boolean ignoreErrorOrInvalidRecipes = true;
-  
-    /*@Config.Comment("Setting this to true makes RongTech take priority over Tinker's in their tool stats")
-    @Config.RequiresMcRestart
-    public static boolean overrideTiConStats = false;*/
+    public static boolean ignoreErrorOrInvalidRecipes = false;
 }

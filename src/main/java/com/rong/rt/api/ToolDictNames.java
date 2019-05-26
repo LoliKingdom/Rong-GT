@@ -11,7 +11,7 @@ public enum ToolDictNames {
     craftingToolPlunger,
     craftingToolWireCutter,
     craftingToolBranchCutter,
-    craftingToolHardHammer,
+    craftingToolForgeHammer,
     craftingToolMiningDrill,
     craftingToolScrewdriver,
 

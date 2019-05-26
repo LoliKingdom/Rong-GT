@@ -30,28 +30,27 @@ public class Materials {
 
     private static final long STD_SOLID = GENERATE_PLATE | GENERATE_ROD | GENERATE_SCREW;
     private static final long STD_GEM = GENERATE_ORE | GENERATE_PLATE | GENERATE_ROD | GENERATE_LENSE;
-    private static final long STD_METAL = GENERATE_PLATE;
-    private static final long EXT_METAL = STD_METAL | GENERATE_ROD | GENERATE_SCREW;
-    private static final long EXT2_METAL = EXT_METAL | GENERATE_GEAR | GENERATE_FOIL | GENERATE_FINE_WIRE | GENERATE_DENSE; //Test
+    private static final long EXT_METAL = GENERATE_PLATE | GENERATE_ROD | GENERATE_SCREW;
+    private static final long EXT2_METAL = EXT_METAL | GENERATE_GEAR | GENERATE_FOIL | GENERATE_FINE_WIRE;
 
     public static MarkerMaterial _NULL = new MarkerMaterial("_null");
     
     /**
-     * 'Direct EnumElementss'
+     * 'Direct Elements'
      */
     public static IngotMaterial Aluminium = new IngotMaterial(1, "aluminium", 0x80C8F0, MaterialIconSet.SHINY, 2, of(), EXT2_METAL | GENERATE_SMALL_GEAR | GENERATE_ORE | GENERATE_RING | GENERATE_FRAME, EnumElements.Al, 9.0F, 2.5F, 966, 1700);
-    public static IngotMaterial Americium = new IngotMaterial(2, "americium", 0xC8C8C8, MaterialIconSet.METALLIC, 3, of(), STD_METAL, EnumElements.Am);
-    public static IngotMaterial Antimony = new IngotMaterial(3, "antimony", 0xDCDCC8, MaterialIconSet.SHINY, 2, of(), STD_METAL | MORTAR_GRINDABLE, EnumElements.Sb);
+    public static IngotMaterial Americium = new IngotMaterial(2, "americium", 0xC8C8C8, MaterialIconSet.METALLIC, 3, of(), 0, EnumElements.Am);
+    public static IngotMaterial Antimony = new IngotMaterial(3, "antimony", 0xDCDCC8, MaterialIconSet.SHINY, 2, of(), MORTAR_GRINDABLE, EnumElements.Sb);
     public static FluidMaterial Argon = new FluidMaterial(4, "argon", 0xBBBB00, MaterialIconSet.FLUID, of(), STATE_GAS | DECOMPOSITION_BY_CENTRIFUGING | GENERATE_PLASMA, EnumElements.Ar);
     public static DustMaterial Arsenic = new DustMaterial(5, "arsenic", 0xDDDDDD, MaterialIconSet.SAND, 2, of(), 0, EnumElements.As);
     public static IngotMaterial Barium = new IngotMaterial(6, "barium", 0xFFFFFF, MaterialIconSet.SHINY, 2, of(), 0, EnumElements.Ba);
     public static IngotMaterial Beryllium = new IngotMaterial(7, "beryllium", 0x64B464, MaterialIconSet.METALLIC, 2, of(), EXT_METAL | GENERATE_ORE, EnumElements.Be, 11.0F, 3.0F, 450);
-    public static IngotMaterial Bismuth = new IngotMaterial(8, "bismuth", 0x64A0A0, MaterialIconSet.METALLIC, 1, of(), GENERATE_ORE, EnumElements.Bi);
+    public static IngotMaterial Bismuth = new IngotMaterial(8, "bismuth", 0x64A0A0, MaterialIconSet.METALLIC, 1, of(), GENERATE_PLATE | GENERATE_ORE, EnumElements.Bi);
     public static IngotMaterial Boron = new IngotMaterial(9, "boron", 0xD2F0D2, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.B); //IngotMaterial for the sake of NuclearCraft
     public static IngotMaterial Caesium = new IngotMaterial(10, "caesium", 0xFFFFFC, MaterialIconSet.DULL, 2, of(), 0, EnumElements.Cs);
     public static IngotMaterial Calcium = new IngotMaterial(11, "calcium", 0xDDDDAA, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Ca);
     public static IngotMaterial Carbon = new IngotMaterial(12, "carbon", 0x333333, MaterialIconSet.DULL, 1, of(), 0, EnumElements.C);
-    public static IngotMaterial Cadmium = new IngotMaterial(13, "cadmium", 0x505060, MaterialIconSet.SHINY, 2, of(), STD_METAL, EnumElements.Cd);
+    public static IngotMaterial Cadmium = new IngotMaterial(13, "cadmium", 0x505060, MaterialIconSet.SHINY, 2, of(), GENERATE_PLATE, EnumElements.Cd);
     public static IngotMaterial Cerium = new IngotMaterial(14, "cerium", 0xEEEEEE, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Ce, 1068);
     public static FluidMaterial Chlorine = new FluidMaterial(15, "chlorine", 0xEEEECC, MaterialIconSet.GAS, of(), STATE_GAS, EnumElements.Cl);
     public static IngotMaterial Chrome = new IngotMaterial(16, "chrome", 0xFFAAAB, MaterialIconSet.SHINY, 4, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR, EnumElements.Cr, 11.0F, 3.5F, 1960, 1700);
@@ -59,8 +58,8 @@ public class Materials {
     public static IngotMaterial Copper = new IngotMaterial(18, "copper", 0xFF8000, MaterialIconSet.SHINY, 1, of(), EXT2_METAL | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_RING, EnumElements.Cu, 5.0F, 1.2F, 120);
     public static FluidMaterial Deuterium = new FluidMaterial(19, "deuterium", 0xEEEE00, MaterialIconSet.FLUID, of(), STATE_GAS | GENERATE_PLASMA, EnumElements.D);
     public static IngotMaterial Dysprosium = new IngotMaterial(20, "dysprosium", 0xFFFFEE, MaterialIconSet.SHINY, 2, of(), 0, EnumElements.Dy, 1680);
-    public static IngotMaterial Erbium = new IngotMaterial(21, "erbium", 0xEEEEEE, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.Er, 1802);
-    public static IngotMaterial Europium = new IngotMaterial(22, "europium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.Eu, 1099);
+    public static IngotMaterial Erbium = new IngotMaterial(21, "erbium", 0xEEEEEE, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Er, 1802);
+    public static IngotMaterial Europium = new IngotMaterial(22, "europium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Eu, 1099);
     public static FluidMaterial Fluorine = new FluidMaterial(23, "fluorine", 0xFFFFAA, MaterialIconSet.GAS, of(), STATE_GAS, EnumElements.F);
     public static IngotMaterial Gadolinium = new IngotMaterial(24, "gadolinium", 0xDDDDFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Gd, 1585);
     public static IngotMaterial Gallium = new IngotMaterial(25, "gallium", 0xEEEEFF, MaterialIconSet.SHINY, 2, of(), GENERATE_PLATE, EnumElements.Ga);
@@ -73,17 +72,17 @@ public class Materials {
     public static IngotMaterial Iridium = new IngotMaterial(32, "iridium", 0xFFFFFF, MaterialIconSet.METALLIC, 5, of(), GENERATE_ORE | EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_FRAME, EnumElements.Ir, 11.0F, 5.0F, 1096, 2719);
     public static IngotMaterial Iron = new IngotMaterial(33, "iron", 0xAAAAAA, MaterialIconSet.METALLIC, 2, of(), EXT2_METAL | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_PLASMA | GENERATE_FRAME, EnumElements.Fe, 7.0F, 2.5F, 288);
     public static IngotMaterial Lanthanum = new IngotMaterial(34, "lanthanum", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.La, 1193);
-    public static IngotMaterial Lead = new IngotMaterial(35, "lead", 0x8C648C, MaterialIconSet.METALLIC, 1, of(), EXT2_METAL | GENERATE_ORE | MORTAR_GRINDABLE, EnumElements.Pb);
-    public static IngotMaterial Lithium = new IngotMaterial(36, "lithium", 0xCBCBCB, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_ORE, EnumElements.Li);
-    public static IngotMaterial Lutetium = new IngotMaterial(37, "lutetium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.Lu, 1925);
+    public static IngotMaterial Lead = new IngotMaterial(35, "lead", 0x8C648C, MaterialIconSet.METALLIC, 1, of(), EXT_METAL | GENERATE_ORE | MORTAR_GRINDABLE, EnumElements.Pb);
+    public static IngotMaterial Lithium = new IngotMaterial(36, "lithium", 0xCBCBCB, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE | GENERATE_ORE, EnumElements.Li);
+    public static IngotMaterial Lutetium = new IngotMaterial(37, "lutetium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Lu, 1925);
     public static IngotMaterial Magnesium = new IngotMaterial(38, "magnesium", 0xFFBBBB, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Mg);
     public static IngotMaterial Manganese = new IngotMaterial(39, "manganese", 0xEEEEEE, MaterialIconSet.SHINY, 2, of(), 0, EnumElements.Mn);
     public static FluidMaterial Mercury = new FluidMaterial(40, "mercury", 0xFFDDDD, MaterialIconSet.FLUID, of(), SMELT_INTO_FLUID, EnumElements.Hg);
-    public static IngotMaterial Molybdenum = new IngotMaterial(41, "molybdenum", 0xAAAADD, MaterialIconSet.METALLIC, 2, of(), GENERATE_DENSE, EnumElements.Mo);
-    public static IngotMaterial Neodymium = new IngotMaterial(42, "neodymium", 0x777777, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_ROD | GENERATE_ORE, EnumElements.Nd, 1297);
+    public static IngotMaterial Molybdenum = new IngotMaterial(41, "molybdenum", 0xAAAADD, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Mo);
+    public static IngotMaterial Neodymium = new IngotMaterial(42, "neodymium", 0x777777, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE | GENERATE_ROD | GENERATE_ORE, EnumElements.Nd, 1297);
     public static IngotMaterial Darmstadtium = new IngotMaterial(43, "darmstadtium", 0xAAAAAA, MaterialIconSet.METALLIC, 6, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_FRAME, EnumElements.Ds, 24.0F, 8.0F, 155360);
-    public static IngotMaterial Nickel = new IngotMaterial(44, "nickel", 0xAAAAFF, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_PLASMA, EnumElements.Ni);
-    public static IngotMaterial Niobium = new IngotMaterial(45, "niobium", 0x9486AA, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_ORE, EnumElements.Nb, 2750);
+    public static IngotMaterial Nickel = new IngotMaterial(44, "nickel", 0xAAAAFF, MaterialIconSet.METALLIC, 2, of(), EXT_METAL | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_PLASMA, EnumElements.Ni);
+    public static IngotMaterial Niobium = new IngotMaterial(45, "niobium", 0x9486AA, MaterialIconSet.METALLIC, 2, of(), GENERATE_ORE, EnumElements.Nb, 2750);
     public static FluidMaterial Nitrogen = new FluidMaterial(46, "nitrogen", 0x7090AF, MaterialIconSet.FLUID, of(), STATE_GAS | GENERATE_PLASMA, EnumElements.N);
     public static IngotMaterial Osmium = new IngotMaterial(47, "osmium", 0x5050FF, MaterialIconSet.METALLIC, 4, of(), GENERATE_ORE | EXT2_METAL | GENERATE_RING | GENERATE_ROTOR, EnumElements.Os, 16.0F, 7.0F, 2459, 3306);
     public static FluidMaterial Oxygen = new FluidMaterial(48, "oxygen", 0x90AAEE, MaterialIconSet.FLUID, of(), STATE_GAS | GENERATE_PLASMA, EnumElements.O);
@@ -99,15 +98,15 @@ public class Materials {
     public static IngotMaterial Rubidium = new IngotMaterial(58, "rubidium", 0xF01E1E, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Rb);
     public static IngotMaterial Samarium = new IngotMaterial(59, "samarium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Sm, 1345);
     public static IngotMaterial Scandium = new IngotMaterial(60, "scandium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Sc, 1814);
-    public static IngotMaterial Silicon = new IngotMaterial(61, "silicon", 0x3C3C50, MaterialIconSet.METALLIC, 2, of(), STD_METAL | GENERATE_FOIL, EnumElements.Si, 1687);
+    public static IngotMaterial Silicon = new IngotMaterial(61, "silicon", 0x3C3C50, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE | GENERATE_FOIL, EnumElements.Si, 1687);
     public static IngotMaterial Silver = new IngotMaterial(62, "silver", 0xDCDCFF, MaterialIconSet.SHINY, 2, of(), EXT2_METAL | GENERATE_ORE | MORTAR_GRINDABLE, EnumElements.Ag, 10.0F, 3.0F, 64);
     public static IngotMaterial Sodium = new IngotMaterial(63, "sodium", 0x000096, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Na);
     public static IngotMaterial Strontium = new IngotMaterial(64, "strontium", 0xC8C896, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Sr);
-    public static DustMaterial Sulfur = new DustMaterial(65, "sulfur", 0xC8C800, MaterialIconSet.SAND, 2, of(), NO_SMASHING | NO_SMELTING | FLAMMABLE |  GENERATE_ORE, EnumElements.S);
+    public static DustMaterial Sulfur = new DustMaterial(65, "sulfur", 0xC8C800, MaterialIconSet.SAND, 2, of(), NO_SMASHING | NO_SMELTING | FLAMMABLE | GENERATE_ORE, EnumElements.S);
     public static IngotMaterial Tantalum = new IngotMaterial(66, "tantalum", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Ta);
     public static IngotMaterial Tellurium = new IngotMaterial(67, "tellurium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Te);
     public static IngotMaterial Terbium = new IngotMaterial(68, "terbium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Tb, 1629);
-    public static IngotMaterial Thorium = new IngotMaterial(69, "thorium", 0x001E00, MaterialIconSet.SHINY, 2, of(), STD_METAL | GENERATE_ORE, EnumElements.Th, 6.0F, 4.0F, 788);
+    public static IngotMaterial Thorium = new IngotMaterial(69, "thorium", 0x001E00, MaterialIconSet.SHINY, 2, of(), GENERATE_PLATE | GENERATE_ORE, EnumElements.Th, 6.0F, 4.0F, 788);
     public static IngotMaterial Thulium = new IngotMaterial(70, "thulium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), 0, EnumElements.Tm, 1818);
     public static IngotMaterial Tin = new IngotMaterial(71, "tin", 0xDCDCDC, MaterialIconSet.METALLIC, 1, of(), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_ROTOR | GENERATE_ORE, EnumElements.Sn);
     public static IngotMaterial Titanium = new IngotMaterial(72, "titanium", 0xDCA0F0, MaterialIconSet.METALLIC, 3, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, EnumElements.Ti, 10.0F, 4.0F, 1600, 1941);
@@ -115,11 +114,11 @@ public class Materials {
     public static IngotMaterial Tungsten = new IngotMaterial(74, "tungsten", 0x323232, MaterialIconSet.METALLIC, 3, of(), EXT2_METAL, EnumElements.W, 7.0F, 4.0F, 1300);
     public static IngotMaterial Uranium = new IngotMaterial(75, "uranium", 0x32F032, MaterialIconSet.METALLIC, 3, of(), 0, EnumElements.U, 8.0F, 4.0F, 1024);
     public static IngotMaterial Uranium235 = new IngotMaterial(76, "uranium235", 0x46FA46, MaterialIconSet.SHINY, 3, of(), 0, EnumElements.U_235, 8.0F, 4.0F, 1024);
-    public static IngotMaterial Vanadium = new IngotMaterial(77, "vanadium", 0x323232, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.V, 2183);
-    public static IngotMaterial Ytterbium = new IngotMaterial(78, "ytterbium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.Yb, 1097);
-    public static IngotMaterial Yttrium = new IngotMaterial(79, "yttrium", 0xDCFADC, MaterialIconSet.METALLIC, 2, of(), STD_METAL, EnumElements.Y, 1799);
-    public static IngotMaterial Zinc = new IngotMaterial(80, "zinc", 0xFAF0F0, MaterialIconSet.METALLIC, 1, of(), STD_METAL | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_FOIL, EnumElements.Zn);    
-    public static IngotMaterial Zirconium = new IngotMaterial(81, "zirconium", 0xB76A17, MaterialIconSet.SHINY, 3, of(), EXT_METAL, EnumElements.Zr, 10.0F, 4.5F, 680, 1855);    
+    public static IngotMaterial Vanadium = new IngotMaterial(77, "vanadium", 0x323232, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE, EnumElements.V, 2183);
+    public static IngotMaterial Ytterbium = new IngotMaterial(78, "ytterbium", 0xFFFFFF, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE, EnumElements.Yb, 1097);
+    public static IngotMaterial Yttrium = new IngotMaterial(79, "yttrium", 0xDCFADC, MaterialIconSet.METALLIC, 2, of(), GENERATE_PLATE, EnumElements.Y, 1799);
+    public static IngotMaterial Zinc = new IngotMaterial(80, "zinc", 0xFAF0F0, MaterialIconSet.METALLIC, 1, of(), GENERATE_PLATE | GENERATE_ORE | MORTAR_GRINDABLE | GENERATE_FOIL, EnumElements.Zn);    
+    public static IngotMaterial Zirconium = new IngotMaterial(81, "zirconium", 0xB76A17, MaterialIconSet.SHINY, 3, of(), GENERATE_PLATE, EnumElements.Zr, 10.0F, 4.5F, 680, 1855);    
 
     /**
      * First Degree Compounds : Fits up to 100-150ID
@@ -379,7 +378,7 @@ public class Materials {
      */
     public static IngotMaterial StainlessSteel = new IngotMaterial(501, "stainless_steel", 0xC8C8DC, MaterialIconSet.SHINY, 2, of(new MaterialStack(Iron, 6), new MaterialStack(Chrome, 1), new MaterialStack(Manganese, 1), new MaterialStack(Nickel, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, null, 6.0F, 3.5F, 1248, 1700);
     public static IngotMaterial Steel = new IngotMaterial(502, "steel", 0x505050, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 1)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_DENSE | DISABLE_DECOMPOSITION | GENERATE_FRAME, null, 6.0F, 3.0F, 748, 1000);
-    public static IngotMaterial RedAlloy = new IngotMaterial(504, "red_alloy", 0xC80000, MaterialIconSet.METALLIC, 0, of(new MaterialStack(Copper, 1), new MaterialStack(Redstone, 4)), STD_METAL | GENERATE_FINE_WIRE | GENERATE_FOIL);
+    public static IngotMaterial RedAlloy = new IngotMaterial(504, "red_alloy", 0xC80000, MaterialIconSet.METALLIC, 0, of(new MaterialStack(Copper, 1), new MaterialStack(Redstone, 4)), GENERATE_PLATE | GENERATE_FINE_WIRE | GENERATE_FOIL);
     public static IngotMaterial SterlingSilver = new IngotMaterial(505, "sterling_silver", 0xFADCE1, MaterialIconSet.SHINY, 2, of(new MaterialStack(Copper, 1), new MaterialStack(Silver, 4)), EXT2_METAL, null, 13.0F, 3.0F, 256, 1700);
     public static IngotMaterial RoseGold = new IngotMaterial(507, "rose_gold", 0xFFE61E, MaterialIconSet.SHINY, 2, of(new MaterialStack(Copper, 1), new MaterialStack(Gold, 4)), EXT_METAL | GENERATE_RING, null, 13.0F, 3.0F, 256, 1600);
     public static IngotMaterial BismuthBronze = new IngotMaterial(506, "bismuth_bronze", 0x647D7D, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Bismuth, 1), new MaterialStack(Zinc, 1), new MaterialStack(Copper, 3)), EXT_METAL, 8.0F, 3.0F, 512);
@@ -391,19 +390,19 @@ public class Materials {
     public static IngotMaterial HSSG = new IngotMaterial(513, "hssg", 0x999900, MaterialIconSet.METALLIC, 3, of(new MaterialStack(TungstenSteel, 5), new MaterialStack(Chrome, 1), new MaterialStack(Molybdenum, 2), new MaterialStack(Vanadium, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_FRAME, null, 10.0F, 5.0F, 3584, 4500);
     public static IngotMaterial HSSE = new IngotMaterial(515, "hsse", 0x336600, MaterialIconSet.METALLIC, 4, of(new MaterialStack(HSSG, 6), new MaterialStack(Cobalt, 1), new MaterialStack(Manganese, 1), new MaterialStack(Silicon, 1)), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR, null, 10.0F, 5.0F, 5120, 5400);
     public static IngotMaterial HSSS = new IngotMaterial(514, "hsss", 0x660033, MaterialIconSet.METALLIC, 5, of(new MaterialStack(HSSG, 6), new MaterialStack(Iridium, 2), new MaterialStack(Osmium, 1)), EXT2_METAL | GENERATE_GEAR, null, 14.0F, 6.0F, 3200, 5400);
-    public static IngotMaterial IronMagnetic = new IngotMaterial(516, "iron_magnetic", 0xC8C8C8, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Iron, 1)), STD_METAL | GENERATE_ROD | MORTAR_GRINDABLE);
-    public static IngotMaterial SteelMagnetic = new IngotMaterial(517, "steel_magnetic", 0x808080, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Steel, 1)), STD_METAL | GENERATE_ROD | MORTAR_GRINDABLE);
-    public static IngotMaterial NeodymiumMagnetic = new IngotMaterial(518, "neodymium_magnetic", 0x646464, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Neodymium, 1)), STD_METAL | GENERATE_ROD);
+    public static IngotMaterial IronMagnetic = new IngotMaterial(516, "iron_magnetic", 0xC8C8C8, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Iron, 1)), GENERATE_PLATE | GENERATE_ROD | MORTAR_GRINDABLE);
+    public static IngotMaterial SteelMagnetic = new IngotMaterial(517, "steel_magnetic", 0x808080, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Steel, 1)), GENERATE_PLATE | GENERATE_ROD | MORTAR_GRINDABLE);
+    public static IngotMaterial NeodymiumMagnetic = new IngotMaterial(518, "neodymium_magnetic", 0x646464, MaterialIconSet.MAGNETIC, 2, of(new MaterialStack(Neodymium, 1)), GENERATE_PLATE | GENERATE_ROD);
     public static IngotMaterial Osmiridium = new IngotMaterial(519, "osmiridium", 0x6464FF, MaterialIconSet.METALLIC, 5, of(new MaterialStack(Iridium, 3), new MaterialStack(Osmium, 1)), EXT2_METAL, null, 15.0F, 6.0F, 4800, 2500);
     public static IngotMaterial SolderingAlloy = new IngotMaterial(520, "soldering_alloy", 0xDCDCE6, MaterialIconSet.METALLIC, 1, of(new MaterialStack(Tin, 9), new MaterialStack(Antimony, 1)), EXT_METAL | GENERATE_FINE_WIRE);
     public static IngotMaterial Nichrome = new IngotMaterial(521, "nichrome", 0xCDCEF6, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Nickel, 4), new MaterialStack(Chrome, 1)), EXT_METAL, null, 6.0F, 2.5F, 128, 2700);
     public static IngotMaterial NiobiumTitanium = new IngotMaterial(522, "niobium_titanium", 0x1D1D29, MaterialIconSet.SHINY, 2, of(new MaterialStack(Niobium, 1), new MaterialStack(Titanium, 1)), EXT2_METAL, null, 4500);
-    public static IngotMaterial VanadiumGallium = new IngotMaterial(523, "vanadium_gallium", 0x80808C, MaterialIconSet.SHINY, 2, of(new MaterialStack(Vanadium, 3), new MaterialStack(Gallium, 1)), STD_METAL | GENERATE_FOIL | GENERATE_ROD, null, 4500);
+    public static IngotMaterial VanadiumGallium = new IngotMaterial(523, "vanadium_gallium", 0x80808C, MaterialIconSet.SHINY, 2, of(new MaterialStack(Vanadium, 3), new MaterialStack(Gallium, 1)), GENERATE_PLATE | GENERATE_FOIL | GENERATE_ROD, null, 4500);
     public static IngotMaterial WroughtIron = new IngotMaterial(525, "wrought_iron", 0xC8B4B4, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 1)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_RING, Iron.toolSpeed + 0.5F, Iron.toolAttackDamage, Iron.toolDurability + 50);
     public static IngotMaterial Electrum = new IngotMaterial(526, "electrum", 0xFFFF64, MaterialIconSet.SHINY, 2, of(new MaterialStack(Silver, 1), new MaterialStack(Gold, 1)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_FOIL, 12.0F, 2.0F, 120);
     public static IngotMaterial PigIron = new IngotMaterial(524, "pig_iron", 0xC8B4B4, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 1)), EXT_METAL, Iron.toolSpeed + 1.5F, Iron.toolAttackDamage, Iron.toolDurability + 100);
     public static IngotMaterial AnnealedCopper = new IngotMaterial(527, "annealed_copper", 0xFF7814, MaterialIconSet.SHINY, 2, of(new MaterialStack(Copper, 1)), EXT2_METAL | MORTAR_GRINDABLE);
-    public static IngotMaterial BatteryAlloy = new IngotMaterial(528, "battery_alloy", 0x9C7CA0, MaterialIconSet.DULL, 1, of(new MaterialStack(Lead, 4), new MaterialStack(Antimony, 1)), STD_METAL);
+    public static IngotMaterial BatteryAlloy = new IngotMaterial(528, "battery_alloy", 0x9C7CA0, MaterialIconSet.DULL, 1, of(new MaterialStack(Lead, 4), new MaterialStack(Antimony, 1)), GENERATE_PLATE);
     public static IngotMaterial Kanthal = new IngotMaterial(529, "kanthal", 0xC2D2DF, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Iron, 1), new MaterialStack(Aluminium, 1), new MaterialStack(Chrome, 1)), EXT_METAL, null, 6.0F, 3.0F, 240, 1800);
     public static IngotMaterial Magnalium = new IngotMaterial(530, "magnalium", 0xC8BEFF, MaterialIconSet.DULL, 2, of(new MaterialStack(Magnesium, 1), new MaterialStack(Aluminium, 2)), EXT_METAL, 6.0F, 2.5F, 256);
     public static IngotMaterial Cupronickel = new IngotMaterial(534, "cupronickel", 0xE39680, MaterialIconSet.METALLIC, 1, of(new MaterialStack(Copper, 1), new MaterialStack(Nickel, 1)), EXT_METAL | GENERATE_RING, 6.0F, 2.5F, 64);
@@ -411,9 +410,9 @@ public class Materials {
     public static IngotMaterial Brass = new IngotMaterial(532, "brass", 0xFFB400, MaterialIconSet.METALLIC, 1, of(new MaterialStack(Zinc, 1), new MaterialStack(Copper, 3)), EXT_METAL | GENERATE_RING | MORTAR_GRINDABLE, 7.0F, 2.0F, 96);
     public static IngotMaterial Bronze = new IngotMaterial(533, "bronze", 0xFF8000, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Tin, 1), new MaterialStack(Copper, 3)), EXT2_METAL | MORTAR_GRINDABLE | GENERATE_ROTOR, 6.5F, 2.5F, 256);
     public static IngotMaterial Ultimet = new IngotMaterial(535, "ultimet", 0xB4B4E6, MaterialIconSet.SHINY, 4, of(new MaterialStack(Cobalt, 5), new MaterialStack(Chrome, 2), new MaterialStack(Nickel, 1), new MaterialStack(Molybdenum, 1)), EXT2_METAL, null, 9.0F, 4.0F, 2048, 2700);
-    public static IngotMaterial BerylliumCopper = new IngotMaterial(536, "beryllium_copper", 0x64B464, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Copper, 5), new MaterialStack(Beryllium, 2), new MaterialStack(Nickel, 1)), STD_METAL | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 7.0F, 3.5F, 593, 1100);
-    public static IngotMaterial AluminiumCopper = new IngotMaterial(537, "aluminium_copper", 0xFADCE1, MaterialIconSet.SHINY, 2, of(new MaterialStack(Copper, 3), new MaterialStack(Aluminium, 1)), STD_METAL | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 8.0F, 3.8F, 710, 2500);
-    public static IngotMaterial Dymalloy = new IngotMaterial(538, "dymalloy", 0xFADCE1, MaterialIconSet.SHINY, 4, of(new MaterialStack(Copper, 1), new MaterialStack(Silver, 3), new MaterialStack(Diamond, 1)), STD_METAL | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 13.0F, 5.0F, 1009, 7000);
+    public static IngotMaterial BerylliumCopper = new IngotMaterial(536, "beryllium_copper", 0x64B464, MaterialIconSet.METALLIC, 2, of(new MaterialStack(Copper, 5), new MaterialStack(Beryllium, 2), new MaterialStack(Nickel, 1)), GENERATE_PLATE | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 7.0F, 3.5F, 593, 1100);
+    public static IngotMaterial AluminiumCopper = new IngotMaterial(537, "aluminium_copper", 0xFADCE1, MaterialIconSet.SHINY, 2, of(new MaterialStack(Copper, 3), new MaterialStack(Aluminium, 1)), GENERATE_PLATE | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 8.0F, 3.8F, 710, 2500);
+    public static IngotMaterial Dymalloy = new IngotMaterial(538, "dymalloy", 0xFADCE1, MaterialIconSet.SHINY, 4, of(new MaterialStack(Copper, 1), new MaterialStack(Silver, 3), new MaterialStack(Diamond, 1)), GENERATE_PLATE | GENERATE_ROD | GENERATE_RING | GENERATE_FOIL, null, 13.0F, 5.0F, 1009, 7000);
 
     /**
      * Magic + Fantasy Materials 601-650ID

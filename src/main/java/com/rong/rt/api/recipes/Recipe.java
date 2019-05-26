@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.rong.rt.api.recipes.handlers.IMultipleTankHandler;
+import com.rong.rt.api.recipes.input.CountableIngredient;
 import com.rong.rt.api.utils.Utility;
 
 import gnu.trove.impl.unmodifiable.TUnmodifiableObjectIntMap;
@@ -20,38 +18,8 @@ import gnu.trove.map.TObjectIntMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
-/**
- * Class that represent machine recipe.
- * <p>
- *
- * Recipes are created using {@link RecipeBuilder} or its subclasses in
- * builder-alike pattern. To get RecipeBuilder use
- * {@link RecipeMap#recipeBuilder()}.
- * <p>
- *
- * Example: RecipeMap.POLARIZER_RECIPES.recipeBuilder().inputs(new
- * ItemStack(Items.APPLE)).outputs(new
- * ItemStack(Items.GOLDEN_APPLE)).duration(256).EUt(480).buildAndRegister();
- * <p>
- * This will create and register Polarizer recipe with Apple as input and Golden
- * apple as output, duration - 256 ticks and energy consumption of 480 EU/t.
- * <p>
- * To get example for particular RecipeMap see {@link RecipeMap}
- * <p>
- *
- * Recipes are immutable.
- */
 public class Recipe {
-
-	public static int getMaxChancedValue() {
-		return 10000;
-	}
-
-	public static String formatChanceValue(int outputChance) {
-		return String.format("%.2f", outputChance / (getMaxChancedValue() * 1.0) * 100);
-	}
 
 	private final List<CountableIngredient> inputs;
 	private final NonNullList<ItemStack> outputs;
@@ -66,25 +34,10 @@ public class Recipe {
 
 	private final int duration;
 
-	private final int EUt;
-
-	/**
-	 * If this Recipe is hidden from JEI
-	 */
-	private final boolean hidden;
-
-	/**
-	 * If this Recipe needs the Output Slots to be completely empty. Needed in case
-	 * you have randomised Outputs
-	 */
-	private final boolean needsEmptyOutput;
-
-	private final Map<String, Object> recipeProperties;
+	private final int energyPerTick;
 
 	public Recipe(List<CountableIngredient> inputs, List<ItemStack> outputs, TObjectIntMap<ItemStack> chancedOutputs,
-			List<FluidStack> fluidInputs, List<FluidStack> fluidOutputs, Map<String, Object> recipeProperties,
-			int duration, int EUt, boolean hidden, boolean needsEmptyOutput) {
-		this.recipeProperties = ImmutableMap.copyOf(recipeProperties);
+			List<FluidStack> fluidInputs, List<FluidStack> fluidOutputs, int duration, int energyPerTick) {
 		this.inputs = NonNullList.create();
 		this.inputs.addAll(inputs);
 		this.outputs = NonNullList.create();
@@ -93,16 +46,8 @@ public class Recipe {
 		this.fluidInputs = ImmutableList.copyOf(fluidInputs);
 		this.fluidOutputs = ImmutableList.copyOf(fluidOutputs);
 		this.duration = duration;
-		this.EUt = EUt;
-		this.hidden = hidden;
-		this.needsEmptyOutput = needsEmptyOutput;
-		// sort input elements in descending order (i.e not consumables inputs are last)
+		this.energyPerTick = energyPerTick;
 		this.inputs.sort(Comparator.comparing(CountableIngredient::getCount).reversed());
-	}
-
-	public final boolean matches(boolean consumeIfSuccessful, IItemHandlerModifiable inputs,
-			IMultipleTankHandler fluidInputs) {
-		return matches(consumeIfSuccessful, Utility.itemHandlerToList(inputs), Utility.fluidHandlerToList(fluidInputs));
 	}
 
 	public boolean matches(boolean consumeIfSuccessful, List<ItemStack> inputs, List<FluidStack> fluidInputs) {
@@ -173,10 +118,6 @@ public class Recipe {
 		return true;
 	}
 
-	///////////////////
-	// Getters //
-	///////////////////
-
 	public List<CountableIngredient> getInputs() {
 		return inputs;
 	}
@@ -190,7 +131,8 @@ public class Recipe {
 		TObjectIntMap<ItemStack> chancedOutputsMap = getChancedOutputs();
 		for(ItemStack chancedOutput : chancedOutputsMap.keySet()) {
 			int outputChance = chancedOutputsMap.get(chancedOutput) * byproductChanceMultiplier;
-			if(random.nextInt(Recipe.getMaxChancedValue()) <= outputChance) outputs.add(chancedOutput.copy());
+			//10000 = max
+			if(random.nextInt(10000) <= outputChance) outputs.add(chancedOutput.copy());
 		}
 		return outputs;
 	}
@@ -220,12 +162,8 @@ public class Recipe {
 		return duration;
 	}
 
-	public int getEUt() {
-		return EUt;
-	}
-
-	public boolean isHidden() {
-		return hidden;
+	public int getEnergyPerTick() {
+		return energyPerTick;
 	}
 
 	public boolean hasValidInputsForDisplay() {
@@ -235,60 +173,6 @@ public class Recipe {
 			hasValidInputs &= Arrays.stream(matchingItems).anyMatch(s -> !s.isEmpty());
 		}
 		return hasValidInputs;
-	}
-
-	public boolean needsEmptyOutput() {
-		return needsEmptyOutput;
-	}
-
-	public Set<String> getPropertyKeys() {
-		return recipeProperties.keySet();
-	}
-
-	public boolean getBooleanProperty(String key) {
-		Validate.notNull(key);
-		Object o = this.recipeProperties.get(key);
-		if(!(o instanceof Boolean)) {
-			throw new IllegalArgumentException();
-		}
-		return (boolean) o;
-	}
-
-	public int getIntegerProperty(String key) {
-		Validate.notNull(key);
-		Object o = this.recipeProperties.get(key);
-		if(!(o instanceof Integer)) {
-			throw new IllegalArgumentException();
-		}
-		return (int) o;
-	}
-
-	public long getLongProperty(String key) {
-		Validate.notNull(key);
-		Object o = this.recipeProperties.get(key);
-		if(!(o instanceof Long)) {
-			throw new IllegalArgumentException();
-		}
-		return (int) o;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T getProperty(String key) {
-		Validate.notNull(key);
-		Object o = this.recipeProperties.get(key);
-		if(o == null) {
-			throw new IllegalArgumentException();
-		}
-		return (T) o;
-	}
-
-	public String getStringProperty(String key) {
-		Validate.notNull(key);
-		Object o = this.recipeProperties.get(key);
-		if(!(o instanceof String)) {
-			throw new IllegalArgumentException();
-		}
-		return (String) o;
 	}
 
 }

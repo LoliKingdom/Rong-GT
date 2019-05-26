@@ -42,7 +42,7 @@ public class Values {
     public static final short W = OreDictionary.WILDCARD_VALUE;
 
     /**
-     * The Voltage Tiers. Use this Array instead of the old named Voltage Variables
+     * The Voltage Tiers.
      */
     public static final long[] V = new long[]{32, 128, 512, 2048, 8192, 32768, 131072};
 

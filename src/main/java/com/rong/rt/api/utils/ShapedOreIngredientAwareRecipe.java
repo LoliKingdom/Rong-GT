@@ -1,5 +1,13 @@
 package com.rong.rt.api.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import com.rong.rt.api.metaitems.ToolMetaItem;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -9,14 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import javax.annotation.Nonnull;
-
-import com.rong.rt.api.metaitems.ToolMetaItem;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ShapedOreIngredientAwareRecipe extends ShapedOreRecipe {
 

@@ -9,6 +9,8 @@ death.attack.explosion.player=%s exploded with help of %s.
 death.attack.heat.player=%s was boiled alive by %s.
 death.attack.crusher=%s was grinded dead.
 
+rongtech.jei.byproducts=Material Byproducts
+
 //Subject to change
 //rongtech.top.energy_stored=Energy:
 //rongtech.top.progress=Progress:

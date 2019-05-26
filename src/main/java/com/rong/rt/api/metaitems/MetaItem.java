@@ -18,8 +18,6 @@ import com.rong.rt.Values;
 import com.rong.rt.api.CombinedCapabilityProvider;
 import com.rong.rt.api.OreDictNames;
 import com.rong.rt.api.RongTechAPI;
-import com.rong.rt.api.gui.ModularUI;
-import com.rong.rt.api.gui.PlayerInventoryHolder;
 import com.rong.rt.api.metaitems.interfaces.IFoodBehavior;
 import com.rong.rt.api.metaitems.interfaces.IItemBehaviour;
 import com.rong.rt.api.metaitems.interfaces.IItemCapabilityProvider;
@@ -29,7 +27,6 @@ import com.rong.rt.api.metaitems.interfaces.IItemDurabilityManager;
 import com.rong.rt.api.metaitems.interfaces.IItemMaxStackSizeProvider;
 import com.rong.rt.api.metaitems.interfaces.IItemModelIndexProvider;
 import com.rong.rt.api.metaitems.interfaces.IItemNameProvider;
-import com.rong.rt.api.metaitems.interfaces.IItemUIFactory;
 import com.rong.rt.api.metaitems.interfaces.IItemUseManager;
 import com.rong.rt.api.metaitems.interfaces.IMetaItemStats;
 import com.rong.rt.api.unification.EnumOrePrefix;
@@ -92,7 +89,7 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 
 @SuppressWarnings("deprecation")
-public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item implements IItemUIFactory {
+public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item {
 
 	private static final List<MetaItem<?>> META_ITEMS = new ArrayList<>();
 
@@ -420,14 +417,6 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
 		}
 		return super.getItemStackDisplayName(stack);
 	}
-	
-	@Override
-    public ModularUI createUI(PlayerInventoryHolder holder, EntityPlayer entityPlayer) {
-        ItemStack itemStack = holder.getCurrentItem();
-        T metaValueItem = getItem(itemStack);
-        IItemUIFactory uiFactory = metaValueItem == null ? null : metaValueItem.getUIManager();
-        return uiFactory == null ? null : uiFactory.createUI(holder, entityPlayer);
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -517,7 +506,6 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
 		private List<IMetaItemStats> allStats = new ArrayList<>();
 		private List<IItemBehaviour> behaviours = new ArrayList<>();
 		private IItemUseManager useManager;
-		private IItemUIFactory uiManager;
 		private IItemDurabilityManager durabilityManager;
 		private IItemMaxStackSizeProvider stackSizeProvider;
 		private IItemColorProvider colorProvider;
@@ -637,11 +625,6 @@ public abstract class MetaItem<T extends MetaItem<?>.MetaValueItem> extends Item
 		@Nullable
 		public IItemUseManager getUseManager() {
 			return useManager;
-		}
-
-		@Nullable
-        public IItemUIFactory getUIManager() {
-            return uiManager;
 		}
 		
 		@Nullable

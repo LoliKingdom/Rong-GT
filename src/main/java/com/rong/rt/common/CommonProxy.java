@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import com.rong.rt.RTLog;
 import com.rong.rt.Values;
+import com.rong.rt.api.block.BlockMachine;
 import com.rong.rt.api.metaitems.MetaItem;
 import com.rong.rt.api.unification.EnumOrePrefix;
 import com.rong.rt.common.blocks.CompressedItemBlock;
@@ -18,9 +19,11 @@ import com.rong.rt.common.blocks.FrameItemBlock;
 import com.rong.rt.common.blocks.OreItemBlock;
 import com.rong.rt.common.blocks.RTBlocks;
 import com.rong.rt.common.items.MetaItems;
+import com.rong.rt.common.items.RTItemBlock;
 import com.rong.rt.common.loaders.MaterialInfoLoader;
 import com.rong.rt.common.loaders.OreDictionaryLoader;
 import com.rong.rt.common.loaders.RecipesLoader;
+import com.rong.rt.common.tiles.chemical_reactor.TileChemicalReactor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -28,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,6 +40,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Values.MOD_ID)
@@ -45,9 +50,6 @@ public class CommonProxy {
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		RTLog.logger.info("Registering Blocks...");
 		IForgeRegistry<Block> registry = event.getRegistry();
-		
-		registry.register(RTBlocks.blockAutoclave);
-		registry.register(RTBlocks.blockBender);
 
 		COMPRESSED.values().stream().distinct().forEach(registry::register);
 		SURFACE_ROCKS.values().stream().distinct().forEach(registry::register);
@@ -55,6 +57,10 @@ public class CommonProxy {
 		FRAMES.values().stream().distinct().forEach(registry::register);
 		ORES.forEach(registry::register);
 		FLUID_BLOCKS.forEach(registry::register);
+		
+		registry.registerAll(RTBlocks.CHEMICAL_REACTOR.setUnlocalizedName(Values.MOD_ID + "chemical_reactor").setRegistryName("chemical_reactor"));
+		GameRegistry.registerTileEntity(TileChemicalReactor.class, new ResourceLocation(Values.MOD_ID, "chemical_reactor"));
+		
 	}
 
 	@SubscribeEvent
@@ -66,15 +72,14 @@ public class CommonProxy {
 			registry.register(item);
 			item.registerSubItems();
 		}
-		
-		registry.register(new ItemBlock(RTBlocks.blockAutoclave).setRegistryName(RTBlocks.blockAutoclave.getRegistryName()));
-		registry.register(new ItemBlock(RTBlocks.blockBender).setRegistryName(RTBlocks.blockBender.getRegistryName()));
-		
+
 		COMPRESSED.values().stream().distinct().map(block -> createItemBlock(block, CompressedItemBlock::new))
 				.forEach(registry::register);
 		FRAMES.values().stream().distinct().map(block -> createItemBlock(block, FrameItemBlock::new))
 				.forEach(registry::register);
 		ORES.stream().map(block -> createItemBlock(block, OreItemBlock::new)).forEach(registry::register);
+		
+		registry.registerAll((new RTItemBlock(RTBlocks.CHEMICAL_REACTOR).setRegistryName("chemical_reactor")));
 	}
 
 	@SubscribeEvent
@@ -123,22 +128,23 @@ public class CommonProxy {
 			// ThaumcraftProcessingHandler.init();
 		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
-    private static <T extends Block> ItemBlock createMultiTexItemBlock(T block, Function<IBlockState, String> nameProducer) {
-        ItemBlock itemBlock = new ItemMultiTexture(block, block, stack -> {
-            IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
-            return nameProducer.apply(blockState);
-        });
-        itemBlock.setRegistryName(block.getRegistryName());
-        return itemBlock;
-    }
-    
-    private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
-        ItemBlock itemBlock = producer.apply(block);
-        itemBlock.setRegistryName(block.getRegistryName());
-        return itemBlock;
-    }
+	private static <T extends Block> ItemBlock createMultiTexItemBlock(T block,
+			Function<IBlockState, String> nameProducer) {
+		ItemBlock itemBlock = new ItemMultiTexture(block, block, stack -> {
+			IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
+			return nameProducer.apply(blockState);
+		});
+		itemBlock.setRegistryName(block.getRegistryName());
+		return itemBlock;
+	}
+
+	private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
+		ItemBlock itemBlock = producer.apply(block);
+		itemBlock.setRegistryName(block.getRegistryName());
+		return itemBlock;
+	}
 
 	public void onPreLoad() {
 		// TODO Auto-generated method stub

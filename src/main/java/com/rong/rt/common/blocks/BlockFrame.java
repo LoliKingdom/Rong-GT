@@ -3,8 +3,8 @@ package com.rong.rt.common.blocks;
 import java.util.HashSet;
 import java.util.Stack;
 
+import com.rong.rt.api.ModHandler;
 import com.rong.rt.api.RongTechAPI;
-import com.rong.rt.api.recipes.ModHandler;
 import com.rong.rt.api.unification.materials.types.SolidMaterial;
 
 import net.minecraft.block.Block;

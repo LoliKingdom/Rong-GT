@@ -1,8 +1,8 @@
 package com.rong.rt.api.utils;
 
-import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
-
 import java.util.function.Consumer;
+
+import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
 
 public class MCGuiUtil {
 

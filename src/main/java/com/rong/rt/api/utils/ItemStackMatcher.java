@@ -1,10 +1,11 @@
 package com.rong.rt.api.utils;
 
+import java.util.Objects;
+
 import com.google.common.base.Preconditions;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import java.util.Objects;
 
 public class ItemStackMatcher {
 

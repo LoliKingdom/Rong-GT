@@ -10,20 +10,19 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class MachineRecipeLoader {
-	
+
 	public static void init() {
 		initializeBendingRecipes();
+		initializeChemicalRecipes();
 	}
 
 	private static void initializeBendingRecipes() {
-		RecipeMaps.BENDER_RECIPES.recipeBuilder().circuitMeta(1).input(EnumOrePrefix.plate, Materials.Iron, 12)
-				.outputs(new ItemStack(Items.BUCKET, 4)).duration(800).EUt(4).buildAndRegister();
+	}
 
-		RecipeMaps.BENDER_RECIPES.recipeBuilder().circuitMeta(1).input(EnumOrePrefix.plate, Materials.WroughtIron, 12)
-				.outputs(new ItemStack(Items.BUCKET, 4)).duration(800).EUt(4).buildAndRegister();
-
-		RecipeMaps.BENDER_RECIPES.recipeBuilder().input(EnumOrePrefix.plate, Materials.Tin, 2)
-				.outputs(Ic2Items.emptyCell).duration(200).EUt(8).buildAndRegister();
+	private static void initializeChemicalRecipes() {
+		RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().input(EnumOrePrefix.block, Materials.Iron)
+				.fluidInputs(Materials.Air.getFluid(1000)).outputs(MetaItems.BOARD_ADVANCED.getStackForm(2))
+				.buildAndRegister();
 	}
 
 }
