@@ -189,7 +189,7 @@ metaitem.board.basic.name=Silicon Dioxide PCB
 metaitem.board.intermediate.name=Phenolic PCB
 metaitem.board.advanced.name=Reinforced Epoxy PCB
 metaitem.board.elite.name=Plastic PCB
-metaitem.board.master.name=Epoxid PCB
+metaitem.board.master.name=Epoxy PCB
 metaitem.board.expert.name=Fiberglass PCB
 metaitem.board.ultimate.name=Duranium-Fused Acrylic PCB
 
@@ -901,7 +901,7 @@ material.phosphorous_pentoxide=Phosphorous Pentoxide
 material.phosphoric_acid=Phosphoric Acid
 material.polyvinyl_acetate=Polyvinyl Acetate
 material.phenol=Phenol
-material.bisphenol_a=Bisphenol A
+material.bisphenols = Bisphenol S
 material.epoxid=Epoxid
 material.reinforced_epoxy_resin=Reinforced Epoxy Resin
 material.fiberglass=Fiberglass
