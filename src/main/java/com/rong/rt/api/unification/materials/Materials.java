@@ -278,7 +278,7 @@ public class Materials {
     /**
      * Random Dusts, good for separation : 351-400ID
      */
-    public static DustMaterial BisphenolS = new DustMaterial(731, "bisphenols", 0xf7ffd8, MaterialIconSet.SAND, 1, of(new MaterialStack(Carbon, 12), new MaterialStack(Sulfur, 1), new MaterialStack(Hydrogen, 10), new MaterialStack(Oxygen, 4), new MaterialStack(Oxygen, 1)), NO_SMELTING | DISABLE_DECOMPOSITION);
+    public static DustMaterial BisphenolS = new DustMaterial(731, "bisphenols", 0xf7ffd8, MaterialIconSet.SAND, 1, of(new MaterialStack(Carbon, 12), new MaterialStack(Sulfur, 1), new MaterialStack(Hydrogen, 10), new MaterialStack(Oxygen, 4)), NO_SMELTING | DISABLE_DECOMPOSITION);
     public static DustMaterial RareEarth = new DustMaterial(351, "rare_earth", 0x808064, MaterialIconSet.ROUGH, 0, of(), 0);
     public static DustMaterial Phosphor = new DustMaterial(352, "phosphor", 0xFFFF00, MaterialIconSet.FLINT, 2, of(new MaterialStack(Calcium, 3), new MaterialStack(Phosphate, 2)), GENERATE_ORE | NO_SMASHING | NO_SMELTING | FLAMMABLE | EXPLOSIVE);
     public static DustMaterial Barite = new DustMaterial(354, "barite", 0xE6EBFF, MaterialIconSet.DULL, 2, of(new MaterialStack(Barium, 1), new MaterialStack(Sulfur, 1), new MaterialStack(Oxygen, 4)), GENERATE_ORE);
