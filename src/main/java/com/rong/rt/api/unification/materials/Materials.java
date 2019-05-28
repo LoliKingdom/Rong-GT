@@ -278,6 +278,7 @@ public class Materials {
     /**
      * Random Dusts, good for separation : 351-400ID
      */
+    public static DustMaterial BisphenolS = new DustMaterial(731, "bisphenols", 0xf7ffd8, MaterialIconSet.SAND, 1, of(new MaterialStack(Carbon, 12), new MaterialStack(Sulfur, 1), new MaterialStack(Hydrogen, 10), new MaterialStack(Oxygen, 4), new MaterialStack(Oxygen, 1)), NO_SMELTING | DISABLE_DECOMPOSITION);
     public static DustMaterial RareEarth = new DustMaterial(351, "rare_earth", 0x808064, MaterialIconSet.ROUGH, 0, of(), 0);
     public static DustMaterial Phosphor = new DustMaterial(352, "phosphor", 0xFFFF00, MaterialIconSet.FLINT, 2, of(new MaterialStack(Calcium, 3), new MaterialStack(Phosphate, 2)), GENERATE_ORE | NO_SMASHING | NO_SMELTING | FLAMMABLE | EXPLOSIVE);
     public static DustMaterial Barite = new DustMaterial(354, "barite", 0xE6EBFF, MaterialIconSet.DULL, 2, of(new MaterialStack(Barium, 1), new MaterialStack(Sulfur, 1), new MaterialStack(Oxygen, 4)), GENERATE_ORE);
@@ -510,7 +511,7 @@ public class Materials {
     public static FluidMaterial MethylAcetate = new FluidMaterial(723, "methyl_acetate", 12427150, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 3), new MaterialStack(Hydrogen, 6), new MaterialStack(Oxygen, 2)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
     public static FluidMaterial CalciumAcetate = new FluidMaterial(728, "calcium_acetate", 11444113, MaterialIconSet.FLUID, of(new MaterialStack(Calcium, 1), new MaterialStack(Carbon, 2), new MaterialStack(Oxygen, 4), new MaterialStack(Hydrogen, 6)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
     public static FluidMaterial Ethenone = new FluidMaterial(724, "ethenone", 1776449, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 2), new MaterialStack(Hydrogen, 2), new MaterialStack(Oxygen, 1)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
-    public static FluidMaterial BisphenolA = new FluidMaterial(731, "bisphenol_a", 10848014, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 15), new MaterialStack(Hydrogen, 16), new MaterialStack(Oxygen, 2)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
+    //public static FluidMaterial BisphenolA = new FluidMaterial(731, "bisphenol_a", 10848014, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 15), new MaterialStack(Hydrogen, 16), new MaterialStack(Oxygen, 2)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
     public static FluidMaterial AllylChloride = new FluidMaterial(732, "allyl_chloride", 7450250, MaterialIconSet.FLUID, of(new MaterialStack(Carbon, 3), new MaterialStack(Hydrogen, 5), new MaterialStack(Chlorine, 1)), GENERATE_FLUID_BLOCK | DECOMPOSITION_BY_ELECTROLYZING);
     public static FluidMaterial SodiumCyanide = new FluidMaterial(733, "sodium_cyanide", 16316671, MaterialIconSet.FLUID, of(new MaterialStack(Sodium, 1), new MaterialStack(Carbon, 1), new MaterialStack(Nitrogen, 1)), GENERATE_FLUID_BLOCK | DISABLE_DECOMPOSITION);
     public static FluidMaterial AcetoneCyanohydrin = new FluidMaterial(734, "acetone_cyanohydrin", 12092939, MaterialIconSet.FLUID, of(new MaterialStack(Oxygen, 1), new MaterialStack(Nitrogen, 1), new MaterialStack(Carbon, 4), new MaterialStack(Hydrogen, 7)), GENERATE_FLUID_BLOCK | DISABLE_DECOMPOSITION);
